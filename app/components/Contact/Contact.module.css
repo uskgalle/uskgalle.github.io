@@ -1,0 +1,60 @@
+.contact {
+  padding: 60px 24px;
+  border-top: 1px dashed var(--pencil);
+  position: relative;
+  z-index: 1;
+}
+
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link, .info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Caveat', cursive;
+  font-size: 1.15rem;
+  color: var(--ink-light);
+  text-decoration: none;
+}
+
+.link i, .info i {
+  color: var(--sepia);
+  width: 1.2em;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.link {
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+  width: fit-content;
+}
+
+.link:hover {
+  color: var(--blue-wash);
+  border-color: var(--blue-wash);
+}
+
+@media (max-width: 640px) {
+  .inner { grid-template-columns: 1fr; gap: 32px; }
+}

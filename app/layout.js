@@ -1,8 +1,8 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Urban Sketchers Galle — Sketch Meet-Up #03',
-  description: 'Join us for a relaxed and inspiring morning of sketching within the timeless streets of the Historic Galle Dutch Fort.',
+  title: 'Sketch Meet-Up #03',
+  description: 'A relaxed and inspiring morning of sketching within the timeless streets of the Historic Galle Dutch Fort.',
 };
 
 export default function RootLayout({ children }) {

@@ -1,0 +1,109 @@
+.join {
+  padding: 100px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.label {
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  color: var(--sepia);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 36px;
+}
+
+.title em { color: var(--sepia); }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+
+.tag {
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  padding: 8px 22px;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  position: relative;
+  transition: background 0.2s;
+}
+
+.tag::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 1.5px solid var(--sepia-light);
+  transform: translate(3px, 3px);
+  opacity: 0.5;
+}
+
+.tag:hover {
+  background: var(--paper-dark);
+}
+
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 48px;
+  background: var(--ink);
+  color: var(--paper-warm);
+  font-family: 'Caveat', cursive;
+  font-size: 1.3rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 1.5px solid var(--ink);
+  transform: translate(4px, 4px);
+  transition: transform 0.2s;
+}
+
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--sepia);
+}
+
+.btn:hover::before { transform: translate(6px, 6px); }
+
+.qrNote {
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  color: var(--pencil);
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qrNote i { color: var(--sepia-light); }
