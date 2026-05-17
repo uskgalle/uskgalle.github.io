@@ -1,0 +1,295 @@
+/* ══════════════════════════════════════════
+   HERO — split layout (image left / text right)
+   ══════════════════════════════════════════ */
+.hero {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+  overflow: hidden;
+  position: relative;
+  padding-top: 68px;
+  box-sizing: border-box;
+}
+
+/* ── Left — image ── */
+.imageCol {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+  order: 1;
+}
+
+/* ── Right — text ── */
+.textCol {
+  flex: 0 0 44%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 5rem 4rem 4rem;
+  background-color: #ffffff;
+  order: 2;
+  animation: fadeUp 0.7s ease both;
+}
+
+/* ── Headline ── */
+.headline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin: 0 0 1.75rem;
+}
+
+.headlineBold {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #2a1f14;
+  display: block;
+  animation: fadeUp 0.65s ease both;
+  animation-delay: 0.1s;
+}
+
+/* Cursive accent line — uses a script/italic font */
+.headlineCursive {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.3;
+  color: #b8854a;
+  display: block;
+  animation: fadeUp 0.65s ease both;
+  animation-delay: 0.25s;
+}
+
+/* ── Body ── */
+.body {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #6b5a47;
+  margin: 0 0 2.5rem;
+  max-width: 400px;
+  animation: fadeUp 0.65s ease both;
+  animation-delay: 0.4s;
+}
+
+/* ── CTAs ── */
+.ctas {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: fadeUp 0.65s ease both;
+  animation-delay: 0.55s;
+}
+
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.6rem;
+  background-color: #b8854a;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background-color 0.22s ease, transform 0.15s ease;
+}
+
+.primaryBtn:hover {
+  background-color: #9e6e38;
+  transform: translateY(-2px);
+}
+
+.secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.78rem 1.5rem;
+  background-color: transparent;
+  color: #3a2e22;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1.5px solid #3a2e22;
+  border-radius: 2px;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.secondaryBtn:hover {
+  background-color: #3a2e22;
+  color: #ffffff;
+}
+
+/* ── Right image column ── */
+.imageCol {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+}
+
+/*
+  SWAP YOUR IMAGE HERE:
+  Replace the gradient with:
+  background-image: url('/images/galle-hero.jpg');
+*/
+.imagePlaceholder {
+  position: absolute;
+  inset: 0;
+  background-image: url('/hero.png');
+  background-size: cover;
+  background-position: center top;
+  animation: slowZoom 14s ease-out both;
+}
+
+/* ══════════════════════════════════════════
+   FEATURE STRIP
+   ══════════════════════════════════════════ */
+.featureStrip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  background-color: #f5f0e8;
+  border-top: 1px solid #e0d8cc;
+  padding: 2.5rem 3rem;
+}
+
+.featureCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1.75rem;
+  background-color: #ffffff;
+  border: 1px solid #e0d8cc;
+  border-radius: 3px;
+  transition: box-shadow 0.25s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.featureCard:hover {
+  box-shadow: 0 8px 28px rgba(42, 31, 20, 0.1);
+  transform: translateY(-3px);
+  border-color: #c9b99a;
+}
+
+.featureIcon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid #e0d8cc;
+  border-radius: 2px;
+  color: #b8854a;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.featureText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.featureTitle {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #2a1f14;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+.featureDesc {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: #6b5a47;
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════
+   ANIMATIONS
+   ══════════════════════════════════════════ */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slowZoom {
+  from {
+    transform: scale(1.06);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    min-height: auto;
+    padding-top: 52px;
+  }
+
+  .imageCol {
+    flex: none;
+    height: 55vw;
+    min-height: 260px;
+    order: 1;
+    /* image on top */
+  }
+
+  .textCol {
+    flex: none;
+    padding: 3rem 1.5rem 2rem;
+    order: 2;
+    /* text below */
+  }
+
+  .featureStrip {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .textCol {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .featureStrip {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+
+  .ctas {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,276 @@
+.section {
+  background-color: #ffffff;
+  padding: 6rem 2rem;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family:  var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #b8854a;
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  color: #2a1f14;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+.subtitle {
+  font-family:  var(--font-sans);
+  font-size: 0.95rem;
+  color: #6b5a47;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+/* ── Card ── */
+.card {
+  background-color: #faf8f5;
+  border: 1px solid #e8e2d9;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: box-shadow 0.25s ease, transform 0.2s ease;
+  position: relative;
+}
+
+.card:hover {
+  box-shadow: 0 8px 32px rgba(42, 31, 20, 0.1);
+  transform: translateY(-3px);
+}
+
+/* ── Upcoming card — stands out with border ── */
+.cardUpcoming {
+  background-color: #faf8f5;
+  border: 2px solid #b8854a;
+  box-shadow: 0 4px 20px rgba(184, 133, 74, 0.12);
+}
+
+.cardUpcoming:hover {
+  box-shadow: 0 10px 36px rgba(184, 133, 74, 0.2);
+}
+
+/* ── Upcoming badge ── */
+.upcomingBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #b8854a;
+  color: #ffffff;
+  font-family:  var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.65rem;
+  border-radius: 2px;
+}
+
+.upcomingDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  animation: pulse 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.7); }
+}
+
+/* ── Date badge ── */
+.dateBadge {
+  background-color: #b8854a;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  width: 64px;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin: 1.5rem 0 0 1.5rem;
+  border-radius: 2px;
+}
+
+/* Past event date badge — muted */
+.dateBadge:not(.dateBadgeUpcoming) {
+  background-color: #3a2e24;
+}
+
+.dateBadgeUpcoming {
+  background-color: #b8854a;
+}
+
+.dateDay {
+  font-family:  var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.dateMonth {
+  font-family:  var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 0.15rem;
+}
+
+/* ── Card body ── */
+.cardBody {
+  padding: 1.25rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.tag {
+  font-family:  var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b8854a;
+  margin-bottom: 0.5rem;
+}
+
+.cardTitle {
+  font-family:  var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2a1f14;
+  line-height: 1.25;
+  margin: 0 0 0.75rem;
+}
+
+/* Override text colours for dark upcoming card */
+.cardUpcoming .cardTitle { color: #2a1f14; }
+.cardUpcoming .cardDesc  { color: #8a7a68; }
+.cardUpcoming .tag       { color: #c9a870; }
+.cardUpcoming .metaItem  { color: #6b5a47; }
+.cardUpcoming .metaItem svg { color: #b8854a; }
+
+.cardDesc {
+  font-family:  var(--font-sans);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: #6b5a47;
+  margin: 0 0 1.25rem;
+  flex: 1;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.metaItem {
+  font-family:  var(--font-sans);
+  font-size: 0.78rem;
+  color: #8a7060;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.metaItem svg { color: #b8854a; font-size: 0.75rem; }
+
+.cardLink {
+  font-family:  var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b8854a;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.cardLink:hover { gap: 0.7rem; color: #9e6e38; }
+
+/* Past event link — muted */
+.cardLink:not(.cardLinkUpcoming) {
+  color: #6b5a47;
+}
+.cardLink:not(.cardLinkUpcoming):hover { color: #b8854a; }
+
+/* Upcoming event link — bright */
+.cardLinkUpcoming {
+  color: #b8854a;
+}
+.cardLinkUpcoming:hover { color: #6b5a47; }
+
+/* ── Footer ── */
+.footer {
+  display: flex;
+  justify-content: center;
+}
+
+.allEventsBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 2rem;
+  border: 1.5px solid #b8854a;
+  color: #b8854a;
+  font-family:  var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.allEventsBtn:hover {
+  background-color: #b8854a;
+  color: #ffffff;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+}

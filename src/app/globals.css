@@ -1,0 +1,46 @@
+/* ─── CSS Variables ─────────────────────────────────────────────────── */
+/* Display: Georgia (system font — no load needed)                       */
+/* Body:    Inter (loaded via next/font in layout.js)                    */
+:root {
+  --color-bg:         #f0ebe3;
+  --color-surface:    #e8e0d5;
+  --color-dark:       #2a201a;
+  --color-brown:      #5c4a32;
+  --color-tan:        #b8854a;
+  --color-tan-light:  #c9b99a;
+  --color-text:       #3a2e22;
+  --color-muted:      #6b5a47;
+ 
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-sans:    var(--font-inter), 'Helvetica Neue', sans-serif;
+}
+/* ─── Reset ─────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #ffffff;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}

@@ -1,0 +1,47 @@
+.btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 200;
+
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #2a1f14;
+  color: #c9b99a;
+  border: 1px solid #3a2e24;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 0.85rem;
+
+  /* hidden by default */
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease,
+              background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.btn:hover {
+  background-color: #b8854a;
+  color: #ffffff;
+  border-color: #b8854a;
+}
+
+@media (max-width: 600px) {
+  .btn {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    width: 38px;
+    height: 38px;
+  }
+}
