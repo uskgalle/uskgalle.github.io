@@ -10,7 +10,7 @@ const meets = [
     location: "ART'O'SAN Gallery, Galle Fort",
     time: '8.30 AM – 12.30 PM',
     tag: 'Outdoor',
-    desc: 'Meet fellow sketchers, explore Galle Fort, and capture everyday moments through drawing in this friendly community sketch session.',
+    desc: 'Come along and sketch with us at our upcoming session: meet fellow artists, explore Galle Fort, and turn everyday moments into meaningful drawings.',
     upcoming: true,
     href: '#join',
   },
@@ -51,7 +51,7 @@ export default function SketchMeet() {
           <span className={styles.eyebrow}>What's On</span>
           <h2 className={styles.title}>Sketch Meets</h2>
           <p className={styles.subtitle}>
-            From past gatherings to upcoming sketch meets, join the Urban Sketchers Galle community and sketch the world together.
+            We’ve held sketching gatherings that brought creative people together, and we’re excited for many more to come. Join us as we sketch the world together.
           </p>
         </div>
 

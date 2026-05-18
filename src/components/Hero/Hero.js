@@ -22,7 +22,7 @@ const features = [
   {
     icon: faPencil,
     title: 'All are Welcome',
-    desc: 'Beginners or professionals, everyone is welcome to sketch with us.',
+    desc: 'Whether you’re a beginner or a professional, everyone is welcome to sketch with us.',
   },
   {
     icon: faImage,
@@ -45,7 +45,7 @@ export default function Hero() {
           </h1>
 
           <p className={styles.body}>
-            We are 'Urban Sketchers Galle', a community of sketchers who meet up & sketch on-location at interesting locations in our city.
+            We are Urban Sketchers Galle, a community that meets up to explore and sketch interesting urban spaces around our city.
           </p>
 
           <div className={styles.ctas}>
