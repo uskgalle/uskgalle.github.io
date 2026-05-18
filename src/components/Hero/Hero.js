@@ -45,7 +45,7 @@ export default function Hero() {
           </h1>
 
           <p className={styles.body}>
-            We are Urban Sketchers Galle, a community that meets up to explore and sketch interesting urban spaces around our city.
+            We are <b>Urban Sketchers Galle</b>, a community that meets up to explore and sketch interesting urban spaces around our city.
           </p>
 
           <div className={styles.ctas}>
