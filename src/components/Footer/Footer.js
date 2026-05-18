@@ -15,12 +15,12 @@ const footerLinks = {
     { label: 'Sketch Meets', href: '#events' },
     { label: 'Manifesto',    href: '#' },
   ],
-  Connect: [
+  /* Connect: [
     { label: 'Instagram',    href: 'https://www.instagram.com/urbansketchersgalle' },
     { label: 'Facebook',     href: 'https://www.facebook.com/share/1L8GtVnbzg' },
     { label: 'WhatsApp',     href: 'https://chat.whatsapp.com/IlMO9dqYLKR8i6qhXcnU6l' },
-    { label: 'Contact',      href: '#' },
-  ],
+    { label: 'Contact',      href: '#join' },
+  ], */
 };
 
 const socials = [
@@ -47,7 +47,7 @@ export default function Footer() {
             </p>
             <div className={styles.socials}>
               {socials.map((s) => (
-                <a key={s.label} href={s.href} className={styles.socialIcon} aria-label={s.label}>
+                <a key={s.label} href={s.href} target='_blank' className={styles.socialIcon} aria-label={s.label}>
                   <FontAwesomeIcon icon={s.icon} />
                 </a>
               ))}

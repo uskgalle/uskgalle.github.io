@@ -30,9 +30,8 @@ export default function RootLayout({ children }) {
     <html lang="en" className={inter.variable}>
       <body>
         <Navbar />
-        {/* This wrapper clears the fixed navbar (68px desktop / 52px mobile) */}
         <div>
-          <AnnouncementBar />
+          {/* <AnnouncementBar /> */}
           <main>{children}</main>
         </div>
         <Footer />
