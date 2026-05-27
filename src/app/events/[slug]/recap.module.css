@@ -1,0 +1,137 @@
+.page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+}
+
+.back a {
+    font-family: 'Caveat', cursive;
+    font-size: 1.05rem;
+    color: var(--sepia);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 48px;
+    transition: gap 0.2s;
+}
+
+.back a:hover {
+    gap: 12px;
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.dateBox {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    padding: 10px 0;
+    background: var(--ink);
+    color: var(--paper-warm);
+    line-height: 1.1;
+    flex-shrink: 0;
+}
+
+.day {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.month {
+    font-family: 'Caveat', cursive;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+}
+
+.type {
+    font-family: 'Caveat', cursive;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    color: var(--sepia);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 12px;
+}
+
+.meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-family: 'Caveat', cursive;
+    font-size: 1.05rem;
+    color: var(--pencil);
+}
+
+.meta i {
+    color: var(--sepia-light);
+    width: 1.2em;
+}
+
+.divider {
+    margin: 32px 0;
+}
+
+.body {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: var(--ink-light);
+    max-width: 720px;
+    margin-bottom: 60px;
+    white-space: pre-line;
+}
+
+.gallery {
+    columns: 3;
+    gap: 12px;
+}
+
+.imgWrap {
+    break-inside: avoid;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.imgWrap img {
+    width: 100%;
+    display: block;
+    filter: sepia(10%);
+    transition: filter 0.3s, transform 0.3s;
+}
+
+.imgWrap:hover img {
+    filter: sepia(0%);
+    transform: scale(1.02);
+}
+
+@media (max-width: 640px) {
+    .gallery {
+        columns: 2;
+    }
+
+    .header {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 400px) {
+    .gallery {
+        columns: 1;
+    }
+}

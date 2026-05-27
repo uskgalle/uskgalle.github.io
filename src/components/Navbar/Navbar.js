@@ -7,7 +7,7 @@ import styles from './Navbar.module.css';
 
 const navLinks = [
   { label: 'Home',      href: '/' },
-  { label: 'Events',    href: '#events' },
+  { label: 'Events',    href: '/events' },
   { label: 'Artists',   href: '#artists' },
   { label: 'Gallery',   href: '#gallery' },
   { label: 'About',     href: '#about' },

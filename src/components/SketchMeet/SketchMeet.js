@@ -1,45 +1,18 @@
 import styles from './SketchMeet.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDays, faLocationDot, faClock, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCalendarDays,
+  faLocationDot,
+  faClock,
+  faArrowRight,
+} from '@fortawesome/free-solid-svg-icons';
 
-const meets = [
-  {
-    id: 1,
-    date: { day: '07', month: 'Jun' },
-    title: 'Sketch Meet-Up #4',
-    location: "ART'O'SAN Gallery, Galle Fort",
-    time: '8.30 AM – 12.30 PM',
-    tag: 'Outdoor',
-    desc: 'Come along and sketch with us at our upcoming session: meet fellow artists, explore Galle Fort, and turn everyday moments into meaningful drawings.',
-    upcoming: true,
-    href: '#join',
-  },
-  {
-    id: 2,
-    date: { day: '10', month: 'May' },
-    title: 'Sketch Meet-Up #3',
-    location: "ART'O'SAN Gallery, Galle Fort",
-    time: '8.30 AM – 12.30 PM',
-    tag: 'Outdoor',
-    desc: 'A friendly sketch meet filled with conversation, creativity, and on-location drawing around the beautiful streets of Galle.',
-    upcoming: false,
-    href: '#',
-  },
-  {
-    id: 3,
-    date: { day: '08', month: 'March' },
-    title: 'Sketch Meet-Up #2',
-    location: "ART'O'SAN Gallery, Galle Fort",
-    time: '8.30 AM – 12.30 PM',
-    tag: 'Outdoor',
-    desc: 'An outdoor sketch meetup filled with creativity, conversation, and shared inspiration among local artists and sketch enthusiasts.',
-    upcoming: false,
-    href: '#',
-  },
-];
+import { events } from '../../app/data/events';
 
-// Sort: upcoming first
-const sorted = [...meets].sort((a, b) => (b.upcoming ? 1 : 0) - (a.upcoming ? 1 : 0));
+// Upcoming first, then limit to 3
+const sorted = [...events]
+  .sort((a, b) => Number(b.upcoming) - Number(a.upcoming))
+  .slice(0, 3);
 
 export default function SketchMeet() {
   return (
@@ -49,9 +22,13 @@ export default function SketchMeet() {
         {/* Header */}
         <div className={styles.header}>
           <span className={styles.eyebrow}>What's On</span>
+
           <h2 className={styles.title}>Sketch Meets</h2>
+
           <p className={styles.subtitle}>
-            We’ve held sketching gatherings that brought creative people together, and we’re excited for many more to come. Join us as we sketch the world together.
+            We’ve held sketching gatherings that brought creative people together,
+            and we’re excited for many more to come. Join us as we sketch the
+            world together.
           </p>
         </div>
 
@@ -59,8 +36,9 @@ export default function SketchMeet() {
         <div className={styles.grid}>
           {sorted.map((meet) => (
             <article
-              key={meet.id}
-              className={`${styles.card} ${meet.upcoming ? styles.cardUpcoming : ''}`}
+              key={meet.slug}
+              className={`${styles.card} ${meet.upcoming ? styles.cardUpcoming : ''
+                }`}
             >
               {/* Upcoming badge */}
               {meet.upcoming && (
@@ -71,29 +49,44 @@ export default function SketchMeet() {
               )}
 
               {/* Date badge */}
-              <div className={`${styles.dateBadge} ${meet.upcoming ? styles.dateBadgeUpcoming : ''}`}>
+              <div
+                className={`${styles.dateBadge} ${meet.upcoming ? styles.dateBadgeUpcoming : ''
+                  }`}
+              >
                 <span className={styles.dateDay}>{meet.date.day}</span>
                 <span className={styles.dateMonth}>{meet.date.month}</span>
               </div>
 
               <div className={styles.cardBody}>
-                <span className={styles.tag}>{meet.tag}</span>
+                <span className={styles.tag}>{meet.type}</span>
+
                 <h3 className={styles.cardTitle}>{meet.title}</h3>
-                <p className={styles.cardDesc}>{meet.desc}</p>
+
+                <p className={styles.cardDesc}>{meet.description}</p>
 
                 <div className={styles.meta}>
                   <span className={styles.metaItem}>
                     <FontAwesomeIcon icon={faLocationDot} />
                     {meet.location}
                   </span>
+
                   <span className={styles.metaItem}>
                     <FontAwesomeIcon icon={faClock} />
                     {meet.time}
                   </span>
                 </div>
 
-                <a href={meet.href} className={`${styles.cardLink} ${meet.upcoming ? styles.cardLinkUpcoming : ''}`}>
+                <a
+                  href={
+                    meet.upcoming
+                      ? meet.registerLink
+                      : `/events/${meet.slug}`
+                  }
+                  className={`${styles.cardLink} ${meet.upcoming ? styles.cardLinkUpcoming : ''
+                    }`}
+                >
                   {meet.upcoming ? 'Register' : 'View Recap'}
+
                   <FontAwesomeIcon icon={faArrowRight} />
                 </a>
               </div>
@@ -102,7 +95,7 @@ export default function SketchMeet() {
         </div>
 
         <div className={styles.footer}>
-          <a href="#events" className={styles.allEventsBtn}>
+          <a href="/events" className={styles.allEventsBtn}>
             <FontAwesomeIcon icon={faCalendarDays} />
             View All Events
           </a>
