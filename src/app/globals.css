@@ -1,6 +1,3 @@
-/* ─── CSS Variables ─────────────────────────────────────────────────── */
-/* Display: Georgia (system font — no load needed)                       */
-/* Body:    Inter (loaded via next/font in layout.js)                    */
 :root {
   --color-bg:         #f0ebe3;
   --color-surface:    #e8e0d5;

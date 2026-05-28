@@ -4,19 +4,21 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import styles from './Navbar.module.css';
+import { usePathname } from 'next/navigation';
 
 const navLinks = [
-  { label: 'Home',      href: '/' },
-  { label: 'Events',    href: '/events' },
-  { label: 'Artists',   href: '#artists' },
-  { label: 'Gallery',   href: '#gallery' },
-  { label: 'About',     href: '#about' },
-  { label: 'Blog',      href: '#blog' },
+  { label: 'Home', href: '/' },
+  { label: 'Events', href: '/events' },
+  { label: 'Artists', href: '#artists' },
+  { label: 'Gallery', href: '#gallery' },
+  { label: 'About', href: '#about' },
+  { label: 'Blog', href: '#blog' },
 ];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -30,7 +32,7 @@ export default function Navbar() {
 
         {/* Logo — text only */}
         <a href="/" className={styles.logo}>
-          USK Galle
+          {/*  <img src="icon.png" alt="" className='navImage' /> */} USK Galle
         </a>
 
         {/* Nav links — center */}
@@ -39,7 +41,11 @@ export default function Navbar() {
             <li key={link.label}>
               <a
                 href={link.href}
-                className={`${styles.navLink} ${link.href === '/' ? styles.navLinkActive : ''}`}
+                className={`${styles.navLink} ${pathname === link.href ||
+                    (link.href !== '/' && pathname.startsWith(link.href))
+                    ? styles.navLinkActive
+                    : ''
+                  }`}
               >
                 {link.label}
               </a>

@@ -65,7 +65,7 @@ export const events = [
         registerLink: null,
         recap: {
             body: 'A relaxed morning of sketching, walking, observing, and sharing the city through lines and colours.',
-            images: [1, 2, 3, 4, 5],
+            images: Array.from({ length: 40 }, (_, i) => i + 1),
         },
     },
     {
@@ -83,7 +83,7 @@ export const events = [
         registerLink: null,
         recap: {
             body: "The event was organized by Urban Sketchers Colombo in collaboration with the Collective for Historical Dialogue & Memory and Art'o'San Gallery.",
-            images: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            images: Array.from({ length: 10 }, (_, i) => i + 1),
         },
     }
 ];

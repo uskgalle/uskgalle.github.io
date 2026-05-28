@@ -1,6 +1,6 @@
 import './globals.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import { config } from '@fortawesome/fontawesome-svg-core';
+import { config, icon } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false;
 
 import { Inter } from 'next/font/google';
@@ -23,6 +23,9 @@ export const metadata = {
   title: 'Urban Sketchers Galle',
   description:
     'A community of sketchers dedicated to on-location drawing across Galle and the southern coast of Sri Lanka.',
+  icons: {
+    icon: '/icon.png',
+  },
 };
 
 export default function RootLayout({ children }) {
