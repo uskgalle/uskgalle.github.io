@@ -172,24 +172,24 @@
 }
 
 /* ─────────────────────────────
-   GALLERY
+   GALLERY  — masonry
 ───────────────────────────── */
 
 .gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
+    columns: 3;
+    column-gap: 1.25rem;
 }
 
-/* IMAGE */
-
 .imgWrap {
+    break-inside: avoid;
+    margin-bottom: 1.25rem;
+
     overflow: hidden;
-
     border-radius: 2px;
-
     background: #f5f0e8;
     border: 1px solid #e8dfd2;
+
+    cursor: pointer;
 
     transition:
         transform 0.22s ease,
@@ -199,17 +199,13 @@
 
 .imgWrap:hover {
     transform: translateY(-3px);
-
     border-color: #c9b99a;
-
-    box-shadow:
-        0 8px 28px rgba(42, 31, 20, 0.08);
+    box-shadow: 0 8px 28px rgba(42, 31, 20, 0.08);
 }
 
 .imgWrap img {
     width: 100%;
     display: block;
-
     transition:
         transform 0.5s ease,
         opacity 0.3s ease;
@@ -224,12 +220,14 @@
 ───────────────────────────── */
 
 @media (max-width: 900px) {
-    .page {
-        padding: 90px 24px 80px;
-    }
-
     .gallery {
-        grid-template-columns: repeat(2, 1fr);
+        columns: 2;
+    }
+}
+
+@media (max-width: 640px) {
+    .gallery {
+        columns: 1;
     }
 }
 

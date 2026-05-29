@@ -29,7 +29,7 @@ export const events = [
         registerLink: null,
         recap: {
             body: 'A friendly sketch meet filled with conversation, creativity, and on-location drawing around the beautiful streets of Galle.',
-            images: [1, 2, 3, 4, 5],
+            images: Array.from({ length: 20 }, (_, i) => i + 1),
         },
     },
     {
@@ -47,7 +47,7 @@ export const events = [
         registerLink: null,
         recap: {
             body: 'An outdoor sketch meetup filled with creativity, conversation, and shared inspiration among local artists and sketch enthusiasts.',
-            images: [1, 2, 3, 4, 5],
+             images: Array.from({ length: 17 }, (_, i) => i + 1),
         },
     },
     {
