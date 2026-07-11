@@ -9,10 +9,10 @@ import { usePathname } from 'next/navigation';
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Events', href: '/events' },
-  { label: 'Artists', href: '#artists' },
-  { label: 'Gallery', href: '#gallery' },
-  { label: 'About', href: '#about' },
-  { label: 'Blog', href: '#blog' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Artists', href: '/artists' },
+  /* { label: 'About', href: '/about' }, */
+  { label: 'Blog', href: '/blog' },
 ];
 
 export default function Navbar() {

@@ -11,10 +11,10 @@ export default function HomePage() {
     <>
       <Hero />
       <SketchMeet />
-      <FeaturedArtists />
+      {/* <FeaturedArtists /> */}
       <RecentSketches />
       <AboutCommunity />
-      <BlogHighlights />
+      {/* <BlogHighlights /> */}
       <WhatsAppCTA />
     </>
   );
