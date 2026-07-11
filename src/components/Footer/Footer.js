@@ -4,16 +4,16 @@ import styles from './Footer.module.css';
 
 const footerLinks = {
   Explore: [
-    { label: 'Events',       href: '#events' },
-    { label: 'Artists',      href: '#artists' },
-    { label: 'Gallery',      href: '#gallery' },
-    { label: 'Blog',         href: '#blog' },
+    { label: 'Events',       href: '/events' },
+    { label: 'Artists',      href: '/artists' },
+    { label: 'Gallery',      href: '/gallery' },
+    { label: 'Blog',         href: '/blog' },
   ],
   Community: [
-    { label: 'About Us',     href: '#about' },
-    { label: 'Join Us',      href: '#join' },
-    { label: 'Sketch Meets', href: '#events' },
-    { label: 'Manifesto',    href: '#' },
+    { label: 'About Us',     href: '/#about' },
+    { label: 'Join Us',      href: '/#join' },
+    { label: 'Sketch Meets', href: '/events' },
+    /* { label: 'Manifesto',    href: '/' }, */
   ],
   /* Connect: [
     { label: 'Instagram',    href: 'https://www.instagram.com/urbansketchersgalle' },
