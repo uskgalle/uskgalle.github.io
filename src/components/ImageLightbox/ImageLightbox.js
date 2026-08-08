@@ -1,7 +1,10 @@
 'use client';
 
 import { useEffect, useRef, useCallback } from 'react';
+import Link from 'next/link';
 import styles from './ImageLightbox.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPalette, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 export default function ImageLightbox({ images, activeIndex, onClose, onNext, onPrev }) {
     const touchStartX = useRef(null);
@@ -33,7 +36,6 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNext, on
         const dx = e.changedTouches[0].clientX - touchStartX.current;
         const dy = e.changedTouches[0].clientY - touchStartY.current;
 
-        // Only register horizontal swipes (avoid scroll conflicts)
         if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 48) {
             dx < 0 ? onNext() : onPrev();
         }
@@ -41,7 +43,15 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNext, on
         touchStartY.current = null;
     };
 
-    if (activeIndex === null) return null;
+    if (activeIndex === null || !images || images.length === 0) return null;
+
+    const currentItem = images[activeIndex];
+    const currentSrc = typeof currentItem === 'string' ? currentItem : currentItem.src;
+    const artistName = typeof currentItem === 'object' ? currentItem.artistName : null;
+    const artistSlug = typeof currentItem === 'object' ? currentItem.artistSlug : null;
+    const artistMedium = typeof currentItem === 'object' ? (currentItem.artistMedium || currentItem.medium) : null;
+    const artistLocation = typeof currentItem === 'object' ? (currentItem.artistLocation || currentItem.location) : null;
+    const title = typeof currentItem === 'object' ? currentItem.title : null;
 
     const current = activeIndex + 1;
     const total = images.length;
@@ -61,7 +71,7 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNext, on
                 </button>
             </div>
 
-            {/* Prev — hidden on mobile (use swipe or bottom bar) */}
+            {/* Prev button */}
             <button
                 className={`${styles.navBtn} ${styles.prevBtn}`}
                 onClick={(e) => { e.stopPropagation(); onPrev(); }}
@@ -70,16 +80,47 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNext, on
                 ‹
             </button>
 
-            {/* Image */}
-            <img
-                key={activeIndex}
-                className={styles.img}
-                src={images[activeIndex]}
-                alt={`Image ${current} of ${total}`}
-                onClick={(e) => e.stopPropagation()}
-            />
+            {/* Image & Caption Container */}
+            <div className={styles.imageContainer} onClick={(e) => e.stopPropagation()}>
+                <img
+                    key={activeIndex}
+                    className={styles.img}
+                    src={currentSrc}
+                    alt={title || `Image ${current} of ${total}`}
+                />
 
-            {/* Next — hidden on mobile */}
+                {(artistName || artistMedium || artistLocation) && (
+                    <div className={styles.captionOverlay}>
+                        {artistName && (
+                            <div className={styles.captionArtist}>
+                                {artistSlug ? (
+                                    <Link href={`/artists/${artistSlug}`} className={styles.artistLink} onClick={onClose}>
+                                        {artistName}
+                                    </Link>
+                                ) : (
+                                    <span>{artistName}</span>
+                                )}
+                            </div>
+                        )}
+                        {(artistMedium || artistLocation) && (
+                            <div className={styles.captionMeta}>
+                                {artistMedium && (
+                                    <span className={styles.metaBadge}>
+                                        <FontAwesomeIcon icon={faPalette} /> {artistMedium}
+                                    </span>
+                                )}
+                                {artistLocation && (
+                                    <span className={styles.metaBadge}>
+                                        <FontAwesomeIcon icon={faLocationDot} /> {artistLocation}
+                                    </span>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
+
+            {/* Next button */}
             <button
                 className={`${styles.navBtn} ${styles.nextBtn}`}
                 onClick={(e) => { e.stopPropagation(); onNext(); }}

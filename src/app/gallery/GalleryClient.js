@@ -1,19 +1,51 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import ImageLightbox from '../../components/ImageLightbox/ImageLightbox';
 import styles from './gallery.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShuffle, faClock, faHistory } from '@fortawesome/free-solid-svg-icons';
 
-export default function GalleryClient({ artists, initialArtworks }) {
-    const [selectedArtistFolder, setSelectedArtistFolder] = useState('all');
+// Helper for shuffling arrays
+function shuffle(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+export default function GalleryClient({ initialArtworks }) {
+    const [artworks, setArtworks] = useState(initialArtworks);
+    const [sortMode, setSortMode] = useState('random');
     const [lightboxIndex, setLightboxIndex] = useState(null);
 
-    const filteredArtworks = selectedArtistFolder === 'all'
-        ? initialArtworks
-        : initialArtworks.filter((art) => art.artistFolder === selectedArtistFolder);
+    // Randomize on initial client mount so every page visit is fresh & different
+    useEffect(() => {
+        setArtworks(shuffle(initialArtworks));
+    }, [initialArtworks]);
 
-    const lightboxImages = filteredArtworks.map((art) => art.src);
+    const handleSort = (mode) => {
+        setSortMode(mode);
+        if (mode === 'random') {
+            setArtworks(shuffle(initialArtworks));
+        } else if (mode === 'latest') {
+            const sorted = [...initialArtworks].sort((a, b) => {
+                const numA = parseInt(a.filename.replace(/\D/g, ''), 10) || 0;
+                const numB = parseInt(b.filename.replace(/\D/g, ''), 10) || 0;
+                return numB - numA;
+            });
+            setArtworks(sorted);
+        } else if (mode === 'old') {
+            const sorted = [...initialArtworks].sort((a, b) => {
+                const numA = parseInt(a.filename.replace(/\D/g, ''), 10) || 0;
+                const numB = parseInt(b.filename.replace(/\D/g, ''), 10) || 0;
+                return numA - numB;
+            });
+            setArtworks(sorted);
+        }
+    };
 
     return (
         <main className={styles.page}>
@@ -21,69 +53,60 @@ export default function GalleryClient({ artists, initialArtworks }) {
                 <span className={styles.eyebrow}>From the Sketchbooks</span>
                 <h1 className={styles.title}>USK Galle Gallery</h1>
                 <p className={styles.subtitle}>
-                    Browse sketches and artworks created by Urban Sketchers Galle across the southern coast.
+                    A visual collection of urban sketches capturing the heritage and coastal life of Galle.
                 </p>
             </div>
 
-            <div className={styles.filterBar}>
+            <div className={styles.sortBar}>
+                <span className={styles.sortLabel}>Sort by:</span>
                 <button
-                    className={`${styles.filterBtn} ${selectedArtistFolder === 'all' ? styles.activeFilter : ''}`}
-                    onClick={() => setSelectedArtistFolder('all')}
+                    className={`${styles.sortBtn} ${sortMode === 'random' ? styles.activeSort : ''}`}
+                    onClick={() => handleSort('random')}
                 >
-                    All Artists ({initialArtworks.length})
+                    <FontAwesomeIcon icon={faShuffle} /> Random
                 </button>
-                {artists.map((artist) => {
-                    const count = initialArtworks.filter((art) => art.artistFolder === artist.folder).length;
-                    return (
-                        <button
-                            key={artist.folder}
-                            className={`${styles.filterBtn} ${selectedArtistFolder === artist.folder ? styles.activeFilter : ''}`}
-                            onClick={() => setSelectedArtistFolder(artist.folder)}
-                        >
-                            {artist.name} ({count})
-                        </button>
-                    );
-                })}
+                <button
+                    className={`${styles.sortBtn} ${sortMode === 'latest' ? styles.activeSort : ''}`}
+                    onClick={() => handleSort('latest')}
+                >
+                    <FontAwesomeIcon icon={faClock} /> Latest
+                </button>
+                <button
+                    className={`${styles.sortBtn} ${sortMode === 'old' ? styles.activeSort : ''}`}
+                    onClick={() => handleSort('old')}
+                >
+                    <FontAwesomeIcon icon={faHistory} /> Old
+                </button>
             </div>
 
-            {filteredArtworks.length === 0 ? (
+            {artworks.length === 0 ? (
                 <div className={styles.emptyState}>
-                    <p>No artworks found for this artist.</p>
+                    <p>No artworks found.</p>
                 </div>
             ) : (
                 <div className={styles.gallery}>
-                    {filteredArtworks.map((art, index) => (
+                    {artworks.map((art, index) => (
                         <div
-                            key={art.id}
+                            key={`${art.id}-${index}`}
                             className={styles.imgWrap}
                             onClick={() => setLightboxIndex(index)}
                         >
                             <img
                                 src={art.src}
-                                alt={art.title}
+                                alt={art.title || `Artwork ${index + 1}`}
                                 loading="lazy"
                             />
-                            <div className={styles.caption}>
-                                <h3 className={styles.artTitle}>{art.title}</h3>
-                                <Link
-                                    href={`/artists/${art.artistSlug}`}
-                                    className={styles.artistLink}
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                    By {art.artistName}
-                                </Link>
-                            </div>
                         </div>
                     ))}
                 </div>
             )}
 
             <ImageLightbox
-                images={lightboxImages}
+                images={artworks}
                 activeIndex={lightboxIndex}
                 onClose={() => setLightboxIndex(null)}
-                onNext={() => setLightboxIndex((prev) => (prev + 1) % lightboxImages.length)}
-                onPrev={() => setLightboxIndex((prev) => (prev - 1 + lightboxImages.length) % lightboxImages.length)}
+                onNext={() => setLightboxIndex((prev) => (prev + 1) % artworks.length)}
+                onPrev={() => setLightboxIndex((prev) => (prev - 1 + artworks.length) % artworks.length)}
             />
         </main>
     );

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import ImageLightbox from '../../../components/ImageLightbox/ImageLightbox';
 import styles from './ArtistClient.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShareNodes, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faShareNodes, faArrowLeft, faPalette, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 export default function ArtistClient({ artist, artworks, profileImage }) {
@@ -36,8 +36,6 @@ export default function ArtistClient({ artist, artworks, profileImage }) {
         }
     };
 
-    const imageSources = artworks.map((art) => art.src);
-
     return (
         <main className={styles.main}>
             <Link href="/artists" className={styles.backLink}>
@@ -58,8 +56,16 @@ export default function ArtistClient({ artist, artworks, profileImage }) {
                     <h1 className={styles.name}>{artist.name}</h1>
 
                     <div className={styles.tags}>
-                        {artist.medium && <span className={styles.tag}>🎨 {artist.medium}</span>}
-                        {artist.location && <span className={styles.tag}>📍 {artist.location}</span>}
+                        {artist.medium && (
+                            <span className={styles.tag}>
+                                <FontAwesomeIcon icon={faPalette} /> {artist.medium}
+                            </span>
+                        )}
+                        {artist.location && (
+                            <span className={styles.tag}>
+                                <FontAwesomeIcon icon={faLocationDot} /> {artist.location}
+                            </span>
+                        )}
                     </div>
 
                     <p className={styles.bio}>{artist.bio}</p>
@@ -115,11 +121,11 @@ export default function ArtistClient({ artist, artworks, profileImage }) {
             </section>
 
             <ImageLightbox
-                images={imageSources}
+                images={artworks}
                 activeIndex={lightboxIndex}
                 onClose={() => setLightboxIndex(null)}
-                onNext={() => setLightboxIndex((prev) => (prev + 1) % imageSources.length)}
-                onPrev={() => setLightboxIndex((prev) => (prev - 1 + imageSources.length) % imageSources.length)}
+                onNext={() => setLightboxIndex((prev) => (prev + 1) % artworks.length)}
+                onPrev={() => setLightboxIndex((prev) => (prev - 1 + artworks.length) % artworks.length)}
             />
         </main>
     );

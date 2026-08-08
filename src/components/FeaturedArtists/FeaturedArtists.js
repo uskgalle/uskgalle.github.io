@@ -2,7 +2,7 @@ import Link from 'next/link';
 import styles from './FeaturedArtists.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { artists, getArtworksForArtist, getProfileImagePath } from '../../app/data/artists';
 
 export default function FeaturedArtists() {
@@ -55,7 +55,9 @@ export default function FeaturedArtists() {
                   <p className={styles.bio}>{artist.bio}</p>
 
                   <div className={styles.footer}>
-                    <span className={styles.location}>📍 {artist.location}</span>
+                    <span className={styles.location}>
+                      <FontAwesomeIcon icon={faLocationDot} /> {artist.location}
+                    </span>
                     <span className={styles.count}>{artworks.length} {artworks.length === 1 ? 'sketch' : 'sketches'}</span>
                   </div>
                 </div>

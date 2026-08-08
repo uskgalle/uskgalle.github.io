@@ -1,4 +1,4 @@
-import { artists, getAllArtworks } from '../data/artists';
+import { getAllArtworks } from '../data/artists';
 import GalleryClient from './GalleryClient';
 
 export const metadata = {
@@ -9,5 +9,5 @@ export const metadata = {
 export default function GalleryPage() {
     const allArtworks = getAllArtworks();
 
-    return <GalleryClient artists={artists} initialArtworks={allArtworks} />;
+    return <GalleryClient initialArtworks={allArtworks} />;
 }

@@ -36,20 +36,30 @@
     font-size: 0.95rem;
     color: #6b5a47;
     line-height: 1.7;
-    max-width: 480px;
+    max-width: 500px;
     margin: 0 auto;
 }
 
-/* Filter Bar — matching event card aesthetics */
-.filterBar {
+/* Sort Bar */
+.sortBar {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     margin-bottom: 40px;
 }
 
-.filterBtn {
+.sortLabel {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8a7060;
+    margin-right: 4px;
+}
+
+.sortBtn {
     padding: 6px 16px;
     border-radius: 2px;
     font-family: var(--font-sans);
@@ -64,26 +74,26 @@
     transition: all 0.2s ease;
 }
 
-.filterBtn:hover {
+.sortBtn:hover {
     background-color: #f5f0e8;
     color: #2a1f14;
     border-color: #c9b99a;
 }
 
-.activeFilter {
+.activeSort {
     background-color: #b8854a;
     color: #ffffff;
     border-color: #b8854a;
 }
 
-.activeFilter:hover {
+.activeSort:hover {
     background-color: #9b6c36;
     color: #ffffff;
     border-color: #9b6c36;
 }
 
 /* ─────────────────────────────
-   GALLERY  — recap.module.css style
+   PINTEREST MASONRY GALLERY (recap.module.css style)
 ───────────────────────────── */
 
 .gallery {
@@ -124,38 +134,6 @@
 
 .imgWrap:hover img {
     transform: scale(1.03);
-}
-
-.caption {
-    padding: 0.75rem 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #faf8f5;
-    border-top: 1px solid #e8dfd2;
-}
-
-.artTitle {
-    font-family: var(--font-display);
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #2a1f14;
-    margin: 0;
-}
-
-.artistLink {
-    font-family: var(--font-sans);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: #b8854a;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.artistLink:hover {
-    color: #9b6c36;
-    text-decoration: underline;
 }
 
 @media (max-width: 900px) {

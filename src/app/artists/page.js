@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { artists, getArtworksForArtist, getProfileImagePath } from '../data/artists';
 import styles from './artists.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 export const metadata = {
     title: 'Artists - USK Galle',
@@ -45,7 +45,9 @@ export default function ArtistsPage() {
 
                             <div className={styles.cardFooter}>
                                 <div className={styles.details}>
-                                    <span className={styles.location}>📍 {artist.location}</span>
+                                    <span className={styles.location}>
+                                        <FontAwesomeIcon icon={faLocationDot} /> {artist.location}
+                                    </span>
                                     <span className={styles.count}>{artworks.length} {artworks.length === 1 ? 'sketch' : 'sketches'}</span>
                                 </div>
 
