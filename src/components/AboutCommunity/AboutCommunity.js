@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faHandshake, faGlobe } from '@fortawesome/free-solid-svg-icons';
 
 const values = [
-  { icon: faPencil,    label: 'Draw on Location',   desc: 'We only sketch from life — no photos, no studios. Just us, the place, and the moment.' },
+  { icon: faPencil,    label: 'Draw on Location',   desc: 'We only sketch from life: no photos, no studios. Just us, the place, and the moment.' },
   { icon: faHandshake, label: 'Share Openly',        desc: 'Every sketch is shared with honesty. We celebrate progress, not perfection.' },
   { icon: faGlobe,     label: 'Part of a Global Movement', desc: 'USK Galle is one of hundreds of chapters worldwide, united by the Urban Sketchers manifesto.' },
 ];

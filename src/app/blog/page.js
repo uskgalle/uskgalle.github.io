@@ -1,27 +1,11 @@
-import { events } from '../data/events';
-import EventCard from '../../components/EventCard/EventCard';
-import styles from './blog.module.css';
+import { blogPosts } from '../data/blog';
+import BlogClient from './BlogClient';
 
 export const metadata = {
-    title: 'Sketch Meets',
+    title: 'Blog - USK Galle',
+    description: 'Articles on urban sketching, watercolor techniques, and Galle Fort architectural history.',
 };
 
 export default function BlogPage() {
-    return (
-        <main className={styles.page}>
-            <div className={styles.header}>
-                <span className={styles.eyebrow}>blog</span>
-                <h2 className={styles.title}>blog</h2>
-                <p className={styles.subtitle}>
-                    [Content Under Construction]
-                </p>
-            </div>
-
-            <div className={styles.body}>
-                <p className={styles.subtitle}>
-                    [Content Under Construction]
-                </p>
-            </div>
-        </main>
-    );
+    return <BlogClient posts={blogPosts} />;
 }

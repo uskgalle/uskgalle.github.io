@@ -28,7 +28,7 @@ export const artists = [
     slug: 'dilini-fernando',
     medium: 'Graphite & Colour Pencil',
     location: 'Hikkaduwa',
-    bio: 'Dilini finds beauty in everyday moments — market stalls, tuk-tuks, temple steps — rendered with warmth.',
+    bio: 'Dilini finds beauty in everyday moments: market stalls, tuk-tuks, temple steps, rendered with warmth.',
     instagram: 'https://instagram.com/dilinifernando',
     color: '#9c8ab0',
   },

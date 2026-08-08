@@ -9,7 +9,7 @@ export const events = [
         description:
             'Come along and sketch with us at our upcoming session: meet fellow artists, explore Galle Fort, and turn everyday moments into meaningful drawings.',
         location: "ART'O'SAN Gallery, Galle Fort",
-        time: '8.30 AM – 12.30 PM',
+        time: '8.30 AM - 12.30 PM',
         upcoming: true,
         registerLink: '#join',
         recap: null,
@@ -24,7 +24,7 @@ export const events = [
         description:
             'A friendly sketch meet filled with conversation, creativity, and on-location drawing around the beautiful streets of Galle.',
         location: "ART'O'SAN Gallery, Galle Fort",
-        time: '8.30 AM – 12.30 PM',
+        time: '8.30 AM - 12.30 PM',
         upcoming: false,
         registerLink: null,
         recap: {
@@ -42,7 +42,7 @@ export const events = [
         description:
             'An outdoor sketch meetup filled with creativity, conversation, and shared inspiration among local artists and sketch enthusiasts.',
         location: "ART'O'SAN Gallery, Galle Fort",
-        time: '8.30 AM – 12.30 PM',
+        time: '8.30 AM - 12.30 PM',
         upcoming: false,
         registerLink: null,
         recap: {
@@ -60,7 +60,7 @@ export const events = [
         description:
             'A relaxed morning of sketching, walking, observing, and sharing the city through lines and colours.',
         location: "ART'O'SAN Gallery, Galle Fort",
-        time: '9.15 AM – 12.30 PM',
+        time: '9.15 AM - 12.30 PM',
         upcoming: false,
         registerLink: null,
         recap: {
@@ -78,7 +78,7 @@ export const events = [
         description:
             "The event was organized by Urban Sketchers Colombo in collaboration with the Collective for Historical Dialogue & Memory and Art'o'San Gallery.",
         location: "ART'O'SAN Gallery, Galle Fort",
-        time: '9.15 AM – 12.30 PM',
+        time: '9.15 AM - 12.30 PM',
         upcoming: false,
         registerLink: null,
         recap: {

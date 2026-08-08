@@ -1,0 +1,226 @@
+.main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 120px 24px 100px;
+    min-height: 80vh;
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6b5a47;
+    text-decoration: none;
+    margin-bottom: 32px;
+    transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.backLink:hover {
+    gap: 0.7rem;
+    color: #b8854a;
+}
+
+/* Article Header */
+.articleHeader {
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e8e2d9;
+}
+
+.categoryTag {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #b8854a;
+    background-color: #f5f0e8;
+    border: 1px solid #e8dfd2;
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #2a1f14;
+    line-height: 1.2;
+    margin: 0 0 16px;
+}
+
+.metaRow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: #8a7060;
+}
+
+.authorLink {
+    color: #2a1f14;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.authorLink:hover {
+    color: #b8854a;
+}
+
+.dot {
+    opacity: 0.5;
+}
+
+.shareBtn {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 2px;
+    background-color: #faf8f5;
+    color: #2a1f14;
+    border: 1px solid #e8e2d9;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.shareBtn:hover {
+    background-color: #b8854a;
+    color: #ffffff;
+    border-color: #b8854a;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: #2a1f14;
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 2px;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+
+/* Article Body */
+.content {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #3a2e24;
+    margin-bottom: 60px;
+}
+
+.content h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2a1f14;
+    margin: 36px 0 16px;
+}
+
+.content h4 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2a1f14;
+    margin: 28px 0 12px;
+}
+
+.content p {
+    margin-bottom: 20px;
+}
+
+.content blockquote {
+    background-color: #faf8f5;
+    border-left: 4px solid #b8854a;
+    margin: 28px 0;
+    padding: 18px 24px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: #5c4b38;
+}
+
+.content ul, .content ol {
+    margin-bottom: 24px;
+    padding-left: 24px;
+}
+
+.content li {
+    margin-bottom: 8px;
+}
+
+/* Author Box */
+.authorBox {
+    background-color: #faf8f5;
+    border: 1px solid #e8e2d9;
+    border-radius: 3px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 60px;
+}
+
+.authorInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.writtenBy {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8a7060;
+}
+
+.authorName {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2a1f14;
+    margin: 0;
+}
+
+.viewProfileBtn {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #b8854a;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.viewProfileBtn:hover {
+    gap: 10px;
+    color: #9b6c36;
+}
