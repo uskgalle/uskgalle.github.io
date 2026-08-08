@@ -1,54 +1,9 @@
+import Link from 'next/link';
 import styles from './FeaturedArtists.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-
-const artists = [
-  {
-    id: 1,
-    name: 'Amara Perera',
-    medium: 'Watercolour & Ink',
-    location: 'Galle Fort',
-    bio: 'Amara captures the weathered textures of colonial architecture with a loose, expressive watercolour style.',
-    avatar: 'AP',
-    color: '#c9a87c',
-    sketches: 42,
-    instagram: '#',
-  },
-  {
-    id: 2,
-    name: 'Roshan Silva',
-    medium: 'Pen & Wash',
-    location: 'Unawatuna',
-    bio: 'Roshan\'s fine linework brings the fishing boats and coastal life of the southern shore to vivid detail.',
-    avatar: 'RS',
-    color: '#8a9e7c',
-    sketches: 31,
-    instagram: '#',
-  },
-  {
-    id: 3,
-    name: 'Dilini Fernando',
-    medium: 'Graphite & Colour Pencil',
-    location: 'Hikkaduwa',
-    bio: 'Dilini finds beauty in everyday moments — market stalls, tuk-tuks, temple steps — rendered with warmth.',
-    avatar: 'DF',
-    color: '#9c8ab0',
-    sketches: 28,
-    instagram: '#',
-  },
-  {
-    id: 4,
-    name: 'Dilini Fernando',
-    medium: 'Graphite & Colour Pencil',
-    location: 'Hikkaduwa',
-    bio: 'Dilini finds beauty in everyday moments — market stalls, tuk-tuks, temple steps — rendered with warmth.',
-    avatar: 'DF',
-    color: '#9c8ab0',
-    sketches: 28,
-    instagram: '#',
-  },
-];
+import { artists, getArtworksForArtist, getProfileImagePath } from '../../app/data/artists';
 
 export default function FeaturedArtists() {
   return (
@@ -59,44 +14,60 @@ export default function FeaturedArtists() {
           <span className={styles.eyebrow}>Our People</span>
           <h2 className={styles.title}>Featured Artists</h2>
           <p className={styles.subtitle}>
-            Meet some of the sketchers who make USK Galle what it is. [This Section Is Under Construction]
+            Meet some of the sketchers who make USK Galle what it is.
           </p>
         </div>
 
         <div className={styles.grid}>
-          {artists.map((artist) => (
-            <article key={artist.id} className={styles.card}>
-              {/* Avatar */}
-              <div className={styles.avatar} style={{ backgroundColor: artist.color }}>
-                {artist.avatar}
-              </div>
+          {artists.map((artist) => {
+            const artworks = getArtworksForArtist(artist.folder);
+            const profileImage = getProfileImagePath(artist.folder);
 
-              <div className={styles.cardBody}>
-                <div className={styles.nameRow}>
-                  <div>
-                    <h3 className={styles.name}>{artist.name}</h3>
-                    <span className={styles.medium}>{artist.medium}</span>
+            return (
+              <article key={artist.slug} className={styles.card}>
+                <Link href={`/artists/${artist.slug}`} style={{ textDecoration: 'none' }}>
+                  <div className={styles.avatar} style={{ backgroundColor: artist.color }}>
+                    <img
+                      src={profileImage}
+                      alt={artist.name}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
                   </div>
-                  <a href={artist.instagram} className={styles.igIcon} aria-label="Instagram">
-                    <FontAwesomeIcon icon={faInstagram} />
-                  </a>
-                </div>
+                </Link>
 
-                <p className={styles.bio}>{artist.bio}</p>
+                <div className={styles.cardBody}>
+                  <div className={styles.nameRow}>
+                    <div>
+                      <h3 className={styles.name}>
+                        <Link href={`/artists/${artist.slug}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                          {artist.name}
+                        </Link>
+                      </h3>
+                      <span className={styles.medium}>{artist.medium}</span>
+                    </div>
+                    {artist.instagram && (
+                      <a href={artist.instagram} target="_blank" rel="noopener noreferrer" className={styles.igIcon} aria-label="Instagram">
+                        <FontAwesomeIcon icon={faInstagram} />
+                      </a>
+                    )}
+                  </div>
 
-                <div className={styles.footer}>
-                  <span className={styles.location}>📍 {artist.location}</span>
-                  <span className={styles.count}>{artist.sketches} sketches</span>
+                  <p className={styles.bio}>{artist.bio}</p>
+
+                  <div className={styles.footer}>
+                    <span className={styles.location}>📍 {artist.location}</span>
+                    <span className={styles.count}>{artworks.length} {artworks.length === 1 ? 'sketch' : 'sketches'}</span>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
 
         <div className={styles.viewAll}>
-          <a href="#gallery" className={styles.viewAllBtn}>
+          <Link href="/artists" className={styles.viewAllBtn}>
             Meet All Artists <FontAwesomeIcon icon={faArrowRight} />
-          </a>
+          </Link>
         </div>
 
       </div>

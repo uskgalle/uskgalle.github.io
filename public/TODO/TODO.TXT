@@ -1,0 +1,9 @@
+Artworks 
+- load all artwoarks from artwoarks-iamges folder
+- in follder artworks are categorized  (artist name = folder name )
+- artworks 1.webp, 2.webp ...
+
+Artists
+- just profile pics at artists-images folder
+- make a array.  (artist display names, folder name)
+- need a slug for each artist (so they can share it)

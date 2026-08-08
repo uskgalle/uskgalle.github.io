@@ -15,7 +15,7 @@
 
 .eyebrow {
   display: inline-block;
-  font-family:  var(--font-sans);
+  font-family: var(--font-sans);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.15em;
@@ -34,7 +34,7 @@
 }
 
 .subtitle {
-  font-family:  var(--font-sans);
+  font-family: var(--font-sans);
   font-size: 0.95rem;
   color: #6b5a47;
   line-height: 1.7;
@@ -42,47 +42,61 @@
   margin: 0 auto;
 }
 
-/* ── Masonry grid ── */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto;
-  gap: 1rem;
+/* ─────────────────────────────
+   GALLERY  — recap.module.css style
+───────────────────────────── */
+
+.gallery {
+  columns: 3;
+  column-gap: 1.25rem;
   margin-bottom: 3rem;
 }
 
-/* ── Sketch cards ── */
-.sketchCard {
+.imgWrap {
+  break-inside: avoid;
+  margin-bottom: 1.25rem;
   position: relative;
+
   overflow: hidden;
   border-radius: 2px;
+  background: #f5f0e8;
+  border: 1px solid #e8dfd2;
+
   cursor: pointer;
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
 }
 
-.sketchCard:hover .overlay { opacity: 1; }
-.sketchCard:hover .sketchImg { transform: scale(1.04); }
+.imgWrap:hover {
+  transform: translateY(-3px);
+  border-color: #c9b99a;
+  box-shadow: 0 8px 28px rgba(42, 31, 20, 0.08);
+}
 
-.sketchImg {
+.imgWrap img {
   width: 100%;
-  height: 100%;
-  min-height: 200px;
-  transition: transform 0.5s ease;
+  display: block;
+  transition:
+    transform 0.5s ease,
+    opacity 0.3s ease;
 }
 
-/* aspect variants */
-.tall   { grid-row: span 2; }
-.wide   { grid-column: span 1; }
-.square { grid-column: span 1; }
+.imgWrap:hover img {
+  transform: scale(1.03);
+}
 
-.tall .sketchImg   { min-height: 420px; }
-.wide .sketchImg   { min-height: 200px; }
-.square .sketchImg { min-height: 200px; }
+.imgWrap:hover .overlay {
+  opacity: 1;
+}
 
 /* ── Hover overlay ── */
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(30, 20, 10, 0.78) 0%, transparent 60%);
+  background: linear-gradient(to top, rgba(30, 20, 10, 0.82) 0%, transparent 65%);
   opacity: 0;
   transition: opacity 0.3s ease;
   display: flex;
@@ -93,7 +107,7 @@
 }
 
 .overlayArtist {
-  font-family:  var(--font-display);
+  font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 600;
   color: #ffffff;
@@ -101,14 +115,14 @@
 }
 
 .overlayLocation {
-  font-family:  var(--font-sans);
+  font-family: var(--font-sans);
   font-size: 0.75rem;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.8);
   margin: 0;
 }
 
 .overlayMedium {
-  font-family:  var(--font-sans);
+  font-family: var(--font-sans);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -130,7 +144,7 @@
   padding: 0.75rem 2rem;
   border: 1.5px solid #b8854a;
   color: #b8854a;
-  font-family:  var(--font-sans);
+  font-family: var(--font-sans);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -140,16 +154,20 @@
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.viewAllBtn:hover { background-color: #b8854a; color: #ffffff; }
-
-/* ── Responsive ── */
-@media (max-width: 768px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-  .tall { grid-row: span 1; }
-  .tall .sketchImg { min-height: 200px; }
-  .overlay { opacity: 1; }
+.viewAllBtn:hover {
+  background-color: #b8854a;
+  color: #ffffff;
 }
 
-@media (max-width: 480px) {
-  .grid { grid-template-columns: 1fr; }
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .gallery {
+    columns: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .gallery {
+    columns: 1;
+  }
 }

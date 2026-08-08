@@ -1,0 +1,285 @@
+.main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 120px 24px 100px;
+    min-height: 80vh;
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6b5a47;
+    text-decoration: none;
+    margin-bottom: 32px;
+    transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.backLink:hover {
+    gap: 0.7rem;
+    color: #b8854a;
+}
+
+/* Header / Profile Card - EventCard style */
+.profileHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #faf8f5;
+    border: 1px solid #e8e2d9;
+    border-radius: 3px;
+    padding: 36px 24px;
+    transition: box-shadow 0.25s ease, transform 0.2s ease;
+    margin-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+    .profileHeader {
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start;
+        gap: 36px;
+        padding: 40px;
+    }
+}
+
+.avatarWrapper {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid #e8e2d9;
+    background-color: #f5efe6;
+}
+
+.avatarImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profileDetails {
+    flex: 1;
+}
+
+.eyebrow {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #b8854a;
+    margin-bottom: 0.5rem;
+}
+
+.name {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 600;
+    color: #2a1f14;
+    margin: 0 0 12px;
+    line-height: 1.2;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+    .tags {
+        justify-content: flex-start;
+    }
+}
+
+.tag {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+    background-color: #f5f0e8;
+    color: #6b5a47;
+    border: 1px solid #e8dfd2;
+}
+
+.bio {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #6b5a47;
+    max-width: 650px;
+    margin: 0 0 24px;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .actions {
+        justify-content: flex-start;
+    }
+}
+
+.btnPrimary, .btnSecondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 2px;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.btnPrimary {
+    background-color: #b8854a;
+    color: #ffffff;
+    border: 1px solid #b8854a;
+}
+
+.btnPrimary:hover {
+    background-color: #9b6c36;
+    border-color: #9b6c36;
+}
+
+.btnSecondary {
+    background-color: #faf8f5;
+    color: #2a1f14;
+    border: 1px solid #e8e2d9;
+}
+
+.btnSecondary:hover {
+    background-color: #f5f0e8;
+    color: #b8854a;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: #2a1f14;
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 2px;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+
+/* Section Header */
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e8e2d9;
+    padding-bottom: 12px;
+}
+
+.sectionTitle {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2a1f14;
+    margin: 0;
+}
+
+.countBadge {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: #8a7060;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+/* ─────────────────────────────
+   GALLERY  — recap.module.css style
+───────────────────────────── */
+
+.gallery {
+    columns: 3;
+    column-gap: 1.25rem;
+}
+
+.imgWrap {
+    break-inside: avoid;
+    margin-bottom: 1.25rem;
+
+    overflow: hidden;
+    border-radius: 2px;
+    background: #f5f0e8;
+    border: 1px solid #e8dfd2;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+}
+
+.imgWrap:hover {
+    transform: translateY(-3px);
+    border-color: #c9b99a;
+    box-shadow: 0 8px 28px rgba(42, 31, 20, 0.08);
+}
+
+.imgWrap img {
+    width: 100%;
+    display: block;
+    transition:
+        transform 0.5s ease,
+        opacity 0.3s ease;
+}
+
+.imgWrap:hover img {
+    transform: scale(1.03);
+}
+
+@media (max-width: 900px) {
+    .gallery {
+        columns: 2;
+    }
+}
+
+@media (max-width: 640px) {
+    .gallery {
+        columns: 1;
+    }
+}
+
+.emptyState {
+    text-align: center;
+    padding: 60px 20px;
+    color: #8a7060;
+    background-color: #faf8f5;
+    border-radius: 3px;
+    border: 1px dashed #e8e2d9;
+    font-family: var(--font-sans);
+}
