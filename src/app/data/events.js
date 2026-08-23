@@ -38,14 +38,26 @@ export const events = [
         time: '8.30 AM - 12.30 PM',
         upcoming: true,
         registerLink: '/events/meet-up-04/register',
-        googleFormUrl: null,
-        sheetEndpointUrl: 'https://script.google.com/macros/s/AKfycbwaGLRzDY1hbS_JhrXl8JKSePD3iDLDIXSVbFmgw-FsfUi1tYiOvpl1CeCAK7xS13ktBQ/exec', // Add your Google Apps Script Web App URL here to submit directly to Google Sheets!
-        instructions: [
-            { icon: '📍', title: 'Meeting Point', text: "ART'O'SAN Gallery, Galle Fort at 8.30 AM for a quick intro." },
-            { icon: '🎨', title: 'What to Bring', text: 'Sketchbook, drawing pens or watercolors, portable stool, and water bottle.' },
-            { icon: '🚶‍♂️', title: 'Outdoor Walking', text: 'We will sketch on-location and walk between stops around Galle Fort.' },
-            { icon: '📸', title: 'Photos & Consent', text: 'Group photos & sketches will be shared on Urban Sketchers Galle social media.' },
+        image: '/doodles/hero.jpg',
+        sheetEndpointUrl: 'https://script.google.com/macros/s/AKfycbwaGLRzDY1hbS_JhrXl8JKSePD3iDLDIXSVbFmgw-FsfUi1tYiOvpl1CeCAK7xS13ktBQ/exec',
+        whoCanJoin: [
+            'All age groups welcome',
+            'All skill levels welcome: beginners to professionals',
         ],
+        whatToBring: [
+            'Pencil',
+            'Pen / Ink',
+            'Watercolour',
+            'Markers',
+            'iPad / Digital tools',
+            'Or anything else you enjoy using',
+        ],
+        whatToBringNote: 'No specific tools required. All styles are welcome.',
+        contact: {
+            name: 'Sandeepa',
+            phone: '+94 71 872 6368',
+            whatsappLink: 'https://wa.me/94718726368',
+        },
         recap: null,
     },
     {

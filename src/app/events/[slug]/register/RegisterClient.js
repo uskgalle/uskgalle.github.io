@@ -15,6 +15,9 @@ import {
     faArrowRight,
     faArrowDown,
     faPaperPlane,
+    faUsers,
+    faPalette,
+    faPhone,
 } from '@fortawesome/free-solid-svg-icons';
 import {
     faWhatsapp,
@@ -71,7 +74,6 @@ export default function RegisterClient({ event }) {
 
         setIsSubmitting(true);
 
-        // If a Google Apps Script / Sheet Endpoint URL is set in events.js, send POST request
         if (event.sheetEndpointUrl) {
             try {
                 const params = new URLSearchParams({
@@ -136,50 +138,30 @@ export default function RegisterClient({ event }) {
         return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
     };
 
-    const downloadIcsFile = () => {
-        const monthMap = {
-            JAN: '01', FEB: '02', MAR: '03', MARCH: '03', APR: '04', APRIL: '04',
-            MAY: '05', JUN: '06', JUNE: '06', JUL: '07', JULY: '07', AUG: '08',
-            SEP: '09', OCT: '10', NOV: '11', DEC: '12',
-        };
-        const monthNum = monthMap[event.date.month.toUpperCase()] || '08';
-        const dayStr = String(event.date.day).padStart(2, '0');
-        const dateStr = `${event.year}${monthNum}${dayStr}`;
-
-        const icsData = [
-            'BEGIN:VCALENDAR',
-            'VERSION:2.0',
-            'PRODID:-//Urban Sketchers Galle//EN',
-            'BEGIN:VEVENT',
-            `SUMMARY:Urban Sketchers Galle - ${event.title}`,
-            `DESCRIPTION:${event.description.replace(/\n/g, ' ')}`,
-            `LOCATION:${event.location}`,
-            `DTSTART:${dateStr}T083000`,
-            `DTEND:${dateStr}T123000`,
-            'END:VEVENT',
-            'END:VCALENDAR',
-        ].join('\r\n');
-
-        const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
-        const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.setAttribute('download', `${event.slug}-event.ics`);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    };
-
     const shareText = `Join me at Urban Sketchers Galle for ${event.title} on ${event.date.day} ${event.date.month} ${event.year} at ${event.location}! Register here:`;
     const waShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText} ${currentUrl}`)}`;
     const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
     const twShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(currentUrl)}`;
 
-    const instructions = event.instructions || [
-        { icon: '📍', title: 'Meeting Point', text: `Meet at ${event.location} at ${event.time.split('-')[0] || '8.30 AM'}.` },
-        { icon: '🎨', title: 'What to Bring', text: 'Sketchbook, drawing pens or watercolors, portable stool, and water bottle.' },
-        { icon: '🚶‍♂️', title: 'Outdoor Walking', text: 'We will sketch on-location and walk between stops around Galle Fort.' },
-        { icon: '📸', title: 'Photos & Consent', text: 'Group photos & sketches will be shared on Urban Sketchers Galle social media.' },
+    const whoCanJoinList = event.whoCanJoin || [
+        'All age groups welcome',
+        'All skill levels welcome — beginners to professionals',
     ];
+
+    const whatToBringList = event.whatToBring || [
+        'Pencil',
+        'Pen / Ink',
+        'Watercolour',
+        'Markers',
+        'iPad / Digital tools',
+        'Or anything else you enjoy using',
+    ];
+
+    const contact = event.contact || {
+        name: 'Sandeepa',
+        phone: '+94 71 872 6368',
+        whatsappLink: 'https://wa.me/94718726368',
+    };
 
     return (
         <main className={styles.page}>
@@ -190,7 +172,7 @@ export default function RegisterClient({ event }) {
                 </Link>
             </div>
 
-            {/* Hero Banner Header */}
+            {/* Hero Header */}
             <header className={styles.hero}>
                 <span className={styles.eyebrow}>
                     {event.upcoming ? 'Upcoming Sketch Meet' : 'Past Event'}
@@ -207,16 +189,17 @@ export default function RegisterClient({ event }) {
                 )}
             </header>
 
-            {/* Web Page Section 1: Event Details & Instructions Overview */}
-            <section className={styles.detailsSection}>
-                <h2 className={styles.sectionTitle}>Event Information & Guidelines</h2>
-                <p className={styles.sectionSubtitle}>
-                    Here is everything you need to know before joining us on-location.
-                </p>
+            {/* Showcase Section: Featured Event Image + Quick Facts */}
+            <section className={styles.showcaseSection}>
+                <div className={styles.showcaseGrid}>
+                    <div className={styles.imageWrap}>
+                        <img
+                            src={event.image || '/gallery-images/meet-up-03/1.jpg'}
+                            alt={event.title}
+                        />
+                    </div>
 
-                <div className={styles.overviewGrid}>
-                    {/* Event Summary Box */}
-                    <div className={styles.overviewCard}>
+                    <div className={styles.infoCard}>
                         <div className={styles.cardHeader}>
                             <div className={`${styles.dateBadge} ${event.upcoming ? styles.dateBadgeUpcoming : ''}`}>
                                 <span className={styles.dateYear}>{event.year}</span>
@@ -227,7 +210,7 @@ export default function RegisterClient({ event }) {
                             </div>
                             <div className={styles.eventTitleGroup}>
                                 <span className={styles.typeTag}>{event.type} Session</span>
-                                <h3 className={styles.eventTitle}>{event.title}</h3>
+                                <h2 className={styles.eventTitle}>{event.title}</h2>
                             </div>
                         </div>
 
@@ -257,25 +240,77 @@ export default function RegisterClient({ event }) {
 
                         <p className={styles.eventDesc}>{event.description}</p>
                     </div>
+                </div>
+            </section>
 
-                    {/* Event Guidelines List */}
-                    <div className={styles.guidelinesBox}>
-                        <div className={styles.guidelinesList}>
-                            {instructions.map((item, idx) => (
-                                <div key={idx} className={styles.guidelineCard}>
-                                    <div className={styles.guidelineHeader}>
-                                        <span className={styles.guidelineIcon}>{item.icon}</span>
-                                        <h4 className={styles.guidelineTitle}>{item.title}</h4>
-                                    </div>
-                                    <p className={styles.guidelineText}>{item.text}</p>
-                                </div>
+            {/* Clear Editorial Guidelines Section */}
+            <section className={styles.guidelinesSection}>
+                <h2 className={styles.sectionTitle}>Event Guidelines & Details</h2>
+                <p className={styles.sectionSubtitle}>
+                    Everything you need to know before joining us on-location in Galle Fort.
+                </p>
+
+                <div className={styles.guidelinesGrid}>
+                    {/* Who can join */}
+                    <div className={styles.guideCard}>
+                        <div className={styles.guideCardHeader}>
+                            <FontAwesomeIcon icon={faUsers} className={styles.guideIcon} />
+                            <h3 className={styles.guideTitle}>Who Can Join?</h3>
+                        </div>
+                        <ul className={styles.guideList}>
+                            {whoCanJoinList.map((item, i) => (
+                                <li key={i} className={styles.guideItem}>
+                                    {item}
+                                </li>
                             ))}
+                        </ul>
+                    </div>
+
+                    {/* What to bring */}
+                    <div className={styles.guideCard}>
+                        <div className={styles.guideCardHeader}>
+                            <FontAwesomeIcon icon={faPalette} className={styles.guideIcon} />
+                            <h3 className={styles.guideTitle}>What To Bring</h3>
+                        </div>
+                        <ul className={styles.guideList}>
+                            {whatToBringList.map((item, i) => (
+                                <li key={i} className={styles.guideItem}>
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                        <p className={styles.guideNote}>
+                            {event.whatToBringNote || 'No specific tools required — all styles are welcome.'}
+                        </p>
+                    </div>
+
+                    {/* Contact & Inquiries */}
+                    <div className={styles.guideCard}>
+                        <div className={styles.guideCardHeader}>
+                            <FontAwesomeIcon icon={faPhone} className={styles.guideIcon} />
+                            <h3 className={styles.guideTitle}>Details & Inquiries</h3>
+                        </div>
+                        <div className={styles.contactBlock}>
+                            <div className={styles.contactRow}>
+                                <strong>Contact:</strong> {contact.name}
+                            </div>
+                            <div className={styles.contactRow}>
+                                <strong>WhatsApp:</strong> {contact.phone}
+                            </div>
+                            <a
+                                href={contact.whatsappLink || `https://wa.me/${contact.phone.replace(/[^0-9]/g, '')}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.contactLink}
+                            >
+                                <FontAwesomeIcon icon={faWhatsapp} /> Message on WhatsApp
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Web Page Section 2: Native Web Registration Form (or Past Notice / Success State) */}
+            {/* Web Registration Form Section */}
             <section id="register-section" className={styles.formSection}>
                 {!event.upcoming ? (
                     <div className={styles.closedNotice}>
@@ -299,7 +334,7 @@ export default function RegisterClient({ event }) {
                         <div className={styles.checkCircle}>
                             <FontAwesomeIcon icon={faCheck} />
                         </div>
-                        <h2 className={styles.successTitle}>You're Registered! 🎉</h2>
+                        <h2 className={styles.successTitle}>Registration Confirmed</h2>
                         <p className={styles.successBody}>
                             Thank you, <strong>{formData.fullName}</strong>. Your spot is reserved for <strong>{event.title}</strong> on <strong>{event.date.day} {event.date.month} {event.year}</strong>.
                         </p>
@@ -323,9 +358,6 @@ export default function RegisterClient({ event }) {
                             >
                                 <FontAwesomeIcon icon={faCalendarPlus} /> Add to Google Calendar
                             </a>
-                            <button onClick={downloadIcsFile} className={styles.calBtn}>
-                                <FontAwesomeIcon icon={faCalendarPlus} /> Download .ics File
-                            </button>
                         </div>
                     </div>
                 ) : (
@@ -425,7 +457,7 @@ export default function RegisterClient({ event }) {
                                     />
                                 </div>
 
-                                {/* Event Guidelines Agreement Checkbox */}
+                                {/* Event Agreement Checkbox */}
                                 <div className={`${styles.fullWidth} ${styles.agreementRow}`}>
                                     <input
                                         type="checkbox"
