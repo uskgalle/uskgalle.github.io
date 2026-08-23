@@ -39,6 +39,9 @@ export const events = [
         upcoming: true,
         registerLink: '/events/meet-up-04/register',
         image: '/doodles/hero.jpg',
+        whoCanJoinImage: '/doodles/who-can-join.jpg',
+        whatToBringImage: '/doodles/what-to-bring.jpg',
+        contactImage: '/doodles/contact.jpg',
         sheetEndpointUrl: 'https://script.google.com/macros/s/AKfycbwaGLRzDY1hbS_JhrXl8JKSePD3iDLDIXSVbFmgw-FsfUi1tYiOvpl1CeCAK7xS13ktBQ/exec',
         whoCanJoin: [
             'All age groups welcome',

@@ -253,58 +253,85 @@ export default function RegisterClient({ event }) {
                 <div className={styles.guidelinesGrid}>
                     {/* Who can join */}
                     <div className={styles.guideCard}>
-                        <div className={styles.guideCardHeader}>
-                            <FontAwesomeIcon icon={faUsers} className={styles.guideIcon} />
-                            <h3 className={styles.guideTitle}>Who Can Join?</h3>
+                        {/* <div className={styles.guideCardImageWrap}>
+                            <img
+                                src={event.whoCanJoinImage || '/doodles/who-can-join.jpg'}
+                                alt="Who Can Join?"
+                                className={styles.guideCardImg}
+                            />
+                        </div> */}
+                        <div className={styles.guideCardContent}>
+                            <div className={styles.guideCardHeader}>
+                                <FontAwesomeIcon icon={faUsers} className={styles.guideIcon} />
+                                <h3 className={styles.guideTitle}>Who Can Join?</h3>
+                            </div>
+                            <ul className={styles.guideList}>
+                                {whoCanJoinList.map((item, i) => (
+                                    <li key={i} className={styles.guideItem}>
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-                        <ul className={styles.guideList}>
-                            {whoCanJoinList.map((item, i) => (
-                                <li key={i} className={styles.guideItem}>
-                                    {item}
-                                </li>
-                            ))}
-                        </ul>
                     </div>
 
                     {/* What to bring */}
                     <div className={styles.guideCard}>
-                        <div className={styles.guideCardHeader}>
-                            <FontAwesomeIcon icon={faPalette} className={styles.guideIcon} />
-                            <h3 className={styles.guideTitle}>What To Bring</h3>
+                        {/*  <div className={styles.guideCardImageWrap}>
+                            <img
+                                src={event.whatToBringImage || '/doodles/what-to-bring.jpg'}
+                                alt="What To Bring"
+                                className={styles.guideCardImg}
+                            />
+                        </div> */}
+                        <div className={styles.guideCardContent}>
+                            <div className={styles.guideCardHeader}>
+                                <FontAwesomeIcon icon={faPalette} className={styles.guideIcon} />
+                                <h3 className={styles.guideTitle}>What To Bring</h3>
+                            </div>
+                            <ul className={styles.guideList}>
+                                {whatToBringList.map((item, i) => (
+                                    <li key={i} className={styles.guideItem}>
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
+                            <p className={styles.guideNote}>
+                                {event.whatToBringNote || 'No specific tools required — all styles are welcome.'}
+                            </p>
                         </div>
-                        <ul className={styles.guideList}>
-                            {whatToBringList.map((item, i) => (
-                                <li key={i} className={styles.guideItem}>
-                                    {item}
-                                </li>
-                            ))}
-                        </ul>
-                        <p className={styles.guideNote}>
-                            {event.whatToBringNote || 'No specific tools required — all styles are welcome.'}
-                        </p>
                     </div>
 
                     {/* Contact & Inquiries */}
                     <div className={styles.guideCard}>
-                        <div className={styles.guideCardHeader}>
-                            <FontAwesomeIcon icon={faPhone} className={styles.guideIcon} />
-                            <h3 className={styles.guideTitle}>Details & Inquiries</h3>
-                        </div>
-                        <div className={styles.contactBlock}>
-                            <div className={styles.contactRow}>
-                                <strong>Contact:</strong> {contact.name}
+                        {/* <div className={styles.guideCardImageWrap}>
+                            <img
+                                src={event.contactImage || '/doodles/contact.jpg'}
+                                alt="Details & Inquiries"
+                                className={styles.guideCardImg}
+                            />
+                        </div> */}
+                        <div className={styles.guideCardContent}>
+                            <div className={styles.guideCardHeader}>
+                                <FontAwesomeIcon icon={faPhone} className={styles.guideIcon} />
+                                <h3 className={styles.guideTitle}>Details & Inquiries</h3>
                             </div>
-                            <div className={styles.contactRow}>
-                                <strong>WhatsApp:</strong> {contact.phone}
+                            <div className={styles.contactBlock}>
+                                <div className={styles.contactRow}>
+                                    <strong>Contact:</strong> {contact.name}
+                                </div>
+                                <div className={styles.contactRow}>
+                                    <strong>WhatsApp:</strong> {contact.phone}
+                                </div>
+                                <a
+                                    href={contact.whatsappLink || `https://wa.me/${contact.phone.replace(/[^0-9]/g, '')}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={styles.contactLink}
+                                >
+                                    <FontAwesomeIcon icon={faWhatsapp} className={styles.waIcon} /> Message on WhatsApp
+                                </a>
                             </div>
-                            <a
-                                href={contact.whatsappLink || `https://wa.me/${contact.phone.replace(/[^0-9]/g, '')}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={styles.contactLink}
-                            >
-                                <FontAwesomeIcon icon={faWhatsapp} /> Message on WhatsApp
-                            </a>
                         </div>
                     </div>
                 </div>
