@@ -1,0 +1,150 @@
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 120px 24px 100px;
+  text-align: center;
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.illustration {
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.number {
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 15vw, 11rem);
+  font-weight: 700;
+  color: var(--color-dark, #2a1f14);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  opacity: 0.15;
+  user-select: none;
+}
+
+.badgeWrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fdfbf7;
+  border: 1px solid #e8dfd2;
+  padding: 0.85rem 1.75rem;
+  border-radius: 2px;
+  box-shadow: 0 10px 30px rgba(42, 31, 20, 0.06);
+  white-space: nowrap;
+}
+
+.badgeIcon {
+  color: var(--color-tan, #b8854a);
+  font-size: 1.25rem;
+  margin-right: 0.5rem;
+}
+
+.badgeText {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-dark, #2a1f14);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--color-dark, #2a1f14);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  color: var(--color-muted, #6b5a47);
+  line-height: 1.7;
+  max-width: 540px;
+  margin: 0 auto 2.5rem;
+}
+
+.homeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.95rem 2.25rem;
+  background-color: var(--color-dark, #2a1f14);
+  color: #ffffff;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  margin-bottom: 3.5rem;
+}
+
+.homeBtn:hover {
+  background-color: var(--color-tan, #b8854a);
+  transform: translateY(-1px);
+}
+
+.quickNav {
+  border-top: 1px solid #e8dfd2;
+  padding-top: 2.5rem;
+  width: 100%;
+  max-width: 680px;
+}
+
+.quickTitle {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-tan, #b8854a);
+  margin-bottom: 1.25rem;
+}
+
+.linksGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.navCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #fcfaf7;
+  border: 1px solid #e8dfd2;
+  border-radius: 2px;
+  text-decoration: none;
+  color: var(--color-dark, #2a1f14);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: border-color 0.2s ease, transform 0.15s ease, background-color 0.2s ease;
+}
+
+.navCard:hover {
+  border-color: var(--color-tan, #b8854a);
+  background: #ffffff;
+  transform: translateY(-2px);
+}
+
+.navCardIcon {
+  color: var(--color-tan, #b8854a);
+  font-size: 1.1rem;
+}
