@@ -38,6 +38,14 @@ export const events = [
         time: '8.30 AM - 12.30 PM',
         upcoming: true,
         registerLink: '/events/meet-up-04/register',
+        googleFormUrl: null,
+        sheetEndpointUrl: '', // Add your Google Apps Script Web App URL here to submit directly to Google Sheets!
+        instructions: [
+            { icon: '📍', title: 'Meeting Point', text: "ART'O'SAN Gallery, Galle Fort at 8.30 AM for a quick intro." },
+            { icon: '🎨', title: 'What to Bring', text: 'Sketchbook, drawing pens or watercolors, portable stool, and water bottle.' },
+            { icon: '🚶‍♂️', title: 'Outdoor Walking', text: 'We will sketch on-location and walk between stops around Galle Fort.' },
+            { icon: '📸', title: 'Photos & Consent', text: 'Group photos & sketches will be shared on Urban Sketchers Galle social media.' },
+        ],
         recap: null,
     },
     {

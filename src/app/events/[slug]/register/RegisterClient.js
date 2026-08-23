@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './register.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,6 +13,7 @@ import {
     faCopy,
     faShareNodes,
     faArrowRight,
+    faArrowDown,
     faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -30,24 +31,63 @@ export default function RegisterClient({ event }) {
         attendees: '1',
         experience: 'Enthusiast / Beginner',
         notes: '',
+        agreedToGuidelines: false,
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
 
-    const currentUrl = typeof window !== 'undefined'
-        ? window.location.href
-        : `https://urbansketchersgalle.github.io/events/${event.slug}/register`;
+    const defaultUrl = `https://urbansketchersgalle.github.io/events/${event.slug}/register`;
+    const [currentUrl, setCurrentUrl] = useState(defaultUrl);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setCurrentUrl(window.location.href);
+        }
+    }, []);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        const { name, value, type, checked } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value,
+        }));
     };
 
-    const handleSubmit = (e) => {
+    const scrollToForm = () => {
+        const formElement = document.getElementById('register-section');
+        if (formElement) {
+            formElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!formData.agreedToGuidelines) {
+            showToast('Please accept the event guidelines to confirm registration.');
+            return;
+        }
+
         setIsSubmitting(true);
+
+        // If a Google Apps Script / Sheet Endpoint URL is set in events.js, send POST request
+        if (event.sheetEndpointUrl) {
+            try {
+                await fetch(event.sheetEndpointUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        event: event.title,
+                        timestamp: new Date().toISOString(),
+                        ...formData,
+                    }),
+                });
+            } catch (err) {
+                console.error('Error submitting form data to endpoint:', err);
+            }
+        }
 
         setTimeout(() => {
             setIsSubmitting(false);
@@ -57,7 +97,7 @@ export default function RegisterClient({ event }) {
 
     const showToast = (msg) => {
         setToastMessage(msg);
-        setTimeout(() => setToastMessage(''), 3000);
+        setTimeout(() => setToastMessage(''), 3500);
     };
 
     const copyToClipboard = () => {
@@ -125,6 +165,13 @@ export default function RegisterClient({ event }) {
     const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
     const twShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(currentUrl)}`;
 
+    const instructions = event.instructions || [
+        { icon: '📍', title: 'Meeting Point', text: `Meet at ${event.location} at ${event.time.split('-')[0] || '8.30 AM'}.` },
+        { icon: '🎨', title: 'What to Bring', text: 'Sketchbook, drawing pens or watercolors, portable stool, and water bottle.' },
+        { icon: '🚶‍♂️', title: 'Outdoor Walking', text: 'We will sketch on-location and walk between stops around Galle Fort.' },
+        { icon: '📸', title: 'Photos & Consent', text: 'Group photos & sketches will be shared on Urban Sketchers Galle social media.' },
+    ];
+
     return (
         <main className={styles.page}>
             {/* Back link */}
@@ -134,69 +181,93 @@ export default function RegisterClient({ event }) {
                 </Link>
             </div>
 
-            {/* Header */}
-            <header className={styles.header}>
+            {/* Hero Banner Header */}
+            <header className={styles.hero}>
                 <span className={styles.eyebrow}>
                     {event.upcoming ? 'Upcoming Sketch Meet' : 'Past Event'}
                 </span>
-                <h1 className={styles.title}>{event.title} Registration</h1>
+                <h1 className={styles.title}>{event.title}</h1>
                 <p className={styles.subtitle}>
-                    Reserve your spot for our upcoming sketching gathering in Galle Fort. Free and open to sketchers of all skill levels!
+                    Join fellow sketchers for on-location drawing across the streets and ramparts of Galle Fort. Free and open to all skill levels!
                 </p>
+
+                {event.upcoming && !isSubmitted && (
+                    <button onClick={scrollToForm} className={styles.heroCtaBtn}>
+                        Register Now <FontAwesomeIcon icon={faArrowDown} />
+                    </button>
+                )}
             </header>
 
-            {/* Grid */}
-            <div className={styles.grid}>
-                {/* Event Summary Card */}
-                <div className={styles.eventCard}>
-                    <div className={styles.cardHeader}>
-                        {/* Date badge matching site style */}
-                        <div className={`${styles.dateBadge} ${event.upcoming ? styles.dateBadgeUpcoming : ''}`}>
-                            <span className={styles.dateYear}>{event.year}</span>
-                            <div className={styles.dateMain}>
-                                <span className={styles.dateDay}>{event.date.day}</span>
-                                <span className={styles.dateMonth}>{event.date.month}</span>
+            {/* Web Page Section 1: Event Details & Instructions Overview */}
+            <section className={styles.detailsSection}>
+                <h2 className={styles.sectionTitle}>Event Information & Guidelines</h2>
+                <p className={styles.sectionSubtitle}>
+                    Here is everything you need to know before joining us on-location.
+                </p>
+
+                <div className={styles.overviewGrid}>
+                    {/* Event Summary Box */}
+                    <div className={styles.overviewCard}>
+                        <div className={styles.cardHeader}>
+                            <div className={`${styles.dateBadge} ${event.upcoming ? styles.dateBadgeUpcoming : ''}`}>
+                                <span className={styles.dateYear}>{event.year}</span>
+                                <div className={styles.dateMain}>
+                                    <span className={styles.dateDay}>{event.date.day}</span>
+                                    <span className={styles.dateMonth}>{event.date.month}</span>
+                                </div>
+                            </div>
+                            <div className={styles.eventTitleGroup}>
+                                <span className={styles.typeTag}>{event.type} Session</span>
+                                <h3 className={styles.eventTitle}>{event.title}</h3>
                             </div>
                         </div>
-                        <div className={styles.eventTitleGroup}>
-                            <span className={styles.typeTag}>{event.type} Session</span>
-                            <h2 className={styles.eventTitle}>{event.title}</h2>
+
+                        <div className={styles.metaBlock}>
+                            <div className={styles.metaRow}>
+                                <FontAwesomeIcon icon={faLocationDot} className={styles.metaIcon} />
+                                <div>
+                                    <strong>Location:</strong> {event.location}
+                                    <br />
+                                    <a
+                                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={styles.mapLink}
+                                    >
+                                        View on Google Maps <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.7rem' }} />
+                                    </a>
+                                </div>
+                            </div>
+                            <div className={styles.metaRow}>
+                                <FontAwesomeIcon icon={faClock} className={styles.metaIcon} />
+                                <div>
+                                    <strong>Time:</strong> {event.time}
+                                </div>
+                            </div>
                         </div>
+
+                        <p className={styles.eventDesc}>{event.description}</p>
                     </div>
 
-                    <div className={styles.metaBlock}>
-                        <div className={styles.metaRow}>
-                            <FontAwesomeIcon icon={faLocationDot} className={styles.metaIcon} />
-                            <div>
-                                <strong>Location:</strong> {event.location}
-                                <br />
-                                <a
-                                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={styles.mapLink}
-                                >
-                                    View on Google Maps <FontAwesomeIcon icon={faArrowRight} style={{ fontSize: '0.7rem' }} />
-                                </a>
-                            </div>
+                    {/* Event Guidelines List */}
+                    <div className={styles.guidelinesBox}>
+                        <div className={styles.guidelinesList}>
+                            {instructions.map((item, idx) => (
+                                <div key={idx} className={styles.guidelineCard}>
+                                    <div className={styles.guidelineHeader}>
+                                        <span className={styles.guidelineIcon}>{item.icon}</span>
+                                        <h4 className={styles.guidelineTitle}>{item.title}</h4>
+                                    </div>
+                                    <p className={styles.guidelineText}>{item.text}</p>
+                                </div>
+                            ))}
                         </div>
-                        <div className={styles.metaRow}>
-                            <FontAwesomeIcon icon={faClock} className={styles.metaIcon} />
-                            <div>
-                                <strong>Time:</strong> {event.time}
-                            </div>
-                        </div>
-                    </div>
-
-                    <p className={styles.eventDesc}>{event.description}</p>
-
-                    <div className={styles.tipsBox}>
-                        <span className={styles.tipsTitle}>🎨 What to bring:</span>
-                        Sketchbook or watercolor paper, favorite drawing pens or paints, a folding stool, and sun protection!
                     </div>
                 </div>
+            </section>
 
-                {/* Right Form / Success / Closed State */}
+            {/* Web Page Section 2: Native Web Registration Form (or Past Notice / Success State) */}
+            <section id="register-section" className={styles.formSection}>
                 {!event.upcoming ? (
                     <div className={styles.closedNotice}>
                         <h2 className={styles.closedTitle}>Registration Closed</h2>
@@ -219,7 +290,7 @@ export default function RegisterClient({ event }) {
                         <div className={styles.checkCircle}>
                             <FontAwesomeIcon icon={faCheck} />
                         </div>
-                        <h2 className={styles.successTitle}>You're Registered!</h2>
+                        <h2 className={styles.successTitle}>You're Registered! 🎉</h2>
                         <p className={styles.successBody}>
                             Thank you, <strong>{formData.fullName}</strong>. Your spot is reserved for <strong>{event.title}</strong> on <strong>{event.date.day} {event.date.month} {event.year}</strong>.
                         </p>
@@ -231,7 +302,7 @@ export default function RegisterClient({ event }) {
                             className={styles.whatsappInviteBtn}
                         >
                             <FontAwesomeIcon icon={faWhatsapp} style={{ fontSize: '1.2rem' }} />
-                            Join WhatsApp Group for Meetup Updates
+                            Join WhatsApp Group for Live Meetup Updates
                         </a>
 
                         <div className={styles.calendarRow}>
@@ -241,126 +312,146 @@ export default function RegisterClient({ event }) {
                                 rel="noopener noreferrer"
                                 className={styles.calBtn}
                             >
-                                <FontAwesomeIcon icon={faCalendarPlus} /> Google Calendar
+                                <FontAwesomeIcon icon={faCalendarPlus} /> Add to Google Calendar
                             </a>
                             <button onClick={downloadIcsFile} className={styles.calBtn}>
-                                <FontAwesomeIcon icon={faCalendarPlus} /> .ics File
+                                <FontAwesomeIcon icon={faCalendarPlus} /> Download .ics File
                             </button>
                         </div>
                     </div>
                 ) : (
-                    <div className={styles.formCard}>
-                        <h2 className={styles.formTitle}>Reserve Your Spot</h2>
-                        <p className={styles.formSubtitle}>
-                            Fill in your details below to join us for sketching.
+                    <div>
+                        <h2 className={styles.sectionTitle}>Register For This Meet-Up</h2>
+                        <p className={styles.sectionSubtitle}>
+                            Fill out the short form below to confirm your participation.
                         </p>
 
-                        <form onSubmit={handleSubmit} className={styles.form}>
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>
-                                    Full Name <span className={styles.required}>*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="fullName"
-                                    required
-                                    placeholder="e.g. Ama Perera"
-                                    value={formData.fullName}
-                                    onChange={handleChange}
-                                    className={styles.input}
-                                />
-                            </div>
+                        <form onSubmit={handleSubmit}>
+                            <div className={styles.formGrid}>
+                                <div className={styles.formGroup}>
+                                    <label className={styles.label}>
+                                        Full Name <span className={styles.required}>*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="fullName"
+                                        required
+                                        placeholder="e.g. Ama Perera"
+                                        value={formData.fullName}
+                                        onChange={handleChange}
+                                        className={styles.input}
+                                    />
+                                </div>
 
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>
-                                    Email Address <span className={styles.required}>*</span>
-                                </label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    required
-                                    placeholder="name@example.com"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    className={styles.input}
-                                />
-                            </div>
+                                <div className={styles.formGroup}>
+                                    <label className={styles.label}>
+                                        Email Address <span className={styles.required}>*</span>
+                                    </label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        required
+                                        placeholder="name@example.com"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        className={styles.input}
+                                    />
+                                </div>
 
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>
-                                    WhatsApp / Phone <span className={styles.required}>*</span>
-                                </label>
-                                <input
-                                    type="tel"
-                                    name="phone"
-                                    required
-                                    placeholder="+94 77 123 4567"
-                                    value={formData.phone}
-                                    onChange={handleChange}
-                                    className={styles.input}
-                                />
-                            </div>
+                                <div className={styles.formGroup}>
+                                    <label className={styles.label}>
+                                        WhatsApp / Phone <span className={styles.required}>*</span>
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        required
+                                        placeholder="+94 77 123 4567"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        className={styles.input}
+                                    />
+                                </div>
 
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>
-                                    Instagram Handle <span style={{ fontWeight: 400, color: 'var(--color-muted)' }}>(Optional)</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="instagram"
-                                    placeholder="@yourusername"
-                                    value={formData.instagram}
-                                    onChange={handleChange}
-                                    className={styles.input}
-                                />
-                            </div>
+                                <div className={styles.formGroup}>
+                                    <label className={styles.label}>
+                                        Instagram Handle <span style={{ fontWeight: 400, color: 'var(--color-muted)' }}>(Optional)</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="instagram"
+                                        placeholder="@yourusername"
+                                        value={formData.instagram}
+                                        onChange={handleChange}
+                                        className={styles.input}
+                                    />
+                                </div>
 
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>Number of Sketchers</label>
-                                <select
-                                    name="attendees"
-                                    value={formData.attendees}
-                                    onChange={handleChange}
-                                    className={styles.select}
-                                >
-                                    <option value="1">1 (Just me)</option>
-                                    <option value="2">2 Sketchers</option>
-                                    <option value="3">3 Sketchers</option>
-                                    <option value="4">4+ Group</option>
-                                </select>
-                            </div>
+                                <div className={styles.formGroup}>
+                                    <label className={styles.label}>Number of Sketchers</label>
+                                    <select
+                                        name="attendees"
+                                        value={formData.attendees}
+                                        onChange={handleChange}
+                                        className={styles.select}
+                                    >
+                                        <option value="1">1 (Just me)</option>
+                                        <option value="2">2 Sketchers</option>
+                                        <option value="3">3 Sketchers</option>
+                                        <option value="4">4+ Group</option>
+                                    </select>
+                                </div>
 
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>
-                                    Notes or Questions <span style={{ fontWeight: 400, color: 'var(--color-muted)' }}>(Optional)</span>
-                                </label>
-                                <textarea
-                                    name="notes"
-                                    rows="3"
-                                    placeholder="Any questions or special notes for the session..."
-                                    value={formData.notes}
-                                    onChange={handleChange}
-                                    className={styles.textarea}
-                                />
-                            </div>
+                                <div className={styles.formGroup}>
+                                    <label className={styles.label}>
+                                        Notes or Questions <span style={{ fontWeight: 400, color: 'var(--color-muted)' }}>(Optional)</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="notes"
+                                        placeholder="Any notes for the organizers..."
+                                        value={formData.notes}
+                                        onChange={handleChange}
+                                        className={styles.input}
+                                    />
+                                </div>
 
-                            <button
-                                type="submit"
-                                disabled={isSubmitting}
-                                className={styles.submitBtn}
-                            >
-                                {isSubmitting ? (
-                                    'Registering...'
-                                ) : (
-                                    <>
-                                        Confirm Registration <FontAwesomeIcon icon={faPaperPlane} />
-                                    </>
-                                )}
-                            </button>
+                                {/* Event Guidelines Agreement Checkbox */}
+                                <div className={`${styles.fullWidth} ${styles.agreementRow}`}>
+                                    <input
+                                        type="checkbox"
+                                        id="agreedToGuidelines"
+                                        name="agreedToGuidelines"
+                                        required
+                                        checked={formData.agreedToGuidelines}
+                                        onChange={handleChange}
+                                        className={styles.checkbox}
+                                    />
+                                    <label htmlFor="agreedToGuidelines" className={styles.agreementText}>
+                                        <strong>Event Agreement:</strong> I am comfortable sketching outdoors & walking between locations, and I consent to photography/video recording for Urban Sketchers Galle community channels.
+                                    </label>
+                                </div>
+
+                                <div className={styles.fullWidth}>
+                                    <button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className={styles.submitBtn}
+                                    >
+                                        {isSubmitting ? (
+                                            'Registering...'
+                                        ) : (
+                                            <>
+                                                Confirm Registration <FontAwesomeIcon icon={faPaperPlane} />
+                                            </>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 )}
-            </div>
+            </section>
 
             {/* Social Share Bar Section */}
             <div className={styles.shareSection}>
