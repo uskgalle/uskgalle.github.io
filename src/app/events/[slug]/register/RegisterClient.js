@@ -74,15 +74,24 @@ export default function RegisterClient({ event }) {
         // If a Google Apps Script / Sheet Endpoint URL is set in events.js, send POST request
         if (event.sheetEndpointUrl) {
             try {
+                const params = new URLSearchParams({
+                    event: event.title,
+                    timestamp: new Date().toISOString(),
+                    fullName: formData.fullName,
+                    email: formData.email,
+                    phone: formData.phone,
+                    instagram: formData.instagram || '',
+                    attendees: formData.attendees,
+                    notes: formData.notes || '',
+                });
+
                 await fetch(event.sheetEndpointUrl, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        event: event.title,
-                        timestamp: new Date().toISOString(),
-                        ...formData,
-                    }),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: params.toString(),
                 });
             } catch (err) {
                 console.error('Error submitting form data to endpoint:', err);

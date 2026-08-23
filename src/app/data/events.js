@@ -39,7 +39,7 @@ export const events = [
         upcoming: true,
         registerLink: '/events/meet-up-04/register',
         googleFormUrl: null,
-        sheetEndpointUrl: '', // Add your Google Apps Script Web App URL here to submit directly to Google Sheets!
+        sheetEndpointUrl: 'https://script.google.com/macros/s/AKfycbwaGLRzDY1hbS_JhrXl8JKSePD3iDLDIXSVbFmgw-FsfUi1tYiOvpl1CeCAK7xS13ktBQ/exec', // Add your Google Apps Script Web App URL here to submit directly to Google Sheets!
         instructions: [
             { icon: '📍', title: 'Meeting Point', text: "ART'O'SAN Gallery, Galle Fort at 8.30 AM for a quick intro." },
             { icon: '🎨', title: 'What to Bring', text: 'Sketchbook, drawing pens or watercolors, portable stool, and water bottle.' },
@@ -81,7 +81,7 @@ export const events = [
         registerLink: null,
         recap: {
             body: 'An outdoor sketch meetup filled with creativity, conversation, and shared inspiration among local artists and sketch enthusiasts.',
-             images: Array.from({ length: 17 }, (_, i) => i + 1),
+            images: Array.from({ length: 17 }, (_, i) => i + 1),
         },
     },
     {
