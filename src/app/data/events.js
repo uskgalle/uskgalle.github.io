@@ -1,8 +1,34 @@
+/**
+ * Events Data Array
+ * 
+ * TO ADD A NEW UPCOMING EVENT:
+ * 1. Add a new object at the top of the array:
+ *    {
+ *        slug: 'meet-up-05',
+ *        number: 5,
+ *        date: { day: '25', month: 'SEP' },
+ *        year: '2026',
+ *        title: 'Sketch Meet-Up #5',
+ *        type: 'Outdoor',
+ *        description: 'Your event description here...',
+ *        location: "ART'O'SAN Gallery, Galle Fort",
+ *        time: '8.30 AM - 12.30 PM',
+ *        upcoming: true,
+ *        registerLink: '/events/meet-up-05/register',
+ *        recap: null,
+ *    }
+ * 
+ * 2. That's it! The registration page (/events/meet-up-05/register) and event cards
+ *    will automatically generate and handle registration, calendar invites, and social sharing.
+ * 
+ * 3. WHEN THE EVENT IS CONCLUDED:
+ *    Change `upcoming: false` and set `recap: { body: '...', images: [1, 2, 3...] }`.
+ */
 export const events = [
     {
         slug: 'meet-up-04',
         number: 4,
-        date: { day: '07', month: 'JUN' },
+        date: { day: '30', month: 'AUG' },
         year: '2026',
         title: 'Sketch Meet-Up #4',
         type: 'Outdoor',
@@ -11,7 +37,7 @@ export const events = [
         location: "ART'O'SAN Gallery, Galle Fort",
         time: '8.30 AM - 12.30 PM',
         upcoming: true,
-        registerLink: '#join',
+        registerLink: '/events/meet-up-04/register',
         recap: null,
     },
     {

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './SketchMeet.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -76,10 +77,10 @@ export default function SketchMeet() {
                   </span>
                 </div>
 
-                <a
+                <Link
                   href={
                     meet.upcoming
-                      ? meet.registerLink
+                      ? (meet.registerLink || `/events/${meet.slug}/register`)
                       : `/events/${meet.slug}`
                   }
                   className={`${styles.cardLink} ${meet.upcoming ? styles.cardLinkUpcoming : ''
@@ -88,7 +89,7 @@ export default function SketchMeet() {
                   {meet.upcoming ? 'Register' : 'View Recap'}
 
                   <FontAwesomeIcon icon={faArrowRight} />
-                </a>
+                </Link>
               </div>
             </article>
           ))}

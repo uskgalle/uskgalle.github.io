@@ -9,18 +9,21 @@ import { useMemo, useState, useCallback } from 'react';
 
 export default function RecapClient({ event }) {
     const imageUrls = useMemo(() => {
+        if (!event.recap?.images) return [];
         return event.recap.images.map(
             (num) => `/gallery-images/${event.slug}/${num}.jpg`
         );
-    }, [event.recap.images, event.slug]);
+    }, [event.recap?.images, event.slug]);
 
     const [activeIndex, setActiveIndex] = useState(null);
 
     const nextImage = useCallback(() => {
+        if (!imageUrls.length) return;
         setActiveIndex((i) => (i + 1) % imageUrls.length);
     }, [imageUrls.length]);
 
     const prevImage = useCallback(() => {
+        if (!imageUrls.length) return;
         setActiveIndex((i) => (i - 1 + imageUrls.length) % imageUrls.length);
     }, [imageUrls.length]);
 
@@ -61,27 +64,52 @@ export default function RecapClient({ event }) {
                 </span>
             </div>
 
-            <p className={styles.body}>{event.recap.body}</p>
+            <p className={styles.body}>{event.recap?.body || event.description}</p>
 
-            <div className={styles.gallery}>
-                {event.recap.images.map((num, index) => (
-                    <div
-                        key={num}
-                        className={styles.imgWrap}
-                        onClick={() => setActiveIndex(index)}
-                    >
-                        <img src={imageUrls[index]} alt="" />
+            {event.recap ? (
+                <>
+                    <div className={styles.gallery}>
+                        {event.recap.images.map((num, index) => (
+                            <div
+                                key={num}
+                                className={styles.imgWrap}
+                                onClick={() => setActiveIndex(index)}
+                            >
+                                <img src={imageUrls[index]} alt="" />
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
 
-            <ImageLightbox
-                images={imageUrls}
-                activeIndex={activeIndex}
-                onClose={closeImage}
-                onNext={nextImage}
-                onPrev={prevImage}
-            />
+                    <ImageLightbox
+                        images={imageUrls}
+                        activeIndex={activeIndex}
+                        onClose={closeImage}
+                        onNext={nextImage}
+                        onPrev={prevImage}
+                    />
+                </>
+            ) : (
+                <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
+                    <Link
+                        href={`/events/${event.slug}/register`}
+                        className={styles.registerBtn}
+                        style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.75rem',
+                            padding: '0.875rem 2rem',
+                            backgroundColor: 'var(--accent, #e67e22)',
+                            color: '#fff',
+                            borderRadius: '9999px',
+                            fontWeight: '600',
+                            textDecoration: 'none',
+                            transition: 'all 0.2s ease',
+                        }}
+                    >
+                        Register for this Event
+                    </Link>
+                </div>
+            )}
         </main>
     );
 }

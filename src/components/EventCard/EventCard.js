@@ -41,14 +41,11 @@ export default function EventCard({ event }) {
 
                 <div className={styles.action}>
                     {event.upcoming ? (
-
-                        <a href={event.registerLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <Link href={event.registerLink || `/events/${event.slug}/register`}
                             className={`${styles.cardLink} ${styles.cardLinkUpcoming}`}
                         >
                             Register <FontAwesomeIcon icon={faArrowRight} />
-                        </a>
+                        </Link>
                     ) : (
                         <Link href={`/events/${event.slug}`} className={styles.cardLink}>
                             View Recap <FontAwesomeIcon icon={faArrowRight} />
