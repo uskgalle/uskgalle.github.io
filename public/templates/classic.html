@@ -476,7 +476,8 @@
         .detail-value {
             font-size: 12.5px;
             font-weight: 600;
-            color: var(--text-main);
+            color: var(--text-muted);
+            white-space: pre-line;
         }
 
         .qr-section {
@@ -640,7 +641,7 @@
                 <input type="text" id="inputTime" value="8:30 AM – 12:30 PM" oninput="updateCanvas()">
 
                 <label>Location</label>
-                <input type="text" id="inputLocation" value="ART'O'SAN Gallery, Galle Fort" oninput="updateCanvas()">
+                <textarea id="inputLocation" oninput="updateCanvas()" style="min-height: 48px; height: 48px; resize: vertical;">ART'O'SAN Gallery,&#10;Galle Fort</textarea>
 
                 <label>Who Can Join?</label>
                 <input type="text" id="inputWho" value="Everyone. All skill levels." oninput="updateCanvas()">
@@ -774,7 +775,7 @@
             document.getElementById('canvasIntro').innerText = document.getElementById('inputIntro').value || '';
             document.getElementById('canvasDate').innerText = document.getElementById('inputDate').value || '-';
             document.getElementById('canvasTime').innerText = document.getElementById('inputTime').value || '-';
-            document.getElementById('canvasLocation').innerText = document.getElementById('inputLocation').value || '-';
+            document.getElementById('canvasLocation').innerHTML = (document.getElementById('inputLocation').value || '-').replace(/\n/g, '<br>');
             document.getElementById('canvasWho').innerText = document.getElementById('inputWho').value || '-';
             document.getElementById('canvasQrHeadline').innerText = document.getElementById('inputQrHeadline').value || 'Register via QR';
             document.getElementById('canvasQrSubtext').innerText = document.getElementById('inputQrSubtext').value || '';
@@ -858,7 +859,7 @@
             document.getElementById('inputIntro').value = 'Join fellow sketchers for an outdoor drawing session across the streets and ramparts of Galle Fort.';
             document.getElementById('inputDate').value = '30 August 2026';
             document.getElementById('inputTime').value = '8:30 AM – 12:30 PM';
-            document.getElementById('inputLocation').value = "ART'O'SAN Gallery, Galle Fort";
+            document.getElementById('inputLocation').value = "ART'O'SAN Gallery,\nGalle Fort";
             document.getElementById('inputWho').value = 'Everyone. All skill levels.';
             document.getElementById('inputImgUrl').value = '../doodles/hero.jpg';
             document.getElementById('inputQrUrl').value = 'https://uskgalle.github.io/events/meet-up-04/register';

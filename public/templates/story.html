@@ -9,7 +9,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- QRCode JS CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -82,7 +84,9 @@
             transition: margin-left 0.3s ease;
         }
 
-        .sidebar.collapsed { margin-left: -420px; }
+        .sidebar.collapsed {
+            margin-left: -420px;
+        }
 
         .top-nav-link {
             display: flex;
@@ -95,7 +99,9 @@
             margin-bottom: 8px;
         }
 
-        .top-nav-link:hover { color: #c86d3b; }
+        .top-nav-link:hover {
+            color: #c86d3b;
+        }
 
         .sidebar-header {
             display: flex;
@@ -135,7 +141,8 @@
             font-weight: 500;
         }
 
-        input[type="text"], textarea {
+        input[type="text"],
+        textarea {
             width: 100%;
             background: #0f1115;
             border: 1px solid #334155;
@@ -145,7 +152,10 @@
             font-size: 13px;
         }
 
-        textarea { resize: vertical; min-height: 60px; }
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
 
         .file-upload-btn {
             display: flex;
@@ -161,9 +171,15 @@
             font-size: 13px;
         }
 
-        input[type="file"] { display: none; }
+        input[type="file"] {
+            display: none;
+        }
 
-        .btn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
 
         .opt-btn {
             background: #242936;
@@ -177,7 +193,8 @@
             text-align: center;
         }
 
-        .opt-btn:hover, .opt-btn.active {
+        .opt-btn:hover,
+        .opt-btn.active {
             background: #c86d3b;
             color: #ffffff;
             border-color: #c86d3b;
@@ -273,7 +290,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
-        .sidebar.collapsed ~ .toggle-sidebar-floating {
+        .sidebar.collapsed~.toggle-sidebar-floating {
             display: flex;
         }
 
@@ -322,7 +339,7 @@
         .story-bg-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.92) 100%);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 40%, rgba(0, 0, 0, 0.92) 100%);
         }
 
         .brand-header {
@@ -470,7 +487,8 @@
             border-radius: 10px;
         }
 
-        #qrcode canvas, #qrcode img {
+        #qrcode canvas,
+        #qrcode img {
             width: 80px !important;
             height: 80px !important;
         }
@@ -511,16 +529,19 @@
 
             <div class="sidebar-header">
                 <div class="sidebar-title">
-                    <span style="color: var(--accent);"><i class="fa-solid fa-mobile-screen-button"></i></span> Instagram Story Template
+                    <span style="color: var(--accent);"><i class="fa-solid fa-mobile-screen-button"></i></span>
+                    Instagram Story Template
                 </div>
                 <div style="display: flex; gap: 6px;">
-                    <button class="btn-secondary" onclick="saveDraft()" title="Save Post Draft"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                    <button class="btn-secondary" onclick="saveDraft()" title="Save Post Draft"><i
+                            class="fa-solid fa-floppy-disk"></i> Save</button>
                     <button class="btn-secondary" onclick="loadDefaults()" title="Reset to Defaults">Reset</button>
                 </div>
             </div>
 
             <div class="control-group">
-                <button class="btn-secondary" onclick="loadMeetup4Data()" style="width: 100%; justify-content: center; gap: 8px;">
+                <button class="btn-secondary" onclick="loadMeetup4Data()"
+                    style="width: 100%; justify-content: center; gap: 8px;">
                     <i class="fa-solid fa-bolt" style="color: #e5a93c;"></i> Load Meet-Up #4 Data
                 </button>
             </div>
@@ -547,11 +568,15 @@
                 <div style="display: flex; gap: 12px; align-items: center; margin-top: 10px; flex-wrap: wrap;">
                     <div style="display: flex; align-items: center; gap: 6px;">
                         <label style="font-size: 11px; margin: 0; color: #cbd5e1;">Canvas BG:</label>
-                        <input type="color" id="inputCanvasBgColor" value="#141716" onchange="setCustomCanvasBg(this.value)" style="width: 34px; height: 26px; padding: 0; border: none; cursor: pointer; border-radius: 4px; background: none;">
+                        <input type="color" id="inputCanvasBgColor" value="#141716"
+                            onchange="setCustomCanvasBg(this.value)"
+                            style="width: 34px; height: 26px; padding: 0; border: none; cursor: pointer; border-radius: 4px; background: none;">
                     </div>
                     <div style="display: flex; align-items: center; gap: 6px;">
                         <label style="font-size: 11px; margin: 0; color: #cbd5e1;">Accent Color:</label>
-                        <input type="color" id="inputAccentColor" value="#e5a93c" onchange="setCustomAccentColor(this.value)" style="width: 34px; height: 26px; padding: 0; border: none; cursor: pointer; border-radius: 4px; background: none;">
+                        <input type="color" id="inputAccentColor" value="#e5a93c"
+                            onchange="setCustomAccentColor(this.value)"
+                            style="width: 34px; height: 26px; padding: 0; border: none; cursor: pointer; border-radius: 4px; background: none;">
                     </div>
                 </div>
             </div>
@@ -561,11 +586,14 @@
                 <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
                     <div style="display: flex; align-items: center; gap: 6px;">
                         <label style="font-size: 11px; margin: 0; color: #cbd5e1;">Overlay Color:</label>
-                        <input type="color" id="inputOverlayColor" value="#000000" onchange="setCustomOverlayColor(this.value)" style="width: 34px; height: 26px; padding: 0; border: none; cursor: pointer; border-radius: 4px; background: none;">
+                        <input type="color" id="inputOverlayColor" value="#000000"
+                            onchange="setCustomOverlayColor(this.value)"
+                            style="width: 34px; height: 26px; padding: 0; border: none; cursor: pointer; border-radius: 4px; background: none;">
                     </div>
                     <div style="display: flex; align-items: center; gap: 6px; flex: 1; min-width: 140px;">
                         <label style="font-size: 11px; margin: 0; color: #cbd5e1;">Opacity:</label>
-                        <input type="range" id="inputOverlayOpacity" min="0" max="1" step="0.05" value="0.85" oninput="updateOverlayOpacity(this.value)" style="flex: 1; cursor: pointer;">
+                        <input type="range" id="inputOverlayOpacity" min="0" max="1" step="0.05" value="0.85"
+                            oninput="updateOverlayOpacity(this.value)" style="flex: 1; cursor: pointer;">
                     </div>
                 </div>
             </div>
@@ -579,7 +607,8 @@
                 <input type="text" id="inputTitle" value="Sketch Meet-Up #4" oninput="updateCanvas()">
 
                 <label>Description</label>
-                <textarea id="inputIntro" oninput="updateCanvas()">Join fellow sketchers for an outdoor drawing session across the streets and ramparts of Galle Fort.</textarea>
+                <textarea id="inputIntro"
+                    oninput="updateCanvas()">Join fellow sketchers for an outdoor drawing session across the streets and ramparts of Galle Fort.</textarea>
             </div>
 
             <div class="control-group">
@@ -611,13 +640,15 @@
             <div class="control-group">
                 <div class="section-label">5. Registration QR Code</div>
                 <label>Registration URL</label>
-                <input type="text" id="inputQrUrl" value="https://uskgalle.github.io/events/meet-up-04/register" oninput="generateQR()">
+                <input type="text" id="inputQrUrl" value="https://uskgalle.github.io/events/meet-up-04/register"
+                    oninput="generateQR()">
 
                 <label>QR Label</label>
                 <input type="text" id="inputQrHeadline" value="Scan to Register" oninput="updateCanvas()">
 
                 <label>Instructions</label>
-                <input type="text" id="inputQrSubtext" value="Point camera to register • Link in bio @uskgalle" oninput="updateCanvas()">
+                <input type="text" id="inputQrSubtext" value="Point camera to register • Link in bio @uskgalle"
+                    oninput="updateCanvas()">
             </div>
 
             <div class="action-btns">
@@ -638,13 +669,15 @@
                 <div class="post-canvas" id="postCanvas">
 
                     <!-- Background Full-Bleed Artwork -->
-                    <div class="story-bg-image" id="postImgContainer" style="background-image: url('../doodles/hero.jpg');"></div>
+                    <div class="story-bg-image" id="postImgContainer"
+                        style="background-image: url('../doodles/hero.jpg');"></div>
                     <div class="story-bg-overlay" id="overlayScrim"></div>
 
                     <!-- Header -->
                     <header class="brand-header">
                         <div class="brand-logo-group">
-                            <img src="../icon.png" alt="USK Logo" class="brand-logo-img" onerror="this.style.display='none'">
+                            <img src="../icon.png" alt="USK Logo" class="brand-logo-img"
+                                onerror="this.style.display='none'">
                             <div class="brand-name">Urban Sketchers Galle</div>
                         </div>
                         <div class="eyebrow-badge" id="canvasEyebrow">Upcoming Story</div>
@@ -653,7 +686,8 @@
                     <!-- Main Story Title & Text -->
                     <section class="story-content">
                         <h1 class="post-title" id="canvasTitle">Sketch Meet-Up #4</h1>
-                        <p class="post-intro" id="canvasIntro">Join fellow sketchers for an outdoor drawing session across the streets and ramparts of Galle Fort.</p>
+                        <p class="post-intro" id="canvasIntro">Join fellow sketchers for an outdoor drawing session
+                            across the streets and ramparts of Galle Fort.</p>
                     </section>
 
                     <!-- Details Grid -->
@@ -681,7 +715,8 @@
                         <div>
                             <div class="qr-badge"><i class="fa-solid fa-qrcode"></i> Instant Access</div>
                             <div class="qr-headline" id="canvasQrHeadline">Scan to Register</div>
-                            <div class="qr-subtext" id="canvasQrSubtext">Point camera to register • Link in bio @uskgalle</div>
+                            <div class="qr-subtext" id="canvasQrSubtext">Point camera to register • Link in bio
+                                @uskgalle</div>
                         </div>
                         <div class="qr-box-wrapper">
                             <div id="qrcode"></div>
@@ -733,7 +768,7 @@
             const qrContainer = document.getElementById('qrcode');
             const url = document.getElementById('inputQrUrl').value || 'https://uskgalle.github.io';
             qrContainer.innerHTML = '';
-            
+
             try {
                 if (window.QRCode) {
                     qrcodeObj = new QRCode(qrContainer, {
@@ -770,7 +805,7 @@
             const file = e.target.files[0];
             if (!file) return;
             const reader = new FileReader();
-            reader.onload = function(evt) {
+            reader.onload = function (evt) {
                 document.getElementById('postImgContainer').style.backgroundImage = `url("${evt.target.result}")`;
             };
             reader.readAsDataURL(file);
@@ -820,7 +855,7 @@
             return new Promise((resolve) => {
                 const img = new Image();
                 img.crossOrigin = 'Anonymous';
-                img.onload = function() {
+                img.onload = function () {
                     try {
                         const canvas = document.createElement('canvas');
                         const w = img.naturalWidth || img.width || 1920;
@@ -832,9 +867,9 @@
                         ctx.imageSmoothingQuality = 'high';
                         ctx.drawImage(img, 0, 0, w, h);
                         resolve(canvas.toDataURL('image/png', 1.0));
-                    } catch(e) { resolve(url); }
+                    } catch (e) { resolve(url); }
                 };
-                img.onerror = function() { resolve(url); };
+                img.onerror = function () { resolve(url); };
                 img.src = url;
             });
         }
@@ -918,7 +953,7 @@
             return true;
         }
 
-        window.onbeforeunload = function(e) {
+        window.onbeforeunload = function (e) {
             if (isDirty) {
                 e.preventDefault();
                 e.returnValue = '';
@@ -963,7 +998,7 @@
                 updateImageFromUrl();
                 generateQR();
                 updateCanvas();
-            } catch(e){}
+            } catch (e) { }
         }
         function setAspect(aspectRatio, btn) {
             const canvas = document.getElementById('postCanvas');
@@ -1002,7 +1037,7 @@
                 canvas.style.setProperty('--card-border', p.cardBorder);
                 canvas.style.setProperty('--qr-bg', p.qrBg);
                 if (p.accent) canvas.style.setProperty('--accent-bg', p.accent + '25');
-                
+
                 if (document.getElementById('inputCanvasBgColor')) document.getElementById('inputCanvasBgColor').value = p.bg.startsWith('#') ? p.bg : '#141716';
                 if (document.getElementById('inputAccentColor')) document.getElementById('inputAccentColor').value = p.accent.startsWith('#') ? p.accent : '#e5a93c';
             }
@@ -1031,9 +1066,9 @@
         function setCustomOverlayColor(hexColor) {
             const overlay = document.getElementById('overlayScrim');
             const opacity = document.getElementById('inputOverlayOpacity')?.value || 0.85;
-            const r = parseInt(hexColor.substr(1,2), 16) || 0;
-            const g = parseInt(hexColor.substr(3,2), 16) || 0;
-            const b = parseInt(hexColor.substr(5,2), 16) || 0;
+            const r = parseInt(hexColor.substr(1, 2), 16) || 0;
+            const g = parseInt(hexColor.substr(3, 2), 16) || 0;
+            const b = parseInt(hexColor.substr(5, 2), 16) || 0;
             const grad = `linear-gradient(180deg, rgba(${r},${g},${b},${opacity * 0.3}) 0%, rgba(${r},${g},${b},${opacity * 0.7}) 50%, rgba(${r},${g},${b},${opacity}) 100%)`;
             if (overlay) overlay.style.background = grad;
             isDirty = true;
@@ -1046,4 +1081,5 @@
         }
     </script>
 </body>
+
 </html>
