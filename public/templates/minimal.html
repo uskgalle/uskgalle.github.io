@@ -360,6 +360,16 @@
             background-color: rgba(0, 0, 0, 0.05);
             background-size: cover;
             background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overlay-scrim {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
+            pointer-events: none;
+            transition: background 0.3s, opacity 0.3s;
         }
 
         .post-intro {
@@ -504,11 +514,38 @@
             </div>
 
             <div class="control-group">
-                <div class="section-label">2. Minimal Theme</div>
+                <div class="section-label">2. Main Theme & Canvas Colors</div>
                 <div class="btn-grid btn-grid-3">
-                    <button class="opt-btn active" onclick="setTheme('', this)">Monochrome</button>
-                    <button class="opt-btn" onclick="setTheme('theme-minimal-dark', this)">Dark Slate</button>
-                    <button class="opt-btn" onclick="setTheme('theme-minimal-warm', this)">Warm Ochre</button>
+                    <button class="opt-btn active" onclick="setMainThemePreset('white', this)">Pure White</button>
+                    <button class="opt-btn" onclick="setMainThemePreset('dark', this)">Dark Slate</button>
+                    <button class="opt-btn" onclick="setMainThemePreset('warm', this)">Warm Ochre</button>
+                    <button class="opt-btn" onclick="setMainThemePreset('ocean', this)">Ocean Blue</button>
+                    <button class="opt-btn" onclick="setMainThemePreset('forest', this)">Forest Sage</button>
+                    <button class="opt-btn" onclick="setMainThemePreset('violet', this)">Midnight Violet</button>
+                </div>
+                <div style="display: flex; gap: 12px; align-items: center; margin-top: 10px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <label style="font-size: 11px; margin: 0; color: #cbd5e1;">Canvas BG:</label>
+                        <input type="color" id="inputCanvasBgColor" value="#ffffff" onchange="setCustomCanvasBg(this.value)" style="width: 34px; height: 26px; padding: 0; border: none; cursor: pointer; border-radius: 4px; background: none;">
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <label style="font-size: 11px; margin: 0; color: #cbd5e1;">Accent Color:</label>
+                        <input type="color" id="inputAccentColor" value="#111111" onchange="setCustomAccentColor(this.value)" style="width: 34px; height: 26px; padding: 0; border: none; cursor: pointer; border-radius: 4px; background: none;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="section-label">3. Image Overlay & Opacity</div>
+                <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <label style="font-size: 11px; margin: 0; color: #cbd5e1;">Overlay Color:</label>
+                        <input type="color" id="inputOverlayColor" value="#000000" onchange="setCustomOverlayColor(this.value)" style="width: 34px; height: 26px; padding: 0; border: none; cursor: pointer; border-radius: 4px; background: none;">
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 6px; flex: 1; min-width: 140px;">
+                        <label style="font-size: 11px; margin: 0; color: #cbd5e1;">Opacity:</label>
+                        <input type="range" id="inputOverlayOpacity" min="0" max="1" step="0.05" value="0.85" oninput="updateOverlayOpacity(this.value)" style="flex: 1; cursor: pointer;">
+                    </div>
                 </div>
             </div>
 
@@ -586,7 +623,9 @@
 
                     <h1 class="post-title" id="canvasTitle">Sketch Meet-Up #4</h1>
 
-                    <div class="post-image-container" id="postImgContainer" style="background-image: url('../doodles/hero.jpg');"></div>
+                    <div class="post-image-container" id="postImgContainer" style="background-image: url('../doodles/hero.jpg');">
+                        <div class="overlay-scrim" id="overlayScrim"></div>
+                    </div>
 
                     <p class="post-intro" id="canvasIntro">Join fellow sketchers for an outdoor drawing session across the streets and ramparts of Galle Fort.</p>
 
@@ -913,6 +952,70 @@
                 generateQR();
                 updateCanvas();
             } catch(e){}
+        }
+        const mainThemePresets = {
+            white: { bg: '#ffffff', text: '#111111', muted: '#555555', accent: '#111111', cardBg: '#f5f5f7', cardBorder: '#111111', qrBg: '#ffffff' },
+            dark: { bg: '#111318', text: '#ffffff', muted: '#94a3b8', accent: '#e2e8f0', cardBg: '#1a1d24', cardBorder: '#ffffff', qrBg: '#ffffff' },
+            warm: { bg: '#fbf8f3', text: '#2c2523', muted: '#786c68', accent: '#c86d3b', cardBg: '#f3eee7', cardBorder: '#2c2523', qrBg: '#ffffff' },
+            ocean: { bg: '#0b192c', text: '#ffffff', muted: '#94a3b8', accent: '#38bdf8', cardBg: '#1e293b', cardBorder: '#38bdf8', qrBg: '#ffffff' },
+            forest: { bg: '#0f2318', text: '#ffffff', muted: '#a7f3d0', accent: '#34d399', cardBg: '#163824', cardBorder: '#34d399', qrBg: '#ffffff' },
+            violet: { bg: '#1c102b', text: '#ffffff', muted: '#c084fc', accent: '#a855f7', cardBg: '#2a1a3e', cardBorder: '#a855f7', qrBg: '#ffffff' }
+        };
+
+        function setMainThemePreset(presetKey, btn) {
+            const canvas = document.getElementById('postCanvas');
+            const p = mainThemePresets[presetKey];
+            if (canvas && p) {
+                canvas.style.setProperty('--bg-canvas', p.bg);
+                canvas.style.setProperty('--text-main', p.text);
+                canvas.style.setProperty('--text-muted', p.muted);
+                canvas.style.setProperty('--accent', p.accent);
+                canvas.style.setProperty('--card-bg', p.cardBg);
+                canvas.style.setProperty('--card-border', p.cardBorder);
+                canvas.style.setProperty('--qr-bg', p.qrBg);
+                if (p.accent) canvas.style.setProperty('--accent-bg', p.accent + '25');
+                
+                if (document.getElementById('inputCanvasBgColor')) document.getElementById('inputCanvasBgColor').value = p.bg.startsWith('#') ? p.bg : '#ffffff';
+                if (document.getElementById('inputAccentColor')) document.getElementById('inputAccentColor').value = p.accent.startsWith('#') ? p.accent : '#111111';
+            }
+            if (btn && btn.parentElement) {
+                btn.parentElement.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            }
+            isDirty = true;
+        }
+
+        function setCustomCanvasBg(color) {
+            const canvas = document.getElementById('postCanvas');
+            if (canvas) canvas.style.setProperty('--bg-canvas', color);
+            isDirty = true;
+        }
+
+        function setCustomAccentColor(color) {
+            const canvas = document.getElementById('postCanvas');
+            if (canvas) {
+                canvas.style.setProperty('--accent', color);
+                canvas.style.setProperty('--accent-bg', color + '25');
+                canvas.style.setProperty('--card-border', color);
+            }
+            isDirty = true;
+        }
+
+        function setCustomOverlayColor(hexColor) {
+            const overlay = document.getElementById('overlayScrim');
+            const opacity = document.getElementById('inputOverlayOpacity')?.value || 0.85;
+            const r = parseInt(hexColor.substr(1,2), 16) || 0;
+            const g = parseInt(hexColor.substr(3,2), 16) || 0;
+            const b = parseInt(hexColor.substr(5,2), 16) || 0;
+            const grad = `linear-gradient(180deg, rgba(${r},${g},${b},0.05) 0%, rgba(${r},${g},${b},${opacity}) 100%)`;
+            if (overlay) overlay.style.background = grad;
+            isDirty = true;
+        }
+
+        function updateOverlayOpacity(val) {
+            const overlay = document.getElementById('overlayScrim');
+            if (overlay) overlay.style.opacity = val;
+            isDirty = true;
         }
     </script>
 </body>
