@@ -159,8 +159,8 @@ export default function RegisterClient({ event }) {
 
     const contact = event.contact || {
         name: 'Sandeepa',
-        phone: '+94 71 872 6368',
-        whatsappLink: 'https://wa.me/94718726368',
+        phone: '+94 71 847 2636',
+        whatsappLink: 'https://wa.me/94718472636',
     };
 
     return (
