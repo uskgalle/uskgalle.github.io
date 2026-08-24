@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USK Galle — Classic Editorial Template</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- QRCode JS CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- html2canvas CDN for HD PNG Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-canvas: #f5f0e6;
+            --text-main: #1f2421;
+            --text-muted: #5c645d;
+            --accent: #c86d3b;
+            --accent-bg: rgba(200, 109, 59, 0.12);
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-border: rgba(31, 36, 33, 0.12);
+            --qr-bg: #ffffff;
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-brand: 'Cinzel', serif;
+        }
+
+        .theme-warm-paper {
+            --bg-canvas: #f5f0e6;
+            --text-main: #1f2421;
+            --text-muted: #5c645d;
+            --accent: #c86d3b;
+            --accent-bg: rgba(200, 109, 59, 0.12);
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-border: rgba(31, 36, 33, 0.12);
+            --qr-bg: #ffffff;
+        }
+
+        .theme-terracotta {
+            --bg-canvas: #2d1c19;
+            --text-main: #f7ede2;
+            --text-muted: #d6ccc2;
+            --accent: #e76f51;
+            --accent-bg: rgba(231, 111, 81, 0.2);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(247, 237, 226, 0.15);
+            --qr-bg: #ffffff;
+        }
+
+        .theme-charcoal {
+            --bg-canvas: #141716;
+            --text-main: #f0f3f1;
+            --text-muted: #9ca6a0;
+            --accent: #e5a93c;
+            --accent-bg: rgba(229, 169, 60, 0.15);
+            --card-bg: rgba(255, 255, 255, 0.06);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --qr-bg: #ffffff;
+        }
+
+        .theme-ocean {
+            --bg-canvas: #0f2537;
+            --text-main: #f0f7ff;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-bg: rgba(56, 189, 248, 0.15);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(240, 247, 255, 0.15);
+            --qr-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #111418;
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            display: flex;
+            width: 100vw;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 420px;
+            background: #1a1d24;
+            border-right: 1px solid #2e3440;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            overflow-y: auto;
+            max-height: 100vh;
+            z-index: 100;
+            transition: margin-left 0.3s ease;
+        }
+
+        .sidebar.collapsed {
+            margin-left: -420px;
+        }
+
+        .top-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            transition: color 0.2s;
+        }
+
+        .top-nav-link:hover {
+            color: #c86d3b;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #2e3440;
+        }
+
+        .sidebar-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #94a3b8;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .control-group label {
+            font-size: 12px;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            background: #0f1115;
+            border: 1px solid #334155;
+            color: #f1f5f9;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .file-upload-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #242936;
+            border: 1px dashed #475569;
+            color: #cbd5e1;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .btn-grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .opt-btn {
+            background: #242936;
+            border: 1px solid #334155;
+            color: #cbd5e1;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .opt-btn:hover,
+        .opt-btn.active {
+            background: #c86d3b;
+            color: #ffffff;
+            border-color: #c86d3b;
+        }
+
+        .action-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid #2e3440;
+        }
+
+        .btn-primary {
+            background: #c86d3b;
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(200, 109, 59, 0.3);
+        }
+
+        .btn-secondary {
+            background: #242936;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .sidebar-nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #2e3440;
+            margin-bottom: 4px;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #242936;
+            border: 1px solid #334155;
+            color: #cbd5e1;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: #334155;
+            color: #ffffff;
+            border-color: #c86d3b;
+        }
+
+        .toggle-sidebar-floating {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 101;
+            background: #1a1d24;
+            color: #f8fafc;
+            border: 1px solid #334155;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar.collapsed ~ .toggle-sidebar-floating {
+            display: flex;
+        }
+
+        /* Preview Stage */
+        .preview-stage {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background: #090a0c;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .post-wrapper {
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .post-canvas {
+            width: 540px;
+            aspect-ratio: 4 / 5;
+            background: var(--bg-canvas);
+            color: var(--text-main);
+            padding: 36px 36px 30px 36px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        .post-canvas.aspect-4-5 { aspect-ratio: 4 / 5; height: 675px; }
+        .post-canvas.aspect-1-1 { aspect-ratio: 1 / 1; height: 540px; }
+        .post-canvas.aspect-9-16 { aspect-ratio: 9 / 16; height: 960px; }
+
+        /* Header */
+        .brand-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .brand-logo-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo-img {
+            width: 34px;
+            height: 34px;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .brand-name {
+            font-family: var(--font-brand);
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-main);
+        }
+
+        .eyebrow-badge {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            background: var(--accent-bg);
+            color: var(--accent);
+            border-radius: 20px;
+        }
+
+        .post-image-container {
+            width: 100%;
+            height: 190px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            background-color: rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--card-border);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .post-content { margin-bottom: 20px; }
+
+        .post-title {
+            font-family: var(--font-heading);
+            font-size: 34px;
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .post-intro {
+            font-family: var(--font-body);
+            font-size: 13.5px;
+            line-height: 1.45;
+            color: var(--text-muted);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .detail-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 10px 14px;
+            border-radius: 10px;
+        }
+
+        .detail-label {
+            font-size: 9.5px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .detail-value {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .qr-section {
+            margin-top: auto;
+            background: var(--card-bg);
+            border: 1px dashed var(--card-border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .qr-badge {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .qr-headline {
+            font-family: var(--font-heading);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .qr-subtext {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .qr-box-wrapper {
+            background: var(--qr-bg);
+            padding: 7px;
+            border-radius: 8px;
+        }
+
+        #qrcode canvas, #qrcode img {
+            width: 72px !important;
+            height: 72px !important;
+        }
+
+        .post-footer {
+            margin-top: 14px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+
+<body class="theme-warm-paper">
+
+    <button class="toggle-sidebar-floating" onclick="toggleSidebar()" title="Expand Settings Panel">
+        <i class="fa-solid fa-sliders"></i> Settings Panel
+    </button>
+
+    <div class="app-container">
+
+        <!-- EDITOR SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-nav-header">
+                <a href="../post.html" onclick="return confirmLeave(event)" class="nav-btn">
+                    <i class="fa-solid fa-arrow-left"></i> Gallery
+                </a>
+                <a href="https://uskgalle.github.io" onclick="return confirmLeave(event)" class="nav-btn">
+                    <i class="fa-solid fa-house"></i> Home
+                </a>
+                <button onclick="toggleSidebar()" class="nav-btn" title="Collapse Sidebar">
+                    <i class="fa-solid fa-chevron-left"></i> Hide
+                </button>
+            </div>
+
+            <div class="sidebar-header">
+                <div class="sidebar-title">
+                    <span style="color: var(--accent);"><i class="fa-solid fa-newspaper"></i></span> Classic Template
+                </div>
+                <div style="display: flex; gap: 6px;">
+                    <button class="btn-secondary" onclick="saveDraft()" title="Save Post Draft"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                    <button class="btn-secondary" onclick="loadDefaults()" title="Reset to Defaults">Reset</button>
+                </div>
+            </div>
+
+            <!-- Quick Defaults -->
+            <div class="control-group">
+                <button class="btn-secondary" onclick="loadMeetup4Data()" style="width: 100%; justify-content: center; gap: 8px;">
+                    <i class="fa-solid fa-bolt" style="color: #e5a93c;"></i> Load Meet-Up #4 Data
+                </button>
+            </div>
+
+            <!-- Format & Theme -->
+            <div class="control-group">
+                <div class="section-label">1. Canvas Format</div>
+                <div class="btn-grid">
+                    <button class="opt-btn active" onclick="setAspect('4-5', this)">4:5 Feed</button>
+                    <button class="opt-btn" onclick="setAspect('1-1', this)">1:1 Square</button>
+                    <button class="opt-btn" onclick="setAspect('9-16', this)">9:16 Story</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="section-label">2. Color Theme</div>
+                <div class="btn-grid btn-grid-4">
+                    <button class="opt-btn active" onclick="setTheme('theme-warm-paper', this)">Warm</button>
+                    <button class="opt-btn" onclick="setTheme('theme-terracotta', this)">Clay</button>
+                    <button class="opt-btn" onclick="setTheme('theme-charcoal', this)">Dark</button>
+                    <button class="opt-btn" onclick="setTheme('theme-ocean', this)">Ocean</button>
+                </div>
+            </div>
+
+            <!-- Content Inputs -->
+            <div class="control-group">
+                <div class="section-label">3. Content</div>
+                <label>Eyebrow Tag</label>
+                <input type="text" id="inputEyebrow" value="Upcoming" oninput="updateCanvas()">
+
+                <label>Event Title</label>
+                <input type="text" id="inputTitle" value="Sketch Meet-Up #4" oninput="updateCanvas()">
+
+                <label>Description</label>
+                <textarea id="inputIntro" oninput="updateCanvas()">Join fellow sketchers for an outdoor drawing session across the streets and ramparts of Galle Fort.</textarea>
+            </div>
+
+            <!-- Details Inputs -->
+            <div class="control-group">
+                <div class="section-label">4. Details</div>
+                <label>Date</label>
+                <input type="text" id="inputDate" value="30 August 2026" oninput="updateCanvas()">
+
+                <label>Time</label>
+                <input type="text" id="inputTime" value="8:30 AM – 12:30 PM" oninput="updateCanvas()">
+
+                <label>Location</label>
+                <input type="text" id="inputLocation" value="ART'O'SAN Gallery, Galle Fort" oninput="updateCanvas()">
+
+                <label>Who Can Join?</label>
+                <input type="text" id="inputWho" value="Everyone. All skill levels." oninput="updateCanvas()">
+            </div>
+
+            <!-- Featured Image -->
+            <div class="control-group">
+                <div class="section-label">5. Featured Image</div>
+                <label class="file-upload-btn">
+                    <i class="fa-solid fa-image"></i> Upload Custom Image
+                    <input type="file" id="imageFileInput" accept="image/*" onchange="handleImageUpload(event)">
+                </label>
+
+                <label>Or Image URL</label>
+                <input type="text" id="inputImgUrl" value="../doodles/hero.jpg" oninput="updateImageFromUrl()">
+
+                <div class="btn-grid" style="margin-top: 4px;">
+                    <button class="opt-btn active" onclick="setImageFit('cover', this)">Crop Fit</button>
+                    <button class="opt-btn" onclick="setImageFit('contain', this)">Contain</button>
+                </div>
+            </div>
+
+            <!-- QR Code -->
+            <div class="control-group">
+                <div class="section-label">6. Registration QR Code</div>
+                <label>Registration URL</label>
+                <input type="text" id="inputQrUrl" value="https://uskgalle.github.io/events/meet-up-04/register" oninput="generateQR()">
+
+                <label>QR Label</label>
+                <input type="text" id="inputQrHeadline" value="Register via QR Code" oninput="updateCanvas()">
+
+                <label>Instructions</label>
+                <input type="text" id="inputQrSubtext" value="Point camera to register • Link in bio @uskgalle" oninput="updateCanvas()">
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-btns">
+                <button class="btn-primary" onclick="exportPNG()">
+                    <i class="fa-solid fa-download"></i> Download HD Image (PNG)
+                </button>
+                <button class="btn-secondary" onclick="toggleSidebar()">
+                    <i class="fa-solid fa-eye-slash"></i> Hide Settings Sidebar
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- PREVIEW STAGE -->
+        <main class="preview-stage">
+            <div class="post-wrapper">
+
+                <div class="post-canvas aspect-4-5" id="postCanvas">
+                    <header class="brand-header">
+                        <div class="brand-logo-group">
+                            <img src="../icon.png" alt="USK Logo" class="brand-logo-img" onerror="this.style.display='none'">
+                            <div class="brand-name">Urban Sketchers Galle</div>
+                        </div>
+                        <div class="eyebrow-badge" id="canvasEyebrow">Upcoming</div>
+                    </header>
+
+                    <div class="post-image-container" id="postImgContainer" style="background-image: url('../doodles/hero.jpg');"></div>
+
+                    <section class="post-content">
+                        <h1 class="post-title" id="canvasTitle">Sketch Meet-Up #4</h1>
+                        <p class="post-intro" id="canvasIntro">Join fellow sketchers for an outdoor drawing session across the streets and ramparts of Galle Fort.</p>
+                    </section>
+
+                    <section class="details-grid">
+                        <div class="detail-card">
+                            <div class="detail-label"><i class="fa-regular fa-calendar"></i> Date</div>
+                            <div class="detail-value" id="canvasDate">30 August 2026</div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="detail-label"><i class="fa-regular fa-clock"></i> Time</div>
+                            <div class="detail-value" id="canvasTime">8:30 AM – 12:30 PM</div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="detail-label"><i class="fa-solid fa-location-dot"></i> Location</div>
+                            <div class="detail-value" id="canvasLocation">ART'O'SAN Gallery, Galle Fort</div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="detail-label"><i class="fa-solid fa-users"></i> Who Can Join?</div>
+                            <div class="detail-value" id="canvasWho">Everyone. All skill levels.</div>
+                        </div>
+                    </section>
+
+                    <div class="qr-section" id="qrSection">
+                        <div>
+                            <div class="qr-badge"><i class="fa-solid fa-qrcode"></i> Instant Access</div>
+                            <div class="qr-headline" id="canvasQrHeadline">Register via QR Code</div>
+                            <div class="qr-subtext" id="canvasQrSubtext">Point camera to register • Link in bio @uskgalle</div>
+                        </div>
+                        <div class="qr-box-wrapper">
+                            <div id="qrcode"></div>
+                        </div>
+                    </div>
+
+                    <footer class="post-footer">
+                        <span>Sketching the south, one line at a time.</span>
+                        <span>uskgalle.github.io</span>
+                    </footer>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        let qrcodeObj = null;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            generateQR();
+            updateCanvas();
+        });
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const floatingBtn = document.querySelector('.toggle-sidebar-floating');
+            sidebar.classList.toggle('collapsed');
+            if (floatingBtn) {
+                floatingBtn.style.display = sidebar.classList.contains('collapsed') ? 'flex' : 'none';
+            }
+        }
+
+        function updateCanvas() {
+            document.getElementById('canvasEyebrow').innerText = document.getElementById('inputEyebrow').value || 'UPCOMING';
+            document.getElementById('canvasTitle').innerText = document.getElementById('inputTitle').value || 'Sketch Meet-Up';
+            document.getElementById('canvasIntro').innerText = document.getElementById('inputIntro').value || '';
+            document.getElementById('canvasDate').innerText = document.getElementById('inputDate').value || '-';
+            document.getElementById('canvasTime').innerText = document.getElementById('inputTime').value || '-';
+            document.getElementById('canvasLocation').innerText = document.getElementById('inputLocation').value || '-';
+            document.getElementById('canvasWho').innerText = document.getElementById('inputWho').value || '-';
+            document.getElementById('canvasQrHeadline').innerText = document.getElementById('inputQrHeadline').value || 'Register via QR';
+            document.getElementById('canvasQrSubtext').innerText = document.getElementById('inputQrSubtext').value || '';
+        }
+
+        function generateQR() {
+            const qrContainer = document.getElementById('qrcode');
+            const url = document.getElementById('inputQrUrl').value || 'https://uskgalle.github.io';
+            qrContainer.innerHTML = '';
+            
+            try {
+                if (window.QRCode) {
+                    qrcodeObj = new QRCode(qrContainer, {
+                        text: url,
+                        width: 140,
+                        height: 140,
+                        colorDark: "#141716",
+                        colorLight: "#ffffff",
+                        correctLevel: QRCode.CorrectLevel.H
+                    });
+                } else {
+                    const img = document.createElement('img');
+                    img.src = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(url)}`;
+                    img.style.width = '72px';
+                    img.style.height = '72px';
+                    qrContainer.appendChild(img);
+                }
+            } catch (err) {
+                const img = document.createElement('img');
+                img.src = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(url)}`;
+                img.style.width = '72px';
+                img.style.height = '72px';
+                qrContainer.appendChild(img);
+            }
+        }
+
+        function setAspect(aspectRatio, btn) {
+            const canvas = document.getElementById('postCanvas');
+            const container = document.getElementById('postImgContainer');
+            canvas.classList.remove('aspect-4-5', 'aspect-1-1', 'aspect-9-16');
+            canvas.classList.add(`aspect-${aspectRatio}`);
+
+            if (aspectRatio === '1-1') container.style.height = '140px';
+            else if (aspectRatio === '9-16') container.style.height = '300px';
+            else container.style.height = '190px';
+
+            btn.parentElement.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+        }
+
+        function setTheme(themeClass, btn) {
+            document.body.className = themeClass;
+            btn.parentElement.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+        }
+
+        function handleImageUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                document.getElementById('postImgContainer').style.backgroundImage = `url("${evt.target.result}")`;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function updateImageFromUrl() {
+            const url = document.getElementById('inputImgUrl').value;
+            if (url) document.getElementById('postImgContainer').style.backgroundImage = `url("${url}")`;
+        }
+
+        function setImageFit(fitMode, btn) {
+            document.getElementById('postImgContainer').style.backgroundSize = fitMode;
+            btn.parentElement.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function loadMeetup4Data() {
+            document.getElementById('inputEyebrow').value = 'Upcoming';
+            document.getElementById('inputTitle').value = 'Sketch Meet-Up #4';
+            document.getElementById('inputIntro').value = 'Join fellow sketchers for an outdoor drawing session across the streets and ramparts of Galle Fort.';
+            document.getElementById('inputDate').value = '30 August 2026';
+            document.getElementById('inputTime').value = '8:30 AM – 12:30 PM';
+            document.getElementById('inputLocation').value = "ART'O'SAN Gallery, Galle Fort";
+            document.getElementById('inputWho').value = 'Everyone. All skill levels.';
+            document.getElementById('inputImgUrl').value = '../doodles/hero.jpg';
+            document.getElementById('inputQrUrl').value = 'https://uskgalle.github.io/events/meet-up-04/register';
+            updateImageFromUrl();
+            generateQR();
+            updateCanvas();
+        }
+
+        function loadDefaults() { loadMeetup4Data(); }
+
+        function urlToBase64(url) {
+            return new Promise((resolve) => {
+                if (!url || url.startsWith('data:')) return resolve(url);
+
+                // Fetch raw image blob to preserve 100% original full resolution
+                fetch(url)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => resolve(reader.result);
+                        reader.onerror = () => fallbackCanvasBase64(url).then(resolve);
+                        reader.readAsDataURL(blob);
+                    })
+                    .catch(() => {
+                        fallbackCanvasBase64(url).then(resolve);
+                    });
+            });
+        }
+
+        function fallbackCanvasBase64(url) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.crossOrigin = 'Anonymous';
+                img.onload = function() {
+                    try {
+                        const canvas = document.createElement('canvas');
+                        const w = img.naturalWidth || img.width || 1920;
+                        const h = img.naturalHeight || img.height || 1920;
+                        canvas.width = w;
+                        canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.imageSmoothingQuality = 'high';
+                        ctx.drawImage(img, 0, 0, w, h);
+                        resolve(canvas.toDataURL('image/png', 1.0));
+                    } catch(e) { resolve(url); }
+                };
+                img.onerror = function() { resolve(url); };
+                img.src = url;
+            });
+        }
+
+        async function exportPNG() {
+            const canvasElement = document.getElementById('postCanvas');
+            const primaryBtn = document.querySelector('.btn-primary');
+            const originalText = primaryBtn.innerHTML;
+
+            primaryBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating Ultra-HD PNG...';
+            primaryBtn.disabled = true;
+
+            try {
+                const imgContainer = document.getElementById('postImgContainer');
+                let originalBgStyle = imgContainer.style.backgroundImage;
+                const bgMatch = originalBgStyle.match(/url\(['"]?(.*?)['"]?\)/);
+                if (bgMatch && bgMatch[1] && !bgMatch[1].startsWith('data:')) {
+                    const b64 = await urlToBase64(bgMatch[1]);
+                    if (b64) imgContainer.style.backgroundImage = `url("${b64}")`;
+                }
+
+                const images = canvasElement.querySelectorAll('img');
+                const originalSources = [];
+                for (let i = 0; i < images.length; i++) {
+                    const img = images[i];
+                    originalSources.push(img.src);
+                    if (img.src && !img.src.startsWith('data:')) {
+                        const b64 = await urlToBase64(img.src);
+                        if (b64) img.src = b64;
+                    }
+                }
+
+                await new Promise(r => setTimeout(r, 150));
+
+                const canvas = await html2canvas(canvasElement, {
+                    scale: 3.0, // High-DPI Ultra HD resolution (1620p+)
+                    useCORS: true,
+                    allowTaint: false,
+                    backgroundColor: null,
+                    logging: false
+                });
+
+                imgContainer.style.backgroundImage = originalBgStyle;
+                for (let i = 0; i < images.length; i++) {
+                    if (originalSources[i]) images[i].src = originalSources[i];
+                }
+
+                const link = document.createElement('a');
+                const title = document.getElementById('inputTitle').value.replace(/[^a-z0-9]/gi, '-').toLowerCase() || 'post';
+                link.download = `usk-galle-classic-${title}.png`;
+                link.href = canvas.toDataURL('image/png', 1.0);
+                link.click();
+
+                primaryBtn.innerHTML = originalText;
+                primaryBtn.disabled = false;
+            } catch (err) {
+                console.error("Export Error:", err);
+                alert("Browser security restricted direct export. Sidebar will hide now so you can take a screenshot!");
+                toggleSidebar();
+                primaryBtn.innerHTML = originalText;
+                primaryBtn.disabled = false;
+            }
+        }
+
+        let isDirty = false;
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('input, textarea').forEach(el => {
+                el.addEventListener('input', () => isDirty = true);
+            });
+            loadDraft();
+        });
+
+        function confirmLeave(event) {
+            if (isDirty) {
+                const leave = confirm("You have unsaved changes in your post! Are you sure you want to leave?");
+                if (!leave) {
+                    if (event) event.preventDefault();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        window.onbeforeunload = function(e) {
+            if (isDirty) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        };
+
+        function saveDraft() {
+            const data = {
+                eyebrow: document.getElementById('inputEyebrow')?.value,
+                title: document.getElementById('inputTitle')?.value,
+                intro: document.getElementById('inputIntro')?.value,
+                date: document.getElementById('inputDate')?.value,
+                time: document.getElementById('inputTime')?.value,
+                location: document.getElementById('inputLocation')?.value,
+                who: document.getElementById('inputWho')?.value,
+                imgUrl: document.getElementById('inputImgUrl')?.value,
+                qrUrl: document.getElementById('inputQrUrl')?.value,
+                qrHeadline: document.getElementById('inputQrHeadline')?.value,
+                qrSubtext: document.getElementById('inputQrSubtext')?.value,
+            };
+            localStorage.setItem('usk_draft_' + location.pathname, JSON.stringify(data));
+            isDirty = false;
+            alert("Draft saved successfully to your browser!");
+        }
+
+        function loadDraft() {
+            const raw = localStorage.getItem('usk_draft_' + location.pathname);
+            if (!raw) return;
+            try {
+                const data = JSON.parse(raw);
+                if (data.eyebrow) document.getElementById('inputEyebrow').value = data.eyebrow;
+                if (data.title) document.getElementById('inputTitle').value = data.title;
+                if (data.intro) document.getElementById('inputIntro').value = data.intro;
+                if (data.date) document.getElementById('inputDate').value = data.date;
+                if (data.time) document.getElementById('inputTime').value = data.time;
+                if (data.location) document.getElementById('inputLocation').value = data.location;
+                if (data.who) document.getElementById('inputWho').value = data.who;
+                if (data.imgUrl) document.getElementById('inputImgUrl').value = data.imgUrl;
+                if (data.qrUrl) document.getElementById('inputQrUrl').value = data.qrUrl;
+                if (data.qrHeadline) document.getElementById('inputQrHeadline').value = data.qrHeadline;
+                if (data.qrSubtext) document.getElementById('inputQrSubtext').value = data.qrSubtext;
+                updateImageFromUrl();
+                generateQR();
+                updateCanvas();
+            } catch(e){}
+        }
+    </script>
+</body>
+</html>

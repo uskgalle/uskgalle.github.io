@@ -4,80 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USK Galle : Instagram Post & QR Generator</title>
+    <title>USK Galle — Instagram Post Template Hub</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- QRCode JS CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <!-- html2canvas CDN for HD PNG Export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- FontAwesome 6 CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         :root {
-            --bg-canvas: #f5f0e6;
-            --text-main: #1f2421;
-            --text-muted: #5c645d;
+            --bg-dark: #0f1115;
+            --card-bg: #1a1d24;
+            --card-border: #2e3440;
             --accent: #c86d3b;
-            --accent-bg: rgba(200, 109, 59, 0.1);
-            --card-bg: rgba(255, 255, 255, 0.65);
-            --card-border: rgba(31, 36, 33, 0.12);
-            --qr-bg: #ffffff;
-            --font-heading: 'Outfit', sans-serif;
-            --font-body: 'Inter', sans-serif;
-            --font-brand: 'Cinzel', serif;
-        }
-
-        /* Themes */
-        .theme-warm-paper {
-            --bg-canvas: #f5f0e6;
-            --text-main: #1f2421;
-            --text-muted: #5c645d;
-            --accent: #c86d3b;
-            --accent-bg: rgba(200, 109, 59, 0.12);
-            --card-bg: rgba(255, 255, 255, 0.7);
-            --card-border: rgba(31, 36, 33, 0.12);
-            --qr-bg: #ffffff;
-        }
-
-        .theme-terracotta {
-            --bg-canvas: #2d1c19;
-            --text-main: #f7ede2;
-            --text-muted: #d6ccc2;
-            --accent: #e76f51;
-            --accent-bg: rgba(231, 111, 81, 0.2);
-            --card-bg: rgba(255, 255, 255, 0.08);
-            --card-border: rgba(247, 237, 226, 0.15);
-            --qr-bg: #ffffff;
-        }
-
-        .theme-charcoal {
-            --bg-canvas: #141716;
-            --text-main: #f0f3f1;
-            --text-muted: #9ca6a0;
-            --accent: #e5a93c;
-            --accent-bg: rgba(229, 169, 60, 0.15);
-            --card-bg: rgba(255, 255, 255, 0.06);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --qr-bg: #ffffff;
-        }
-
-        .theme-ocean {
-            --bg-canvas: #0f2537;
-            --text-main: #f0f7ff;
+            --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --accent: #38bdf8;
-            --accent-bg: rgba(56, 189, 248, 0.15);
-            --card-bg: rgba(255, 255, 255, 0.08);
-            --card-border: rgba(240, 247, 255, 0.15);
-            --qr-bg: #ffffff;
         }
 
         * {
@@ -88,994 +32,426 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #111418;
-            color: #e2e8f0;
+            background: var(--bg-dark);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
-            overflow-x: hidden;
+            flex-direction: column;
+            padding: 40px 20px;
         }
 
-        /* App Layout */
-        .app-container {
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Header */
+        .hub-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(200, 109, 59, 0.12);
+            border: 1px solid rgba(200, 109, 59, 0.3);
+            color: var(--accent);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .brand-badge img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .hub-title {
+            font-family: 'Cinzel', serif;
+            font-size: 38px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .hub-subtitle {
+            font-size: 16px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+            margin-bottom: 50px;
+        }
+
+        /* Template Card */
+        .template-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
             display: flex;
-            width: 100vw;
-            min-height: 100vh;
+            flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
         }
 
-        /* Sidebar Control Panel */
-        .sidebar {
-            width: 420px;
-            background: #1a1d24;
-            border-right: 1px solid #2e3440;
+        .template-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(200, 109, 59, 0.2);
+        }
+
+        /* Card Preview Mockup */
+        .preview-box {
+            height: 260px;
+            background: #12141a;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        /* Mini Canvas Mockups */
+        .mini-canvas {
+            width: 140px;
+            aspect-ratio: 4 / 5;
+            background: #f5f0e6;
+            border-radius: 6px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .template-card:hover .mini-canvas {
+            transform: scale(1.05);
+        }
+
+        .mini-brand {
+            font-size: 5px;
+            font-weight: 800;
+            color: #1f2421;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .mini-img {
+            width: 100%;
+            height: 50px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+            margin-bottom: 6px;
+        }
+
+        .mini-title {
+            font-size: 8px;
+            font-weight: 800;
+            color: #1f2421;
+            margin-bottom: 4px;
+            line-height: 1.1;
+        }
+
+        .mini-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            margin-top: auto;
+        }
+
+        .mini-box {
+            background: rgba(0, 0, 0, 0.06);
+            height: 14px;
+            border-radius: 2px;
+        }
+
+        /* Specific Mini Layout Mockups */
+        .mini-canvas.overlay-style {
+            background: #2d1c19;
+            color: #ffffff;
+        }
+
+        .mini-canvas.overlay-style .mini-img-full {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.85;
+        }
+
+        .mini-canvas.overlay-style .mini-overlay-scrim {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%);
+        }
+
+        .mini-canvas.overlay-style .mini-content {
+            position: relative;
+            z-index: 2;
+            margin-top: auto;
+            color: #ffffff;
+        }
+
+        .mini-canvas.story-style {
+            aspect-ratio: 9 / 16;
+            height: 180px;
+            width: auto;
+        }
+
+        /* Card Content */
+        .card-body {
             padding: 24px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            overflow-y: auto;
-            max-height: 100vh;
-            z-index: 100;
-            transition: margin-left 0.3s ease;
+            flex: 1;
         }
 
-        .sidebar.collapsed {
-            margin-left: -420px;
-        }
-
-        .sidebar-header {
+        .card-tags {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #2e3440;
-        }
-
-        .sidebar-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #f8fafc;
-            display: flex;
-            align-items: center;
             gap: 8px;
+            margin-bottom: 12px;
         }
 
-        .sidebar-title span {
-            color: #c86d3b;
-        }
-
-        .section-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #94a3b8;
+        .tag {
+            font-size: 10px;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: #242936;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+        }
+
+        .tag.tag-featured {
+            background: rgba(200, 109, 59, 0.15);
+            color: var(--accent);
+            border-color: rgba(200, 109, 59, 0.3);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
             margin-bottom: 8px;
         }
 
-        .control-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .control-group label {
-            font-size: 12px;
-            color: #cbd5e1;
-            font-weight: 500;
-        }
-
-        input[type="text"],
-        textarea,
-        select {
-            width: 100%;
-            background: #0f1115;
-            border: 1px solid #334155;
-            color: #f1f5f9;
-            padding: 10px 12px;
-            border-radius: 6px;
+        .card-desc {
             font-size: 13px;
-            font-family: inherit;
-            transition: border-color 0.2s;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 20px;
+            flex: 1;
         }
 
-        input[type="text"]:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            border-color: #c86d3b;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 60px;
-        }
-
-        .file-upload-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: #242936;
-            border: 1px dashed #475569;
-            color: #cbd5e1;
-            padding: 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.2s;
-        }
-
-        .file-upload-btn:hover {
-            border-color: #c86d3b;
-            color: #f8fafc;
-            background: #2d3345;
-        }
-
-        input[type="file"] {
-            display: none;
-        }
-
-        /* Button Grid */
-        .btn-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-
-        .btn-grid-4 {
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .opt-btn {
-            background: #242936;
-            border: 1px solid #334155;
-            color: #cbd5e1;
-            padding: 8px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.2s;
-        }
-
-        .opt-btn:hover,
-        .opt-btn.active {
-            background: #c86d3b;
-            color: #ffffff;
-            border-color: #c86d3b;
-        }
-
-        .action-btns {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: auto;
-            padding-top: 16px;
-            border-top: 1px solid #2e3440;
-        }
-
-        .btn-primary {
-            background: #c86d3b;
+        .card-btn {
+            background: var(--accent);
             color: #ffffff;
             border: none;
-            padding: 14px;
+            padding: 12px 18px;
             border-radius: 8px;
+            font-size: 13px;
             font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: background 0.2s, transform 0.1s;
-            box-shadow: 0 4px 12px rgba(200, 109, 59, 0.3);
+            transition: background 0.2s;
         }
 
-        .btn-primary:hover {
+        .template-card:hover .card-btn {
             background: #b55c2d;
         }
 
-        .btn-primary:active {
-            transform: scale(0.98);
-        }
-
-        .btn-secondary {
-            background: #242936;
-            color: #cbd5e1;
-            border: 1px solid #334155;
-            padding: 10px;
-            border-radius: 6px;
-            font-weight: 600;
+        /* Footer */
+        .hub-footer {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-muted);
             font-size: 13px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
         }
 
-        .btn-secondary:hover {
-            background: #334155;
-            color: #ffffff;
-        }
-
-        /* Toggle Sidebar Button */
-        .toggle-sidebar-floating {
-            position: fixed;
-            top: 16px;
-            left: 16px;
-            z-index: 101;
-            background: #1a1d24;
-            color: #f8fafc;
-            border: 1px solid #334155;
-            padding: 8px 14px;
-            border-radius: 30px;
-            font-size: 12px;
+        .hub-footer a {
+            color: var(--accent);
+            text-decoration: none;
             font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
-        /* Preview Stage */
-        .preview-stage {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            background: #090a0c;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        /* Instagram Canvas Container */
-        .post-wrapper {
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-            border-radius: 4px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        /* Main Canvas Element */
-        .post-canvas {
-            width: 540px;
-            /* Render base width (Scales to 1080px on export) */
-            aspect-ratio: 4 / 5;
-            background: var(--bg-canvas);
-            color: var(--text-main);
-            padding: 36px 36px 30px 36px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            box-sizing: border-box;
-            user-select: none;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        /* Aspect Ratios */
-        .post-canvas.aspect-4-5 {
-            aspect-ratio: 4 / 5;
-            height: 675px;
-        }
-
-        .post-canvas.aspect-1-1 {
-            aspect-ratio: 1 / 1;
-            height: 540px;
-        }
-
-        .post-canvas.aspect-9-16 {
-            aspect-ratio: 9 / 16;
-            height: 960px;
-        }
-
-        /* Canvas Elements */
-        .brand-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .brand-logo-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .brand-logo-img {
-            width: 34px;
-            height: 34px;
-            object-fit: contain;
-            border-radius: 6px;
-        }
-
-        .brand-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--accent);
-            color: #ffffff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 14px;
-            letter-spacing: -0.5px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .brand-name {
-            font-family: var(--font-brand);
-            font-size: 15px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-main);
-        }
-
-        .eyebrow-badge {
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: 5px 12px;
-            background: var(--accent-bg);
-            color: var(--accent);
-            border-radius: 20px;
-        }
-
-        /* Hero Image Container */
-        .post-image-container {
-            width: 100%;
-            height: 190px;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            position: relative;
-            background-color: rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--card-border);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            transition: background-size 0.2s;
-        }
-
-        .post-image-container.hidden {
-            display: none;
-        }
-
-        /* Content Section */
-        .post-content {
-            margin-bottom: 20px;
-        }
-
-        .post-title {
-            font-family: var(--font-heading);
-            font-size: 34px;
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -0.5px;
-            margin-bottom: 10px;
-            color: var(--text-main);
-        }
-
-        .post-intro {
-            font-family: var(--font-body);
-            font-size: 13.5px;
-            line-height: 1.45;
-            color: var(--text-muted);
-            max-width: 95%;
-        }
-
-        /* Details Grid */
-        .details-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .detail-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: 10px 14px;
-            border-radius: 10px;
-            backdrop-filter: blur(8px);
-        }
-
-        .detail-label {
-            font-size: 9.5px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 3px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .detail-value {
-            font-size: 12.5px;
-            font-weight: 600;
-            line-height: 1.3;
-            color: var(--text-main);
-        }
-
-        /* QR Code & Register Footer Section */
-        .qr-section {
-            margin-top: auto;
-            background: var(--card-bg);
-            border: 1px dashed var(--card-border);
-            border-radius: 12px;
-            padding: 14px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-        }
-
-        .qr-section.hidden {
-            display: none;
-        }
-
-        .qr-text-side {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .qr-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--accent);
-        }
-
-        .qr-headline {
-            font-family: var(--font-heading);
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 1.2;
-            color: var(--text-main);
-        }
-
-        .qr-subtext {
-            font-size: 11px;
-            color: var(--text-muted);
-            line-height: 1.3;
-        }
-
-        .qr-box-wrapper {
-            background: var(--qr-bg);
-            padding: 7px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        #qrcode canvas,
-        #qrcode img {
-            display: block;
-            width: 72px !important;
-            height: 72px !important;
-        }
-
-        /* Footer Tagline */
-        .post-footer {
-            margin-top: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 10px;
-            color: var(--text-muted);
-            letter-spacing: 0.5px;
-            font-weight: 500;
-        }
-
-        /* Responsive Tweaks */
-        @media (max-width: 900px) {
-            .app-container {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-                max-height: none;
-            }
-
-            .preview-stage {
-                padding: 20px 10px;
-            }
-
-            .post-canvas {
-                width: 100%;
-                max-width: 480px;
-            }
+        .hub-footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 
-<body class="theme-warm-paper">
+<body>
 
-    <button class="toggle-sidebar-floating" onclick="toggleSidebar()" title="Toggle Settings Sidebar">
-        <span id="toggleIcon"><i class="fa-solid fa-chevron-left"></i></span> Settings Panel
-    </button>
+    <div class="container">
 
-    <div class="app-container">
-
-        <!-- EDITOR SIDEBAR -->
-        <aside class="sidebar" id="sidebar">
-
-            <div class="sidebar-header">
-                <div class="sidebar-title">
-                    <span style="color: var(--accent);"><i class="fa-solid fa-palette"></i></span> Post & QR Builder
-                </div>
-                <button class="btn-secondary" onclick="loadDefaults()" title="Reset to default text">Reset</button>
+        <!-- TOP NAV BAR -->
+        <div class="top-nav-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <a href="https://uskgalle.github.io" class="home-btn" style="display: inline-flex; align-items: center; gap: 8px; background: #1a1d24; border: 1px solid #2e3440; color: #f8fafc; padding: 10px 18px; border-radius: 30px; text-decoration: none; font-size: 13px; font-weight: 600; transition: all 0.2s;">
+                <i class="fa-solid fa-house" style="color: #c86d3b;"></i> Home Website
+            </a>
+            <div style="font-size: 13px; color: #94a3b8; font-weight: 600;">
+                <i class="fa-solid fa-palette" style="color: #c86d3b;"></i> USK Galle Post Hub
             </div>
+        </div>
 
-            <!-- Quick Template Defaults -->
-            <div class="control-group">
-                <button class="btn-secondary" onclick="loadMeetup4Data()" style="width: 100%; justify-content: center; gap: 8px;">
-                    <i class="fa-solid fa-bolt" style="color: #e5a93c;"></i> Load Meet-Up #4 Data
-                </button>
+        <!-- HEADER -->
+        <header class="hub-header">
+            <div class="brand-badge">
+                <img src="icon.png" alt="USK Logo" onerror="this.style.display='none'">
+                Urban Sketchers Galle
             </div>
+            <h1 class="hub-title">Instagram Post Templates</h1>
+            <p class="hub-subtitle">Select a post template below to customize event details, upload artwork, generate registration QR codes, and export HD images.</p>
+        </header>
 
-            <!-- Format & Theme Controls -->
-            <div class="control-group">
-                <div class="section-label">1. Canvas Format</div>
-                <div class="btn-grid">
-                    <button class="opt-btn active" onclick="setAspect('4-5', this)">4:5 Feed</button>
-                    <button class="opt-btn" onclick="setAspect('1-1', this)">1:1 Square</button>
-                    <button class="opt-btn" onclick="setAspect('9-16', this)">9:16 Story</button>
-                </div>
-            </div>
+        <!-- TEMPLATE GALLERY GRID -->
+        <div class="gallery-grid">
 
-            <div class="control-group">
-                <div class="section-label">2. Color Theme</div>
-                <div class="btn-grid btn-grid-4">
-                    <button class="opt-btn active" onclick="setTheme('theme-warm-paper', this)">Warm</button>
-                    <button class="opt-btn" onclick="setTheme('theme-terracotta', this)">Clay</button>
-                    <button class="opt-btn" onclick="setTheme('theme-charcoal', this)">Dark</button>
-                    <button class="opt-btn" onclick="setTheme('theme-ocean', this)">Ocean</button>
-                </div>
-            </div>
-
-            <!-- Content Inputs -->
-            <div class="control-group">
-                <div class="section-label">3. Post Content</div>
-
-                <label>Header Tag / Eyebrow</label>
-                <input type="text" id="inputEyebrow" value="Upcoming" oninput="updateCanvas()">
-
-                <label>Event Title</label>
-                <input type="text" id="inputTitle" value="Sketch Meet-Up #4" oninput="updateCanvas()">
-
-                <label>Short Description</label>
-                <textarea id="inputIntro"
-                    oninput="updateCanvas()">Join fellow sketchers for an outdoor drawing session across the streets and ramparts of Galle Fort.</textarea>
-            </div>
-
-            <!-- Event Details -->
-            <div class="control-group">
-                <div class="section-label">4. Event Details</div>
-
-                <label>Date</label>
-                <input type="text" id="inputDate" value="30 August 2026" oninput="updateCanvas()">
-
-                <label>Time</label>
-                <input type="text" id="inputTime" value="8:30 AM – 12:30 PM" oninput="updateCanvas()">
-
-                <label>Location</label>
-                <input type="text" id="inputLocation" value="ART'O'SAN Gallery, Galle Fort" oninput="updateCanvas()">
-
-                <label>Who Can Join?</label>
-                <input type="text" id="inputWho" value="Everyone. All skill levels." oninput="updateCanvas()">
-            </div>
-
-            <!-- Featured Image -->
-            <div class="control-group">
-                <div class="section-label">5. Featured Image</div>
-
-                <label class="file-upload-btn">
-                    <i class="fa-solid fa-image"></i> Upload Custom Image
-                    <input type="file" id="imageFileInput" accept="image/*" onchange="handleImageUpload(event)">
-                </label>
-
-                <label>Or Image URL / Preset</label>
-                <input type="text" id="inputImgUrl" value="doodles/hero.jpg" placeholder="e.g. doodles/hero.jpg"
-                    oninput="updateImageFromUrl()">
-
-                <div class="btn-grid" style="margin-top: 4px;">
-                    <button class="opt-btn active" onclick="setImageFit('cover', this)">Crop Fit</button>
-                    <button class="opt-btn" onclick="setImageFit('contain', this)">Contain</button>
-                    <button class="opt-btn" onclick="toggleImage(this)" id="btnToggleImg">Hide Image</button>
-                </div>
-            </div>
-
-            <!-- QR Code & Link -->
-            <div class="control-group">
-                <div class="section-label">6. Registration QR Code</div>
-
-                <label>Registration Link (Encoded into QR)</label>
-                <input type="text" id="inputQrUrl" value="https://uskgalle.github.io/events/meet-up-04/register"
-                    oninput="generateQR()">
-
-                <label>QR Callout Label</label>
-                <input type="text" id="inputQrHeadline" value="Register via QR Code" oninput="updateCanvas()">
-
-                <label>Subtext / Instructions</label>
-                <input type="text" id="inputQrSubtext" value="Point camera to register • Link in bio @uskgalle"
-                    oninput="updateCanvas()">
-
-                <div class="btn-grid" style="margin-top: 4px;">
-                    <button class="opt-btn active" onclick="toggleQR(true, this)">Show QR</button>
-                    <button class="opt-btn" onclick="toggleQR(false, this)">Hide QR</button>
-                </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="action-btns">
-                <button class="btn-primary" onclick="exportPNG()">
-                    <i class="fa-solid fa-download"></i> Download HD Image (PNG)
-                </button>
-                <button class="btn-secondary" onclick="toggleSidebar()">
-                    <i class="fa-solid fa-eye-slash"></i> Hide Settings Sidebar
-                </button>
-            </div>
-
-        </aside>
-
-        <!-- PREVIEW STAGE -->
-        <main class="preview-stage">
-            <div class="post-wrapper">
-
-                <div class="post-canvas aspect-4-5" id="postCanvas">
-
-                    <!-- Top Branding Header -->
-                    <header class="brand-header">
-                        <div class="brand-logo-group">
-                            <img src="icon.png" alt="USK Galle Logo" class="brand-logo-img"
-                                onerror="this.onerror=null; this.style.display='none';">
-                            <div class="brand-name">Urban Sketchers Galle</div>
-                        </div>
-                        <div class="eyebrow-badge" id="canvasEyebrow">Upcoming</div>
-                    </header>
-
-                    <!-- Hero Image Area -->
-                    <div class="post-image-container" id="postImgContainer"
-                        style="background-image: url('doodles/hero.jpg');"></div>
-
-                    <!-- Main Content -->
-                    <section class="post-content">
-                        <h1 class="post-title" id="canvasTitle">Sketch Meet-Up #4</h1>
-                        <p class="post-intro" id="canvasIntro">Join fellow sketchers for an outdoor drawing session
-                            across the streets and ramparts of Galle Fort.</p>
-                    </section>
-
-                    <!-- Event Details Grid -->
-                    <section class="details-grid">
-                        <div class="detail-card">
-                            <div class="detail-label"><i class="fa-regular fa-calendar"></i> Date</div>
-                            <div class="detail-value" id="canvasDate">30 August 2026</div>
-                        </div>
-                        <div class="detail-card">
-                            <div class="detail-label"><i class="fa-regular fa-clock"></i> Time</div>
-                            <div class="detail-value" id="canvasTime">8:30 AM – 12:30 PM</div>
-                        </div>
-                        <div class="detail-card">
-                            <div class="detail-label"><i class="fa-solid fa-location-dot"></i> Location</div>
-                            <div class="detail-value" id="canvasLocation">ART'O'SAN Gallery, Galle Fort</div>
-                        </div>
-                        <div class="detail-card">
-                            <div class="detail-label"><i class="fa-solid fa-users"></i> Who Can Join?</div>
-                            <div class="detail-value" id="canvasWho">Everyone. All skill levels.</div>
-                        </div>
-                    </section>
-
-                    <!-- QR Code Callout Section -->
-                    <div class="qr-section" id="qrSection">
-                        <div class="qr-text-side">
-                            <div class="qr-badge"><i class="fa-solid fa-qrcode"></i> Instant Access</div>
-                            <div class="qr-headline" id="canvasQrHeadline">Register via QR Code</div>
-                            <div class="qr-subtext" id="canvasQrSubtext">Point camera to register • Link in bio
-                                @uskgalle</div>
-                        </div>
-                        <div class="qr-box-wrapper">
-                            <div id="qrcode"></div>
+            <!-- TEMPLATE 1: CLASSIC EDITORIAL -->
+            <a href="templates/classic.html" class="template-card">
+                <div class="preview-box">
+                    <div class="mini-canvas">
+                        <div class="mini-brand">URBAN SKETCHERS GALLE</div>
+                        <div class="mini-img" style="background-image: url('doodles/hero.jpg');"></div>
+                        <div class="mini-title">Sketch Meet-Up #4</div>
+                        <div class="mini-grid">
+                            <div class="mini-box"></div>
+                            <div class="mini-box"></div>
                         </div>
                     </div>
-
-                    <!-- Footer Tagline -->
-                    <footer class="post-footer">
-                        <span>Sketching the south, one line at a time.</span>
-                        <span>uskgalle.github.io</span>
-                    </footer>
-
                 </div>
+                <div class="card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-featured">4:5 Feed</span>
+                        <span class="tag">Editorial</span>
+                    </div>
+                    <h2 class="card-title">Classic Meetup Flyer</h2>
+                    <p class="card-desc">Balanced layout featuring framed hero artwork, 2x2 details grid, scannable QR card, and color presets.</p>
+                    <div class="card-btn">
+                        Customize Template <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </a>
 
-            </div>
-        </main>
+            <!-- TEMPLATE 2: FULL-BLEED OVERLAY -->
+            <a href="templates/overlay.html" class="template-card">
+                <div class="preview-box">
+                    <div class="mini-canvas overlay-style">
+                        <div class="mini-img-full" style="background-image: url('doodles/hero.jpg');"></div>
+                        <div class="mini-overlay-scrim"></div>
+                        <div class="mini-content">
+                            <div class="mini-brand" style="color: #ffffff;">URBAN SKETCHERS</div>
+                            <div class="mini-title" style="color: #ffffff;">Text Over Image</div>
+                            <div class="mini-grid">
+                                <div class="mini-box" style="background: rgba(255,255,255,0.2);"></div>
+                                <div class="mini-box" style="background: rgba(255,255,255,0.2);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-featured">Image Overlay</span>
+                        <span class="tag">Text Over Image</span>
+                    </div>
+                    <h2 class="card-title">Full-Bleed Image Overlay</h2>
+                    <p class="card-desc">Artwork spans the top section with title and description overlaid directly on top of the image using dark gradient scrims.</p>
+                    <div class="card-btn">
+                        Customize Template <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </a>
+
+            <!-- TEMPLATE 3: MINIMALIST POSTER -->
+            <a href="templates/minimal.html" class="template-card">
+                <div class="preview-box">
+                    <div class="mini-canvas" style="background: #ffffff;">
+                        <div class="mini-title" style="font-size: 11px; margin-bottom: 2px;">SKETCH MEET #4</div>
+                        <div class="mini-img" style="background-image: url('doodles/hero.jpg'); height: 60px;"></div>
+                        <div class="mini-grid">
+                            <div class="mini-box" style="background: #eee;"></div>
+                            <div class="mini-box" style="background: #eee;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-featured">Minimal</span>
+                        <span class="tag">Bold Typography</span>
+                    </div>
+                    <h2 class="card-title">Minimalist Magazine Poster</h2>
+                    <p class="card-desc">Bold headline typography, full-width artwork strip, clean event info grid, and high contrast QR box.</p>
+                    <div class="card-btn">
+                        Customize Template <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </a>
+
+            <!-- TEMPLATE 4: INSTAGRAM STORY -->
+            <a href="templates/story.html" class="template-card">
+                <div class="preview-box">
+                    <div class="mini-canvas story-style" style="background: #141716;">
+                        <div class="mini-img-full" style="background-image: url('doodles/hero.jpg');"></div>
+                        <div class="mini-overlay-scrim"></div>
+                        <div class="mini-content">
+                            <div class="mini-title" style="color: #ffffff; font-size: 9px;">INSTAGRAM STORY</div>
+                            <div style="font-size: 5px; color: #d4af37;">9:16 VERTICAL</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-featured">9:16 Story</span>
+                        <span class="tag">Vertical Fullscreen</span>
+                    </div>
+                    <h2 class="card-title">Instagram Story Flyer</h2>
+                    <p class="card-desc">Full-height 9:16 vertical layout optimized specifically for Instagram Stories, Reels, and mobile screens.</p>
+                    <div class="card-btn">
+                        Customize Template <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="hub-footer">
+            <p>Urban Sketchers Galle — Sketching the south, one line at a time.</p>
+            <p style="margin-top: 6px;"><a href="https://uskgalle.github.io" target="_blank">uskgalle.github.io</a></p>
+        </footer>
 
     </div>
 
-    <!-- Application Script -->
-    <script>
-        let qrcodeObj = null;
-
-        // Initialize Page
-        window.addEventListener('DOMContentLoaded', () => {
-            generateQR();
-            updateCanvas();
-        });
-
-        // Toggle Sidebar
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const icon = document.getElementById('toggleIcon');
-            sidebar.classList.toggle('collapsed');
-            icon.innerHTML = sidebar.classList.contains('collapsed') 
-                ? '<i class="fa-solid fa-chevron-right"></i>' 
-                : '<i class="fa-solid fa-chevron-left"></i>';
-        }
-
-        // Live Text Update
-        function updateCanvas() {
-            document.getElementById('canvasEyebrow').innerText = document.getElementById('inputEyebrow').value || 'UPCOMING';
-            document.getElementById('canvasTitle').innerText = document.getElementById('inputTitle').value || 'Sketch Meet-Up';
-            document.getElementById('canvasIntro').innerText = document.getElementById('inputIntro').value || '';
-            document.getElementById('canvasDate').innerText = document.getElementById('inputDate').value || '-';
-            document.getElementById('canvasTime').innerText = document.getElementById('inputTime').value || '-';
-            document.getElementById('canvasLocation').innerText = document.getElementById('inputLocation').value || '-';
-            document.getElementById('canvasWho').innerText = document.getElementById('inputWho').value || '-';
-            document.getElementById('canvasQrHeadline').innerText = document.getElementById('inputQrHeadline').value || 'Register via QR';
-            document.getElementById('canvasQrSubtext').innerText = document.getElementById('inputQrSubtext').value || '';
-        }
-
-        // QR Code Generator
-        function generateQR() {
-            const qrContainer = document.getElementById('qrcode');
-            const url = document.getElementById('inputQrUrl').value || 'https://uskgalle.github.io';
-
-            qrContainer.innerHTML = '';
-
-            try {
-                if (window.QRCode) {
-                    qrcodeObj = new QRCode(qrContainer, {
-                        text: url,
-                        width: 140,
-                        height: 140,
-                        colorDark: "#141716",
-                        colorLight: "#ffffff",
-                        correctLevel: QRCode.CorrectLevel.H
-                    });
-                } else {
-                    // Fallback to QR API if CDN fails
-                    const img = document.createElement('img');
-                    img.src = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(url)}`;
-                    img.style.width = '72px';
-                    img.style.height = '72px';
-                    qrContainer.appendChild(img);
-                }
-            } catch (err) {
-                console.error("QR Code Error:", err);
-                const img = document.createElement('img');
-                img.src = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(url)}`;
-                img.style.width = '72px';
-                img.style.height = '72px';
-                qrContainer.appendChild(img);
-            }
-        }
-
-        // Format Aspect Ratio Switcher
-        function setAspect(aspectRatio, btn) {
-            const canvas = document.getElementById('postCanvas');
-            const container = document.getElementById('postImgContainer');
-
-            canvas.classList.remove('aspect-4-5', 'aspect-1-1', 'aspect-9-16');
-            canvas.classList.add(`aspect-${aspectRatio}`);
-
-            // Adjust image height based on aspect ratio
-            if (aspectRatio === '1-1') {
-                container.style.height = '140px';
-            } else if (aspectRatio === '9-16') {
-                container.style.height = '300px';
-            } else {
-                container.style.height = '190px';
-            }
-
-            document.querySelectorAll('.control-group:nth-child(3) .opt-btn').forEach(b => b.classList.remove('active'));
-            if (btn) btn.classList.add('active');
-        }
-
-        // Theme Switcher
-        function setTheme(themeClass, btn) {
-            document.body.className = themeClass;
-            document.querySelectorAll('.control-group:nth-child(4) .opt-btn').forEach(b => b.classList.remove('active'));
-            if (btn) btn.classList.add('active');
-        }
-
-        // Image Handling
-        function handleImageUpload(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function (evt) {
-                const container = document.getElementById('postImgContainer');
-                container.style.backgroundImage = `url("${evt.target.result}")`;
-                container.classList.remove('hidden');
-                document.getElementById('btnToggleImg').innerText = 'Hide Image';
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function updateImageFromUrl() {
-            const url = document.getElementById('inputImgUrl').value;
-            if (url) {
-                const container = document.getElementById('postImgContainer');
-                container.style.backgroundImage = `url("${url}")`;
-                container.classList.remove('hidden');
-                document.getElementById('btnToggleImg').innerText = 'Hide Image';
-            }
-        }
-
-        function setImageFit(fitMode, btn) {
-            const container = document.getElementById('postImgContainer');
-            container.style.backgroundSize = fitMode;
-            btn.parentElement.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        }
-
-        function toggleImage(btn) {
-            const container = document.getElementById('postImgContainer');
-            if (container.classList.contains('hidden')) {
-                container.classList.remove('hidden');
-                btn.innerText = 'Hide Image';
-            } else {
-                container.classList.add('hidden');
-                btn.innerText = 'Show Image';
-            }
-        }
-
-        function toggleQR(show, btn) {
-            const qrSec = document.getElementById('qrSection');
-            if (show) {
-                qrSec.classList.remove('hidden');
-            } else {
-                qrSec.classList.add('hidden');
-            }
-            btn.parentElement.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        }
-
-        // Preset Data
-        function loadMeetup4Data() {
-            document.getElementById('inputEyebrow').value = 'Upcoming';
-            document.getElementById('inputTitle').value = 'Sketch Meet-Up #4';
-            document.getElementById('inputIntro').value = 'Join fellow sketchers for an outdoor drawing session across the streets and ramparts of Galle Fort.';
-            document.getElementById('inputDate').value = '30 August 2026';
-            document.getElementById('inputTime').value = '8:30 AM – 12:30 PM';
-            document.getElementById('inputLocation').value = "ART'O'SAN Gallery, Galle Fort";
-            document.getElementById('inputWho').value = 'Everyone. All skill levels.';
-            document.getElementById('inputImgUrl').value = 'doodles/hero.jpg';
-            document.getElementById('inputQrUrl').value = 'https://uskgalle.github.io/events/meet-up-04/register';
-            document.getElementById('inputQrHeadline').value = 'Register via QR Code';
-            document.getElementById('inputQrSubtext').value = 'Point camera to register • Link in bio @uskgalle';
-
-            updateImageFromUrl();
-            generateQR();
-            updateCanvas();
-        }
-
-        function loadDefaults() {
-            loadMeetup4Data();
-        }
-
-        // Helper to convert image URL or img tag to Base64 to prevent canvas tainting in file:// protocol
-        function urlToBase64(url) {
-            return new Promise((resolve) => {
-                if (!url || url.startsWith('data:')) return resolve(url);
-                const img = new Image();
-                img.crossOrigin = 'Anonymous';
-                img.onload = function () {
-                    try {
-                        const canvas = document.createElement('canvas');
-                        canvas.width = img.naturalWidth || 600;
-                        canvas.height = img.naturalHeight || 600;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0);
-                        resolve(canvas.toDataURL('image/png'));
-                    } catch (e) {
-                        resolve(url);
-                    }
-                };
-                img.onerror = function () { resolve(url); };
-                img.src = url;
-            });
-        }
-
-        // Export HD PNG
-        async function exportPNG() {
-            const canvasElement = document.getElementById('postCanvas');
-            const primaryBtn = document.querySelector('.btn-primary');
-            const originalText = primaryBtn.innerHTML;
-
-            primaryBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating HD PNG...';
-            primaryBtn.disabled = true;
-
-            try {
-                // Convert background-image URL to Base64 if needed
-                const imgContainer = document.getElementById('postImgContainer');
-                let originalBgStyle = imgContainer.style.backgroundImage;
-                const bgMatch = originalBgStyle.match(/url\(['"]?(.*?)['"]?\)/);
-
-                if (bgMatch && bgMatch[1] && !bgMatch[1].startsWith('data:')) {
-                    const b64 = await urlToBase64(bgMatch[1]);
-                    if (b64) {
-                        imgContainer.style.backgroundImage = `url("${b64}")`;
-                    }
-                }
-
-                // Convert any inline <img> tags (like logo) to Base64
-                const images = canvasElement.querySelectorAll('img');
-                const originalSources = [];
-                for (let i = 0; i < images.length; i++) {
-                    const img = images[i];
-                    originalSources.push(img.src);
-                    if (img.src && !img.src.startsWith('data:')) {
-                        const b64 = await urlToBase64(img.src);
-                        if (b64) img.src = b64;
-                    }
-                }
-
-                // Short delay for DOM update
-                await new Promise(r => setTimeout(r, 150));
-
-                // Render canvas with html2canvas
-                const canvas = await html2canvas(canvasElement, {
-                    scale: 2.5, // High DPI resolution (1080p+)
-                    useCORS: true,
-                    allowTaint: false,
-                    backgroundColor: null,
-                    logging: false
-                });
-
-                // Restore original image sources
-                imgContainer.style.backgroundImage = originalBgStyle;
-                for (let i = 0; i < images.length; i++) {
-                    if (originalSources[i]) images[i].src = originalSources[i];
-                }
-
-                // Download PNG
-                const link = document.createElement('a');
-                const title = document.getElementById('inputTitle').value.replace(/[^a-z0-9]/gi, '-').toLowerCase() || 'post';
-                link.download = `usk-galle-${title}.png`;
-                link.href = canvas.toDataURL('image/png', 1.0);
-                link.click();
-
-                primaryBtn.innerHTML = originalText;
-                primaryBtn.disabled = false;
-            } catch (err) {
-                console.error("Export Error:", err);
-                alert("Direct file download was restricted by local browser security. Sidebar will hide now so you can take a screenshot!");
-                toggleSidebar();
-                primaryBtn.innerHTML = originalText;
-                primaryBtn.disabled = false;
-            }
-        }
-    </script>
 </body>
 
 </html>
