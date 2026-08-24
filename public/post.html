@@ -430,22 +430,16 @@
             overflow: hidden;
             margin-bottom: 20px;
             position: relative;
-            background: rgba(0, 0, 0, 0.05);
+            background-color: rgba(0, 0, 0, 0.05);
             border: 1px solid var(--card-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-size 0.2s;
         }
 
         .post-image-container.hidden {
             display: none;
-        }
-
-        .post-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
         }
 
         /* Content Section */
@@ -744,9 +738,7 @@
                     </header>
 
                     <!-- Hero Image Area -->
-                    <div class="post-image-container" id="postImgContainer">
-                        <img src="doodles/hero.jpg" alt="Event Artwork" class="post-image" id="postImage" onerror="this.onerror=null; this.src='hero.png';">
-                    </div>
+                    <div class="post-image-container" id="postImgContainer" style="background-image: url('doodles/hero.jpg');"></div>
 
                     <!-- Main Content -->
                     <section class="post-content">
@@ -900,9 +892,9 @@
 
             const reader = new FileReader();
             reader.onload = function(evt) {
-                const img = document.getElementById('postImage');
-                img.src = evt.target.result;
-                document.getElementById('postImgContainer').classList.remove('hidden');
+                const container = document.getElementById('postImgContainer');
+                container.style.backgroundImage = `url("${evt.target.result}")`;
+                container.classList.remove('hidden');
                 document.getElementById('btnToggleImg').innerText = 'Hide Image';
             };
             reader.readAsDataURL(file);
@@ -911,14 +903,16 @@
         function updateImageFromUrl() {
             const url = document.getElementById('inputImgUrl').value;
             if (url) {
-                document.getElementById('postImage').src = url;
-                document.getElementById('postImgContainer').classList.remove('hidden');
+                const container = document.getElementById('postImgContainer');
+                container.style.backgroundImage = `url("${url}")`;
+                container.classList.remove('hidden');
                 document.getElementById('btnToggleImg').innerText = 'Hide Image';
             }
         }
 
         function setImageFit(fitMode, btn) {
-            document.getElementById('postImage').style.objectFit = fitMode;
+            const container = document.getElementById('postImgContainer');
+            container.style.backgroundSize = fitMode;
             btn.parentElement.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
@@ -968,24 +962,82 @@
             loadMeetup4Data();
         }
 
+        // Helper to convert image URL or img tag to Base64 to prevent canvas tainting in file:// protocol
+        function urlToBase64(url) {
+            return new Promise((resolve) => {
+                if (!url || url.startsWith('data:')) return resolve(url);
+                const img = new Image();
+                img.crossOrigin = 'Anonymous';
+                img.onload = function() {
+                    try {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = img.naturalWidth || 600;
+                        canvas.height = img.naturalHeight || 600;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0);
+                        resolve(canvas.toDataURL('image/png'));
+                    } catch(e) {
+                        resolve(url);
+                    }
+                };
+                img.onerror = function() { resolve(url); };
+                img.src = url;
+            });
+        }
+
         // Export HD PNG
-        function exportPNG() {
+        async function exportPNG() {
             const canvasElement = document.getElementById('postCanvas');
-            
-            // Show feedback
             const primaryBtn = document.querySelector('.btn-primary');
             const originalText = primaryBtn.innerHTML;
+
             primaryBtn.innerHTML = '⏳ Generating HD PNG...';
             primaryBtn.disabled = true;
 
-            // Use html2canvas to capture canvas element
-            html2canvas(canvasElement, {
-                scale: 2.5, // High DPI resolution (1080p+)
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: null,
-                logging: false
-            }).then(canvas => {
+            try {
+                // Convert background-image URL to Base64 if needed
+                const imgContainer = document.getElementById('postImgContainer');
+                let originalBgStyle = imgContainer.style.backgroundImage;
+                const bgMatch = originalBgStyle.match(/url\(['"]?(.*?)['"]?\)/);
+                
+                if (bgMatch && bgMatch[1] && !bgMatch[1].startsWith('data:')) {
+                    const b64 = await urlToBase64(bgMatch[1]);
+                    if (b64) {
+                        imgContainer.style.backgroundImage = `url("${b64}")`;
+                    }
+                }
+
+                // Convert any inline <img> tags (like logo) to Base64
+                const images = canvasElement.querySelectorAll('img');
+                const originalSources = [];
+                for (let i = 0; i < images.length; i++) {
+                    const img = images[i];
+                    originalSources.push(img.src);
+                    if (img.src && !img.src.startsWith('data:')) {
+                        const b64 = await urlToBase64(img.src);
+                        if (b64) img.src = b64;
+                    }
+                }
+
+                // Short delay for DOM update
+                await new Promise(r => setTimeout(r, 150));
+
+                // Render canvas with html2canvas
+                const canvas = await html2canvas(canvasElement, {
+                    scale: 2.5, // High DPI resolution (1080p+)
+                    useCORS: true,
+                    allowTaint: false,
+                    backgroundColor: null,
+                    logging: false
+                });
+
+                // Restore original image sources
+                imgContainer.style.backgroundImage = originalBgStyle;
+                for (let i = 0; i < images.length; i++) {
+                    if (originalSources[i]) images[i].src = originalSources[i];
+                }
+
+                // Download PNG
                 const link = document.createElement('a');
                 const title = document.getElementById('inputTitle').value.replace(/[^a-z0-9]/gi, '-').toLowerCase() || 'post';
                 link.download = `usk-galle-${title}.png`;
@@ -994,12 +1046,13 @@
 
                 primaryBtn.innerHTML = originalText;
                 primaryBtn.disabled = false;
-            }).catch(err => {
+            } catch (err) {
                 console.error("Export Error:", err);
-                alert("Could not generate image automatically. You can take a screenshot of the post canvas directly!");
+                alert("Direct file download was restricted by local browser security. Sidebar will hide now so you can take a screenshot!");
+                toggleSidebar();
                 primaryBtn.innerHTML = originalText;
                 primaryBtn.disabled = false;
-            });
+            }
         }
     </script>
 </body>
