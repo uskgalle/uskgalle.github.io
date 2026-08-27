@@ -178,3 +178,61 @@
     gap: 0.7rem;
     color: #b8854a;
 }
+
+/* Header Actions — Sleek Pill Buttons */
+.headerActions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 1.75rem;
+    flex-wrap: wrap;
+}
+
+.primaryActionBtn {
+    background-color: #b8854a;
+    color: #ffffff;
+    padding: 10px 22px;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 25px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px rgba(184, 133, 74, 0.25);
+    border: 1px solid transparent;
+}
+
+.primaryActionBtn:hover {
+    background-color: #5c4a32;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(92, 74, 50, 0.3);
+}
+
+.secondaryActionBtn {
+    background-color: #ffffff;
+    color: #5c4a32;
+    border: 1px solid #c9b99a;
+    padding: 10px 22px;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 25px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.secondaryActionBtn:hover {
+    background-color: #faf6f0;
+    border-color: #b8854a;
+    color: #b8854a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(184, 133, 74, 0.15);
+}

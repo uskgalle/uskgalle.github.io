@@ -55,7 +55,7 @@ export default function Navbar() {
 
         {/* Right — Join CTA */}
         <div className={styles.right}>
-          <a href="#join" className={styles.joinBtn}>Join</a>
+          <a href="/#join" className={styles.joinBtn}>Join</a>
           <button
             className={styles.hamburger}
             onClick={() => setMenuOpen((prev) => !prev)}
@@ -79,7 +79,7 @@ export default function Navbar() {
             {link.label}
           </a>
         ))}
-        <a href="#join" className={styles.mobileJoinBtn} onClick={() => setMenuOpen(false)}>
+        <a href="/#join" className={styles.mobileJoinBtn} onClick={() => setMenuOpen(false)}>
           Join
         </a>
       </div>

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { artists, getArtworksForArtist, getProfileImagePath } from '../data/artists';
 import styles from './artists.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faLocationDot, faUserPlus, faPalette } from '@fortawesome/free-solid-svg-icons';
 
 export const metadata = {
     title: 'Artists - USK Galle',
@@ -18,6 +18,20 @@ export default function ArtistsPage() {
                 <p className={styles.subtitle}>
                     Meet the talented sketchers capturing the architecture, culture, and coastal life of Galle.
                 </p>
+
+                <div className={styles.headerActions}>
+                    <Link href="/register" className={styles.primaryActionBtn}>
+                        <FontAwesomeIcon icon={faUserPlus} /> Register Profile
+                    </Link>
+                    <a
+                        href="https://forms.gle/6siWSXRDP4S98xPQA"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.secondaryActionBtn}
+                    >
+                        <FontAwesomeIcon icon={faPalette} /> Submit Artwork
+                    </a>
+                </div>
             </div>
 
             <div className={styles.grid}>

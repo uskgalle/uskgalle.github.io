@@ -1,0 +1,299 @@
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 120px 32px 100px;
+  background-color: #ffffff;
+}
+
+/* ── Back Navigation ── */
+.back {
+  margin-bottom: 42px;
+}
+
+.back a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted, #6b5a47);
+  transition: color 0.2s ease, gap 0.2s ease;
+}
+
+.back a:hover {
+  color: var(--color-dark, #2a1f14);
+  gap: 14px;
+}
+
+/* ── Hero / Header ── */
+.hero {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid #e8dfd2;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-tan, #b8854a);
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.25rem);
+  font-weight: 700;
+  color: var(--color-dark, #2a1f14);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+}
+
+.subtitle {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  color: var(--color-muted, #6b5a47);
+  line-height: 1.7;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ── Form Container Card ── */
+.formCard {
+  background: #fcfaf7;
+  border: 1px solid #e8dfd2;
+  border-radius: 2px;
+  padding: 3rem 2.5rem;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-dark, #2a1f14);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.required {
+  color: #c93b2b;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 2px;
+  border: 1px solid #e0d8cc;
+  background: #ffffff;
+  color: var(--color-text, #3a2e22);
+  font-family: var(--font-sans);
+  font-size: 0.935rem;
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--color-tan, #b8854a);
+  background: #ffffff;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.helpText {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-muted, #6b5a47);
+  line-height: 1.5;
+}
+
+.submitBtn {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 1.05rem 2rem;
+  background-color: var(--color-dark, #2a1f14);
+  color: #ffffff;
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background-color: var(--color-tan, #b8854a);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ── Success Card State ── */
+.successCard {
+  background: #fcfaf7;
+  border: 1px solid #e8dfd2;
+  border-radius: 2px;
+  padding: 3.5rem 2rem;
+  text-align: center;
+}
+
+.checkCircle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(184, 133, 74, 0.12);
+  color: var(--color-tan, #b8854a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  margin: 0 auto 1.5rem;
+  border: 1px solid var(--color-tan, #b8854a);
+}
+
+.successTitle {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-dark, #2a1f14);
+  margin-bottom: 0.5rem;
+}
+
+.successText {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--color-muted, #6b5a47);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.infoBox {
+  background: #f5eedf;
+  border: 1px solid #e8dfd2;
+  border-radius: 2px;
+  color: var(--color-dark, #2a1f14);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  padding: 1.25rem 1.5rem;
+  max-width: 520px;
+  margin: 0 auto 2rem;
+  text-align: left;
+}
+
+.actionGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.9rem 1.75rem;
+  background-color: var(--color-dark, #2a1f14);
+  color: #ffffff;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.backBtn:hover {
+  background-color: var(--color-tan, #b8854a);
+}
+
+.resetBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.9rem 1.5rem;
+  background-color: transparent;
+  color: var(--color-dark, #2a1f14);
+  border: 1px solid #dcd1c2;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.resetBtn:hover {
+  border-color: var(--color-tan, #b8854a);
+  color: var(--color-tan, #b8854a);
+  background-color: #faf6f0;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 90px 16px 60px;
+  }
+
+  .formCard {
+    padding: 2rem 1.25rem;
+  }
+
+  .actionGroup {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .backBtn,
+  .resetBtn {
+    width: 100%;
+  }
+}
