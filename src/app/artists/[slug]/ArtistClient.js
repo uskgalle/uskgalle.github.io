@@ -55,7 +55,7 @@ export default function ArtistClient({ artist, artworks, profileImage }) {
                     <span className={styles.eyebrow}>USK Galle Artist</span>
                     <h1 className={styles.name}>{artist.name}</h1>
 
-                    <div className={styles.tags}>
+                    {/* <div className={styles.tags}>
                         {artist.medium && (
                             <span className={styles.tag}>
                                 <FontAwesomeIcon icon={faPalette} /> {artist.medium}
@@ -66,7 +66,7 @@ export default function ArtistClient({ artist, artworks, profileImage }) {
                                 <FontAwesomeIcon icon={faLocationDot} /> {artist.location}
                             </span>
                         )}
-                    </div>
+                    </div> */}
 
                     <p className={styles.bio}>{artist.bio}</p>
 

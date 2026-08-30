@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { artists, getArtworksForArtist, getProfileImagePath } from '../data/artists';
 import styles from './artists.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faLocationDot, faUserPlus, faPalette } from '@fortawesome/free-solid-svg-icons';
+import { faUserPlus, faPalette } from '@fortawesome/free-solid-svg-icons';
 
 export const metadata = {
     title: 'Artists - USK Galle',
@@ -40,7 +40,7 @@ export default function ArtistsPage() {
                     const profileImage = getProfileImagePath(artist.folder);
 
                     return (
-                        <article key={artist.slug} className={styles.card}>
+                        <Link key={artist.slug} href={`/artists/${artist.slug}`} className={styles.card}>
                             <div className={styles.cardHeader}>
                                 <div className={styles.avatar}>
                                     <img
@@ -51,25 +51,14 @@ export default function ArtistsPage() {
                                 </div>
                                 <div className={styles.artistMeta}>
                                     <h2 className={styles.name}>{artist.name}</h2>
-                                    <span className={styles.medium}>{artist.medium}</span>
+                                    <span className={styles.count}>
+                                        {artworks.length} {artworks.length === 1 ? 'sketch' : 'sketches'}
+                                    </span>
                                 </div>
                             </div>
 
                             <p className={styles.bio}>{artist.bio}</p>
-
-                            <div className={styles.cardFooter}>
-                                <div className={styles.details}>
-                                    <span className={styles.location}>
-                                        <FontAwesomeIcon icon={faLocationDot} /> {artist.location}
-                                    </span>
-                                    <span className={styles.count}>{artworks.length} {artworks.length === 1 ? 'sketch' : 'sketches'}</span>
-                                </div>
-
-                                <Link href={`/artists/${artist.slug}`} className={styles.profileBtn}>
-                                    Profile <FontAwesomeIcon icon={faArrowRight} />
-                                </Link>
-                            </div>
-                        </article>
+                        </Link>
                     );
                 })}
             </div>
