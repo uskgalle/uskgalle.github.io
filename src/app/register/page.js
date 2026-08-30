@@ -12,6 +12,11 @@ import {
   faUserPlus,
   faSpinner,
   faArrowLeft,
+  faCamera,
+  faUpload,
+  faExternalLinkAlt,
+  faImage,
+  faPalette,
 } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 
@@ -25,6 +30,7 @@ export default function RegisterPage() {
     email: '',
     bio: '',
     instagram: '',
+    uploadedPhoto: false,
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -44,6 +50,7 @@ export default function RegisterPage() {
       email: formData.email,
       bio: formData.bio,
       instagram: formData.instagram || 'Not provided',
+      uploadedPhoto: formData.uploadedPhoto ? 'Yes' : 'No / Pending',
       timestamp: new Date().toISOString(),
     };
 
@@ -55,6 +62,7 @@ export default function RegisterPage() {
       Email: payload.email,
       Bio: payload.bio,
       Instagram: payload.instagram,
+      'Uploaded Photo': payload.uploadedPhoto,
       SubmittedAt: payload.timestamp,
     });
     console.log('Payload JSON:', JSON.stringify(payload, null, 2));
@@ -67,6 +75,7 @@ export default function RegisterPage() {
         formDataPayload.append('email', payload.email);
         formDataPayload.append('bio', payload.bio);
         formDataPayload.append('instagram', payload.instagram);
+        formDataPayload.append('uploadedPhoto', payload.uploadedPhoto);
         formDataPayload.append('timestamp', payload.timestamp);
 
         await fetch(GOOGLE_SHEETS_ENDPOINT, {
@@ -85,7 +94,7 @@ export default function RegisterPage() {
   };
 
   const handleReset = () => {
-    setFormData({ name: '', email: '', bio: '', instagram: '' });
+    setFormData({ name: '', email: '', bio: '', instagram: '', uploadedPhoto: false });
     setIsSubmitted(false);
   };
 
@@ -101,7 +110,7 @@ export default function RegisterPage() {
         <span className={styles.eyebrow}>Join Our Community</span>
         <h1 className={styles.title}>Register Profile</h1>
         <p className={styles.subtitle}>
-          Create your artist profile to join Urban Sketchers Galle.
+          Create your artist profile to showcase your artworks.
         </p>
       </header>
 
@@ -117,9 +126,35 @@ export default function RegisterPage() {
           <div className={styles.infoBox}>
             We will manually create your profile and send a confirmation email to <strong>{formData.email}</strong>.
           </div>
+
+          <div className={styles.photoReminderBox}>
+            <p className={styles.photoReminderText}>
+              <FontAwesomeIcon icon={faCamera} /> <strong>Profile Picture:</strong>{' '}
+              {formData.uploadedPhoto
+                ? 'Thank you for indicating that you uploaded your photo!'
+                : 'Haven’t uploaded a profile picture yet? You can upload it anytime via our upload form.'}
+            </p>
+            <a
+              href="https://forms.gle/VnmFnsi5VtuJhxhw9"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.secondaryUploadBtn}
+            >
+              <FontAwesomeIcon icon={faUpload} /> Upload Profile Picture <FontAwesomeIcon icon={faExternalLinkAlt} />
+            </a>
+          </div>
+
           <div className={styles.actionGroup}>
+            <a
+              href="https://forms.gle/6siWSXRDP4S98xPQA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.submitArtworkBtn}
+            >
+              <FontAwesomeIcon icon={faPalette} /> Submit Artwork <FontAwesomeIcon icon={faExternalLinkAlt} className={styles.externalIcon} />
+            </a>
             <Link href="/artists" className={styles.backBtn}>
-              <FontAwesomeIcon icon={faArrowLeft} /> Back to Artists
+              <FontAwesomeIcon icon={faArrowLeft} /> All Artists
             </Link>
           </div>
         </div>
@@ -158,6 +193,9 @@ export default function RegisterPage() {
                 onChange={handleInputChange}
                 className={styles.input}
               />
+              <span className={styles.helpText}>
+                Your email stays private and won't be displayed publicly. See <Link href="/artists" target="_blank" className={styles.helpLink}>how artist profiles look</Link>.
+              </span>
             </div>
 
             {/* Short Bio */}
@@ -180,7 +218,7 @@ export default function RegisterPage() {
             {/* Instagram */}
             <div className={styles.fieldGroup}>
               <label htmlFor="instagram" className={styles.label}>
-                <FontAwesomeIcon icon={faInstagram} /> Instagram
+                <FontAwesomeIcon icon={faInstagram} /> Instagram <span className={styles.optionalTag}>(Optional)</span>
               </label>
               <input
                 type="text"
@@ -191,7 +229,49 @@ export default function RegisterPage() {
                 onChange={handleInputChange}
                 className={styles.input}
               />
-              <span className={styles.helpText}>Optional - to link your Instagram profile on artist listings.</span>
+            </div>
+
+            {/* Profile Picture (Optional) */}
+            <div className={styles.fieldGroup}>
+              <label className={styles.label}>
+                <FontAwesomeIcon icon={faCamera} /> Profile Picture <span className={styles.optionalTag}>(Optional)</span>
+              </label>
+
+              <div className={styles.photoUploadCard}>
+                <div className={styles.photoUploadHeader}>
+                  <div className={styles.photoIconBadge}>
+                    <FontAwesomeIcon icon={faImage} />
+                  </div>
+                  <div className={styles.photoUploadMeta}>
+                    <h4 className={styles.photoUploadTitle}>Upload Profile Picture</h4>
+                    <p className={styles.photoUploadDesc}>
+                      To display your picture on your artist card, please submit it via our dedicated photo submission form.
+                    </p>
+                  </div>
+                </div>
+
+                <div className={styles.photoActions}>
+                  <a
+                    href="https://forms.gle/VnmFnsi5VtuJhxhw9"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.uploadFormBtn}
+                  >
+                    <FontAwesomeIcon icon={faUpload} /> Open Photo Upload Form <FontAwesomeIcon icon={faExternalLinkAlt} className={styles.externalIcon} />
+                  </a>
+
+                  <label className={styles.checkboxLabel}>
+                    <input
+                      type="checkbox"
+                      name="uploadedPhoto"
+                      checked={formData.uploadedPhoto}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, uploadedPhoto: e.target.checked }))}
+                      className={styles.checkbox}
+                    />
+                    <span>I have submitted / will submit my picture via the form</span>
+                  </label>
+                </div>
+              </div>
             </div>
 
             {/* Submit Button */}
@@ -212,3 +292,4 @@ export default function RegisterPage() {
     </main>
   );
 }
+

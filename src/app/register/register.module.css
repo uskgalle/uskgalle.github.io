@@ -137,6 +137,141 @@
   line-height: 1.5;
 }
 
+.helpLink {
+  color: var(--color-tan, #b8854a);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.helpLink:hover {
+  color: var(--color-dark, #2a1f14);
+}
+
+.optionalTag {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-muted, #6b5a47);
+  text-transform: none;
+}
+
+/* ── Photo Upload Section ── */
+.photoUploadCard {
+  background: #ffffff;
+  border: 1px solid #e0d8cc;
+  border-radius: 4px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: border-color 0.2s ease;
+}
+
+.photoUploadCard:focus-within,
+.photoUploadCard:hover {
+  border-color: var(--color-tan, #b8854a);
+}
+
+.photoUploadHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.photoIconBadge {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(184, 133, 74, 0.1);
+  color: var(--color-tan, #b8854a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(184, 133, 74, 0.25);
+}
+
+.photoUploadMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.photoUploadTitle {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-dark, #2a1f14);
+  margin: 0;
+}
+
+.photoUploadDesc {
+  font-family: var(--font-sans);
+  font-size: 0.835rem;
+  color: var(--color-muted, #6b5a47);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.photoActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed #ece4d8;
+}
+
+.uploadFormBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.25rem;
+  background-color: #f7f2ea;
+  color: var(--color-dark, #2a1f14);
+  border: 1px solid #dcd1c2;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  width: fit-content;
+}
+
+.uploadFormBtn:hover {
+  background-color: var(--color-tan, #b8854a);
+  color: #ffffff;
+  border-color: var(--color-tan, #b8854a);
+}
+
+.externalIcon {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.835rem;
+  color: var(--color-text, #3a2e22);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-tan, #b8854a);
+  cursor: pointer;
+}
+
 .submitBtn {
   margin-top: 1rem;
   width: 100%;
@@ -219,8 +354,53 @@
   line-height: 1.6;
   padding: 1.25rem 1.5rem;
   max-width: 520px;
+  margin: 0 auto 1.25rem;
+  text-align: left;
+}
+
+/* ── Success Photo Reminder Box ── */
+.photoReminderBox {
+  background: #ffffff;
+  border: 1px dashed var(--color-tan, #b8854a);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  max-width: 520px;
   margin: 0 auto 2rem;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.photoReminderText {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--color-dark, #2a1f14);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.secondaryUploadBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.15rem;
+  background-color: var(--color-dark, #2a1f14);
+  color: #ffffff;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  width: fit-content;
+  transition: background-color 0.2s ease;
+}
+
+.secondaryUploadBtn:hover {
+  background-color: var(--color-tan, #b8854a);
 }
 
 .actionGroup {
@@ -231,7 +411,7 @@
   flex-wrap: wrap;
 }
 
-.backBtn {
+.submitArtworkBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -249,11 +429,11 @@
   transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
-.backBtn:hover {
+.submitArtworkBtn:hover {
   background-color: var(--color-tan, #b8854a);
 }
 
-.resetBtn {
+.backBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -268,11 +448,11 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  cursor: pointer;
+  text-decoration: none;
   transition: all 0.2s ease;
 }
 
-.resetBtn:hover {
+.backBtn:hover {
   border-color: var(--color-tan, #b8854a);
   color: var(--color-tan, #b8854a);
   background-color: #faf6f0;
@@ -287,13 +467,18 @@
     padding: 2rem 1.25rem;
   }
 
+  .uploadFormBtn,
+  .secondaryUploadBtn {
+    width: 100%;
+  }
+
   .actionGroup {
     flex-direction: column;
     width: 100%;
   }
 
-  .backBtn,
-  .resetBtn {
+  .submitArtworkBtn,
+  .backBtn {
     width: 100%;
   }
 }
