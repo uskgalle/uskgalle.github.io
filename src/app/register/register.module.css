@@ -32,8 +32,8 @@
 /* ── Hero / Header ── */
 .hero {
   text-align: center;
-  margin-bottom: 3rem;
-  padding-bottom: 2.5rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
   border-bottom: 1px solid #e8dfd2;
 }
 
@@ -67,14 +67,123 @@
   margin: 0 auto;
 }
 
+/* ── Tabs Navigation ── */
+.tabsContainer {
+  display: flex;
+  max-width: 680px;
+  margin: 0 auto 1.5rem;
+  gap: 12px;
+}
+
+.tabBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 1.1rem 1.25rem;
+  background: #fdfbf7;
+  border: 1px solid #e2d7c7;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.tabBtn:hover {
+  background: #f7f1e6;
+  border-color: var(--color-tan, #b8854a);
+}
+
+.tabBtnActive {
+  background: #ffffff;
+  border-color: var(--color-tan, #b8854a);
+  box-shadow: 0 4px 14px rgba(184, 133, 74, 0.12);
+}
+
+.tabBtnActive::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--color-tan, #b8854a);
+  border-radius: 0 0 4px 4px;
+}
+
+.tabBadge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #ece3d4;
+  color: var(--color-dark, #2a1f14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.tabBtnActive .tabBadge {
+  background: var(--color-tan, #b8854a);
+  color: #ffffff;
+}
+
+.tabTextWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tabTitle {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-dark, #2a1f14);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tabSubtitle {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-muted, #6b5a47);
+}
+
 /* ── Form Container Card ── */
 .formCard {
   background: #fcfaf7;
   border: 1px solid #e8dfd2;
-  border-radius: 2px;
-  padding: 3rem 2.5rem;
+  border-radius: 4px;
+  padding: 2.75rem 2.5rem;
   max-width: 680px;
   margin: 0 auto;
+}
+
+.formIntro {
+  margin-bottom: 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee5d8;
+}
+
+.formSectionTitle {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-dark, #2a1f14);
+  margin: 0 0 0.35rem;
+}
+
+.formSectionDesc {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--color-muted, #6b5a47);
+  line-height: 1.5;
+  margin: 0;
 }
 
 .form {
@@ -156,124 +265,29 @@
   text-transform: none;
 }
 
-/* ── Photo Upload Section ── */
-.photoUploadCard {
-  background: #ffffff;
-  border: 1px solid #e0d8cc;
-  border-radius: 4px;
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  transition: border-color 0.2s ease;
-}
-
-.photoUploadCard:focus-within,
-.photoUploadCard:hover {
-  border-color: var(--color-tan, #b8854a);
-}
-
-.photoUploadHeader {
+.nextHintBox {
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
-}
-
-.photoIconBadge {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(184, 133, 74, 0.1);
-  color: var(--color-tan, #b8854a);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.15rem;
-  flex-shrink: 0;
-  border: 1px solid rgba(184, 133, 74, 0.25);
-}
-
-.photoUploadMeta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.photoUploadTitle {
+  gap: 10px;
+  background: #f7f1e6;
+  border-left: 3px solid var(--color-tan, #b8854a);
+  padding: 0.85rem 1rem;
+  border-radius: 0 4px 4px 0;
   font-family: var(--font-sans);
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 0.825rem;
   color: var(--color-dark, #2a1f14);
-  margin: 0;
-}
-
-.photoUploadDesc {
-  font-family: var(--font-sans);
-  font-size: 0.835rem;
-  color: var(--color-muted, #6b5a47);
   line-height: 1.5;
-  margin: 0;
 }
 
-.photoActions {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  padding-top: 0.85rem;
-  border-top: 1px dashed #ece4d8;
-}
-
-.uploadFormBtn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 0.75rem 1.25rem;
-  background-color: #f7f2ea;
-  color: var(--color-dark, #2a1f14);
-  border: 1px solid #dcd1c2;
-  border-radius: 2px;
-  font-family: var(--font-sans);
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  width: fit-content;
-}
-
-.uploadFormBtn:hover {
-  background-color: var(--color-tan, #b8854a);
-  color: #ffffff;
-  border-color: var(--color-tan, #b8854a);
-}
-
-.externalIcon {
-  font-size: 0.75rem;
-  opacity: 0.85;
-}
-
-.checkboxLabel {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-sans);
-  font-size: 0.835rem;
-  color: var(--color-text, #3a2e22);
-  cursor: pointer;
-  user-select: none;
-}
-
-.checkbox {
-  width: 16px;
-  height: 16px;
-  accent-color: var(--color-tan, #b8854a);
-  cursor: pointer;
+.hintIcon {
+  color: var(--color-tan, #b8854a);
+  font-size: 0.95rem;
+  margin-top: 2px;
+  flex-shrink: 0;
 }
 
 .submitBtn {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   width: 100%;
   padding: 1.05rem 2rem;
   background-color: var(--color-dark, #2a1f14);
@@ -283,13 +297,13 @@
   font-family: var(--font-sans);
   font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
+  gap: 0.75rem;
   transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
@@ -304,10 +318,6 @@
 
 /* ── Success Card State ── */
 .successCard {
-  background: #fcfaf7;
-  border: 1px solid #e8dfd2;
-  border-radius: 2px;
-  padding: 3.5rem 2rem;
   text-align: center;
 }
 
@@ -321,7 +331,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.75rem;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 1.25rem;
   border: 1px solid var(--color-tan, #b8854a);
 }
 
@@ -338,7 +348,7 @@
   font-size: 1rem;
   color: var(--color-muted, #6b5a47);
   line-height: 1.6;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
@@ -350,59 +360,252 @@
   border-radius: 2px;
   color: var(--color-dark, #2a1f14);
   font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   line-height: 1.6;
-  padding: 1.25rem 1.5rem;
+  padding: 1rem 1.25rem;
   max-width: 520px;
-  margin: 0 auto 1.25rem;
+  margin: 0 auto 1.5rem;
   text-align: left;
 }
 
-/* ── Success Photo Reminder Box ── */
-.photoReminderBox {
+.nextStepPrompt {
   background: #ffffff;
-  border: 1px dashed var(--color-tan, #b8854a);
+  border: 2px dashed var(--color-tan, #b8854a);
   border-radius: 4px;
-  padding: 1.25rem 1.5rem;
+  padding: 1.5rem;
   max-width: 520px;
-  margin: 0 auto 2rem;
-  text-align: left;
+  margin: 0 auto 1.75rem;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  align-items: center;
+  gap: 1rem;
 }
 
-.photoReminderText {
+.nextStepText {
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: 0.92rem;
   color: var(--color-dark, #2a1f14);
   line-height: 1.5;
   margin: 0;
 }
 
-.secondaryUploadBtn {
+.nextStepBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1.15rem;
-  background-color: var(--color-dark, #2a1f14);
+  gap: 0.65rem;
+  padding: 0.85rem 1.75rem;
+  background-color: var(--color-tan, #b8854a);
   color: #ffffff;
+  border: none;
   border-radius: 2px;
   font-family: var(--font-sans);
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  text-decoration: none;
-  width: fit-content;
+  cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
-.secondaryUploadBtn:hover {
-  background-color: var(--color-tan, #b8854a);
+.nextStepBtn:hover {
+  background-color: var(--color-dark, #2a1f14);
 }
 
+/* ── Tab 2: Photo Upload Tab ── */
+.photoTabContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.successBanner {
+  background: #f0f7ec;
+  border: 1px solid #cce3c1;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.bannerIcon {
+  color: #3b8a2e;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.bannerTitle {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #27561f;
+  margin: 0 0 3px;
+}
+
+.bannerText {
+  font-family: var(--font-sans);
+  font-size: 0.835rem;
+  color: #3f6838;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.photoHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.photoIconBadge {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(184, 133, 74, 0.12);
+  color: var(--color-tan, #b8854a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(184, 133, 74, 0.25);
+}
+
+.photoSectionTitle {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-dark, #2a1f14);
+  margin: 0 0 0.35rem;
+}
+
+.photoSectionSubtitle {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--color-muted, #6b5a47);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.instructionsCard {
+  background: #ffffff;
+  border: 1px solid #e0d8cc;
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+}
+
+.instructionsTitle {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-dark, #2a1f14);
+  margin: 0 0 0.75rem;
+}
+
+.instructionsList {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--color-text, #3a2e22);
+  line-height: 1.65;
+}
+
+.instructionsList li {
+  margin-bottom: 0.4rem;
+}
+
+.instructionsList li:last-child {
+  margin-bottom: 0;
+}
+
+.photoActionWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 0;
+}
+
+.mainUploadBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.1rem 2.2rem;
+  background-color: var(--color-dark, #2a1f14);
+  color: #ffffff;
+  border-radius: 3px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(42, 31, 20, 0.15);
+}
+
+.mainUploadBtn:hover {
+  background-color: var(--color-tan, #b8854a);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(184, 133, 74, 0.25);
+}
+
+.externalIcon {
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.openFormNote {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--color-muted, #6b5a47);
+  text-align: center;
+}
+
+.divider {
+  height: 1px;
+  background-color: #eee5d8;
+  margin: 0.25rem 0;
+}
+
+.photoFooterActions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footerNote {
+  background: #fdfbf7;
+  padding: 0.85rem 1rem;
+  border-radius: 4px;
+  border-left: 3px solid #dcd1c2;
+}
+
+.footerNoteTitle {
+  font-family: var(--font-sans);
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--color-dark, #2a1f14);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.footerNoteText {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--color-muted, #6b5a47);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── Common Action Groups ── */
 .actionGroup {
   display: flex;
   align-items: center;
@@ -416,21 +619,21 @@
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
-  padding: 0.9rem 1.75rem;
-  background-color: var(--color-dark, #2a1f14);
+  padding: 0.85rem 1.6rem;
+  background-color: var(--color-tan, #b8854a);
   color: #ffffff;
   border-radius: 2px;
   font-family: var(--font-sans);
   font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background-color 0.2s ease, transform 0.15s ease;
+  transition: background-color 0.2s ease;
 }
 
 .submitArtworkBtn:hover {
-  background-color: var(--color-tan, #b8854a);
+  background-color: var(--color-dark, #2a1f14);
 }
 
 .backBtn {
@@ -438,7 +641,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
-  padding: 0.9rem 1.5rem;
+  padding: 0.85rem 1.4rem;
   background-color: transparent;
   color: var(--color-dark, #2a1f14);
   border: 1px solid #dcd1c2;
@@ -446,9 +649,10 @@
   font-family: var(--font-sans);
   font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
+  cursor: pointer;
   transition: all 0.2s ease;
 }
 
@@ -463,12 +667,16 @@
     padding: 90px 16px 60px;
   }
 
+  .tabsContainer {
+    flex-direction: column;
+    gap: 8px;
+  }
+
   .formCard {
     padding: 2rem 1.25rem;
   }
 
-  .uploadFormBtn,
-  .secondaryUploadBtn {
+  .mainUploadBtn {
     width: 100%;
   }
 
