@@ -1,46 +1,41 @@
 import fs from 'fs';
 import path from 'path';
+import { artworks, getArtworkMetadata } from './artworks';
+
+export { artworks, getArtworkMetadata };
 
 export const artists = [
   {
-    name: 'Amara Perera',
-    folder: 'amara-perera',
-    slug: 'amara-perera',
-    medium: 'Watercolour & Ink',
-    location: 'Galle Fort',
-    bio: 'Amara captures the weathered textures of colonial architecture with a loose, expressive watercolour style.',
-    instagram: 'https://instagram.com/amaraperera',
-    color: '#c9a87c',
+    id: 1,
+    name: 'Yasith Arangala',
+    slug: 'yasith-arangala',
+    folder: 'yasith-arangala',
+    bio: 'Architecture student & artist, exploring watercolor with pen and ink.',
+    instagram: 'https://instagram.com/test',
   },
   {
+    id: 2,
     name: 'Roshan Silva',
-    folder: 'roshan-silva',
     slug: 'roshan-silva',
-    medium: 'Pen & Wash',
-    location: 'Unawatuna',
+    folder: 'roshan-silva',
     bio: 'Roshan\'s fine linework brings the fishing boats and coastal life of the southern shore to vivid detail.',
-    instagram: 'https://instagram.com/roshansilva',
-    color: '#8a9e7c',
+    instagram: 'https://instagram.com/test',
   },
   {
+    id: 3,
     name: 'Dilini Fernando',
-    folder: 'dilini-fernando',
     slug: 'dilini-fernando',
-    medium: 'Graphite & Colour Pencil',
-    location: 'Hikkaduwa',
+    folder: 'dilini-fernando',
     bio: 'Dilini finds beauty in everyday moments: market stalls, tuk-tuks, temple steps, rendered with warmth.',
-    instagram: 'https://instagram.com/dilinifernando',
-    color: '#9c8ab0',
+    instagram: 'https://instagram.com/test',
   },
   {
+    id: 4,
     name: 'Namal Karunaratne',
-    folder: 'namal-karunaratne',
     slug: 'namal-karunaratne',
-    medium: 'Digital & Ink',
-    location: 'Galle Fort',
+    folder: 'namal-karunaratne',
     bio: 'Namal blends traditional line drawings with digital watercolors to depict historic Galle landmarks.',
-    instagram: 'https://instagram.com/namalkarunaratne',
-    color: '#7ca8c9',
+    instagram: 'https://instagram.com/test',
   },
 ];
 
@@ -48,10 +43,16 @@ export function getArtistBySlug(slug) {
   return artists.find((artist) => artist.slug === slug) || null;
 }
 
+export function getArtistById(id) {
+  return artists.find((artist) => artist.id === id || artist.id === Number(id)) || null;
+}
+
 export function getProfileImagePath(folder) {
-  const customPath = path.join(process.cwd(), 'public', 'artists-images', `${folder}.webp`);
-  if (fs.existsSync(customPath)) {
-    return `/artists-images/${folder}.webp`;
+  for (const ext of ['webp', 'png', 'jpg', 'jpeg']) {
+    const imgPath = path.join(process.cwd(), 'public', 'artists-images', `${folder}.${ext}`);
+    if (fs.existsSync(imgPath)) {
+      return `/artists-images/${folder}.${ext}`;
+    }
   }
   return `/artists-images/${folder}.png`;
 }
@@ -72,12 +73,17 @@ export function getArtworksForArtist(folder) {
         return numA - numB;
       });
 
-    return imageFiles.map((filename, index) => ({
-      id: `${folder}-${index + 1}`,
-      filename,
-      src: `/artworks-images/${folder}/${filename}`,
-      title: `Sketch #${filename.replace(/\.[^/.]+$/, '')}`,
-    }));
+    return imageFiles.map((filename, index) => {
+      const meta = getArtworkMetadata(folder, filename);
+
+      return {
+        id: meta?.id || `${folder}-${index + 1}`,
+        filename,
+        src: `/artworks-images/${folder}/${filename}`,
+        title: meta?.title || `Sketch #${filename.replace(/\.[^/.]+$/, '')}`,
+        description: meta?.description || '',
+      };
+    });
   } catch (err) {
     console.error(`Error reading artworks for ${folder}:`, err);
     return [];
@@ -88,14 +94,13 @@ export function getAllArtworks() {
   let allArtworks = [];
 
   for (const artist of artists) {
-    const artworks = getArtworksForArtist(artist.folder);
-    const mapped = artworks.map((art) => ({
+    const artistArtworks = getArtworksForArtist(artist.folder);
+    const mapped = artistArtworks.map((art) => ({
       ...art,
+      artistId: artist.id,
       artistName: artist.name,
       artistSlug: artist.slug,
       artistFolder: artist.folder,
-      artistLocation: artist.location,
-      artistMedium: artist.medium,
     }));
     allArtworks = allArtworks.concat(mapped);
   }

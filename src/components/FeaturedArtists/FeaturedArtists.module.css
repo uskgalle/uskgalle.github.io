@@ -147,6 +147,19 @@
   color: #b8854a;
 }
 
+.profileLink {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #8a7060;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.profileLink:hover {
+  color: #b8854a;
+}
+
 /* ── View all ── */
 .viewAll {
   display: flex;

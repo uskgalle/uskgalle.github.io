@@ -52,6 +52,7 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNext, on
     const artistMedium = typeof currentItem === 'object' ? (currentItem.artistMedium || currentItem.medium) : null;
     const artistLocation = typeof currentItem === 'object' ? (currentItem.artistLocation || currentItem.location) : null;
     const title = typeof currentItem === 'object' ? currentItem.title : null;
+    const description = typeof currentItem === 'object' ? currentItem.description : null;
 
     const current = activeIndex + 1;
     const total = images.length;
@@ -89,10 +90,13 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNext, on
                     alt={title || `Image ${current} of ${total}`}
                 />
 
-                {(artistName || artistMedium || artistLocation) && (
+                {(title || description || artistName || artistMedium || artistLocation) && (
                     <div className={styles.captionOverlay}>
+                        {title && <h3 className={styles.captionTitle}>{title}</h3>}
+                        {description && <p className={styles.captionDescription}>{description}</p>}
                         {artistName && (
                             <div className={styles.captionArtist}>
+                                <span className={styles.byLabel}>By </span>
                                 {artistSlug ? (
                                     <Link href={`/artists/${artistSlug}`} className={styles.artistLink} onClick={onClose}>
                                         {artistName}

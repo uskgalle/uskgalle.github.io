@@ -2,7 +2,7 @@ import Link from 'next/link';
 import styles from './FeaturedArtists.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { faArrowRight, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { artists, getArtworksForArtist, getProfileImagePath } from '../../app/data/artists';
 
 export default function FeaturedArtists() {
@@ -24,9 +24,9 @@ export default function FeaturedArtists() {
             const profileImage = getProfileImagePath(artist.folder);
 
             return (
-              <article key={artist.slug} className={styles.card}>
+              <article key={artist.id || artist.slug} className={styles.card}>
                 <Link href={`/artists/${artist.slug}`} style={{ textDecoration: 'none' }}>
-                  <div className={styles.avatar} style={{ backgroundColor: artist.color }}>
+                  <div className={styles.avatar}>
                     <img
                       src={profileImage}
                       alt={artist.name}
@@ -43,7 +43,6 @@ export default function FeaturedArtists() {
                           {artist.name}
                         </Link>
                       </h3>
-                      <span className={styles.medium}>{artist.medium}</span>
                     </div>
                     {artist.instagram && (
                       <a href={artist.instagram} target="_blank" rel="noopener noreferrer" className={styles.igIcon} aria-label="Instagram">
@@ -55,10 +54,10 @@ export default function FeaturedArtists() {
                   <p className={styles.bio}>{artist.bio}</p>
 
                   <div className={styles.footer}>
-                    <span className={styles.location}>
-                      <FontAwesomeIcon icon={faLocationDot} /> {artist.location}
-                    </span>
                     <span className={styles.count}>{artworks.length} {artworks.length === 1 ? 'sketch' : 'sketches'}</span>
+                    <Link href={`/artists/${artist.slug}`} className={styles.profileLink}>
+                      View Profile →
+                    </Link>
                   </div>
                 </div>
               </article>

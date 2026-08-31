@@ -114,11 +114,35 @@
     text-align: center;
 }
 
-.captionArtist {
+.captionTitle {
     font-family: var(--font-display, serif);
-    font-size: 1.15rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.captionDescription {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 600px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.captionArtist {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.95rem;
     font-weight: 600;
     color: #ffffff;
+    margin-top: 2px;
+}
+
+.byLabel {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 400;
 }
 
 .artistLink {

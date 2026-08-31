@@ -26,9 +26,8 @@ export default function RecentSketches() {
             <div key={s.id} className={styles.imgWrap}>
               <img src={s.src} alt={s.title} />
               <div className={styles.overlay}>
-                <p className={styles.overlayArtist}>{s.artistName}</p>
-                <p className={styles.overlayLocation}>{s.artistLocation}</p>
-                <span className={styles.overlayMedium}>{s.artistMedium}</span>
+                {s.title && <h3 className={styles.overlayTitle}>{s.title}</h3>}
+                <p className={styles.overlayArtist}>by {s.artistName}</p>
               </div>
             </div>
           ))}
