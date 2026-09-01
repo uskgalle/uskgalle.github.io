@@ -69,6 +69,20 @@
     flex: 1;
 }
 
+.eyebrowRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .eyebrowRow {
+        justify-content: flex-start;
+    }
+}
+
 .eyebrow {
     display: inline-block;
     font-family: var(--font-sans);
@@ -77,7 +91,22 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: #b8854a;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
+}
+
+.artistId {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #7a6350;
+    background-color: #f3eee6;
+    border: 1px solid #e2d8c7;
+    padding: 1px 7px;
+    border-radius: 3px;
+    line-height: 1.4;
 }
 
 .name {

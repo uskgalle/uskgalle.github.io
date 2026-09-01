@@ -44,7 +44,7 @@ export default function ArtistsPage() {
                             <div className={styles.cardHeader}>
                                 <div className={styles.avatar}>
                                     <img
-                                        src={profileImage}
+                                        src={profileImage || '/artists-images/no_profile.png'}
                                         alt={artist.name}
                                         className={styles.avatarImg}
                                     />

@@ -46,14 +46,21 @@ export default function ArtistClient({ artist, artworks, profileImage }) {
             <header className={styles.profileHeader}>
                 <div className={styles.avatarWrapper}>
                     <img
-                        src={profileImage}
+                        src={profileImage || '/artists-images/no_profile.png'}
                         alt={artist.name}
                         className={styles.avatarImg}
+                        onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = '/artists-images/no_profile.png';
+                        }}
                     />
                 </div>
 
                 <div className={styles.profileDetails}>
-                    <span className={styles.eyebrow}>USK Galle Artist</span>
+                    <div className={styles.eyebrowRow}>
+                        <span className={styles.eyebrow}>USK Galle Artist</span>
+                        {artist.id && <span className={styles.artistId}>{artist.id}</span>}
+                    </div>
                     <h1 className={styles.name}>{artist.name}</h1>
 
                     {/* <div className={styles.tags}>

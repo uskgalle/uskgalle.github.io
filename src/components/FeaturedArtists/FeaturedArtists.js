@@ -28,7 +28,7 @@ export default function FeaturedArtists() {
                 <Link href={`/artists/${artist.slug}`} style={{ textDecoration: 'none' }}>
                   <div className={styles.avatar}>
                     <img
-                      src={profileImage}
+                      src={profileImage || '/artists-images/no_profile.png'}
                       alt={artist.name}
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />

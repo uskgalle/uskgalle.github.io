@@ -6,7 +6,7 @@ export { artworks, getArtworkMetadata };
 
 export const artists = [
   {
-    id: 1,
+    id: 'USKG1',
     name: 'Yasith Arangala',
     slug: 'yasith-arangala',
     folder: 'yasith-arangala',
@@ -14,29 +14,29 @@ export const artists = [
     instagram: 'https://instagram.com/yasitharangala',
   },
   {
-    id: 2,
-    name: 'Roshan Silva',
-    slug: 'roshan-silva',
-    folder: 'roshan-silva',
-    bio: 'Roshan\'s fine linework brings the fishing boats and coastal life of the southern shore to vivid detail.',
-    instagram: 'https://instagram.com/test',
+    id: 'USKG2',
+    name: 'Sumudu Udari',
+    slug: 'sumudu-udari',
+    folder: 'sumudu-udari',
+    bio: 'Interior Designer | Sketcher | Artist',
+    instagram: 'https://instagram.com/_udarii_',
   },
   {
-    id: 3,
-    name: 'Dilini Fernando',
-    slug: 'dilini-fernando',
-    folder: 'dilini-fernando',
-    bio: 'Dilini finds beauty in everyday moments: market stalls, tuk-tuks, temple steps, rendered with warmth.',
-    instagram: 'https://instagram.com/test',
+    id: 'USKG3',
+    name: 'Nimthaka Jayavihan',
+    slug: 'nimthaka-jayavihan',
+    folder: 'nimthaka-jayavihan',
+    bio: 'I’m an architecture student at the University of Moratuwa, and I enjoy urban sketching in Galle.',
+    instagram: 'https://instagram.com/nimthakajayavihan',
   },
-  {
-    id: 4,
+  /* {
+    id: 'USKG4',
     name: 'Namal Karunaratne',
     slug: 'namal-karunaratne',
     folder: 'namal-karunaratne',
     bio: 'Namal blends traditional line drawings with digital watercolors to depict historic Galle landmarks.',
     instagram: 'https://instagram.com/test',
-  },
+  }, */
 ];
 
 export function getArtistBySlug(slug) {
@@ -44,17 +44,20 @@ export function getArtistBySlug(slug) {
 }
 
 export function getArtistById(id) {
-  return artists.find((artist) => artist.id === id || artist.id === Number(id)) || null;
+  if (!id) return null;
+  return artists.find((artist) => String(artist.id).toLowerCase() === String(id).toLowerCase()) || null;
 }
 
 export function getProfileImagePath(folder) {
+  if (!folder) return '/artists-images/no_profile.png';
+
   for (const ext of ['webp', 'png', 'jpg', 'jpeg']) {
     const imgPath = path.join(process.cwd(), 'public', 'artists-images', `${folder}.${ext}`);
     if (fs.existsSync(imgPath)) {
       return `/artists-images/${folder}.${ext}`;
     }
   }
-  return `/artists-images/${folder}.png`;
+  return '/artists-images/no_profile.png';
 }
 
 export function getArtworksForArtist(folder) {
@@ -82,6 +85,7 @@ export function getArtworksForArtist(folder) {
         src: `/artworks-images/${folder}/${filename}`,
         title: meta?.title || `Sketch #${filename.replace(/\.[^/.]+$/, '')}`,
         description: meta?.description || '',
+        event: meta?.event || null,
       };
     });
   } catch (err) {

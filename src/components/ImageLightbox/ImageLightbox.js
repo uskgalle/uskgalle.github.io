@@ -4,7 +4,23 @@ import { useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import styles from './ImageLightbox.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPalette, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faPalette, faLocationDot, faCalendarDays } from '@fortawesome/free-solid-svg-icons';
+
+function formatEventBadge(eventSlug) {
+    if (!eventSlug) return null;
+    const match = eventSlug.match(/meet-up-0*(\d+)/i);
+    if (match) {
+        return `Meet-Up #${match[1]}`;
+    }
+    const walkMatch = eventSlug.match(/sketch-walk-0*(\d+)/i);
+    if (walkMatch) {
+        return `Sketch Walk #${walkMatch[1]}`;
+    }
+    return eventSlug
+        .split('-')
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(' ');
+}
 
 export default function ImageLightbox({ images, activeIndex, onClose, onNext, onPrev }) {
     const touchStartX = useRef(null);
@@ -53,6 +69,7 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNext, on
     const artistLocation = typeof currentItem === 'object' ? (currentItem.artistLocation || currentItem.location) : null;
     const title = typeof currentItem === 'object' ? currentItem.title : null;
     const description = typeof currentItem === 'object' ? currentItem.description : null;
+    const event = typeof currentItem === 'object' ? currentItem.event : null;
 
     const current = activeIndex + 1;
     const total = images.length;
@@ -90,36 +107,48 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNext, on
                     alt={title || `Image ${current} of ${total}`}
                 />
 
-                {(title || description || artistName || artistMedium || artistLocation) && (
+                {(title || description || artistName || artistMedium || artistLocation || event) && (
                     <div className={styles.captionOverlay}>
-                        {title && <h3 className={styles.captionTitle}>{title}</h3>}
+                        <div className={styles.captionMainRow}>
+                            {event && (
+                                <Link
+                                    href={`/events/${event}`}
+                                    className={styles.eventBadge}
+                                    onClick={onClose}
+                                >
+                                    <FontAwesomeIcon icon={faCalendarDays} /> {formatEventBadge(event)}
+                                </Link>
+                            )}
+
+                            {title && <h3 className={styles.captionTitle}>{title}</h3>}
+
+                            {artistName && (
+                                <span className={styles.captionArtist}>
+                                    <span className={styles.byLabel}>by </span>
+                                    {artistSlug ? (
+                                        <Link href={`/artists/${artistSlug}`} className={styles.artistLink} onClick={onClose}>
+                                            {artistName}
+                                        </Link>
+                                    ) : (
+                                        <span>{artistName}</span>
+                                    )}
+                                </span>
+                            )}
+
+                            {artistMedium && (
+                                <span className={styles.metaBadge}>
+                                    <FontAwesomeIcon icon={faPalette} /> {artistMedium}
+                                </span>
+                            )}
+
+                            {artistLocation && (
+                                <span className={styles.metaBadge}>
+                                    <FontAwesomeIcon icon={faLocationDot} /> {artistLocation}
+                                </span>
+                            )}
+                        </div>
+
                         {description && <p className={styles.captionDescription}>{description}</p>}
-                        {artistName && (
-                            <div className={styles.captionArtist}>
-                                <span className={styles.byLabel}>By </span>
-                                {artistSlug ? (
-                                    <Link href={`/artists/${artistSlug}`} className={styles.artistLink} onClick={onClose}>
-                                        {artistName}
-                                    </Link>
-                                ) : (
-                                    <span>{artistName}</span>
-                                )}
-                            </div>
-                        )}
-                        {(artistMedium || artistLocation) && (
-                            <div className={styles.captionMeta}>
-                                {artistMedium && (
-                                    <span className={styles.metaBadge}>
-                                        <FontAwesomeIcon icon={faPalette} /> {artistMedium}
-                                    </span>
-                                )}
-                                {artistLocation && (
-                                    <span className={styles.metaBadge}>
-                                        <FontAwesomeIcon icon={faLocationDot} /> {artistLocation}
-                                    </span>
-                                )}
-                            </div>
-                        )}
                     </div>
                 )}
             </div>
