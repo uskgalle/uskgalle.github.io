@@ -26,18 +26,18 @@
  */
 export const events = [
     {
-        slug: 'meet-up-04',
-        number: 4,
-        date: { day: '30', month: 'AUG' },
+        slug: 'meet-up-05',
+        number: 5,
+        date: { day: '27', month: 'SEP' },
         year: '2026',
-        title: 'Sketch Meet-Up #4',
+        title: 'Sketch Meet-Up #5',
         type: 'Outdoor',
         description:
             'Come along and sketch with us at our upcoming session: meet fellow artists, explore Galle Fort, and turn everyday moments into meaningful drawings.',
         location: "ART'O'SAN Gallery, Galle Fort",
         time: '8.30 AM - 12.30 PM',
         upcoming: true,
-        registerLink: '/events/meet-up-04/register',
+        registerLink: '/events/meet-up-05/register',
         image: '/doodles/hero.jpg',
         whoCanJoinImage: '/doodles/who-can-join.jpg',
         whatToBringImage: '/doodles/what-to-bring.jpg',
@@ -62,6 +62,24 @@ export const events = [
             whatsappLink: 'https://wa.me/94718472636',
         },
         recap: null,
+    },
+    {
+        slug: 'meet-up-04',
+        number: 4,
+        date: { day: '30', month: 'AUG' },
+        year: '2026',
+        title: 'Sketch Meet-Up #4',
+        type: 'Outdoor',
+        description:
+            'Featuring the iconic Galle Fort Lighthouse and Clock Tower. A memorable sketching session exploring the historic streets and architecture of Galle Fort. Artists captured the character of these iconic landmarks, from the Lighthouse to the Clock Tower, while enjoying the atmosphere and stories of this historic location.',
+        location: "ART'O'SAN Gallery, Galle Fort",
+        time: '8.30 AM - 12.30 PM',
+        upcoming: false,
+        registerLink: null,
+        recap: {
+            body: 'Featuring the iconic Galle Fort Lighthouse and Clock Tower. A memorable sketching session exploring the historic streets and architecture of Galle Fort. Artists captured the character of these iconic landmarks, from the Lighthouse to the Clock Tower, while enjoying the atmosphere and stories of this historic location.',
+            images: Array.from({ length: 31 }, (_, i) => i + 1),
+        },
     },
     {
         slug: 'meet-up-03',
