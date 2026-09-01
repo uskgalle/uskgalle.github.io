@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import ImageLightbox from '../../../components/ImageLightbox/ImageLightbox';
+import BlurImage from '../../../components/BlurImage/BlurImage';
 import styles from './ArtistClient.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShareNodes, faArrowLeft, faPalette, faLocationDot } from '@fortawesome/free-solid-svg-icons';
@@ -109,7 +110,7 @@ export default function ArtistClient({ artist, artworks, profileImage }) {
                                 className={styles.imgWrap}
                                 onClick={() => setLightboxIndex(index)}
                             >
-                                <img
+                                <BlurImage
                                     src={art.src}
                                     alt={art.title}
                                     loading="lazy"

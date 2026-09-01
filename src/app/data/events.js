@@ -22,7 +22,7 @@
  *    will automatically generate and handle registration, calendar invites, and social sharing.
  * 
  * 3. WHEN THE EVENT IS CONCLUDED:
- *    Change `upcoming: false` and set `recap: { body: '...', images: [1, 2, 3...] }`.
+ *    Change `upcoming: false` and set `recap: { body: '...', extension: 'jpg' (optional, default 'jpg'), images: [1, 2, 3...] }`.
  */
 export const events = [
     {
@@ -71,13 +71,14 @@ export const events = [
         title: 'Sketch Meet-Up #4',
         type: 'Outdoor',
         description:
-            'Featuring the iconic Galle Fort Lighthouse and Clock Tower. A memorable sketching session exploring the historic streets and architecture of Galle Fort. Artists captured the character of these iconic landmarks, from the Lighthouse to the Clock Tower, while enjoying the atmosphere and stories of this historic location.',
+            'A memorable sketching session exploring the historic streets and architecture of Galle Fort.',
         location: "ART'O'SAN Gallery, Galle Fort",
         time: '8.30 AM - 12.30 PM',
         upcoming: false,
         registerLink: null,
         recap: {
             body: 'Featuring the iconic Galle Fort Lighthouse and Clock Tower. A memorable sketching session exploring the historic streets and architecture of Galle Fort. Artists captured the character of these iconic landmarks, from the Lighthouse to the Clock Tower, while enjoying the atmosphere and stories of this historic location.',
+            extension: 'png',
             images: Array.from({ length: 31 }, (_, i) => i + 1),
         },
     },

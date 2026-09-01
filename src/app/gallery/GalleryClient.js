@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import ImageLightbox from '../../components/ImageLightbox/ImageLightbox';
+import BlurImage from '../../components/BlurImage/BlurImage';
 import styles from './gallery.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShuffle, faClock, faHistory } from '@fortawesome/free-solid-svg-icons';
@@ -91,7 +92,7 @@ export default function GalleryClient({ initialArtworks }) {
                             className={styles.imgWrap}
                             onClick={() => setLightboxIndex(index)}
                         >
-                            <img
+                            <BlurImage
                                 src={art.src}
                                 alt={art.title || `Artwork ${index + 1}`}
                                 loading="lazy"

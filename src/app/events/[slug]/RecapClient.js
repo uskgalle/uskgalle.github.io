@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import styles from './recap.module.css';
 import ImageLightbox from '@/components/ImageLightbox/ImageLightbox';
+import BlurImage from '@/components/BlurImage/BlurImage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faClock, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useMemo, useState, useCallback } from 'react';
@@ -10,10 +11,15 @@ import { useMemo, useState, useCallback } from 'react';
 export default function RecapClient({ event }) {
     const imageUrls = useMemo(() => {
         if (!event.recap?.images) return [];
-        return event.recap.images.map(
-            (num) => `/gallery-images/${event.slug}/${num}.jpg`
-        );
-    }, [event.recap?.images, event.slug]);
+        const ext = event.recap.extension || event.recap.imageExtension || 'jpg';
+        return event.recap.images.map((item) => {
+            if (typeof item === 'string') {
+                if (item.startsWith('/')) return item;
+                if (item.includes('.')) return `/gallery-images/${event.slug}/${item}`;
+            }
+            return `/gallery-images/${event.slug}/${item}.${ext}`;
+        });
+    }, [event.recap, event.slug]);
 
     const [activeIndex, setActiveIndex] = useState(null);
 
@@ -75,7 +81,7 @@ export default function RecapClient({ event }) {
                                 className={styles.imgWrap}
                                 onClick={() => setActiveIndex(index)}
                             >
-                                <img src={imageUrls[index]} alt="" />
+                                <BlurImage src={imageUrls[index]} alt={`${event.title} sketch ${index + 1}`} loading="lazy" />
                             </div>
                         ))}
                     </div>

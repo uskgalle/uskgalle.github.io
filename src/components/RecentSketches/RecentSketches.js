@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './RecentSketches.module.css';
+import BlurImage from '../BlurImage/BlurImage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { getAllArtworks } from '../../app/data/artists';
@@ -24,7 +25,7 @@ export default function RecentSketches() {
         <div className={styles.gallery}>
           {displaySketches.map((s) => (
             <div key={s.id} className={styles.imgWrap}>
-              <img src={s.src} alt={s.title} />
+              <BlurImage src={s.src} alt={s.title} loading="lazy" />
               <div className={styles.overlay}>
                 {s.title && <h3 className={styles.overlayTitle}>{s.title}</h3>}
                 <p className={styles.overlayArtist}>by {s.artistName}</p>
