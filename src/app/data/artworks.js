@@ -9,21 +9,21 @@ export const artworks = [
     artistSlug: 'yasith-arangala',
     filename: '1.png',
     title: 'Symbols of Galle fort',
-    description: 'Mix media (water color, inck, etc.)',
+    description: 'Mix media (water color, ink, etc.)',
   },
   {
     id: 'yasith-arangala-2',
     artistSlug: 'yasith-arangala',
     filename: '2.png',
     title: 'Symbols of Galle fort',
-    description: 'Mix media (water color, inck, etc.)',
+    description: 'Mix media (water color, ink, etc.)',
   },
   {
     id: 'yasith-arangala-3',
     artistSlug: 'yasith-arangala',
     filename: '3.png',
     title: 'Symbols of Galle fort',
-    description: 'Mix media (water color, inck, etc.)',
+    description: 'Mix media (water color, ink, etc.)',
   },
 
   // ── Roshan Silva ─────────────────────────────────
