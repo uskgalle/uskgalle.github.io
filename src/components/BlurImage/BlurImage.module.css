@@ -6,6 +6,16 @@
     background-color: #f5f0e8;
 }
 
+.wrapperLoading {
+    min-height: 200px;
+    aspect-ratio: 4 / 3;
+}
+
+.wrapperLoaded {
+    min-height: auto;
+    aspect-ratio: auto;
+}
+
 .skeleton {
     position: absolute;
     inset: 0;

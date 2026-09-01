@@ -188,6 +188,7 @@
     border-radius: 2px;
     background: #f5f0e8;
     border: 1px solid #e8dfd2;
+    min-height: 180px;
 
     cursor: pointer;
 

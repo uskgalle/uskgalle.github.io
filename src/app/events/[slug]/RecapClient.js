@@ -75,15 +75,23 @@ export default function RecapClient({ event }) {
             {event.recap ? (
                 <>
                     <div className={styles.gallery}>
-                        {event.recap.images.map((num, index) => (
-                            <div
-                                key={num}
-                                className={styles.imgWrap}
-                                onClick={() => setActiveIndex(index)}
-                            >
-                                <BlurImage src={imageUrls[index]} alt={`${event.title} sketch ${index + 1}`} loading="lazy" />
-                            </div>
-                        ))}
+                        {event.recap.images.map((num, index) => {
+                            const placeholderAspects = ['4/3', '1/1', '3/4', '4/3', '16/11'];
+                            return (
+                                <div
+                                    key={num}
+                                    className={styles.imgWrap}
+                                    onClick={() => setActiveIndex(index)}
+                                >
+                                    <BlurImage
+                                        src={imageUrls[index]}
+                                        alt={`${event.title} sketch ${index + 1}`}
+                                        aspectRatio={placeholderAspects[index % placeholderAspects.length]}
+                                        loading="lazy"
+                                    />
+                                </div>
+                            );
+                        })}
                     </div>
 
                     <ImageLightbox

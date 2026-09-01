@@ -8,6 +8,7 @@ export default function BlurImage({
     alt = '',
     className = '',
     imgClassName = '',
+    aspectRatio,
     loading = 'lazy',
     onClick,
     ...props
@@ -26,8 +27,14 @@ export default function BlurImage({
         setIsLoaded(true);
     };
 
+    const wrapperStyle = !isLoaded && aspectRatio ? { aspectRatio } : undefined;
+
     return (
-        <div className={`${styles.wrapper} ${className}`} onClick={onClick}>
+        <div
+            className={`${styles.wrapper} ${isLoaded ? styles.wrapperLoaded : styles.wrapperLoading} ${className}`}
+            style={wrapperStyle}
+            onClick={onClick}
+        >
             <div className={`${styles.skeleton} ${isLoaded ? styles.skeletonHidden : ''}`} />
             <img
                 ref={imgRef}

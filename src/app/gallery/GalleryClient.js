@@ -86,19 +86,23 @@ export default function GalleryClient({ initialArtworks }) {
                 </div>
             ) : (
                 <div className={styles.gallery}>
-                    {artworks.map((art, index) => (
-                        <div
-                            key={`${art.id}-${index}`}
-                            className={styles.imgWrap}
-                            onClick={() => setLightboxIndex(index)}
-                        >
-                            <BlurImage
-                                src={art.src}
-                                alt={art.title || `Artwork ${index + 1}`}
-                                loading="lazy"
-                            />
-                        </div>
-                    ))}
+                    {artworks.map((art, index) => {
+                        const placeholderAspects = ['4/3', '1/1', '3/4', '4/3', '16/11'];
+                        return (
+                            <div
+                                key={`${art.id}-${index}`}
+                                className={styles.imgWrap}
+                                onClick={() => setLightboxIndex(index)}
+                            >
+                                <BlurImage
+                                    src={art.src}
+                                    alt={art.title || `Artwork ${index + 1}`}
+                                    aspectRatio={placeholderAspects[index % placeholderAspects.length]}
+                                    loading="lazy"
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
             )}
 
