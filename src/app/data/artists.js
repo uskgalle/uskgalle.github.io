@@ -11,7 +11,7 @@ export const artists = [
     slug: 'yasith-arangala',
     folder: 'yasith-arangala',
     bio: 'Architecture student & artist, exploring watercolor with pen and ink.',
-    instagram: 'https://instagram.com/test',
+    instagram: 'https://instagram.com/yasitharangala',
   },
   {
     id: 2,
