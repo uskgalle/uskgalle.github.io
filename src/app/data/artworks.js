@@ -3,7 +3,7 @@
  * Referenced by artist folder / slug and image filename.
  */
 export const artworks = [
-  // ── Yasith Arangala ──────────────────────────────
+  // ── Yasith Arangala USKG1 ──────────────────────────────
   {
     id: 'yasith-arangala-1',
     artistSlug: 'yasith-arangala',
@@ -29,7 +29,7 @@ export const artworks = [
     event: 'meet-up-04'
   },
 
-  // ── Sumudu Udari ─────────────────────────────────
+  // ── Sumudu Udari USKG2 ─────────────────────────────────
   {
     id: 'sumudu-udari-1',
     artistSlug: 'sumudu-udari',
@@ -39,13 +39,23 @@ export const artworks = [
     event: 'meet-up-04'
   },
 
-  // ── Nimthaka Jayavihan ─────────────────────────────────
+  // ── Nimthaka Jayavihan USKG3 ─────────────────────────────────
   {
     id: 'nimthaka-jayavihan-1',
     artistSlug: 'nimthaka-jayavihan',
     filename: '1.png',
     title: 'Galle lighthouse ',
     description: 'I captured the lighthouse and the beautiful landscape using watercolors and markers to showcase the beauty of Galle.',
+    event: 'meet-up-04'
+  },
+
+  // ── Lakshana Samadhi USKG4 ─────────────────────────────────
+  {
+    id: 'lakshana-samadhi-1',
+    artistSlug: 'lakshana-samadhi',
+    filename: '1.png',
+    title: 'Galle light house',
+    description: 'Pencil & water colours',
     event: 'meet-up-04'
   },
 
