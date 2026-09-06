@@ -29,14 +29,14 @@ export const artists = [
     bio: 'I’m an architecture student at the University of Moratuwa, and I enjoy urban sketching in Galle.',
     instagram: 'https://instagram.com/nimthakajayavihan',
   },
-  /* {
+  {
     id: 'USKG4',
-    name: 'Namal Karunaratne',
-    slug: 'namal-karunaratne',
-    folder: 'namal-karunaratne',
-    bio: 'Namal blends traditional line drawings with digital watercolors to depict historic Galle landmarks.',
-    instagram: 'https://instagram.com/test',
-  }, */
+    name: 'Lakshana Samadhi',
+    slug: 'lakshana-samadhi',
+    folder: 'lakshana-samadhi',
+    bio: 'I sketch what catches my eye, paint what I feel, and love discovering new perspectives through art.',
+    instagram: 'https://instagram.com/_samadhiiii',
+  },
 ];
 
 export function getArtistBySlug(slug) {

@@ -28,7 +28,7 @@ export const events = [
     {
         slug: 'meet-up-05',
         number: 5,
-        date: { day: '27', month: 'SEP' },
+        date: { day: '20', month: 'SEP' },
         year: '2026',
         title: 'Sketch Meet-Up #5',
         type: 'Outdoor',
