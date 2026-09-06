@@ -29,6 +29,16 @@ export const artworks = [
     event: 'meet-up-04'
   },
 
+  // ── Sumudu Udari ─────────────────────────────────
+  {
+    id: 'sumudu-udari-1',
+    artistSlug: 'sumudu-udari',
+    filename: '1.png',
+    title: 'Galle Fort Lighthouse with blue sky',
+    description: 'The Galle Fort Lighthouse is a historic symbol of Galle, built in 1939. I sketched its simple white design standing beautifully against the blue sky. Medium used : Watercolors & pen',
+    event: 'meet-up-04'
+  },
+
   // ── Nimthaka Jayavihan ─────────────────────────────────
   {
     id: 'nimthaka-jayavihan-1',
@@ -38,6 +48,9 @@ export const artworks = [
     description: 'I captured the lighthouse and the beautiful landscape using watercolors and markers to showcase the beauty of Galle.',
     event: 'meet-up-04'
   },
+
+
+
 
 ];
 
