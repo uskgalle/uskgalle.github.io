@@ -43,7 +43,7 @@ export const artists = [
     slug: 'sachith-vithanage',
     folder: 'sachith-vithanage',
     bio: 'As a traveling artist I enjoy sketching at different places. I’m interested in sketching architecture and landscape. I believe each city and place has something to offer, and sketching them can be a good way to understand what it is.',
-    instagram: 'https://instagram.com/sachith_vithanage',
+    instagram: 'https://instagram.com/sachithvithanage',
   },
 ];
 
