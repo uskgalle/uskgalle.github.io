@@ -59,6 +59,15 @@ export const artworks = [
     event: 'meet-up-04'
   },
 
+    // ── Sachith Vithanage USKG5 ─────────────────────────────────
+  {
+    id: 'sachith-vithanage-1',
+    artistSlug: 'sachith-vithanage',
+    filename: '1.png',
+    title: 'Galle Fort lighthouse',
+    description: '',
+    event: 'meet-up-04'
+  },
 
 
 

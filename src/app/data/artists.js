@@ -37,6 +37,14 @@ export const artists = [
     bio: 'I sketch what catches my eye, paint what I feel, and love discovering new perspectives through art.',
     instagram: 'https://instagram.com/_samadhiiii',
   },
+  {
+    id: 'USKG5',
+    name: 'Sachith Vithanage',
+    slug: 'sachith-vithanage',
+    folder: 'sachith-vithanage',
+    bio: 'As a traveling artist I enjoy sketching at different places. I’m interested in sketching architecture and landscape. I believe each city and place has something to offer, and sketching them can be a good way to understand what it is.',
+    instagram: 'https://instagram.com/sachith_vithanage',
+  },
 ];
 
 export function getArtistBySlug(slug) {
