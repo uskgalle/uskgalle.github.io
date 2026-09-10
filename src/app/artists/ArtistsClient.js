@@ -69,20 +69,6 @@ export default function ArtistsClient({ initialArtists }) {
                 <p className={styles.subtitle}>
                     Meet the talented sketchers capturing the architecture, culture, and coastal life of Galle.
                 </p>
-
-                <div className={styles.headerActions}>
-                    <Link href="/register" className={styles.primaryActionBtn}>
-                        <FontAwesomeIcon icon={faUserPlus} /> Register Profile
-                    </Link>
-                    <a
-                        href="https://forms.gle/6siWSXRDP4S98xPQA"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.secondaryActionBtn}
-                    >
-                        <FontAwesomeIcon icon={faPalette} /> Submit Artwork
-                    </a>
-                </div>
             </div>
 
             {/* Filter & Sort Controls */}
@@ -211,6 +197,35 @@ export default function ArtistsClient({ initialArtists }) {
                     ))}
                 </div>
             )}
+
+            {/* Become an Artist CTA Section */}
+            <section className={styles.ctaSection}>
+                <div className={styles.ctaCard}>
+                    <span className={styles.ctaEyebrow}>Join Our Community</span>
+                    <h2 className={styles.ctaTitle}>Become an Artist?</h2>
+                    <p className={styles.ctaDesc}>
+                        Are you sketching in Galle? Join our directory to showcase your artworks and profile with our growing creative community.
+                    </p>
+
+                    <div className={styles.ctaActions}>
+                        <Link href="/register" className={styles.primaryActionBtn}>
+                            <FontAwesomeIcon icon={faUserPlus} /> Register Profile
+                        </Link>
+                        <a
+                            href="https://forms.gle/6siWSXRDP4S98xPQA"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.secondaryActionBtn}
+                        >
+                            <FontAwesomeIcon icon={faPalette} /> Submit Artwork
+                        </a>
+                    </div>
+
+                    <p className={styles.requirementNote}>
+                        * To create an artist profile, you must attend at least one sketchwalk event.
+                    </p>
+                </div>
+            </section>
         </main>
     );
 }
