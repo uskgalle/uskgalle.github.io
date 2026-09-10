@@ -208,9 +208,9 @@
     justify-content: space-between;
     gap: 16px;
     flex-wrap: wrap;
-    background-color: #faf8f5;
-    border: 1px solid #e8e2d9;
-    padding: 12px 18px;
+    /* background-color: #faf8f5; */
+    border-bottom: 1px solid #e8e2d9;
+    padding: 12px 0;
     border-radius: 6px;
 }
 
@@ -292,13 +292,14 @@
 }
 
 .sortBtn {
-    padding: 6px 14px;
-    border-radius: 20px;
+    padding: 6px 16px;
+    border-radius: 2px;
     font-family: var(--font-sans);
-    font-size: 0.74rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    background-color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background-color: #faf8f5;
     color: #6b5a47;
     border: 1px solid #e8e2d9;
     cursor: pointer;
@@ -310,7 +311,7 @@
 }
 
 .sortBtn:hover {
-    background-color: #f5efe6;
+    background-color: #f5f0e8;
     color: #2a1f14;
     border-color: #c9b99a;
 }
@@ -319,13 +320,12 @@
     background-color: #b8854a;
     color: #ffffff;
     border-color: #b8854a;
-    box-shadow: 0 2px 8px rgba(184, 133, 74, 0.25);
 }
 
 .activeSort:hover {
-    background-color: #9e6e38;
-    border-color: #9e6e38;
+    background-color: #9b6c36;
     color: #ffffff;
+    border-color: #9b6c36;
 }
 
 .btnTextFull {
@@ -396,12 +396,10 @@
 }
 
 .ctaCard {
-    background: linear-gradient(180deg, #faf7f2 0%, #f4ede2 100%);
     border: 1px solid #e5dbcc;
     border-radius: 8px;
     padding: 3.5rem 2rem;
     text-align: center;
-    max-width: 720px;
     margin: 0 auto;
     box-shadow: 0 4px 20px rgba(42, 31, 20, 0.04);
 }
@@ -546,8 +544,8 @@
         width: 100%;
         justify-content: center;
         padding: 8px 4px;
-        font-size: 0.72rem;
-        border-radius: 16px;
+        font-size: 0.7rem;
+        border-radius: 2px;
         gap: 4px;
     }
 
