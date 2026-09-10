@@ -80,26 +80,80 @@
     border-color: #d8cebf;
 }
 
+.cardTop {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 0.85rem;
+}
+
 .cardHeader {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 14px;
     margin-bottom: 1rem;
+    min-height: 52px;
+}
+
+.artistIdBadge {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #614d3c;
+    background-color: #f2ede4;
+    border: 1px solid #ddd2bf;
+    padding: 2px 7px;
+    border-radius: 3px;
+    line-height: 1.3;
+    transition: all 0.2s ease;
+}
+
+.sketchCountBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #b8854a;
+    background-color: #fffdf9;
+    border: 1px solid #ebdccb;
+    padding: 2px 7px;
+    border-radius: 3px;
+    line-height: 1.3;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.card:hover .artistIdBadge {
+    background-color: #ebe2d3;
+    border-color: #cbbba6;
+}
+
+.card:hover .sketchCountBadge {
+    border-color: #b8854a;
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(184, 133, 74, 0.12);
 }
 
 .avatar {
-    width: 60px;
-    height: 60px;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
     border: 2px solid #e8e2d9;
     background-color: #f5efe6;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .card:hover .avatar {
     border-color: #b8854a;
+    transform: scale(1.03);
 }
 
 .avatarImg {
@@ -110,9 +164,7 @@
 
 .artistMeta {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
+    min-width: 0;
 }
 
 .name {
@@ -129,22 +181,212 @@
     color: #b8854a;
 }
 
-.count {
-    font-family: var(--font-sans);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #b8854a;
-}
-
 .bio {
     font-family: var(--font-sans);
     font-size: 0.85rem;
     line-height: 1.7;
     color: #6b5a47;
     margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ── Filter & Sort Controls ── */
+.controlsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.controlsBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    background-color: #faf8f5;
+    border: 1px solid #e8e2d9;
+    padding: 12px 18px;
+    border-radius: 6px;
+}
+
+.searchWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
     flex: 1;
+    min-width: 240px;
+    max-width: 360px;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 14px;
+    color: #8a7060;
+    font-size: 0.85rem;
+    pointer-events: none;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 8px 36px 8px 36px;
+    border: 1px solid #dfd5c7;
+    border-radius: 20px;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: #2a1f14;
+    background-color: #ffffff;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.searchInput:focus {
+    border-color: #b8854a;
+    box-shadow: 0 0 0 3px rgba(184, 133, 74, 0.15);
+}
+
+.clearBtn {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    color: #a89a8b;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    transition: color 0.2s ease;
+}
+
+.clearBtn:hover {
+    color: #2a1f14;
+}
+
+.sortGroup {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sortLabel {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8a7060;
+    margin-right: 2px;
+    white-space: nowrap;
+}
+
+.sortButtons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sortBtn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    background-color: #ffffff;
+    color: #6b5a47;
+    border: 1px solid #e8e2d9;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.sortBtn:hover {
+    background-color: #f5efe6;
+    color: #2a1f14;
+    border-color: #c9b99a;
+}
+
+.activeSort {
+    background-color: #b8854a;
+    color: #ffffff;
+    border-color: #b8854a;
+    box-shadow: 0 2px 8px rgba(184, 133, 74, 0.25);
+}
+
+.activeSort:hover {
+    background-color: #9e6e38;
+    border-color: #9e6e38;
+    color: #ffffff;
+}
+
+.btnTextFull {
+    display: inline;
+}
+
+.btnTextShort {
+    display: none;
+}
+
+.filterInfoRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: #7a6350;
+    padding: 0 4px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.countPill {
+    font-weight: 700;
+    color: #b8854a;
+}
+
+/* ── Empty State ── */
+.emptyState {
+    text-align: center;
+    padding: 4rem 1rem;
+    background-color: #faf8f5;
+    border: 1px dashed #ded4c5;
+    border-radius: 4px;
+    color: #7a6350;
+    font-family: var(--font-sans);
+}
+
+.emptyStateTitle {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #2a1f14;
+}
+
+.resetBtn {
+    margin-top: 1rem;
+    padding: 8px 18px;
+    background-color: #b8854a;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.resetBtn:hover {
+    background-color: #9e6e38;
 }
 
 /* Header Actions — Sleek Pill Buttons */
@@ -203,4 +445,71 @@
     color: #b8854a;
     transform: translateY(-2px);
     box-shadow: 0 4px 14px rgba(184, 133, 74, 0.15);
+}
+
+/* ── Mobile Responsive Refinements ── */
+@media (max-width: 640px) {
+    .page {
+        padding: 40px 16px;
+    }
+
+    .header {
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .controlsBar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 14px;
+    }
+
+    .searchWrapper {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .sortGroup {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .sortLabel {
+        font-size: 0.68rem;
+    }
+
+    .sortButtons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+        gap: 6px;
+    }
+
+    .sortBtn {
+        width: 100%;
+        justify-content: center;
+        padding: 8px 4px;
+        font-size: 0.72rem;
+        border-radius: 16px;
+        gap: 4px;
+    }
+
+    .btnTextFull {
+        display: none;
+    }
+
+    .btnTextShort {
+        display: inline;
+    }
+
+    .filterInfoRow {
+        font-size: 0.76rem;
+    }
+
+    .card {
+        padding: 1.25rem;
+    }
 }
