@@ -20,24 +20,30 @@
 
 /* ── Brand ── */
 .brand {
-  flex: 0 0 200px;
+  flex: 0 0 220px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.logoText {
-  font-family:  var(--font-sans);
-  font-size: 1.05rem;
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #f0ebe3;
+.logoLink {
+  display: inline-block;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.logoText:hover { color: #b8854a; }
+.logoLink:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.footerLogoImg {
+  height: 50px;
+  width: auto;
+  max-width: 220px;
+  display: block;
+  object-fit: contain;
+}
 
 .tagline {
   font-family: var(--font-display);

@@ -30,9 +30,13 @@ export default function Navbar() {
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.container}>
 
-        {/* Logo — text only */}
+        {/* Logo */}
         <a href="/" className={styles.logo}>
-          {/*  <img src="icon.png" alt="" className='navImage' /> */} USK Galle
+          <img
+            src="/usk-galle-logo-black.png"
+            alt="USK Galle - Urban Sketchers Galle"
+            className={styles.logoImg}
+          />
         </a>
 
         {/* Nav links — center */}

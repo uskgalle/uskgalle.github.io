@@ -23,21 +23,25 @@
   gap: 2rem;
 }
 
-/* ── Text logo ── */
+/* ── Logo ── */
 .logo {
-  font-family: var(--font-sans);
-  font-size: 1.05rem;
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #2a1f14;
+  display: flex;
+  align-items: center;
   text-decoration: none;
   flex-shrink: 0;
-  transition: color 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .logo:hover {
-  color: #b8854a;
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.logoImg {
+  height: 44px;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
 /* ── Nav links — centered ── */
@@ -200,8 +204,8 @@
     height: 52px;
   }
 
-  .logo {
-    font-size: 0.9rem;
+  .logoImg {
+    height: 36px;
   }
 
   .navLinks {

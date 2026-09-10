@@ -41,7 +41,13 @@ export default function Footer() {
 
           {/* Brand */}
           <div className={styles.brand}>
-            <a href="/" className={styles.logoText}>USK Galle</a>
+            <a href="/" className={styles.logoLink}>
+              <img
+                src="/usk-galle-logo-white-shadow.png"
+                alt="USK Galle - Urban Sketchers Galle"
+                className={styles.footerLogoImg}
+              />
+            </a>
             <p className={styles.tagline}>
               Sketching the south,<br />one line at a time.
             </p>
