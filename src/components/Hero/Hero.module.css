@@ -1,35 +1,45 @@
 /* ══════════════════════════════════════════
-   HERO — split layout (image left / text right)
+   HERO — split layout:
+   Desktop: Gallery Left (order 1) / Text Right (order 2)
+   Mobile: Gallery Top (order 1) / Text Below (order 2)
    ══════════════════════════════════════════ */
 .hero {
   display: flex;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 600px;
   background-color: #ffffff;
   overflow: hidden;
   position: relative;
   padding-top: 68px;
+  margin-top: 0;
   box-sizing: border-box;
 }
 
-/* ── Left — image ── */
+/* ── Gallery Column (Left on Desktop) ── */
 .imageCol {
   flex: 1;
   position: relative;
   overflow: hidden;
+  height: 100%;
   min-height: 500px;
+  background: linear-gradient(135deg, #faf6f0 0%, #f3eee6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   order: 1;
 }
 
-/* ── Right — text ── */
+/* ── Text Column (Right on Desktop) ── */
 .textCol {
-  flex: 0 0 44%;
+  flex: 0 0 46%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 4rem 5rem 4rem 4rem;
+  padding: 3rem 4.5rem 3rem 4rem;
   background-color: #ffffff;
   order: 2;
+  z-index: 2;
   animation: fadeUp 0.7s ease both;
 }
 
@@ -54,7 +64,7 @@
   animation-delay: 0.1s;
 }
 
-/* Cursive accent line — uses a script/italic font */
+/* Cursive accent line */
 .headlineCursive {
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 2.8vw, 2.4rem);
@@ -74,7 +84,7 @@
   line-height: 1.8;
   color: #6b5a47;
   margin: 0 0 2.5rem;
-  max-width: 400px;
+  max-width: 440px;
   animation: fadeUp 0.65s ease both;
   animation-delay: 0.4s;
 }
@@ -133,26 +143,114 @@
   color: #ffffff;
 }
 
-/* ── Right image column ── */
-.imageCol {
-  flex: 1;
+/* ── Rolling Gallery Stage (Slower flow, Minimal gap) ── */
+.marqueeStage {
+  display: flex;
+  gap: 0.45rem;
+  height: 140%;
+  width: 110%;
   position: relative;
-  overflow: hidden;
-  min-height: 500px;
+  transform: rotate(-3.5deg) scale(1.06);
+  transform-origin: center center;
 }
 
-/*
-  SWAP YOUR IMAGE HERE:
-  Replace the gradient with:
-  background-image: url('/images/galle-hero.jpg');
-*/
-.imagePlaceholder {
+.marqueeColumn {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Slower, graceful drift */
+.marqueeTrackUp {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  animation: scrollUp 75s linear infinite;
+  will-change: transform;
+}
+
+.marqueeTrackDown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  animation: scrollDown 85s linear infinite;
+  will-change: transform;
+}
+
+.marqueeTrackUpFast {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  animation: scrollUp 65s linear infinite;
+  will-change: transform;
+}
+
+@media (max-width: 1200px) {
+  .col3 {
+    display: none;
+  }
+}
+
+/* ── Sketch Card (1:1 Square Format Fill, Minimal Gap) ── */
+.sketchCard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f2ece3;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(42, 31, 20, 0.08);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+  border: 1px solid rgba(229, 220, 207, 0.85);
+}
+
+.sketchCard:hover {
+  transform: scale(1.025);
+  box-shadow: 0 10px 24px rgba(42, 31, 20, 0.16);
+  z-index: 5;
+}
+
+/* BlurImage 1:1 square full cover */
+.blurWrap {
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: 1 / 1 !important;
+  display: block !important;
+}
+
+.sketchImg {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+/* ── Smooth Edge Vignettes ── */
+.topVignette {
   position: absolute;
-  inset: 0;
-  background-image: url('/hero.png');
-  background-size: cover;
-  background-position: center top;
-  animation: slowZoom 14s ease-out both;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.bottomVignette {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: linear-gradient(to top, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  z-index: 3;
+  pointer-events: none;
 }
 
 /* ══════════════════════════════════════════
@@ -230,20 +328,27 @@
     opacity: 0;
     transform: translateY(16px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes slowZoom {
-  from {
-    transform: scale(1.06);
+@keyframes scrollUp {
+  0% {
+    transform: translateY(0);
   }
+  100% {
+    transform: translateY(-50%);
+  }
+}
 
-  to {
-    transform: scale(1);
+@keyframes scrollDown {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 
@@ -253,23 +358,84 @@
 @media (max-width: 900px) {
   .hero {
     flex-direction: column;
-    min-height: auto;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 560px;
     padding-top: 52px;
+    margin-top: 0;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
+  /* Gallery at the TOP on mobile — fills upper half */
   .imageCol {
-    flex: none;
-    height: 55vw;
-    min-height: 260px;
+    flex: 1;
+    min-height: 0;
+    height: auto;
+    max-height: none;
     order: 1;
-    /* image on top */
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0;
   }
 
+  .marqueeStage {
+    transform: rotate(-2deg) scale(1.02);
+    width: 100%;
+    height: 140%;
+    gap: 0.35rem;
+    padding: 0 0.5rem;
+  }
+
+  .marqueeTrackUp,
+  .marqueeTrackDown {
+    gap: 0.35rem;
+  }
+
+  .sketchCard {
+    aspect-ratio: 1 / 1;
+    border-radius: 4px;
+  }
+
+  .topVignette,
+  .bottomVignette {
+    height: 40px;
+  }
+
+  /* Text BELOW gallery on mobile — fills lower half */
   .textCol {
-    flex: none;
-    padding: 3rem 1.5rem 2rem;
+    flex: 0 0 auto;
     order: 2;
-    /* text below */
+    padding: 1.25rem 1.5rem 1.75rem;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: flex-end;
+  }
+
+  .headline {
+    margin-bottom: 0.85rem;
+    gap: 0.15rem;
+  }
+
+  .headlineBold {
+    font-size: clamp(1.85rem, 6vw, 2.4rem);
+    line-height: 1.1;
+  }
+
+  .headlineCursive {
+    font-size: clamp(1.25rem, 4.2vw, 1.6rem);
+  }
+
+  .body {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+    max-width: 100%;
+  }
+
+  .ctas {
+    gap: 0.6rem;
   }
 
   .featureStrip {
@@ -279,8 +445,30 @@
 }
 
 @media (max-width: 560px) {
+  .hero {
+    min-height: 520px;
+  }
+
   .textCol {
-    padding: 2.5rem 1.5rem;
+    padding: 1rem 1.25rem 1.5rem;
+  }
+
+  .headline {
+    margin-bottom: 0.65rem;
+  }
+
+  .headlineBold {
+    font-size: clamp(1.75rem, 5.8vw, 2.1rem);
+  }
+
+  .headlineCursive {
+    font-size: clamp(1.15rem, 4vw, 1.4rem);
+  }
+
+  .body {
+    font-size: 0.84rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
   }
 
   .featureStrip {
@@ -290,6 +478,17 @@
 
   .ctas {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    padding: 0.72rem 1rem;
+    font-size: 0.72rem;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
   }
 }
