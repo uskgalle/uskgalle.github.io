@@ -48,7 +48,22 @@ export const artworks = [
     description: 'I captured the lighthouse and the beautiful landscape using watercolors and markers to showcase the beauty of Galle.',
     event: 'meet-up-04'
   },
-
+  {
+    id: 'nimthaka-jayavihan-2',
+    artistSlug: 'nimthaka-jayavihan',
+    filename: '2.png',
+    title: 'Galle fort clock tower',
+    description: 'Seen from a distance, the Galle Fort Clock Tower rises as a distinctive landmark within the historic fort. The sketch focuses on its relationship with the surrounding buildings, open space, and everyday human activity, capturing the atmosphere and character of the place through quick sketching and watercolour.',
+    event: 'meet-up-04'
+  },
+  {
+    id: 'nimthaka-jayavihan-3',
+    artistSlug: 'nimthaka-jayavihan',
+    filename: '3.png',
+    title: 'Galle fort light-house',
+    description: 'The iconic Galle Fort Lighthouse is captured from a ground-level perspective, highlighting its beauty, architectural details, surrounding atmosphere, and human activities. A quick sketch with watercolour is used to capture the character and vibrancy of the place.',
+    event: 'meet-up-04'
+  },
   // ── Lakshana Samadhi USKG4 ─────────────────────────────────
   {
     id: 'lakshana-samadhi-1',
@@ -59,7 +74,7 @@ export const artworks = [
     event: 'meet-up-04'
   },
 
-    // ── Sachith Vithanage USKG5 ─────────────────────────────────
+  // ── Sachith Vithanage USKG5 ─────────────────────────────────
   {
     id: 'sachith-vithanage-1',
     artistSlug: 'sachith-vithanage',
