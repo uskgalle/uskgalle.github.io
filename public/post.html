@@ -223,6 +223,115 @@
             width: auto;
         }
 
+        .mini-canvas.split-style {
+            background: #ffffff;
+            color: #0f172a;
+            padding: 8px 9px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .mini-split-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .mini-split-header .mini-logo-txt {
+            font-size: 6px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: 0.5px;
+        }
+
+        .mini-split-header-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 2px;
+        }
+
+        .mini-split-header .mini-badge-pill {
+            font-size: 4px;
+            font-weight: 800;
+            background: #faebe2;
+            color: #b85d1b;
+            padding: 1.5px 5px;
+            border-radius: 10px;
+            text-transform: uppercase;
+        }
+
+        .mini-split-header .mini-title-bold {
+            font-size: 6px;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1;
+        }
+
+        .mini-split-body {
+            display: grid;
+            grid-template-columns: 1.48fr 1fr;
+            gap: 5px;
+            flex: 1;
+            margin-bottom: 5px;
+            min-height: 0;
+        }
+
+        .mini-split-left {
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+            border: 0.5px solid #e2e8f0;
+        }
+
+        .mini-split-right {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .mini-split-right .mini-title-bold {
+            font-size: 7px;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        .mini-card-row {
+            background: #f8fafc;
+            border: 0.5px solid #e2e8f0;
+            height: 9px;
+            border-radius: 2px;
+        }
+
+        .mini-split-bottom {
+            border: 0.5px dashed #cbd5e1;
+            border-radius: 4px;
+            padding: 3px 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8fafc;
+            height: 16px;
+        }
+
+        .mini-qr-left {
+            height: 6px;
+            width: 48px;
+            background: #e2e8f0;
+            border-radius: 1px;
+        }
+
+        .mini-qr-code {
+            width: 10px;
+            height: 10px;
+            background: #0f172a;
+            border-radius: 1px;
+        }
+
         /* Card Content */
         .card-body {
             padding: 24px;
@@ -336,6 +445,46 @@
 
         <!-- TEMPLATE GALLERY GRID -->
         <div class="gallery-grid">
+
+            <!-- NEW TEMPLATE: MODERN SPLIT MEETUP -->
+            <a href="templates/split.html" class="template-card">
+                <div class="preview-box">
+                    <div class="mini-canvas split-style">
+                        <div class="mini-split-header">
+                            <div class="mini-logo-txt">USK GALLE</div>
+                            <div class="mini-split-header-right">
+                                <div class="mini-badge-pill">UPCOMING</div>
+                                <div class="mini-title-bold">Meet-Up #5</div>
+                            </div>
+                        </div>
+                        <div class="mini-split-body">
+                            <div class="mini-split-left" style="background-image: url('doodles/meetup-sketch.jpg');"></div>
+                            <div class="mini-split-right">
+                                <div class="mini-card-row"></div>
+                                <div class="mini-card-row"></div>
+                                <div class="mini-card-row"></div>
+                                <div class="mini-card-row"></div>
+                            </div>
+                        </div>
+                        <div class="mini-split-bottom">
+                            <div class="mini-qr-left"></div>
+                            <div class="mini-qr-code"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-featured">New Blueprint</span>
+                        <span class="tag tag-featured">4:5 Feed</span>
+                        <span class="tag">Split Layout</span>
+                    </div>
+                    <h2 class="card-title">Modern Split Meetup Flyer</h2>
+                    <p class="card-desc">Clean white two-column layout with tall portrait artwork, quick event detail cards, and dashed instant-access QR code card.</p>
+                    <div class="card-btn">
+                        Customize Template <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </a>
 
             <!-- TEMPLATE 1: CLASSIC EDITORIAL -->
             <a href="templates/classic.html" class="template-card">
