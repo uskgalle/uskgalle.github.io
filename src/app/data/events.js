@@ -35,7 +35,7 @@ export const events = [
         description:
             'Come along and sketch with us at our upcoming session: meet fellow artists, explore Galle Fort, and turn everyday moments into meaningful drawings.',
         location: "ART'O'SAN Gallery, Galle Fort",
-        time: '9.00 AM - 12.30 PM',
+        time: '8.45 AM - 12.30 PM',
         upcoming: true,
         registerLink: '/events/meet-up-05/register',
         image: '/doodles/hero.jpg',
