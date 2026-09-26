@@ -28,14 +28,14 @@ export const events = [
     {
         slug: 'meet-up-05',
         number: 5,
-        date: { day: '20', month: 'SEP' },
+        date: { day: '03', month: 'OCT' },
         year: '2026',
         title: 'Sketch Meet-Up #5',
         type: 'Outdoor',
         description:
             'Come along and sketch with us at our upcoming session: meet fellow artists, explore Galle Fort, and turn everyday moments into meaningful drawings.',
         location: "ART'O'SAN Gallery, Galle Fort",
-        time: '8.30 AM - 12.30 PM',
+        time: '9.00 AM - 12.30 PM',
         upcoming: true,
         registerLink: '/events/meet-up-05/register',
         image: '/doodles/hero.jpg',
