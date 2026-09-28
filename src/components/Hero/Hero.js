@@ -35,33 +35,8 @@ const features = [
   },
 ];
 
-// Rich pool of genuine USK Galle sketches and meetup moments
-const ALL_HERO_IMAGES = [
-  '/artworks-images/yasith-arangala/1.png',
-  '/gallery-images/meet-up-04/1.png',
-  '/gallery-images/meet-up-01/1.jpg',
-  '/artworks-images/sumudu-udari/1.png',
-  '/gallery-images/meet-up-04/8.png',
-  '/gallery-images/meet-up-01/12.jpg',
-  '/artworks-images/nimthaka-jayavihan/1.png',
-  '/gallery-images/meet-up-04/3.png',
-  '/gallery-images/meet-up-01/21.jpg',
-  '/artworks-images/yasith-arangala/2.png',
-  '/gallery-images/meet-up-04/17.png',
-  '/gallery-images/meet-up-01/7.jpg',
-  '/artworks-images/lakshana-samadhi/1.png',
-  '/gallery-images/meet-up-04/21.png',
-  '/gallery-images/meet-up-01/25.jpg',
-  '/artworks-images/sachith-vithanage/1.png',
-  '/gallery-images/meet-up-04/7.png',
-  '/gallery-images/meet-up-01/34.jpg',
-  '/artworks-images/yasith-arangala/3.png',
-  '/gallery-images/meet-up-04/14.png',
-  '/gallery-images/meet-up-01/16.jpg',
-  '/gallery-images/meet-up-04/25.png',
-  '/gallery-images/meet-up-01/27.jpg',
-  '/gallery-images/meet-up-04/9.png',
-];
+// Dedicated lightweight images from public/hero-images/
+const ALL_HERO_IMAGES = Array.from({ length: 24 }, (_, i) => `/hero-images/${i + 1}.jpg`);
 
 // Initial deterministic slices for SSR / Hydration safety
 const initialCol1 = ALL_HERO_IMAGES.slice(0, 8);
