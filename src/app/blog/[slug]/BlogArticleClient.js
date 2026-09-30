@@ -12,7 +12,6 @@ import {
     faArrowRight, 
     faClock, 
     faCalendarDays,
-    faExpand,
     faChevronUp
 } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
@@ -194,22 +193,18 @@ export default function BlogArticleClient({ post, relatedPosts = [], authorData 
                     </div>
                 </header>
 
-                {/* Cover Image with Lightbox Zoom */}
+                {/* Cover Image */}
                 {post.coverImage && (
                     <figure className={styles.coverFigure}>
                         <div
                             className={styles.coverWrap}
                             onClick={() => setLightboxIndex(0)}
-                            title="Click to view artwork full size"
                         >
                             <BlurImage
                                 src={post.coverImage}
                                 alt={post.coverAlt || post.title}
                                 className={styles.coverImage}
                             />
-                            <div className={styles.coverOverlayBadge}>
-                                <FontAwesomeIcon icon={faExpand} /> View Full Artwork
-                            </div>
                         </div>
                         {post.coverCaption && (
                             <figcaption className={styles.coverCaption}>
