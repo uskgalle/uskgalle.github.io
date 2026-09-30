@@ -49,7 +49,7 @@ const post = {
       </div>
     </div>
 
-    <blockquote>"The church isn't just stone and mortar — it's a testament to the craftsmen who balanced Dutch civic pride with tropical resilience."</blockquote>
+    <blockquote>"The church isn't just stone and mortar; it's a testament to the craftsmen who balanced Dutch civic pride with tropical resilience."</blockquote>
 
     <div class="takeaways-box">
       <h4>Sketching Checklist: Groote Kerk</h4>

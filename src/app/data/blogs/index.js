@@ -1,6 +1,7 @@
 import echoesOfBatavia from './echoes-of-batavia-galle-fort-history';
 import urbanSketching101 from './urban-sketching-101-galle-fort';
 import rampartsHistory from './galle-fort-ramparts-history';
+import artistProfiles from './usk-galle-artist-profiles';
 import essentialKit from './essential-urban-sketching-kit';
 import dutchChurch from './dutch-reformed-church-architecture';
 
@@ -12,6 +13,7 @@ import dutchChurch from './dutch-reformed-church-architecture';
  */
 export const blogPosts = [
   echoesOfBatavia,
+  artistProfiles,
   urbanSketching101,
   rampartsHistory,
   essentialKit,

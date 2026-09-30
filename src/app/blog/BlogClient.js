@@ -27,7 +27,10 @@ export default function BlogClient({ posts }) {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [searchQuery, setSearchQuery] = useState('');
 
-    const categories = ['All', 'Galle History', 'Urban Sketching', 'Guides & Tips'];
+    const categories = useMemo(() => {
+        const unique = Array.from(new Set(posts.map((p) => p.category).filter(Boolean)));
+        return ['All', ...unique];
+    }, [posts]);
 
     const filteredPosts = useMemo(() => {
         return posts.filter((post) => {
