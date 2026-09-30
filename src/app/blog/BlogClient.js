@@ -76,11 +76,7 @@ export default function BlogClient({ posts }) {
         <main className={styles.page}>
             {/* Page Header */}
             <header className={styles.header}>
-                <div className={styles.badgeWrap}>
-                    <span className={styles.eyebrow}>
-                        <FontAwesomeIcon icon={faFeatherPointed} /> USK Galle Journal
-                    </span>
-                </div>
+                <span className={styles.eyebrow}>USK Galle Journal</span>
                 <h1 className={styles.title}>Stories from the Sketchbook</h1>
                 <p className={styles.subtitle}>
                     Field notes, watercolor techniques, architectural history, and memories captured one sketch at a time across Galle Fort.

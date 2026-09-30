@@ -13,7 +13,7 @@
 .main {
     max-width: 900px;
     margin: 0 auto;
-    padding: 100px 24px 100px;
+    padding: 80px 24px 100px;
     min-height: 85vh;
 }
 
@@ -24,6 +24,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 12px;
+    margin-top: 2rem;
     margin-bottom: 32px;
 }
 
@@ -92,15 +93,12 @@
 .categoryTag {
     display: inline-block;
     font-family: var(--font-sans);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: #b8854a;
-    background-color: #faf5ed;
-    border: 1px solid #ebdccb;
-    padding: 4px 14px;
-    border-radius: 999px;
+    margin-bottom: 0.75rem;
 }
 
 .headerTime,
