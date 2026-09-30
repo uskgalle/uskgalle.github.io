@@ -6,11 +6,11 @@ import styles from './article.module.css';
 import BlurImage from '../../../components/BlurImage/BlurImage';
 import ImageLightbox from '../../../components/ImageLightbox/ImageLightbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-    faArrowLeft, 
-    faShareNodes, 
-    faArrowRight, 
-    faClock, 
+import {
+    faArrowLeft,
+    faShareNodes,
+    faArrowRight,
+    faClock,
     faCalendarDays,
     faChevronUp
 } from '@fortawesome/free-solid-svg-icons';
@@ -209,7 +209,7 @@ export default function BlogArticleClient({ post, relatedPosts = [], authorData 
                         </div>
                         {post.coverCaption && (
                             <figcaption className={styles.coverCaption}>
-                                📷 {post.coverCaption}
+                                {post.coverCaption}
                             </figcaption>
                         )}
                     </figure>

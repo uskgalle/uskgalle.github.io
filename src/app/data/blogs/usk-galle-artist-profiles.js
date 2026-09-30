@@ -8,9 +8,9 @@ const post = {
   authorSlug: 'system',
   date: 'July 15, 2025',
   readTime: '6 min read',
-  coverImage: '/gallery-images/meet-up-01/1.jpg',
+  coverImage: '/blog-images/usk-galle-artist-profiles.webp',
   coverAlt: 'USK Galle community artists standing together on the ramparts sharing their sketchbooks',
-  coverCaption: 'USK Galle sketchers gathered at the ramparts: preserving the living spirit of Galle Fort through personal sketchbooks.',
+  coverCaption: ' ',
   coverColor: '#c9a87c',
   featured: false,
   content: `

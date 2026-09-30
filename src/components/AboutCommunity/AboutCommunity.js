@@ -1,6 +1,7 @@
 import styles from './AboutCommunity.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faHandshake, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { artists } from '../../app/data/artists';
 
 const values = [
   { icon: faPencil,    label: 'Draw on Location',   desc: 'We only sketch from life: no photos, no studios. Just us, the place, and the moment.' },
@@ -9,6 +10,8 @@ const values = [
 ];
 
 export default function AboutCommunity() {
+  const sketchersCount = artists.filter((artist) => !artist.isSpecial).length;
+
   return (
     <section className={styles.section} id="about">
       <div className={styles.container}>
@@ -46,12 +49,26 @@ export default function AboutCommunity() {
 
         {/* Right — visual block */}
         <div className={styles.visualCol}>
-          <div className={styles.imgMain} />
+          <div className={styles.imgMain}>
+            <img
+              src="/homepage-images/community-group.jpg"
+              alt="Urban Sketchers Galle community members gathered with sketches"
+              className={styles.visualImg}
+              loading="lazy"
+            />
+          </div>
           <div className={styles.statCard}>
-            <span className={styles.statNum}>50+</span>
+            <span className={styles.statNum}>{sketchersCount}</span>
             <span className={styles.statLabel}>Sketchers<br />& counting</span>
           </div>
-          <div className={styles.imgAccent} />
+          <div className={styles.imgAccent}>
+            <img
+              src="/homepage-images/community-sketches.jpg"
+              alt="Urban Sketchers Galle open sketchbooks on display"
+              className={styles.visualImg}
+              loading="lazy"
+            />
+          </div>
         </div>
 
       </div>

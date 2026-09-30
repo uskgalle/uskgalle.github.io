@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USK Galle — Blog Article Post Builder</title>
+
+    <!-- Google Fonts (Inter for body, Georgia is system serif matching website) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- QRCode JS CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- html2canvas CDN for Ultra-HD PNG Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            /* Exact Web Brand Colors from globals.css */
+            --color-bg-light: #faf8f5;
+            --color-surface: #f5efe6;
+            --color-dark: #2a201a;
+            --color-brown: #5c4a32;
+            --color-tan: #b8854a;
+            --color-tan-light: #c9b99a;
+            --color-text: #3a2e22;
+            --color-muted: #6b5a47;
+            --color-border: #ebdccb;
+
+            /* Exact Web Fonts from globals.css */
+            --font-display: Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: #111418;
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            display: flex;
+            width: 100vw;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Controls */
+        .sidebar {
+            width: 440px;
+            background: #17191e;
+            border-right: 1px solid #2a2f3a;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            overflow-y: auto;
+            max-height: 100vh;
+            z-index: 100;
+            transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sidebar.collapsed {
+            margin-left: -440px;
+        }
+
+        .sidebar-nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #2a2f3a;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #222631;
+            border: 1px solid #333a4a;
+            color: #cbd5e1;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: #333a4a;
+            color: #ffffff;
+            border-color: var(--color-tan);
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #2a2f3a;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #94a3b8;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .control-group label {
+            font-size: 12px;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            background: #0d0f13;
+            border: 1px solid #2e3543;
+            color: #f1f5f9;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--color-tan);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+            line-height: 1.45;
+        }
+
+        .range-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .range-wrap input[type="range"] {
+            flex: 1;
+            accent-color: var(--color-tan);
+        }
+
+        .range-val {
+            font-size: 11px;
+            color: #94a3b8;
+            min-width: 38px;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .file-upload-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #222631;
+            border: 1px dashed #4b5568;
+            color: #cbd5e1;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .file-upload-btn:hover {
+            border-color: var(--color-tan);
+            color: #ffffff;
+            background: #2a3040;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .btn-grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .opt-btn {
+            background: #222631;
+            border: 1px solid #333a4a;
+            color: #cbd5e1;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .opt-btn:hover,
+        .opt-btn.active {
+            background: var(--color-tan);
+            color: #ffffff;
+            border-color: var(--color-tan);
+        }
+
+        .action-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid #2a2f3a;
+        }
+
+        .btn-primary {
+            background: var(--color-tan);
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(184, 133, 74, 0.35);
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .btn-primary:hover {
+            background: #a3723c;
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #222631;
+            color: #cbd5e1;
+            border: 1px solid #333a4a;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: #333a4a;
+            color: #ffffff;
+        }
+
+        .toggle-sidebar-floating {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 101;
+            background: #17191e;
+            color: #f8fafc;
+            border: 1px solid #333a4a;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar.collapsed~.toggle-sidebar-floating {
+            display: flex;
+        }
+
+        /* Preview Stage */
+        .preview-stage {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            background: #090a0c;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .post-wrapper {
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        /* ============================================================
+           CANVAS ELEMENT (Instagram 4:5 Portrait - 540x675 Preview)
+           Exports at 3x scale (1620 x 2025 Ultra-HD)
+           ============================================================ */
+        .post-canvas {
+            width: 540px;
+            height: 675px;
+            background: var(--color-bg-light);
+            color: var(--color-text);
+            padding: 24px 26px 22px 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-sizing: border-box;
+            user-select: none;
+            overflow: hidden;
+        }
+
+        /* ============================================================
+           LAYOUT 1: MAGAZINE HERO (Hero Cover Top + Large Hook + Bottom QR Card)
+           ============================================================ */
+        .layout-magazine .blog-main-section {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
+            margin: 0 0 16px 0;
+            gap: 16px;
+        }
+
+        .layout-magazine .cover-container {
+            width: 100%;
+            height: 295px;
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            background-color: #e8e0d5;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 0 4px 16px rgba(42, 32, 26, 0.07);
+            border: 1px solid var(--color-border);
+            flex-shrink: 0;
+        }
+
+        .layout-magazine .hook-content-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            flex: 1;
+            min-height: 0;
+            /* gap: 12px; */
+        }
+
+        .layout-magazine .blog-headline {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-dark);
+            line-height: 1.18;
+            letter-spacing: -0.4px;
+        }
+
+        .layout-magazine .hook-quote-box {
+            position: relative;
+            padding-left: 14px;
+            border-left: 4.5px solid var(--color-tan);
+        }
+
+        .layout-magazine .hook-text {
+            font-family: var(--font-sans);
+            font-size: 15.5px;
+            line-height: 1.5;
+            color: var(--color-brown);
+            font-weight: 500;
+        }
+
+        .hook-text p {
+            margin: 0 0 10px 0;
+        }
+
+        .hook-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ============================================================
+           LAYOUT 2: SPLIT EDITORIAL (Cover Left + Hook Right + Bottom QR Card)
+           ============================================================ */
+        .layout-split .blog-main-section {
+            display: grid;
+            grid-template-columns: 1.08fr 1fr;
+            gap: 18px;
+            flex: 1;
+            min-height: 0;
+            align-items: stretch;
+            margin: 0 0 16px 0;
+        }
+
+        .layout-split .cover-container {
+            width: 100%;
+            height: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            background-color: #e8e0d5;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 0 4px 16px rgba(42, 32, 26, 0.07);
+            border: 1px solid var(--color-border);
+        }
+
+        .layout-split .hook-content-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            min-height: 0;
+            gap: 12px;
+        }
+
+        .layout-split .blog-headline {
+            font-family: var(--font-display);
+            font-size: 25px;
+            font-weight: 700;
+            color: var(--color-dark);
+            line-height: 1.2;
+            letter-spacing: -0.3px;
+        }
+
+        .layout-split .hook-quote-box {
+            position: relative;
+            padding-left: 12px;
+            border-left: 4.5px solid var(--color-tan);
+        }
+
+        .layout-split .hook-text {
+            font-family: var(--font-sans);
+            font-size: 14.5px;
+            line-height: 1.48;
+            color: var(--color-brown);
+            font-weight: 500;
+        }
+
+        /* ============================================================
+           BOTTOM QR CARD (Clean, Borderless, Logo on Left, QR on Right)
+           ============================================================ */
+        .post-qr-footer {
+            width: 100%;
+        }
+
+        .qr-card-minimal {
+            border: none;
+            border-radius: 14px;
+            background: #ffffff;
+            padding: 10px 18px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 16px;
+            height: 82px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 16px rgba(42, 32, 26, 0.04);
+        }
+
+        .qr-brand-col {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .qr-brand-col .qr-logo-img {
+            height: 50px;
+            max-width: 145px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .qr-cta-col {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            text-align: right;
+            padding-right: 4px;
+        }
+
+        .qr-cta-text {
+            font-family: var(--font-display);
+            font-size: 16.5px;
+            font-weight: 700;
+            color: var(--color-dark);
+            line-height: 1.25;
+            letter-spacing: -0.2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qr-cta-text i {
+            color: var(--color-tan);
+            font-size: 15px;
+            flex-shrink: 0;
+            transition: transform 0.2s;
+        }
+
+        .qr-code-wrapper {
+            width: 58px;
+            height: 58px;
+            background: #ffffff;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            padding: 2px;
+        }
+
+        #qrcode {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        #qrcode img,
+        #qrcode canvas {
+            width: 54px !important;
+            height: 54px !important;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- FLOATING SHOW SIDEBAR BUTTON -->
+        <button class="toggle-sidebar-floating" onclick="toggleSidebar()">
+            <i class="fa-solid fa-sliders"></i> Show Edit Controls
+        </button>
+
+        <!-- SIDEBAR CONTROLS -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-nav-header">
+                <a href="../post.html" onclick="return confirmLeave(event)" class="nav-btn">
+                    <i class="fa-solid fa-arrow-left"></i> Template Hub
+                </a>
+                <a href="https://uskgalle.github.io/blog" target="_blank" class="nav-btn">
+                    <i class="fa-solid fa-newspaper"></i> Live Blog
+                </a>
+                <button onclick="toggleSidebar()" class="nav-btn" title="Collapse Sidebar">
+                    <i class="fa-solid fa-chevron-left"></i> Hide
+                </button>
+            </div>
+
+            <div class="sidebar-header">
+                <div class="sidebar-title">
+                    <span style="color: var(--color-tan);"><i class="fa-solid fa-book-open"></i></span> Blog Article
+                    Hook Builder
+                </div>
+                <div style="display: flex; gap: 6px;">
+                    <button class="btn-secondary" onclick="saveDraft()" title="Save Post Draft"><i
+                            class="fa-solid fa-floppy-disk"></i> Save</button>
+                    <button class="btn-secondary" onclick="resetToCurrentPreset()"
+                        title="Reset to Preset">Reset</button>
+                </div>
+            </div>
+
+            <!-- 1. PRESET POST SELECTOR -->
+            <div class="control-group">
+                <div class="section-label"><i class="fa-solid fa-bolt"></i> 1. Quick Load Blog Article</div>
+                <label>Select an article to autofill:</label>
+                <select id="presetSelector" onchange="loadSelectedPreset()">
+                    <option value="artistSpotlight" selected>Artist Spotlight: USk Galle Profiles</option>
+                    <option value="echoes">Echoes of Batavia: Galle Fort History</option>
+                    <option value="sketching101">Urban Sketching 101: Beginner's Guide</option>
+                    <option value="ramparts">Ramparts of History: 400-Year Fortifications</option>
+                    <option value="essentialKit">Essential Urban Sketching Kit</option>
+                    <option value="dutchChurch">Architecture of Faith: Dutch Reformed Church</option>
+                </select>
+            </div>
+
+            <!-- 2. LAYOUT SELECTOR -->
+            <div class="control-group">
+                <div class="section-label"><i class="fa-solid fa-table-columns"></i> 2. Layout Style</div>
+                <div class="btn-grid">
+                    <button class="opt-btn active" id="btnLayoutMagazine" onclick="setLayout('magazine')">
+                        <i class="fa-solid fa-newspaper"></i> Magazine Hero
+                    </button>
+                    <button class="opt-btn" id="btnLayoutSplit" onclick="setLayout('split')">
+                        <i class="fa-solid fa-columns"></i> Split Editorial
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. ARTICLE TITLE & HOOK -->
+            <div class="control-group">
+                <div class="section-label"><i class="fa-solid fa-pen-nib"></i> 3. Headline & Hook</div>
+
+                <label>Article Title (Big Headline - Supports Enter for line breaks)</label>
+                <textarea id="inputTitle" style="min-height: 55px;"
+                    oninput="updateCanvas()">Introducing USK Galle Artist Profiles</textarea>
+
+                <div class="range-wrap">
+                    <label style="font-size: 11px;">Title Font Size:</label>
+                    <input type="range" id="titleSizeSlider" min="22" max="36" value="28" oninput="updateFontSize()">
+                    <span class="range-val" id="titleSizeVal">28px</span>
+                </div>
+
+                <label style="margin-top: 6px;">The Hook (Supports Enter for line breaks & paragraph gaps)</label>
+                <textarea id="inputHook"
+                    oninput="updateCanvas()">A digital home for every artist who sketches with us, preserving your work, celebrating your journey, and giving your art a place to be seen and shared.</textarea>
+
+                <div class="range-wrap">
+                    <label style="font-size: 11px;">Hook Font Size:</label>
+                    <input type="range" id="hookSizeSlider" min="13" max="20" value="16" oninput="updateFontSize()">
+                    <span class="range-val" id="hookSizeVal">16px</span>
+                </div>
+            </div>
+
+            <!-- 4. BLOG COVER IMAGE -->
+            <div class="control-group">
+                <div class="section-label"><i class="fa-regular fa-image"></i> 4. Blog Cover Artwork</div>
+                <label class="file-upload-btn">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Upload Custom Cover Artwork
+                    <input type="file" id="imageFileInput" accept="image/*" onchange="handleImageUpload(event)">
+                </label>
+
+                <label>Or Image Path / URL</label>
+                <input type="text" id="inputImgUrl" value="../blog-images/usk-galle-artist-profiles.webp"
+                    oninput="updateImageFromUrl()">
+
+                <div class="btn-grid" style="margin-top: 4px;">
+                    <button class="opt-btn active" id="btnFitCover" onclick="setImageFit('cover')">Crop Fit
+                        (Cover)</button>
+                    <button class="opt-btn" id="btnFitContain" onclick="setImageFit('contain')">Full (Contain)</button>
+                </div>
+
+                <label style="margin-top: 6px;">Vertical Position</label>
+                <div class="btn-grid-3">
+                    <button class="opt-btn" id="btnPosTop" onclick="setImagePosition('top')">Top</button>
+                    <button class="opt-btn active" id="btnPosCenter"
+                        onclick="setImagePosition('center')">Center</button>
+                    <button class="opt-btn" id="btnPosBottom" onclick="setImagePosition('bottom')">Bottom</button>
+                </div>
+            </div>
+
+            <!-- 5. QR CODE LINK & MINIMAL CTA -->
+            <div class="control-group">
+                <div class="section-label"><i class="fa-solid fa-qrcode"></i> 5. QR Code & CTA</div>
+                <label>Article URL (Generates QR Code)</label>
+                <input type="text" id="inputQrUrl" value="https://uskgalle.github.io/blog/usk-galle-artist-profiles"
+                    oninput="generateQR()">
+
+                <label>Minimal Call to Action Text (Supports Enter for line breaks)</label>
+                <textarea id="inputQrCta" style="min-height: 48px;" oninput="updateCanvas()">Read more about
+Artist Profiles</textarea>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-btns">
+                <button class="btn-primary" onclick="exportPNG()">
+                    <i class="fa-solid fa-download"></i> Download Ultra-HD Image (PNG)
+                </button>
+                <button class="btn-secondary" onclick="toggleSidebar()">
+                    <i class="fa-solid fa-eye-slash"></i> Hide Settings Sidebar
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- PREVIEW STAGE -->
+        <main class="preview-stage">
+            <div class="post-wrapper">
+
+                <!-- POST CANVAS (540x675 Instagram 4:5 Portrait) -->
+                <div class="post-canvas layout-magazine" id="postCanvas">
+
+                    <!-- MAIN SECTION: BLOG COVER + LARGE HOOK -->
+                    <section class="blog-main-section" id="blogMainSection">
+
+                        <!-- BLOG COVER ARTWORK (Clean Image at Top) -->
+                        <div class="cover-container" id="postImgContainer"
+                            style="background-image: url('../blog-images/usk-galle-artist-profiles.webp');"></div>
+
+                        <!-- THE EDITORIAL HOOK (Big, Bold, Scroll-Stopping) -->
+                        <div class="hook-content-container">
+                            <h1 class="blog-headline" id="canvasTitle">Introducing USK Galle Artist Profiles</h1>
+                            <div class="hook-quote-box">
+                                <div class="hook-text" id="canvasHook">
+                                    <p>A digital home for every artist who sketches with us, preserving your work,
+                                        celebrating your journey, and giving your art a place to be seen and shared.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <!-- BOTTOM SECTION: LOGO ON LEFT, CTA IN MIDDLE, QR ON RIGHT (NO DASHED LINE) -->
+                    <footer class="post-qr-footer">
+                        <div class="qr-card-minimal">
+                            <div class="qr-brand-col">
+                                <img src="../usk-galle-logo-black.png" alt="Urban Sketchers Galle" class="qr-logo-img"
+                                    id="canvasLogo">
+                            </div>
+                            <div class="qr-cta-col">
+                                <div class="qr-cta-text" id="canvasQrCta">
+                                    <span>Read more about Artist Profiles</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </div>
+                            </div>
+                            <div class="qr-code-wrapper">
+                                <div id="qrcode"></div>
+                            </div>
+                        </div>
+                    </footer>
+
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        // Real USk Galle blog articles presets
+        const BLOG_PRESETS = {
+            artistSpotlight: {
+                title: "Introducing USK Galle Artist Profiles",
+                hook: "A digital home for every artist who sketches with us, preserving your work, celebrating your journey, and giving your art a place to be seen and shared.",
+                imgUrl: "../blog-images/usk-galle-artist-profiles.webp",
+                qrUrl: "https://uskgalle.github.io/blog/usk-galle-artist-profiles",
+                cta: "Read more about\nArtist Profiles"
+            },
+            echoes: {
+                title: "Echoes of Batavia: A Sketcher's Guide to Galle Fort History",
+                hook: "Built with coral stone and soaked in 400 years of monsoon winds — how did 14 Dutch bastions survive centuries of Indian Ocean storms?",
+                imgUrl: "../hero-images/12.jpg",
+                qrUrl: "https://uskgalle.github.io/blog/echoes-of-batavia-galle-fort-history",
+                cta: "Read more about\nBatavia & Fort"
+            },
+            sketching101: {
+                title: "Urban Sketching 101: A Beginner's Guide to Galle Fort",
+                hook: "From quick perspective tricks to capturing blinding tropical sunlight — here is how to start drawing on-location with zero fear.",
+                imgUrl: "../hero-images/5.jpg",
+                qrUrl: "https://uskgalle.github.io/blog/urban-sketching-101-galle-fort",
+                cta: "Read more about\nSketching 101"
+            },
+            ramparts: {
+                title: "Ramparts of History: Sketching 400-Year Fortifications",
+                hook: "Where Sun and Moon bastions collide with crashing ocean breakers — uncover the 3 best vantage points inside Galle Fort.",
+                imgUrl: "../hero-images/3.jpg",
+                qrUrl: "https://uskgalle.github.io/blog/galle-fort-ramparts-history",
+                cta: "Read more about\nFort Ramparts"
+            },
+            essentialKit: {
+                title: "The Essential Urban Sketching Kit for Galle",
+                hook: "High humidity destroys ordinary paper. Here is the battle-tested gear that survives monsoons, ocean mist, and intense sun.",
+                imgUrl: "../hero-images/18.jpg",
+                qrUrl: "https://uskgalle.github.io/blog/essential-urban-sketching-kit",
+                cta: "Read more about\nSketching Kit"
+            },
+            dutchChurch: {
+                title: "Architecture of Faith: The Dutch Reformed Church",
+                hook: "Curved baroque gables, honeycomb floor tombstones, and organ lofts: how to capture the quietest sanctuary in Galle Fort.",
+                imgUrl: "../hero-images/22.jpg",
+                qrUrl: "https://uskgalle.github.io/blog/dutch-reformed-church-architecture",
+                cta: "Read more about\nDutch Church"
+            }
+        };
+
+        // Layout state: 'magazine' | 'split'
+        let currentLayout = 'magazine';
+        let isDirty = false;
+
+        function setLayout(layout) {
+            currentLayout = layout;
+            const canvas = document.getElementById('postCanvas');
+            const btnMag = document.getElementById('btnLayoutMagazine');
+            const btnSplit = document.getElementById('btnLayoutSplit');
+
+            if (layout === 'split') {
+                canvas.classList.remove('layout-magazine');
+                canvas.classList.add('layout-split');
+                btnMag.classList.remove('active');
+                btnSplit.classList.add('active');
+            } else {
+                canvas.classList.remove('layout-split');
+                canvas.classList.add('layout-magazine');
+                btnSplit.classList.remove('active');
+                btnMag.classList.add('active');
+            }
+            isDirty = true;
+        }
+
+        // Update Font Sizes from Sliders
+        function updateFontSize() {
+            const titleSize = document.getElementById('titleSizeSlider').value;
+            const hookSize = document.getElementById('hookSizeSlider').value;
+
+            document.getElementById('titleSizeVal').textContent = titleSize + 'px';
+            document.getElementById('hookSizeVal').textContent = hookSize + 'px';
+
+            document.getElementById('canvasTitle').style.fontSize = titleSize + 'px';
+            document.getElementById('canvasHook').style.fontSize = hookSize + 'px';
+            isDirty = true;
+        }
+
+        // Update Canvas Text in Real-Time (supports line breaks and paragraph gaps)
+        function updateCanvas() {
+            const rawTitle = document.getElementById('inputTitle').value;
+            document.getElementById('canvasTitle').innerHTML = rawTitle.replace(/\n/g, '<br>');
+
+            const rawHook = document.getElementById('inputHook').value.trim();
+            const hookContainer = document.getElementById('canvasHook');
+            if (rawHook) {
+                const paragraphs = rawHook.split(/\n\s*\n/);
+                hookContainer.innerHTML = paragraphs.map(p => {
+                    const withBreaks = p.replace(/\n/g, '<br>');
+                    return `<p>${withBreaks}</p>`;
+                }).join('');
+            } else {
+                hookContainer.innerHTML = '';
+            }
+
+            const rawCta = document.getElementById('inputQrCta').value.trim();
+            const formattedCta = rawCta.replace(/\n/g, '<br>');
+            document.getElementById('canvasQrCta').innerHTML = `<span>${formattedCta}</span> <i class="fa-solid fa-arrow-right"></i>`;
+            isDirty = true;
+        }
+
+        // Image Handling
+        function handleImageUpload(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (evt) {
+                    const container = document.getElementById('postImgContainer');
+                    container.style.backgroundImage = `url("${evt.target.result}")`;
+                    document.getElementById('inputImgUrl').value = '';
+                    isDirty = true;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updateImageFromUrl() {
+            const url = document.getElementById('inputImgUrl').value.trim();
+            if (url) {
+                document.getElementById('postImgContainer').style.backgroundImage = `url("${url}")`;
+                isDirty = true;
+            }
+        }
+
+        function setImageFit(fit) {
+            const container = document.getElementById('postImgContainer');
+            container.style.backgroundSize = fit;
+            document.getElementById('btnFitCover').classList.toggle('active', fit === 'cover');
+            document.getElementById('btnFitContain').classList.toggle('active', fit === 'contain');
+            isDirty = true;
+        }
+
+        function setImagePosition(pos) {
+            const container = document.getElementById('postImgContainer');
+            container.style.backgroundPosition = pos;
+            document.getElementById('btnPosTop').classList.toggle('active', pos === 'top');
+            document.getElementById('btnPosCenter').classList.toggle('active', pos === 'center');
+            document.getElementById('btnPosBottom').classList.toggle('active', pos === 'bottom');
+            isDirty = true;
+        }
+
+        // Minimal QR Code Generator
+        let qrInstance = null;
+        function generateQR() {
+            const url = document.getElementById('inputQrUrl').value.trim() || 'https://uskgalle.github.io/blog';
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = '';
+            qrInstance = new QRCode(qrContainer, {
+                text: url,
+                width: 54,
+                height: 54,
+                colorDark: "#2a201a", // Deep espresso dark brand ink
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.M
+            });
+            isDirty = true;
+        }
+
+        // Presets Loader
+        function loadSelectedPreset() {
+            const key = document.getElementById('presetSelector').value;
+            const data = BLOG_PRESETS[key];
+            if (!data) return;
+
+            document.getElementById('inputTitle').value = data.title;
+            document.getElementById('inputHook').value = data.hook;
+            document.getElementById('inputImgUrl').value = data.imgUrl;
+            document.getElementById('inputQrUrl').value = data.qrUrl;
+            document.getElementById('inputQrCta').value = data.cta;
+
+            document.getElementById('postImgContainer').style.backgroundImage = `url("${data.imgUrl}")`;
+            setImageFit('cover');
+            setImagePosition('center');
+            generateQR();
+            updateCanvas();
+        }
+
+        function resetToCurrentPreset() {
+            loadSelectedPreset();
+        }
+
+        // Toggle Sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed');
+        }
+
+        // Preload Image as Base64 for Clean HTML2Canvas Export
+        function urlToBase64(url) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.crossOrigin = 'Anonymous';
+                img.onload = function () {
+                    try {
+                        const canvas = document.createElement('canvas');
+                        const w = img.naturalWidth || img.width || 1200;
+                        const h = img.naturalHeight || img.height || 1600;
+                        canvas.width = w;
+                        canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.imageSmoothingQuality = 'high';
+                        ctx.drawImage(img, 0, 0, w, h);
+                        resolve(canvas.toDataURL('image/png', 1.0));
+                    } catch (e) { resolve(url); }
+                };
+                img.onerror = function () { resolve(url); };
+                img.src = url;
+            });
+        }
+
+        // Ultra-HD Export to PNG (1620 x 2025 at 3x scale)
+        async function exportPNG() {
+            const canvasElement = document.getElementById('postCanvas');
+            const primaryBtn = document.querySelector('.btn-primary');
+            const originalText = primaryBtn.innerHTML;
+
+            primaryBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating Ultra-HD PNG...';
+            primaryBtn.disabled = true;
+
+            try {
+                const imgContainer = document.getElementById('postImgContainer');
+                let originalBgStyle = imgContainer.style.backgroundImage;
+                const bgMatch = originalBgStyle.match(/url\(['"]?(.*?)['"]?\)/);
+                if (bgMatch && bgMatch[1] && !bgMatch[1].startsWith('data:')) {
+                    const b64 = await urlToBase64(bgMatch[1]);
+                    if (b64) imgContainer.style.backgroundImage = `url("${b64}")`;
+                }
+
+                const images = canvasElement.querySelectorAll('img');
+                const originalSources = [];
+                for (let i = 0; i < images.length; i++) {
+                    const img = images[i];
+                    originalSources.push(img.src);
+                    if (img.src && !img.src.startsWith('data:')) {
+                        const b64 = await urlToBase64(img.src);
+                        if (b64) img.src = b64;
+                    }
+                }
+
+                await new Promise(r => setTimeout(r, 150));
+
+                const canvas = await html2canvas(canvasElement, {
+                    scale: 3.0, // High-DPI Ultra HD resolution (1620 x 2025)
+                    useCORS: true,
+                    allowTaint: false,
+                    backgroundColor: null,
+                    logging: false
+                });
+
+                imgContainer.style.backgroundImage = originalBgStyle;
+                for (let i = 0; i < images.length; i++) {
+                    if (originalSources[i]) images[i].src = originalSources[i];
+                }
+
+                const link = document.createElement('a');
+                const titleSlug = document.getElementById('inputTitle').value.replace(/[^a-z0-9]/gi, '-').toLowerCase() || 'blog-post';
+                link.download = `usk-galle-blog-${titleSlug.substring(0, 30)}.png`;
+                link.href = canvas.toDataURL('image/png', 1.0);
+                link.click();
+
+                primaryBtn.innerHTML = originalText;
+                primaryBtn.disabled = false;
+            } catch (err) {
+                console.error("Export Error:", err);
+                alert("Browser security restricted direct export. Sidebar will hide now so you can take a high-res screenshot!");
+                toggleSidebar();
+                primaryBtn.innerHTML = originalText;
+                primaryBtn.disabled = false;
+            }
+        }
+
+        // Save & Load Draft via LocalStorage
+        function saveDraft() {
+            const data = {
+                preset: document.getElementById('presetSelector')?.value,
+                layout: currentLayout,
+                title: document.getElementById('inputTitle')?.value,
+                titleSize: document.getElementById('titleSizeSlider')?.value,
+                hook: document.getElementById('inputHook')?.value,
+                hookSize: document.getElementById('hookSizeSlider')?.value,
+                imgUrl: document.getElementById('inputImgUrl')?.value,
+                qrUrl: document.getElementById('inputQrUrl')?.value,
+                qrCta: document.getElementById('inputQrCta')?.value,
+            };
+            localStorage.setItem('usk_blog_post_draft_v3', JSON.stringify(data));
+            isDirty = false;
+            alert("Blog post draft saved successfully to browser storage!");
+        }
+
+        function loadDraft() {
+            const raw = localStorage.getItem('usk_blog_post_draft_v3');
+            if (!raw) return;
+            try {
+                const data = JSON.parse(raw);
+                if (data.preset) document.getElementById('presetSelector').value = data.preset;
+                if (data.layout) setLayout(data.layout);
+                if (data.title) document.getElementById('inputTitle').value = data.title;
+                if (data.titleSize) {
+                    document.getElementById('titleSizeSlider').value = data.titleSize;
+                }
+                if (data.hook) document.getElementById('inputHook').value = data.hook;
+                if (data.hookSize) {
+                    document.getElementById('hookSizeSlider').value = data.hookSize;
+                }
+                if (data.imgUrl) document.getElementById('inputImgUrl').value = data.imgUrl;
+                if (data.qrUrl) document.getElementById('inputQrUrl').value = data.qrUrl;
+                if (data.qrCta) document.getElementById('inputQrCta').value = data.qrCta;
+
+                updateFontSize();
+                updateImageFromUrl();
+                generateQR();
+                updateCanvas();
+            } catch (e) { }
+        }
+
+        function confirmLeave(event) {
+            if (isDirty) {
+                const leave = confirm("You have unsaved changes in your post! Are you sure you want to leave?");
+                if (!leave) {
+                    if (event) event.preventDefault();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        window.onbeforeunload = function (e) {
+            if (isDirty) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        };
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            generateQR();
+            document.querySelectorAll('input, textarea').forEach(el => {
+                el.addEventListener('input', () => isDirty = true);
+            });
+            loadDraft();
+        });
+    </script>
+
+</body>
+
+</html>

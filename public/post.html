@@ -223,6 +223,86 @@
             width: auto;
         }
 
+        /* Blog Article Hook Style */
+        .mini-canvas.blog-style {
+            background: #faf8f5;
+            color: #2a201a;
+            padding: 8px 9px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .mini-blog-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            padding-bottom: 3px;
+            border-bottom: 0.5px solid #ebdccb;
+        }
+
+        .mini-blog-header .mini-logo-txt {
+            font-size: 5.5px;
+            font-weight: 800;
+            color: #2a201a;
+            letter-spacing: 0.5px;
+        }
+
+        .mini-blog-header .mini-badge-pill {
+            font-size: 4px;
+            font-weight: 800;
+            background: #f7f1e7;
+            color: #b8854a;
+            padding: 1.5px 5px;
+            border-radius: 10px;
+            text-transform: uppercase;
+        }
+
+        .mini-blog-cover {
+            height: 50px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+            border: 0.5px solid #ebdccb;
+            margin-bottom: 4px;
+        }
+
+        .mini-blog-hook {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-bottom: 4px;
+        }
+
+        .mini-blog-title {
+            font-size: 6px;
+            font-weight: 700;
+            font-family: Georgia, serif;
+            color: #2a201a;
+            line-height: 1.1;
+        }
+
+        .mini-blog-quote {
+            font-size: 4px;
+            color: #5c4a32;
+            border-left: 1.5px solid #b8854a;
+            padding-left: 3px;
+            line-height: 1.2;
+        }
+
+        .mini-blog-bottom {
+            border: 0.5px dashed #d5c4b1;
+            border-radius: 4px;
+            padding: 3px 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ffffff;
+            height: 16px;
+        }
+
         .mini-canvas.split-style {
             background: #ffffff;
             color: #0f172a;
@@ -445,6 +525,36 @@
 
         <!-- TEMPLATE GALLERY GRID -->
         <div class="gallery-grid">
+
+            <!-- NEW TEMPLATE: BLOG ARTICLE HOOK -->
+            <a href="templates/blog.html" class="template-card">
+                <div class="preview-box">
+                    <div class="mini-canvas blog-style">
+                        <div class="mini-blog-cover" style="background-image: url('blog-images/usk-galle-artist-profiles.webp'); height: 60px;"></div>
+                        <div class="mini-blog-hook">
+                            <div class="mini-blog-title" style="font-size: 7px; font-weight: 700;">Introducing USK Galle Artist Profiles</div>
+                            <div class="mini-blog-quote" style="font-size: 4.5px;">A digital home for every artist who sketches with us...</div>
+                        </div>
+                        <div class="mini-blog-bottom" style="border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+                            <div style="font-size: 4px; font-weight: 800; color: #2a201a;">USK GALLE</div>
+                            <div style="font-size: 4px; font-weight: 700; font-family: Georgia, serif; color: #2a201a;">Read more &rarr;</div>
+                            <div class="mini-qr-code"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tags">
+                        <span class="tag tag-featured">Blog Edition</span>
+                        <span class="tag tag-featured">4:5 Feed</span>
+                        <span class="tag">Article Hook</span>
+                    </div>
+                    <h2 class="card-title">Blog Article Hook & QR</h2>
+                    <p class="card-desc">Stripped-down editorial template for blog articles. Features your blog cover, a scroll-stopping hook, and an instant-read QR code card.</p>
+                    <div class="card-btn">
+                        Customize Template <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </a>
 
             <!-- NEW TEMPLATE: MODERN SPLIT MEETUP -->
             <a href="templates/split.html" class="template-card">
