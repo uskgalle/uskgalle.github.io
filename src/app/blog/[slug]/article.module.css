@@ -77,9 +77,9 @@
 
 /* Article Header */
 .articleHeader {
-    margin-bottom: 36px;
     padding-bottom: 28px;
-    border-bottom: 1px solid #ebdccb;
+    /*     margin-bottom: 36px;
+    border-bottom: 1px solid #ebdccb; */
 }
 
 .categoryPillRow {

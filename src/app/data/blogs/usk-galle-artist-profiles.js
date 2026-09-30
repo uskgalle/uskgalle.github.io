@@ -21,10 +21,6 @@ const post = {
 
     <p>We created the <strong>USK Galle Artist Profiles</strong> to give our local sketchers, architecture students, visiting creators, and self-taught painters a lasting, dignified digital home. Whether an artist has been painting for thirty years or just attended their very first sketch walk, their contribution to our collective narrative is invaluable.</p>
 
-    <figure class="article-figure">
-      <img src="/gallery-images/meet-up-01/25.jpg" alt="Community sketchers sharing their sketchbooks after a meetup" />
-      <figcaption>The sketchbook throwdown: a cherished Urban Sketchers tradition where participants celebrate each other's work without judgment.</figcaption>
-    </figure>
 
     <p>By giving each artist a dedicated profile, we ensure:</p>
     <ul>
@@ -46,16 +42,6 @@ const post = {
 
     <p>Through our simple, self-service <strong>Artist Registration portal</strong>, anyone who participates in our gatherings can register their profile, share their artistic focus, and submit photos of their field sketches. Our team then digitizes, optimizes, and indexes each piece within the community archive.</p>
 
-    <div class="image-grid-2">
-      <figure class="article-figure">
-        <img src="/artworks-images/sumudu-udari/1.png" alt="Watercolor painting of Galle Fort Lighthouse by Sumudu Udari" />
-        <figcaption>Sumudu Udari's expressive watercolor study of the lighthouse against an open blue sky.</figcaption>
-      </figure>
-      <figure class="article-figure">
-        <img src="/artworks-images/nimthaka-jayavihan/3.png" alt="Ground-level sketch of the lighthouse by Nimthaka Jayavihan" />
-        <figcaption>Nimthaka Jayavihan's ground-level architectural perspective of the same landmark.</figcaption>
-      </figure>
-    </div>
 
     <h3>3. The Importance of a Living Image Archive</h3>
     <p>Galle Fort is a UNESCO World Heritage site, but it is not a frozen relic. It is a living, evolving ecosystem of residents, visitors, monsoon storms, restoration projects, and weathered coral-stone masonry.</p>
