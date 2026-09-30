@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './BlogHighlights.module.css';
+import BlurImage from '../BlurImage/BlurImage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { blogPosts } from '../../app/data/blog';
@@ -22,7 +23,25 @@ export default function BlogHighlights() {
         <div className={styles.grid}>
           {displayPosts.map((post) => (
             <article key={post.slug} className={styles.card}>
-              <div className={styles.thumb} style={{ backgroundColor: post.coverColor || '#c9a87c' }} />
+              <Link href={`/blog/${post.slug}`} className={styles.thumbLink}>
+                <div className={styles.thumb}>
+                  {post.coverImage ? (
+                    <BlurImage
+                      src={post.coverImage}
+                      alt={post.coverAlt || post.title}
+                      className={styles.thumbImage}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: post.coverColor || '#c9a87c',
+                      }}
+                    />
+                  )}
+                </div>
+              </Link>
 
               <div className={styles.cardBody}>
                 <span className={styles.tag}>{post.category}</span>

@@ -1,4 +1,5 @@
 import { blogPosts, getPostBySlug } from '../../data/blog';
+import { getArtistBySlug } from '../../data/artists';
 import { notFound } from 'next/navigation';
 import BlogArticleClient from './BlogArticleClient';
 
@@ -13,6 +14,11 @@ export async function generateMetadata({ params }) {
     return {
         title: `${post.title} - USK Galle Blog`,
         description: post.excerpt,
+        openGraph: {
+            title: `${post.title} - USK Galle Blog`,
+            description: post.excerpt,
+            images: post.coverImage ? [post.coverImage] : [],
+        },
     };
 }
 
@@ -22,5 +28,25 @@ export default async function BlogArticlePage({ params }) {
 
     if (!post) return notFound();
 
-    return <BlogArticleClient post={post} />;
+    // Look up author info if artist slug is present
+    const authorData = post.authorSlug ? getArtistBySlug(post.authorSlug) : null;
+
+    // Related posts: prioritize same category, then other posts
+    const otherPosts = blogPosts.filter((p) => p.slug !== slug);
+    const sameCategory = otherPosts.filter(
+        (p) => p.category.toLowerCase() === post.category.toLowerCase()
+    );
+    const differentCategory = otherPosts.filter(
+        (p) => p.category.toLowerCase() !== post.category.toLowerCase()
+    );
+
+    const relatedPosts = [...sameCategory, ...differentCategory].slice(0, 3);
+
+    return (
+        <BlogArticleClient
+            post={post}
+            relatedPosts={relatedPosts}
+            authorData={authorData}
+        />
+    );
 }
