@@ -6,17 +6,24 @@ import ImageLightbox from '../../../components/ImageLightbox/ImageLightbox';
 import BlurImage from '../../../components/BlurImage/BlurImage';
 import styles from './ArtistClient.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShareNodes, faArrowLeft, faPalette, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { 
+    faShareNodes, 
+    faArrowLeft, 
+    faClock, 
+    faArrowRight, 
+    faBookOpen, 
+    faPalette 
+} from '@fortawesome/free-solid-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 
-export default function ArtistClient({ artist, artworks, profileImage }) {
+export default function ArtistClient({ artist, artworks = [], profileImage, articles = [] }) {
     const [lightboxIndex, setLightboxIndex] = useState(null);
     const [copied, setCopied] = useState(false);
 
     const handleShare = async () => {
         const shareData = {
-            title: `${artist.name} - USK Galle Artist`,
-            text: `Check out ${artist.name}'s sketches on USK Galle!`,
+            title: `${artist.name} - USK Galle`,
+            text: `Check out ${artist.name}'s profile on USK Galle!`,
             url: window.location.href,
         };
 
@@ -58,23 +65,12 @@ export default function ArtistClient({ artist, artworks, profileImage }) {
 
                 <div className={styles.profileDetails}>
                     <div className={styles.eyebrowRow}>
-                        <span className={styles.eyebrow}>USK Galle Artist</span>
+                        <span className={styles.eyebrow}>
+                            {artist.role || 'USK Galle Artist'}
+                        </span>
                         {artist.id && <span className={styles.artistId}>{artist.id}</span>}
                     </div>
                     <h1 className={styles.name}>{artist.name}</h1>
-
-                    {/* <div className={styles.tags}>
-                        {artist.medium && (
-                            <span className={styles.tag}>
-                                <FontAwesomeIcon icon={faPalette} /> {artist.medium}
-                            </span>
-                        )}
-                        {artist.location && (
-                            <span className={styles.tag}>
-                                <FontAwesomeIcon icon={faLocationDot} /> {artist.location}
-                            </span>
-                        )}
-                    </div> */}
 
                     <p className={styles.bio}>{artist.bio}</p>
 
@@ -93,40 +89,99 @@ export default function ArtistClient({ artist, artworks, profileImage }) {
                                 <FontAwesomeIcon icon={faInstagram} /> Instagram
                             </a>
                         )}
+
+                        {articles.length > 0 && (
+                            <a href="#articles" className={styles.btnSecondary}>
+                                <FontAwesomeIcon icon={faBookOpen} /> {articles.length} {articles.length === 1 ? 'Article' : 'Articles'}
+                            </a>
+                        )}
                     </div>
                 </div>
             </header>
 
             {copied && <div className={styles.toast}>Link copied to clipboard!</div>}
 
-            <section>
-                <div className={styles.sectionHeader}>
-                    <h2 className={styles.sectionTitle}>Artworks by {artist.name}</h2>
-                    <span className={styles.countBadge}>{artworks.length} {artworks.length === 1 ? 'sketch' : 'sketches'}</span>
-                </div>
-
-                {artworks.length === 0 ? (
-                    <div className={styles.emptyState}>
-                        <p>No artworks uploaded yet for this artist.</p>
+            {/* Artworks Gallery (if any) */}
+            {(artworks.length > 0 || !artist.isSpecial) && (
+                <section className={styles.section}>
+                    <div className={styles.sectionHeader}>
+                        <h2 className={styles.sectionTitle}>
+                            <FontAwesomeIcon icon={faPalette} /> Artworks by {artist.name}
+                        </h2>
+                        <span className={styles.countBadge}>
+                            {artworks.length} {artworks.length === 1 ? 'sketch' : 'sketches'}
+                        </span>
                     </div>
-                ) : (
-                    <div className={styles.gallery}>
-                        {artworks.map((art, index) => (
-                            <div
-                                key={art.id}
-                                className={styles.imgWrap}
-                                onClick={() => setLightboxIndex(index)}
-                            >
-                                <BlurImage
-                                    src={art.src}
-                                    alt={art.title}
-                                    loading="lazy"
-                                />
-                            </div>
+
+                    {artworks.length === 0 ? (
+                        <div className={styles.emptyState}>
+                            <p>No artworks uploaded yet for this artist.</p>
+                        </div>
+                    ) : (
+                        <div className={styles.gallery}>
+                            {artworks.map((art, index) => (
+                                <div
+                                    key={art.id}
+                                    className={styles.imgWrap}
+                                    onClick={() => setLightboxIndex(index)}
+                                >
+                                    <BlurImage
+                                        src={art.src}
+                                        alt={art.title}
+                                        loading="lazy"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </section>
+            )}
+
+            {/* Articles by this Author (especially for System & contributors) */}
+            {articles.length > 0 && (
+                <section id="articles" className={styles.section}>
+                    <div className={styles.sectionHeader}>
+                        <h2 className={styles.sectionTitle}>
+                            <FontAwesomeIcon icon={faBookOpen} /> Articles & Stories by {artist.name}
+                        </h2>
+                        <span className={styles.countBadge}>
+                            {articles.length} {articles.length === 1 ? 'article' : 'articles'}
+                        </span>
+                    </div>
+
+                    <div className={styles.articlesGrid}>
+                        {articles.map((post) => (
+                            <article key={post.slug} className={styles.articleCard}>
+                                <Link href={`/blog/${post.slug}`} className={styles.articleThumbLink}>
+                                    <div className={styles.articleThumbWrap}>
+                                        <BlurImage
+                                            src={post.coverImage || '/hero-images/1.jpg'}
+                                            alt={post.coverAlt || post.title}
+                                            className={styles.articleThumb}
+                                        />
+                                        <span className={styles.articleCategory}>{post.category}</span>
+                                    </div>
+                                </Link>
+
+                                <div className={styles.articleBody}>
+                                    <span className={styles.articleTime}>
+                                        <FontAwesomeIcon icon={faClock} /> {post.readTime}
+                                    </span>
+                                    <h3 className={styles.articleCardTitle}>
+                                        <Link href={`/blog/${post.slug}`}>
+                                            {post.title}
+                                        </Link>
+                                    </h3>
+                                    <p className={styles.articleExcerpt}>{post.excerpt}</p>
+                                    <Link href={`/blog/${post.slug}`} className={styles.articleReadBtn}>
+                                        Read Story <FontAwesomeIcon icon={faArrowRight} />
+                                    </Link>
+                                </div>
+                            </article>
                         ))}
                     </div>
-                )}
-            </section>
+                </section>
+            )}
 
             <ImageLightbox
                 images={artworks}

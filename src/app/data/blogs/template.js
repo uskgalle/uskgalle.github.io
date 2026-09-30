@@ -13,8 +13,8 @@ const post = {
   category: 'Urban Sketching', // 'Urban Sketching' | 'Galle History' | 'Guides & Tips' | or any custom category
   tags: ['Watercolor', 'Galle Fort', 'Techniques'],
   excerpt: 'A short 1-2 sentence preview for blog cards and search results.',
-  author: 'Yasith Arangala', // 'Yasith Arangala' | 'Sumudu Udari' | 'Nimthaka Jayavihan' | 'Sachith Vithanage' | 'Lakshana Samadhi' | or custom
-  authorSlug: 'yasith-arangala', // Matching artist slug (links to profile) or null for community
+  author: 'System', // 'System' | 'Sandeepa Vithanage' | 'Kasun Miuranga' | or custom
+  authorSlug: 'system', // 'system' | 'sandeepa-vithanage' | 'kasun-miuranga' | or custom
   date: 'October 15, 2025',
   readTime: '5 min read',
   coverImage: '/hero-images/1.jpg', // Place your 16:9 landscape image in /public/

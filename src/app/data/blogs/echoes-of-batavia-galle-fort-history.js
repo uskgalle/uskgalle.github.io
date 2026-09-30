@@ -5,7 +5,7 @@ const post = {
   tags: ['Galle History', 'Architecture', 'Dutch Colonial', 'Heritage'],
   excerpt: 'Built by the Portuguese and expanded by the Dutch East India Company, Galle Fort is a living museum of colonial ramparts, coral-stone masonry, and maritime heritage.',
   author: 'System',
-  authorSlug: null,
+  authorSlug: 'system',
   date: 'June 12, 2025',
   readTime: '7 min read',
   coverImage: '/hero-images/12.jpg',

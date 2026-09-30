@@ -53,7 +53,9 @@ export default function BlogHighlights() {
                 <p className={styles.excerpt}>{post.excerpt}</p>
 
                 <div className={styles.meta}>
-                  <span className={styles.author}>{post.author}</span>
+                  <Link href={`/artists/${post.authorSlug || 'system'}`} className={styles.author}>
+                    {post.author || 'System'}
+                  </Link>
                   <span className={styles.dot}>·</span>
                   <span className={styles.date}>{post.date}</span>
                   <span className={styles.dot}>·</span>

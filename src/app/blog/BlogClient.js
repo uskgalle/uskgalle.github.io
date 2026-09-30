@@ -16,8 +16,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 function getAuthorAvatar(authorSlug) {
-    const known = ['yasith-arangala', 'sumudu-udari', 'sachith-vithanage', 'lakshana-samadhi'];
-    if (authorSlug && known.includes(authorSlug)) {
+    if (!authorSlug || authorSlug.toLowerCase() === 'system') {
+        return '/icon.png';
+    }
+    const known = ['yasith-arangala', 'sumudu-udari', 'sachith-vithanage', 'lakshana-samadhi', 'sandeepa-vithanage', 'kasun-miuranga'];
+    if (known.includes(authorSlug.toLowerCase())) {
         return `/artists-images/${authorSlug}.png`;
     }
     return '/artists-images/no_profile.png';
@@ -172,20 +175,18 @@ export default function BlogClient({ posts }) {
 
                             <div className={styles.featuredFooter}>
                                 <div className={styles.authorGroup}>
-                                    <img
-                                        src={getAuthorAvatar(featuredPost.authorSlug)}
-                                        alt={featuredPost.author}
-                                        className={styles.authorAvatar}
-                                    />
+                                    <Link href={`/artists/${featuredPost.authorSlug || 'system'}`}>
+                                        <img
+                                            src={getAuthorAvatar(featuredPost.authorSlug)}
+                                            alt={featuredPost.author || 'System'}
+                                            className={styles.authorAvatar}
+                                        />
+                                    </Link>
                                     <div>
                                         <span className={styles.byLabel}>Written by</span>
-                                        {featuredPost.authorSlug ? (
-                                            <Link href={`/artists/${featuredPost.authorSlug}`} className={styles.authorNameLink}>
-                                                {featuredPost.author}
-                                            </Link>
-                                        ) : (
-                                            <span className={styles.authorName}>{featuredPost.author}</span>
-                                        )}
+                                        <Link href={`/artists/${featuredPost.authorSlug || 'system'}`} className={styles.authorNameLink}>
+                                            {featuredPost.author || 'System'}
+                                        </Link>
                                     </div>
                                 </div>
 
@@ -265,18 +266,16 @@ export default function BlogClient({ posts }) {
 
                                         <div className={styles.cardFooter}>
                                             <div className={styles.cardAuthorWrap}>
-                                                <img
-                                                    src={getAuthorAvatar(post.authorSlug)}
-                                                    alt={post.author}
-                                                    className={styles.miniAvatar}
-                                                />
-                                                {isSystemAuthor ? (
-                                                    <span className={styles.authorSystem}>USK Galle</span>
-                                                ) : (
-                                                    <Link href={`/artists/${post.authorSlug}`} className={styles.authorLink}>
-                                                        {post.author}
-                                                    </Link>
-                                                )}
+                                                <Link href={`/artists/${post.authorSlug || 'system'}`}>
+                                                    <img
+                                                        src={getAuthorAvatar(post.authorSlug)}
+                                                        alt={post.author || 'System'}
+                                                        className={styles.miniAvatar}
+                                                    />
+                                                </Link>
+                                                <Link href={`/artists/${post.authorSlug || 'system'}`} className={styles.authorLink}>
+                                                    {post.author || 'System'}
+                                                </Link>
                                             </div>
 
                                             <Link href={`/blog/${post.slug}`} className={styles.readLink}>

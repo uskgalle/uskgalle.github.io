@@ -17,8 +17,11 @@ import {
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 function getAuthorAvatar(authorSlug) {
-    const known = ['yasith-arangala', 'sumudu-udari', 'sachith-vithanage', 'lakshana-samadhi'];
-    if (authorSlug && known.includes(authorSlug)) {
+    if (!authorSlug || authorSlug.toLowerCase() === 'system') {
+        return '/icon.png';
+    }
+    const known = ['yasith-arangala', 'sumudu-udari', 'sachith-vithanage', 'lakshana-samadhi', 'sandeepa-vithanage', 'kasun-miuranga'];
+    if (known.includes(authorSlug.toLowerCase())) {
         return `/artists-images/${authorSlug}.png`;
     }
     return '/artists-images/no_profile.png';
@@ -164,20 +167,18 @@ export default function BlogArticleClient({ post, relatedPosts = [], authorData 
 
                     <div className={styles.metaRow}>
                         <div className={styles.authorMeta}>
-                            <img
-                                src={getAuthorAvatar(post.authorSlug)}
-                                alt={post.author}
-                                className={styles.authorAvatar}
-                            />
+                            <Link href={`/artists/${post.authorSlug || 'system'}`}>
+                                <img
+                                    src={getAuthorAvatar(post.authorSlug)}
+                                    alt={post.author || 'System'}
+                                    className={styles.authorAvatar}
+                                />
+                            </Link>
                             <div>
                                 <span className={styles.byLabel}>Story by</span>
-                                {isSystemAuthor ? (
-                                    <span className={styles.authorName}>USK Galle Community</span>
-                                ) : (
-                                    <Link href={`/artists/${post.authorSlug}`} className={styles.authorLink}>
-                                        {post.author}
-                                    </Link>
-                                )}
+                                <Link href={`/artists/${post.authorSlug || 'system'}`} className={styles.authorLink}>
+                                    {post.author || 'System'}
+                                </Link>
                             </div>
                         </div>
 
@@ -236,31 +237,29 @@ export default function BlogArticleClient({ post, relatedPosts = [], authorData 
 
                 {/* Author Box */}
                 <div className={styles.authorBox}>
-                    <img
-                        src={getAuthorAvatar(post.authorSlug)}
-                        alt={post.author}
-                        className={styles.authorBoxAvatar}
-                    />
+                    <Link href={`/artists/${post.authorSlug || 'system'}`}>
+                        <img
+                            src={getAuthorAvatar(post.authorSlug)}
+                            alt={post.author || 'System'}
+                            className={styles.authorBoxAvatar}
+                        />
+                    </Link>
 
                     <div className={styles.authorBoxContent}>
                         <span className={styles.writtenBy}>About the Author</span>
                         <h3 className={styles.authorBoxName}>
-                            {isSystemAuthor ? 'USK Galle Editorial' : post.author}
+                            <Link href={`/artists/${post.authorSlug || 'system'}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                                {authorData?.name || post.author || 'System'}
+                            </Link>
                         </h3>
                         <p className={styles.authorBoxBio}>
-                            {authorData?.bio
-                                ? authorData.bio
-                                : isSystemAuthor
-                                ? 'Stories, architectural notes, and field guides compiled by the urban sketching community in Galle Fort, Sri Lanka.'
-                                : 'Urban sketcher, artist, and frequent contributor to USK Galle community sketch walks.'}
+                            {authorData?.bio || 'AI agent thinking about art, Galle Fort history, and culture — writing blogs and field guides to inspire artists and preserve our collective urban sketching memories.'}
                         </p>
 
                         <div className={styles.authorLinksRow}>
-                            {!isSystemAuthor && post.authorSlug && (
-                                <Link href={`/artists/${post.authorSlug}`} className={styles.viewProfileBtn}>
-                                    View Artist Portfolio <FontAwesomeIcon icon={faArrowRight} />
-                                </Link>
-                            )}
+                            <Link href={`/artists/${post.authorSlug || 'system'}`} className={styles.viewProfileBtn}>
+                                View Profile & Articles <FontAwesomeIcon icon={faArrowRight} />
+                            </Link>
 
                             {authorData?.instagram && (
                                 <a
