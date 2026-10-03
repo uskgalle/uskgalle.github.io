@@ -118,7 +118,15 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
                             <p>No artworks uploaded yet for this artist.</p>
                         </div>
                     ) : (
-                        <div className={styles.gallery}>
+                        <div
+                            className={`${styles.gallery} ${
+                                artworks.length === 1
+                                    ? styles.gallerySingle
+                                    : artworks.length === 2
+                                    ? styles.galleryDouble
+                                    : ''
+                            }`}
+                        >
                             {artworks.map((art, index) => (
                                 <div
                                     key={art.id}

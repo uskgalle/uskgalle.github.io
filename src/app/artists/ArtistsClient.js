@@ -16,7 +16,7 @@ import {
 
 export default function ArtistsClient({ initialArtists }) {
     const [searchQuery, setSearchQuery] = useState('');
-    const [sortBy, setSortBy] = useState('id'); // 'id' | 'sketches' | 'name'
+    const [sortBy, setSortBy] = useState('sketches'); // 'sketches' | 'id' | 'name'
 
     const filteredArtists = useMemo(() => {
         let result = [...initialArtists];
@@ -103,16 +103,6 @@ export default function ArtistsClient({ initialArtists }) {
                         <div className={styles.sortButtons}>
                             <button
                                 type="button"
-                                className={`${styles.sortBtn} ${sortBy === 'id' ? styles.activeSort : ''}`}
-                                onClick={() => setSortBy('id')}
-                                title="Sort by Artist ID"
-                            >
-                                <FontAwesomeIcon icon={faHashtag} />
-                                <span className={styles.btnTextFull}>Artist ID</span>
-                                <span className={styles.btnTextShort}>ID</span>
-                            </button>
-                            <button
-                                type="button"
                                 className={`${styles.sortBtn} ${sortBy === 'sketches' ? styles.activeSort : ''}`}
                                 onClick={() => setSortBy('sketches')}
                                 title="Sort by sketch count (highest first)"
@@ -120,6 +110,16 @@ export default function ArtistsClient({ initialArtists }) {
                                 <FontAwesomeIcon icon={faArrowDown91} />
                                 <span className={styles.btnTextFull}>Sketch Count</span>
                                 <span className={styles.btnTextShort}>Sketches</span>
+                            </button>
+                            <button
+                                type="button"
+                                className={`${styles.sortBtn} ${sortBy === 'id' ? styles.activeSort : ''}`}
+                                onClick={() => setSortBy('id')}
+                                title="Sort by Artist ID"
+                            >
+                                <FontAwesomeIcon icon={faHashtag} />
+                                <span className={styles.btnTextFull}>Artist ID</span>
+                                <span className={styles.btnTextShort}>ID</span>
                             </button>
                             <button
                                 type="button"

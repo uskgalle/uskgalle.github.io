@@ -189,7 +189,6 @@
     border-radius: 2px;
     background: #f5f0e8;
     border: 1px solid #e8dfd2;
-    min-height: 180px;
 
     cursor: pointer;
 
@@ -207,6 +206,7 @@
 
 .imgWrap img {
     width: 100%;
+    height: auto;
     display: block;
     transition:
         transform 0.5s ease,
