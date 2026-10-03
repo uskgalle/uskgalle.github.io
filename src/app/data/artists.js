@@ -103,8 +103,22 @@ export const artists = [
     id: 'USKG14',
     name: 'Isuri Kumarasinghe',
     slug: 'isuri-kumarasinghe',
-    bio: 'Plant Lover | Agriculturist | Cooking & Backing | Artist',
+    bio: 'Plant Lover | Agriculturist | Cooking & Baking | Artist',
     instagram: 'https://instagram.com/isuri_k_',
+  },
+  {
+    id: 'USKG15',
+    name: 'Ravindu Ramawickrama',
+    slug: 'ravindu-ramawickrama',
+    bio: 'Blender Artist | Architect Student | Sketcher',
+    instagram: 'https://instagram.com/ravindu_ramawickrama',
+  },
+  {
+    id: 'USKG16',
+    name: 'Nethmi Pabasara',
+    slug: 'nethmi-pabasara',
+    bio: 'Sketcher',
+    instagram: 'https://instagram.com/Thepabee',
   },
 
 ];

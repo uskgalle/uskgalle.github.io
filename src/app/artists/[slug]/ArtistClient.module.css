@@ -271,12 +271,12 @@
 
 .gallerySingle {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     columns: auto;
 }
 
 .gallerySingle .imgWrap {
-    max-width: 680px;
+    max-width: 540px;
     width: 100%;
     margin-bottom: 0;
 }
