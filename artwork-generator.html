@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USK Galle — Artwork Metadata Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #f6f3ee;
+      --bg-surface: #ffffff;
+      --bg-card: #fcfbf9;
+      --bg-subtle: #eae3d7;
+      --border-light: #e4dcce;
+      --border-focus: #b8854a;
+      
+      --color-primary: #b8854a;
+      --color-primary-hover: #9c6e3b;
+      --color-dark: #2a201a;
+      --color-brown: #5c4a32;
+      --color-text: #3a2e22;
+      --color-muted: #7c6b58;
+      --color-code-bg: #1c1815;
+      --color-code-text: #f3efe9;
+      --color-accent: #2e7d32;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --shadow-sm: 0 2px 8px rgba(42, 32, 26, 0.05);
+      --shadow-md: 0 8px 24px rgba(42, 32, 26, 0.08);
+      --shadow-lg: 0 16px 36px rgba(42, 32, 26, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--color-text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    /* ─── Top Header ─── */
+    header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-light);
+      padding: 1.1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .brand-badge {
+      background: var(--color-dark);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      letter-spacing: 0.05em;
+    }
+
+    .brand-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--color-dark);
+      font-weight: 600;
+    }
+
+    .brand-desc {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    /* ─── Switch Nav ─── */
+    .nav-switcher {
+      display: flex;
+      background: #ede6da;
+      padding: 3px;
+      border-radius: 8px;
+    }
+
+    .nav-switch-btn {
+      padding: 0.4rem 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--color-muted);
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+
+    .nav-switch-btn.active {
+      background: #fff;
+      color: var(--color-dark);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ─── Layout ─── */
+    .container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 1080px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ─── Panels ─── */
+    .panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-header {
+      padding: 1.25rem 1.75rem;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-card);
+    }
+
+    .panel-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .panel-body {
+      padding: 1.75rem;
+    }
+
+    /* ─── Form Controls ─── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .col-span-2 {
+      grid-column: span 2;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .label-hint {
+      font-size: 0.74rem;
+      font-weight: 400;
+      color: var(--color-muted);
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.75rem 0.95rem;
+      font-family: inherit;
+      font-size: 0.92rem;
+      background: #faf8f5;
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      color: var(--color-text);
+      transition: all 0.15s ease;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(184, 133, 74, 0.15);
+    }
+
+    textarea {
+      min-height: 85px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    .helper-text {
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      margin-top: 0.15rem;
+    }
+
+    /* ─── Chips for quick medium input ─── */
+    .chips-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+    }
+
+    .chip-btn {
+      background: #efe9dd;
+      border: none;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--color-brown);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .chip-btn:hover {
+      background: #dfd5c4;
+    }
+
+    /* ─── Format Radios ─── */
+    .ext-selector {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .ext-btn {
+      flex: 1;
+      padding: 0.65rem 0.5rem;
+      text-align: center;
+      background: #faf8f5;
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--color-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .ext-btn.active {
+      background: #f4ecdf;
+      border-color: var(--color-primary);
+      color: var(--color-brown);
+    }
+
+    /* ─── Buttons ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.35rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border: none;
+      font-family: inherit;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(184, 133, 74, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-dark {
+      background: var(--color-dark);
+      color: #fff;
+    }
+
+    .btn-dark:hover {
+      background: #1c1511;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--border-light);
+      color: var(--color-dark);
+    }
+
+    .btn-outline:hover {
+      background: var(--bg-card);
+      border-color: var(--color-muted);
+    }
+
+    .btn-sm {
+      padding: 0.45rem 0.85rem;
+      font-size: 0.78rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* ─── Tabs & Code Output ─── */
+    .tabs-nav {
+      display: flex;
+      border-bottom: 1px solid var(--border-light);
+      background: var(--bg-card);
+      padding: 0 1.25rem;
+    }
+
+    .tab-btn {
+      padding: 0.85rem 1.15rem;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--color-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+      background: var(--bg-surface);
+    }
+
+    .code-container {
+      position: relative;
+      background: var(--color-code-bg);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 1rem;
+      background: #14110f;
+      border-bottom: 1px solid #2e2823;
+    }
+
+    .code-lang {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #9c9184;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    pre code {
+      display: block;
+      padding: 1.2rem 1.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: var(--color-code-text);
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* ─── Preview Card ─── */
+    .artwork-preview-card {
+      background: var(--bg-canvas);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+
+    .preview-art-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: var(--radius-sm);
+      background: #eadfcb;
+      border: 1.5px solid var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--color-brown);
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .preview-art-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .preview-badges-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.3rem;
+      flex-wrap: wrap;
+    }
+
+    .badge-art-id {
+      background: #ded2be;
+      color: var(--color-dark);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .badge-event {
+      background: #e8ecda;
+      color: #385022;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .badge-file {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--color-muted);
+    }
+
+    .preview-art-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .preview-art-desc {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      line-height: 1.4;
+    }
+
+    /* ─── Checklist Box ─── */
+    .checklist-box {
+      background: #fdfbf7;
+      border: 1px solid #ebd9c0;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .checklist-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-dark);
+      margin-bottom: 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      margin-bottom: 0.85rem;
+      font-size: 0.82rem;
+      color: var(--color-text);
+    }
+
+    .checklist-item code {
+      background: #f0ebe3;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--color-dark);
+      font-weight: 600;
+      user-select: all;
+    }
+
+    /* ─── Table ─── */
+    .artworks-table-container {
+      margin-top: 2rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .table-header {
+      padding: 1.25rem 1.75rem;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .table-filter {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .artworks-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+
+    .artworks-table th {
+      text-align: left;
+      padding: 0.85rem 1.25rem;
+      background: #faf7f2;
+      color: var(--color-muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .artworks-table td {
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: middle;
+    }
+
+    .artworks-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .artworks-table tr:hover {
+      background: #fdfcf9;
+    }
+
+    /* ─── Toast Alert ─── */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--color-dark);
+      color: #fff;
+      padding: 0.85rem 1.4rem;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.25s ease;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast-icon {
+      color: #4ade80;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      border-top: 1px solid var(--border-light);
+      background: var(--bg-surface);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header>
+    <div class="header-content">
+      <div class="brand">
+        <span class="brand-badge">USK GALLE</span>
+        <div>
+          <h1 class="brand-title">Artwork Metadata Generator</h1>
+          <p class="brand-desc">Quickly create sketch entries and generate copy-paste code for <code>src/app/data/artworks.js</code></p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="nav-switcher">
+          <a href="artist-generator.html" class="nav-switch-btn">👤 Artists</a>
+          <a href="artwork-generator.html" class="nav-switch-btn active">🎨 Artworks</a>
+        </div>
+        <button class="btn btn-outline btn-sm" id="btn-reset-initial">Reset Defaults</button>
+        <button class="btn btn-dark btn-sm" id="btn-quick-copy">📋 Quick Copy Snippet</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- LEFT COLUMN: Input Form -->
+    <section class="panel">
+      <div class="panel-header">
+        <h2 class="panel-title">
+          <span>✏️</span> Add Sketch Metadata
+        </h2>
+        <span class="helper-text">ID is auto-generated as <code>ArtistID-Number</code></span>
+      </div>
+
+      <div class="panel-body">
+        <form id="artwork-form" onsubmit="event.preventDefault();">
+          <div class="form-grid">
+            
+            <!-- Artist Selector -->
+            <div class="form-group col-span-2">
+              <label for="artist-select">
+                Artist
+                <span class="label-hint">Select who made this sketch</span>
+              </label>
+              <select id="artist-select">
+                <option value="USKG1">USKG1 — Yasith Arangala</option>
+                <option value="USKG2">USKG2 — Sumudu Udari</option>
+                <option value="USKG3">USKG3 — Nimthaka Jayavihan</option>
+                <option value="USKG4">USKG4 — Lakshana Samadhi</option>
+                <option value="USKG5">USKG5 — Sachith Vithanage</option>
+                <option value="USKG6">USKG6 — Shifteh</option>
+                <option value="USKG7">USKG7 — Amodi Kodithuwakku</option>
+                <option value="USKG8">USKG8 — Nelum Buddhadasa</option>
+                <option value="USKG9">USKG9 — Rachel West</option>
+                <option value="USKG10">USKG10 — Maheema Mahimani</option>
+                <option value="USKG11">USKG11 — Rashmi Wimalasiri</option>
+                <option value="USKG12">USKG12 — Lakdini Lisakya</option>
+                <option value="USKG13">USKG13 — Kathya Ruhansi</option>
+                <option value="USKG14">USKG14 — Isuri Kumarasinghe</option>
+                <option value="custom">-- Custom Artist ID --</option>
+              </select>
+            </div>
+
+            <!-- Custom Artist ID input (shown if custom selected) -->
+            <div class="form-group col-span-2" id="custom-artist-group" style="display: none;">
+              <label for="custom-artist-id">Custom Artist ID</label>
+              <input type="text" id="custom-artist-id" placeholder="e.g. USKG15">
+            </div>
+
+            <!-- Sketch / File Number -->
+            <div class="form-group">
+              <label for="art-number">
+                Sketch Number
+                <span class="label-hint">e.g. 1, 2, 3</span>
+              </label>
+              <input type="number" id="art-number" min="1" max="99" value="1" required>
+            </div>
+
+            <!-- File Extension -->
+            <div class="form-group">
+              <label>File Format</label>
+              <div class="ext-selector">
+                <button type="button" class="ext-btn active" data-ext="png">.png</button>
+                <button type="button" class="ext-btn" data-ext="webp">.webp</button>
+                <button type="button" class="ext-btn" data-ext="jpg">.jpg</button>
+              </div>
+            </div>
+
+            <!-- Auto Generated ID & Filename preview -->
+            <div class="form-group">
+              <label>Generated Artwork ID</label>
+              <input type="text" id="art-id" readonly style="background:#f0ebe3; font-weight:700; font-family:'JetBrains Mono', monospace;" value="USKG1-1">
+            </div>
+
+            <div class="form-group">
+              <label>Filename</label>
+              <input type="text" id="art-filename" value="1.png" style="font-family:'JetBrains Mono', monospace;">
+            </div>
+
+            <!-- Title -->
+            <div class="form-group col-span-2">
+              <label for="art-title">
+                Artwork Title <span style="color:#d9534f;">*</span>
+                <span class="label-hint">e.g. Galle Fort Lighthouse</span>
+              </label>
+              <input type="text" id="art-title" placeholder="Enter sketch title..." required>
+            </div>
+
+            <!-- Description / Medium -->
+            <div class="form-group col-span-2">
+              <label for="art-desc">
+                Description / Medium
+                <span class="label-hint">Technique or story</span>
+              </label>
+              <textarea id="art-desc" placeholder="e.g. Watercolor and ink study on location during sunset."></textarea>
+              <div class="chips-group">
+                <span style="font-size:0.72rem; color:var(--color-muted); align-self:center;">Insert medium:</span>
+                <button type="button" class="chip-btn" data-insert="Watercolor & pen">Watercolor & pen</button>
+                <button type="button" class="chip-btn" data-insert="Mix media (water color, ink, etc.)">Mix media</button>
+                <button type="button" class="chip-btn" data-insert="Pencil & water colours">Pencil & watercolor</button>
+                <button type="button" class="chip-btn" data-insert="Quick ink sketch on location">Quick ink</button>
+              </div>
+            </div>
+
+            <!-- Event -->
+            <div class="form-group col-span-2">
+              <label for="art-event">
+                Event / Meet-up Tag
+                <span class="label-hint">e.g. meet-up-04</span>
+              </label>
+              <input type="text" id="art-event" value="meet-up-04" placeholder="meet-up-04">
+            </div>
+
+          </div>
+
+          <!-- Buttons -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" id="btn-add-and-next">
+              <span>➕</span> Add to Array & Next Sketch
+            </button>
+            <button type="button" class="btn btn-outline" id="btn-clear-form">
+              Clear Form
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: Output & Live Preview -->
+    <section class="panel">
+      <!-- Tabs -->
+      <nav class="tabs-nav">
+        <button class="tab-btn active" data-tab="snippet">Single Item Snippet</button>
+        <button class="tab-btn" data-tab="full-array">Full artworks Array</button>
+        <button class="tab-btn" data-tab="batch">⚡ Batch Quick-Add</button>
+        <button class="tab-btn" data-tab="checklist">Asset Checklist</button>
+      </nav>
+
+      <div class="panel-body">
+        
+        <!-- Live Card Preview -->
+        <div>
+          <label style="margin-bottom: 0.5rem; display: block;">Live Artwork Preview</label>
+          <div class="artwork-preview-card">
+            <div class="preview-art-icon">🎨</div>
+            <div class="preview-art-info">
+              <div class="preview-badges-line">
+                <span class="badge-art-id" id="prev-id">USKG1-1</span>
+                <span class="badge-file" id="prev-filename">1.png</span>
+                <span class="badge-event" id="prev-event">meet-up-04</span>
+              </div>
+              <div class="preview-art-title" id="prev-title">Artwork Title</div>
+              <p class="preview-art-desc" id="prev-desc">Description or medium details will appear here...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 1: Single Snippet -->
+        <div class="tab-content" id="tab-snippet">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label>Copy this object and paste inside <code>artworks = [ ... ]</code>:</label>
+            <button class="btn btn-dark btn-sm" id="btn-copy-snippet">
+              <span>📋</span> Copy Snippet
+            </button>
+          </div>
+          <div class="code-container">
+            <div class="code-header">
+              <span class="code-lang">JavaScript (Snippet)</span>
+              <span style="font-size: 0.72rem; color: #9c9184;">Press Ctrl+Enter to copy</span>
+            </div>
+            <pre><code id="code-snippet">// Fill form to generate code...</code></pre>
+          </div>
+        </div>
+
+        <!-- TAB 2: Full Array -->
+        <div class="tab-content" id="tab-full-array" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label>Replace entire <code>export const artworks = [ ... ]</code> in <code>artworks.js</code>:</label>
+            <button class="btn btn-dark btn-sm" id="btn-copy-full">
+              <span>📋</span> Copy Entire Array
+            </button>
+          </div>
+          <div class="code-container">
+            <div class="code-header">
+              <span class="code-lang">JavaScript (Full Array)</span>
+              <span style="font-size: 0.72rem; color: #9c9184;" id="code-full-count">9 Artworks</span>
+            </div>
+            <pre><code id="code-full">// Loading complete array...</code></pre>
+          </div>
+        </div>
+
+        <!-- TAB 3: Batch Generator -->
+        <div class="tab-content" id="tab-batch" style="display: none;">
+          <div style="background: #faf7f2; border: 1px solid var(--border-light); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+            <div style="font-weight: 700; font-size: 0.88rem; margin-bottom: 0.5rem;">⚡ Generate Multiple Sketches At Once:</div>
+            <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+              <label style="font-size: 0.8rem;">How many sketches?</label>
+              <input type="number" id="batch-count" min="1" max="15" value="3" style="width: 70px; padding: 0.4rem;">
+              <button type="button" class="btn btn-dark btn-sm" id="btn-generate-batch">Generate Batch Snippet</button>
+            </div>
+          </div>
+          <div class="code-container">
+            <div class="code-header">
+              <span class="code-lang">JavaScript (Batch)</span>
+              <button class="btn btn-outline btn-sm" id="btn-copy-batch" style="padding: 0.2rem 0.6rem; font-size: 0.72rem;">Copy Batch</button>
+            </div>
+            <pre><code id="code-batch">// Click 'Generate Batch Snippet' above...</code></pre>
+          </div>
+        </div>
+
+        <!-- TAB 4: Checklist -->
+        <div class="tab-content" id="tab-checklist" style="display: none;">
+          <div class="checklist-box">
+            <div class="checklist-title">
+              <span>📁</span> File Location for this Sketch:
+            </div>
+            <div class="checklist-item">
+              <span>🖼️</span>
+              <div>
+                <strong>Save image file as:</strong><br>
+                <code id="check-file-path">public/artworks-images/USKG1/1.png</code>
+                <div class="helper-text">(Supports .png, .webp, .jpg)</div>
+              </div>
+            </div>
+            <div class="checklist-item" style="margin-top: 1rem;">
+              <span>⚡</span>
+              <div>
+                <strong>Create Folder Command (if not created yet):</strong><br>
+                <code id="check-cmd">mkdir "public\artworks-images\USKG1"</code>
+                <button type="button" class="btn btn-outline btn-sm" style="margin-top: 0.5rem; display: block;" id="btn-copy-cmd">
+                  Copy Command
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BOTTOM SECTION: Current Artworks in Array -->
+    <section class="panel col-span-2" style="grid-column: span 2;">
+      <div class="table-header">
+        <div>
+          <h2 class="panel-title">🎨 Current Artworks in Array (<span id="artworks-count">9</span>)</h2>
+          <p class="brand-desc">Loaded from <code>src/app/data/artworks.js</code>. Additions will be stored in your session.</p>
+        </div>
+        <div class="table-filter">
+          <label style="font-size: 0.8rem;">Filter by Artist:</label>
+          <select id="filter-artist" style="padding: 0.4rem 0.75rem; width: auto; font-size: 0.82rem;">
+            <option value="ALL">All Artists</option>
+          </select>
+          <button class="btn btn-outline btn-sm" id="btn-export-json">Export JSON</button>
+        </div>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="artworks-table">
+          <thead>
+            <tr>
+              <th>Artwork ID</th>
+              <th>Filename</th>
+              <th>Title</th>
+              <th>Description / Medium</th>
+              <th>Event</th>
+              <th style="text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="artworks-table-body">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">✓</span>
+    <span id="toast-message">Copied to clipboard! Ready to paste into artworks.js</span>
+  </div>
+
+  <footer>
+    Urban Sketchers Galle — Designed for fast local artwork metadata updates.
+  </footer>
+
+  <!-- Logic Script -->
+  <script>
+    // Initial Artworks loaded directly from artworks.js
+    const DEFAULT_ARTWORKS = [
+      {
+        id: 'USKG1-1',
+        filename: '1.png',
+        title: 'Symbols of Galle fort',
+        description: 'Mix media (water color, ink, etc.)',
+        event: 'meet-up-04',
+      },
+      {
+        id: 'USKG1-2',
+        filename: '2.png',
+        title: 'Symbols of Galle fort',
+        description: 'Mix media (water color, ink, etc.)',
+        event: 'meet-up-04',
+      },
+      {
+        id: 'USKG1-3',
+        filename: '3.png',
+        title: 'Symbols of Galle fort',
+        description: 'Mix media (water color, ink, etc.)',
+        event: 'meet-up-04',
+      },
+      {
+        id: 'USKG2-1',
+        filename: '1.png',
+        title: 'Galle Fort Lighthouse with blue sky',
+        description: 'The Galle Fort Lighthouse is a historic symbol of Galle, built in 1939. I sketched its simple white design standing beautifully against the blue sky. Medium used : Watercolors & pen',
+        event: 'meet-up-04',
+      },
+      {
+        id: 'USKG3-1',
+        filename: '1.png',
+        title: 'Galle lighthouse ',
+        description: 'I captured the lighthouse and the beautiful landscape using watercolors and markers to showcase the beauty of Galle.',
+        event: 'meet-up-04',
+      },
+      {
+        id: 'USKG3-2',
+        filename: '2.png',
+        title: 'Galle fort clock tower',
+        description: 'Seen from a distance, the Galle Fort Clock Tower rises as a distinctive landmark within the historic fort. The sketch focuses on its relationship with the surrounding buildings, open space, and everyday human activity, capturing the atmosphere and character of the place through quick sketching and watercolour.',
+        event: 'meet-up-04',
+      },
+      {
+        id: 'USKG3-3',
+        filename: '3.png',
+        title: 'Galle fort light-house',
+        description: 'The iconic Galle Fort Lighthouse is captured from a ground-level perspective, highlighting its beauty, architectural details, surrounding atmosphere, and human activities. A quick sketch with watercolour is used to capture the character and vibrancy of the place.',
+        event: 'meet-up-04',
+      },
+      {
+        id: 'USKG4-1',
+        filename: '1.png',
+        title: 'Galle light house',
+        description: 'Pencil & water colours',
+        event: 'meet-up-04',
+      },
+      {
+        id: 'USKG5-1',
+        filename: '1.png',
+        title: 'Galle Fort lighthouse',
+        description: '',
+        event: 'meet-up-04',
+      },
+    ];
+
+    // State
+    let artworksList = JSON.parse(JSON.stringify(DEFAULT_ARTWORKS));
+    let selectedExt = 'png';
+    let isFilenameManual = false;
+
+    // Elements
+    const artistSelect = document.getElementById('artist-select');
+    const customArtistGroup = document.getElementById('custom-artist-group');
+    const customArtistId = document.getElementById('custom-artist-id');
+    const artNumber = document.getElementById('art-number');
+    const artId = document.getElementById('art-id');
+    const artFilename = document.getElementById('art-filename');
+    const artTitle = document.getElementById('art-title');
+    const artDesc = document.getElementById('art-desc');
+    const artEvent = document.getElementById('art-event');
+
+    // Preview
+    const prevId = document.getElementById('prev-id');
+    const prevFilename = document.getElementById('prev-filename');
+    const prevEvent = document.getElementById('prev-event');
+    const prevTitle = document.getElementById('prev-title');
+    const prevDesc = document.getElementById('prev-desc');
+
+    // Code outputs
+    const codeSnippet = document.getElementById('code-snippet');
+    const codeFull = document.getElementById('code-full');
+    const codeFullCount = document.getElementById('code-full-count');
+    const codeBatch = document.getElementById('code-batch');
+    const batchCountInput = document.getElementById('batch-count');
+
+    // Checklist
+    const checkFilePath = document.getElementById('check-file-path');
+    const checkCmd = document.getElementById('check-cmd');
+
+    // Table
+    const tableBody = document.getElementById('artworks-table-body');
+    const artworksCountSpan = document.getElementById('artworks-count');
+    const filterArtistSelect = document.getElementById('filter-artist');
+
+    // Toast
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toast-message');
+
+    function showToast(msg) {
+      toastMessage.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2600);
+    }
+
+    function escapeJsString(str) {
+      if (!str) return '';
+      return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, function(m) {
+        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[m];
+      });
+    }
+
+    // Get active artist ID
+    function getSelectedArtistId() {
+      if (artistSelect.value === 'custom') {
+        return (customArtistId.value.trim() || 'USKG1').toUpperCase();
+      }
+      return artistSelect.value;
+    }
+
+    // Calculate next sketch number for this artist
+    function getNextNumberForArtist(artistId) {
+      let maxNum = 0;
+      const prefix = `${artistId.toLowerCase()}-`;
+      for (const art of artworksList) {
+        if (art.id && art.id.toLowerCase().startsWith(prefix)) {
+          const numPart = art.id.toLowerCase().replace(prefix, '');
+          const parsed = parseInt(numPart, 10);
+          if (!isNaN(parsed) && parsed > maxNum) {
+            maxNum = parsed;
+          }
+        }
+      }
+      return maxNum + 1;
+    }
+
+    // Single artwork JS snippet formatter
+    function formatArtworkObject(art, indent = '  ') {
+      const lines = [];
+      lines.push(`${indent}{`);
+      lines.push(`${indent}  id: '${escapeJsString(art.id)}',`);
+      lines.push(`${indent}  filename: '${escapeJsString(art.filename)}',`);
+      lines.push(`${indent}  title: '${escapeJsString(art.title)}',`);
+      lines.push(`${indent}  description: '${escapeJsString(art.description)}',`);
+      if (art.event) {
+        lines.push(`${indent}  event: '${escapeJsString(art.event)}',`);
+      }
+      lines.push(`${indent}},`);
+      return lines.join('\n');
+    }
+
+    // Get current form object
+    function getCurrentFormArtwork() {
+      const artistId = getSelectedArtistId();
+      const num = parseInt(artNumber.value, 10) || 1;
+      const id = `${artistId}-${num}`;
+      const filename = artFilename.value.trim() || `${num}.${selectedExt}`;
+      const title = artTitle.value.trim() || `Sketch #${num}`;
+      const description = artDesc.value.trim();
+      const event = artEvent.value.trim() || 'meet-up-04';
+
+      return { id, filename, title, description, event, artistId, num };
+    }
+
+    // Update outputs and live preview
+    function updateOutputs() {
+      const artistId = getSelectedArtistId();
+      const num = parseInt(artNumber.value, 10) || 1;
+      const id = `${artistId}-${num}`;
+      
+      artId.value = id;
+      if (!isFilenameManual) {
+        artFilename.value = `${num}.${selectedExt}`;
+      }
+
+      const art = getCurrentFormArtwork();
+
+      // Snippet
+      codeSnippet.textContent = formatArtworkObject(art, '  ');
+
+      // Full Array
+      const previewList = [...artworksList];
+      const isCustomTitle = artTitle.value.trim().length > 0;
+      let displayList = previewList;
+      if (isCustomTitle && !artworksList.some(a => a.id === art.id)) {
+        displayList = [...previewList, art];
+      }
+
+      let fullArrayCode = `export const artworks = [\n`;
+      fullArrayCode += displayList.map(a => formatArtworkObject(a, '  ')).join('\n');
+      fullArrayCode += `\n];`;
+      codeFull.textContent = fullArrayCode;
+      codeFullCount.textContent = `${displayList.length} Artworks`;
+
+      // Live Card Preview
+      prevId.textContent = art.id;
+      prevFilename.textContent = art.filename;
+      prevEvent.textContent = art.event || 'meet-up-04';
+      prevTitle.textContent = artTitle.value.trim() || 'Artwork Title';
+      prevDesc.textContent = art.description || 'Description or medium details will appear here...';
+
+      // Checklist Tab
+      checkFilePath.textContent = `public/artworks-images/${artistId}/${art.filename}`;
+      checkCmd.textContent = `mkdir "public\\artworks-images\\${artistId}"`;
+    }
+
+    // Populate filter dropdown
+    function updateFilterDropdown() {
+      const uniqueArtists = new Set();
+      artworksList.forEach(a => {
+        const match = a.id && a.id.match(/^([a-z0-9]+)-/i);
+        if (match) uniqueArtists.add(match[1]);
+      });
+
+      const currentVal = filterArtistSelect.value;
+      filterArtistSelect.innerHTML = '<option value="ALL">All Artists</option>';
+      Array.from(uniqueArtists).sort().forEach(aid => {
+        const opt = document.createElement('option');
+        opt.value = aid;
+        opt.textContent = aid;
+        if (aid === currentVal) opt.selected = true;
+        filterArtistSelect.appendChild(opt);
+      });
+    }
+
+    // Render Table
+    function renderTable() {
+      tableBody.innerHTML = '';
+      const filter = filterArtistSelect.value;
+
+      const filtered = filter === 'ALL'
+        ? artworksList
+        : artworksList.filter(a => a.id && a.id.toLowerCase().startsWith(`${filter.toLowerCase()}-`));
+
+      artworksCountSpan.textContent = artworksList.length;
+
+      filtered.forEach((art) => {
+        const index = artworksList.indexOf(art);
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+          <td>
+            <span class="badge-art-id">${escapeHtml(art.id)}</span>
+          </td>
+          <td>
+            <code style="font-size:0.78rem;">${escapeHtml(art.filename)}</code>
+          </td>
+          <td><strong>${escapeHtml(art.title)}</strong></td>
+          <td style="max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--color-muted);">
+            ${escapeHtml(art.description)}
+          </td>
+          <td>
+            <span class="badge-event">${escapeHtml(art.event || '—')}</span>
+          </td>
+          <td style="text-align: right; white-space: nowrap;">
+            <button class="btn btn-outline btn-sm" onclick="loadArtworkToForm(${index})">Load</button>
+            <button class="btn btn-outline btn-sm" style="color:#d9534f; border-color:#eec4c4;" onclick="deleteArtwork(${index})">✕</button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+
+      updateFilterDropdown();
+    }
+
+    // Add and Next
+    function addArtworkAndNext() {
+      if (!artTitle.value.trim()) {
+        artTitle.focus();
+        showToast('Please enter an artwork title first!');
+        return;
+      }
+
+      const art = getCurrentFormArtwork();
+
+      const existingIdx = artworksList.findIndex(a => a.id.toLowerCase() === art.id.toLowerCase());
+      if (existingIdx !== -1) {
+        artworksList[existingIdx] = art;
+        showToast(`Updated existing artwork ${art.id}!`);
+      } else {
+        artworksList.push(art);
+        showToast(`Added ${art.id} (${art.title}) to array!`);
+      }
+
+      renderTable();
+
+      // Prepare for next sketch for the SAME artist!
+      const nextNum = (parseInt(artNumber.value, 10) || 1) + 1;
+      artNumber.value = nextNum;
+      isFilenameManual = false;
+      artTitle.value = '';
+      artDesc.value = '';
+      artTitle.focus();
+      updateOutputs();
+    }
+
+    document.getElementById('btn-add-and-next').addEventListener('click', addArtworkAndNext);
+
+    document.getElementById('btn-clear-form').addEventListener('click', () => {
+      artTitle.value = '';
+      artDesc.value = '';
+      isFilenameManual = false;
+      artNumber.value = getNextNumberForArtist(getSelectedArtistId());
+      artTitle.focus();
+      updateOutputs();
+      showToast('Form cleared');
+    });
+
+    // Form Event Listeners
+    artistSelect.addEventListener('change', () => {
+      customArtistGroup.style.display = artistSelect.value === 'custom' ? 'flex' : 'none';
+      artNumber.value = getNextNumberForArtist(getSelectedArtistId());
+      isFilenameManual = false;
+      updateOutputs();
+    });
+
+    customArtistId.addEventListener('input', () => {
+      artNumber.value = getNextNumberForArtist(getSelectedArtistId());
+      updateOutputs();
+    });
+
+    artNumber.addEventListener('input', () => {
+      isFilenameManual = false;
+      updateOutputs();
+    });
+
+    artFilename.addEventListener('input', () => {
+      isFilenameManual = true;
+      updateOutputs();
+    });
+
+    artTitle.addEventListener('input', updateOutputs);
+    artDesc.addEventListener('input', updateOutputs);
+    artEvent.addEventListener('input', updateOutputs);
+
+    // Extension buttons
+    const extBtns = document.querySelectorAll('.ext-btn');
+    extBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        extBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedExt = btn.getAttribute('data-ext');
+        isFilenameManual = false;
+        updateOutputs();
+      });
+    });
+
+    // Medium chip buttons
+    document.querySelectorAll('.chip-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const textToInsert = btn.getAttribute('data-insert');
+        if (artDesc.value.trim().length > 0) {
+          artDesc.value += ` | ${textToInsert}`;
+        } else {
+          artDesc.value = textToInsert;
+        }
+        updateOutputs();
+      });
+    });
+
+    // Batch generator
+    function generateBatch() {
+      const artistId = getSelectedArtistId();
+      const count = parseInt(batchCountInput.value, 10) || 3;
+      const eventName = artEvent.value.trim() || 'meet-up-04';
+      const startNum = 1;
+
+      const batchItems = [];
+      for (let i = 0; i < count; i++) {
+        const num = startNum + i;
+        batchItems.push({
+          id: `${artistId}-${num}`,
+          filename: `${num}.${selectedExt}`,
+          title: `Sketch #${num}`,
+          description: '',
+          event: eventName,
+        });
+      }
+
+      const code = batchItems.map(item => formatArtworkObject(item, '  ')).join('\n');
+      codeBatch.textContent = code;
+    }
+
+    document.getElementById('btn-generate-batch').addEventListener('click', generateBatch);
+
+    document.getElementById('btn-copy-batch').addEventListener('click', () => {
+      copyText(codeBatch.textContent, 'Copied batch snippets to clipboard!');
+    });
+
+    // Global Load / Delete
+    window.loadArtworkToForm = function(index) {
+      const art = artworksList[index];
+      if (!art) return;
+
+      const match = art.id && art.id.match(/^([a-z0-9]+)-(\d+)$/i);
+      if (match) {
+        const aid = match[1];
+        const num = match[2];
+        const hasOpt = Array.from(artistSelect.options).some(o => o.value.toLowerCase() === aid.toLowerCase());
+        if (hasOpt) {
+          artistSelect.value = aid;
+          customArtistGroup.style.display = 'none';
+        } else {
+          artistSelect.value = 'custom';
+          customArtistId.value = aid;
+          customArtistGroup.style.display = 'flex';
+        }
+        artNumber.value = num;
+      }
+
+      artFilename.value = art.filename || '';
+      isFilenameManual = true;
+      artTitle.value = art.title || '';
+      artDesc.value = art.description || '';
+      artEvent.value = art.event || 'meet-up-04';
+
+      updateOutputs();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showToast(`Loaded ${art.id} into form`);
+    };
+
+    window.deleteArtwork = function(index) {
+      const art = artworksList[index];
+      if (!confirm(`Delete artwork ${art.id} (${art.title})?`)) return;
+      artworksList.splice(index, 1);
+      renderTable();
+      updateOutputs();
+      showToast(`Removed ${art.id}`);
+    };
+
+    // Reset Defaults
+    document.getElementById('btn-reset-initial').addEventListener('click', () => {
+      if (!confirm('Reset artworks list to default 9 items?')) return;
+      artworksList = JSON.parse(JSON.stringify(DEFAULT_ARTWORKS));
+      renderTable();
+      updateOutputs();
+      showToast('Reset to default artworks');
+    });
+
+    // Copy to clipboard helper
+    async function copyText(text, successMsg) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast(successMsg);
+      } catch (err) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast(successMsg);
+      }
+    }
+
+    document.getElementById('btn-copy-snippet').addEventListener('click', () => {
+      copyText(codeSnippet.textContent, 'Copied snippet to clipboard! Paste into artworks.js');
+    });
+
+    document.getElementById('btn-quick-copy').addEventListener('click', () => {
+      copyText(codeSnippet.textContent, 'Copied snippet to clipboard! Paste into artworks.js');
+    });
+
+    document.getElementById('btn-copy-full').addEventListener('click', () => {
+      copyText(codeFull.textContent, 'Copied full artworks array to clipboard!');
+    });
+
+    document.getElementById('btn-copy-cmd').addEventListener('click', () => {
+      copyText(checkCmd.textContent, 'Copied folder creation command!');
+    });
+
+    document.getElementById('btn-export-json').addEventListener('click', () => {
+      copyText(JSON.stringify(artworksList, null, 2), 'Copied artworks as JSON!');
+    });
+
+    filterArtistSelect.addEventListener('change', renderTable);
+
+    // Tabs Navigation
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const tabKey = btn.getAttribute('data-tab');
+        document.getElementById('tab-snippet').style.display = tabKey === 'snippet' ? 'block' : 'none';
+        document.getElementById('tab-full-array').style.display = tabKey === 'full-array' ? 'block' : 'none';
+        document.getElementById('tab-batch').style.display = tabKey === 'batch' ? 'block' : 'none';
+        document.getElementById('tab-checklist').style.display = tabKey === 'checklist' ? 'block' : 'none';
+
+        if (tabKey === 'batch') generateBatch();
+      });
+    });
+
+    // Shortcuts
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        if (e.shiftKey) {
+          addArtworkAndNext();
+        } else {
+          copyText(codeSnippet.textContent, 'Copied snippet to clipboard! (Ctrl+Enter)');
+        }
+      }
+    });
+
+    // Initial setup
+    artNumber.value = getNextNumberForArtist('USKG1');
+    renderTable();
+    updateOutputs();
+    generateBatch();
+  </script>
+</body>
+</html>

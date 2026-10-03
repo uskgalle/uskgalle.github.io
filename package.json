@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "add-artist": "start artist-generator.html"
+    "add-artist": "start artist-generator.html",
+    "add-artwork": "start artwork-generator.html"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
