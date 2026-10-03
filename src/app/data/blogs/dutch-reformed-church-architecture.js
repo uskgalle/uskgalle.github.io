@@ -32,7 +32,7 @@ const post = {
 
     <div class="image-grid-2">
       <figure class="article-figure">
-        <img src="/artworks-images/nimthaka-jayavihan/2.png" alt="Galle Fort Clock Tower and historic architecture watercolor sketch" />
+        <img src="/artworks-images/USKG3/2.png" alt="Galle Fort Clock Tower and historic architecture watercolor sketch" />
         <figcaption>Galle Fort architectural context sketch by Nimthaka Jayavihan.</figcaption>
       </figure>
       <figure class="article-figure">

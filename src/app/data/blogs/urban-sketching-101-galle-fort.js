@@ -39,7 +39,7 @@ const post = {
 
     <div class="image-grid-2">
       <figure class="article-figure">
-        <img src="/artworks-images/yasith-arangala/1.png" alt="Rapid watercolor and ink sketch by Yasith Arangala" />
+        <img src="/artworks-images/USKG1/1.png" alt="Rapid watercolor and ink sketch by Yasith Arangala" />
         <figcaption>Quick ink linework capturing the essence of Galle Fort landmarks by Yasith Arangala.</figcaption>
       </figure>
       <figure class="article-figure">

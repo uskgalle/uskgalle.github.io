@@ -662,7 +662,7 @@
         <h2 class="panel-title">
           <span>✏️</span> Add New Artist
         </h2>
-        <span class="helper-text">Slug handles routing & artworks folder</span>
+        <span class="helper-text">Images & artworks folders use <strong>Artist ID</strong></span>
       </div>
 
       <div class="panel-body">
@@ -682,19 +682,19 @@
             <div class="form-group">
               <label for="artist-id">
                 Artist ID
-                <span class="label-hint">Profile Image uses this ID</span>
+                <span class="label-hint">Used for images & artwork folders</span>
               </label>
               <div class="input-with-action">
-                <input type="text" id="artist-id" placeholder="USKG6">
+                <input type="text" id="artist-id" placeholder="USKG15">
                 <button type="button" class="input-action-btn" id="btn-next-id" title="Auto calculate next ID">Next</button>
               </div>
-              <span class="helper-text">e.g. <code>USKG6.png</code></span>
+              <span class="helper-text">e.g. <code>USKG15.png</code> and folder <code>USKG15/</code></span>
             </div>
 
             <!-- Slug -->
             <div class="form-group">
               <label for="artist-slug">
-                URL & Folder Slug
+                URL Slug
                 <span class="label-hint">Auto-synced from name</span>
               </label>
               <input type="text" id="artist-slug" placeholder="e.g. kasun-miuranga">
@@ -809,7 +809,7 @@
           <div class="code-container">
             <div class="code-header">
               <span class="code-lang">JavaScript (Full Array)</span>
-              <span style="font-size: 0.72rem; color: #9c9184;" id="code-full-count">5 Artists</span>
+              <span style="font-size: 0.72rem; color: #9c9184;" id="code-full-count">Artists</span>
             </div>
             <pre><code id="code-full">// Loading complete array...</code></pre>
           </div>
@@ -819,21 +819,21 @@
         <div class="tab-content" id="tab-checklist" style="display: none;">
           <div class="checklist-box">
             <div class="checklist-title">
-              <span>📁</span> File Checklist for this Artist:
+              <span>📁</span> Storage Checklist for this Artist:
             </div>
             <div class="checklist-item">
               <span>🖼️</span>
               <div>
                 <strong>Profile Photo:</strong> Save using their <strong>Artist ID</strong>:<br>
-                <code id="check-profile-path">public/artists-images/USKG6.png</code>
-                <div class="helper-text">(Also supports .webp or .jpg)</div>
+                <code id="check-profile-path">public/artists-images/USKG15.png</code>
+                <div class="helper-text">(Supports .png, .webp, .jpg)</div>
               </div>
             </div>
             <div class="checklist-item">
               <span>📂</span>
               <div>
-                <strong>Artworks Folder:</strong> Folder for sketches uses <strong>Slug</strong>:<br>
-                <code id="check-artworks-path">public/artworks-images/artist-slug/</code>
+                <strong>Artworks Folder:</strong> Folder for sketches using <strong>Artist ID</strong>:<br>
+                <code id="check-artworks-path">public/artworks-images/USKG15/</code>
                 <div class="helper-text">(Add 1.png, 2.png, etc. inside this folder)</div>
               </div>
             </div>
@@ -841,7 +841,7 @@
               <span>⚡</span>
               <div>
                 <strong>Quick Command to Create Artworks Folder:</strong><br>
-                <code id="check-cmd">mkdir "public\artworks-images\artist-slug"</code>
+                <code id="check-cmd">mkdir "public\artworks-images\USKG15"</code>
                 <button type="button" class="btn btn-outline btn-sm" style="margin-top: 0.5rem; display: block;" id="btn-copy-cmd">
                   Copy Command
                 </button>
@@ -857,7 +857,7 @@
     <section class="panel col-span-2" style="grid-column: span 2;">
       <div class="table-header">
         <div>
-          <h2 class="panel-title">👥 Current Artists in Array (<span id="artist-count">5</span>)</h2>
+          <h2 class="panel-title">👥 Current Artists in Array (<span id="artist-count">14</span>)</h2>
           <p class="brand-desc">Loaded from artists.js. New additions appear here.</p>
         </div>
         <div style="display: flex; gap: 0.5rem;">
@@ -898,7 +898,7 @@
 
   <!-- Logic Script -->
   <script>
-    // Initial Artists loaded from artists.js (simplified without redundant folder)
+    // Initial Artists loaded directly from artists.js
     const DEFAULT_ARTISTS = [
       {
         id: 'USKG1',
@@ -934,6 +934,69 @@
         slug: 'sachith-vithanage',
         bio: 'As a traveling artist I enjoy sketching at different places. I’m interested in sketching architecture and landscape. I believe each city and place has something to offer, and sketching them can be a good way to understand what it is.',
         instagram: 'https://instagram.com/sachithvithanage',
+      },
+      {
+        id: 'USKG6',
+        name: 'Shifteh',
+        slug: 'shifteh',
+        bio: 'former maha.workroom | temporary super slow traveler | postcard painter  | stubborn experiencer | skill collector',
+        instagram: 'https://instagram.com/shifis.way',
+      },
+      {
+        id: 'USKG7',
+        name: 'Amodi Kodithuwakku',
+        slug: 'amodi-kodithuwakku',
+        bio: 'Colouring outside the lines ofc',
+        instagram: 'https://instagram.com/artis_tmaybe',
+      },
+      {
+        id: 'USKG8',
+        name: 'Nelum Buddhadasa',
+        slug: 'nelum-buddhadasa',
+        bio: 'Rediscovering my sketching abilities after some years!',
+        instagram: 'https://instagram.com/nelum_ventures',
+      },
+      {
+        id: 'USKG9',
+        name: 'Rachel West',
+        slug: 'rachel-west',
+        bio: 'Artist dabbling in illustration and murals wanting to spend more time sketching.',
+        instagram: 'https://instagram.com/Rwestarts',
+      },
+      {
+        id: 'USKG10',
+        name: 'Maheema Mahimani',
+        slug: 'maheema-mahimani',
+        bio: 'Finely imperfect',
+        instagram: 'https://instagram.com/__hibee.___',
+      },
+      {
+        id: 'USKG11',
+        name: 'Rashmi Wimalasiri',
+        slug: 'rashmi-wimalasiri',
+        bio: 'Just started, so let’s see',
+        instagram: 'https://instagram.com/rashmi_ww',
+      },
+      {
+        id: 'USKG12',
+        name: 'Lakdini Lisakya',
+        slug: 'lakdini-lisakya',
+        bio: 'Enjoy and busy with architectural journey',
+        instagram: 'https://instagram.com/lakdinilisakya',
+      },
+      {
+        id: 'USKG13',
+        name: 'Kathya Ruhansi',
+        slug: 'kathya-ruhansi',
+        bio: 'Learning architecture, observing the world through lines | archi student in university of moratuwa',
+        instagram: 'https://instagram.com/_kathya_rk_',
+      },
+      {
+        id: 'USKG14',
+        name: 'Isuri Kumarasinghe',
+        slug: 'isuri-kumarasinghe',
+        bio: 'Plant Lover | Agriculturist | Cooking & Backing | Artist',
+        instagram: 'https://instagram.com/isuri_k_',
       },
     ];
 
@@ -1114,12 +1177,11 @@
         prevInsta.style.display = 'none';
       }
 
-      // Checklist Tab
-      const effectiveId = artist.id || 'USKG#';
-      const effectiveSlug = artist.slug || 'artist-slug';
+      // Checklist Tab (Now uses artist.id for both profile image and artworks folder)
+      const effectiveId = artist.id || 'USKG15';
       checkProfilePath.textContent = `public/artists-images/${effectiveId}.png`;
-      checkArtworksPath.textContent = `public/artworks-images/${effectiveSlug}/`;
-      checkCmd.textContent = `mkdir "public\\artworks-images\\${effectiveSlug}"`;
+      checkArtworksPath.textContent = `public/artworks-images/${effectiveId}/`;
+      checkCmd.textContent = `mkdir "public\\artworks-images\\${effectiveId}"`;
 
       // Bio counter
       bioCount.textContent = `${bioInput.value.length} chars`;
@@ -1278,7 +1340,7 @@
 
     // Reset initial list
     document.getElementById('btn-reset-initial').addEventListener('click', () => {
-      if (!confirm('Reset artists list back to the initial 5 USK Galle artists?')) return;
+      if (!confirm('Reset artists list back to the default list?')) return;
       artistsList = JSON.parse(JSON.stringify(DEFAULT_ARTISTS));
       renderTable();
       idInput.value = getNextId();

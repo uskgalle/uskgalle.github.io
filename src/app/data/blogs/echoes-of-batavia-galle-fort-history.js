@@ -49,7 +49,7 @@ const post = {
         <figcaption>Leyn Baan Street (Rope Walk): narrow cobblestone perspective framed by bougainvillea.</figcaption>
       </figure>
       <figure class="article-figure">
-        <img src="/artworks-images/yasith-arangala/2.png" alt="Architectural watercolor sketch of Galle Fort facade by Yasith Arangala" />
+        <img src="/artworks-images/USKG1/2.png" alt="Architectural watercolor sketch of Galle Fort facade by Yasith Arangala" />
         <figcaption>Watercolor & ink study capturing colonial porticos and gables by Yasith Arangala.</figcaption>
       </figure>
     </div>

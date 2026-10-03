@@ -6,6 +6,7 @@ export const artworks = [
   // ── Yasith Arangala USKG1 ──────────────────────────────
   {
     id: 'yasith-arangala-1',
+    artistId: 'USKG1',
     artistSlug: 'yasith-arangala',
     filename: '1.png',
     title: 'Symbols of Galle fort',
@@ -14,6 +15,7 @@ export const artworks = [
   },
   {
     id: 'yasith-arangala-2',
+    artistId: 'USKG1',
     artistSlug: 'yasith-arangala',
     filename: '2.png',
     title: 'Symbols of Galle fort',
@@ -22,6 +24,7 @@ export const artworks = [
   },
   {
     id: 'yasith-arangala-3',
+    artistId: 'USKG1',
     artistSlug: 'yasith-arangala',
     filename: '3.png',
     title: 'Symbols of Galle fort',
@@ -32,6 +35,7 @@ export const artworks = [
   // ── Sumudu Udari USKG2 ─────────────────────────────────
   {
     id: 'sumudu-udari-1',
+    artistId: 'USKG2',
     artistSlug: 'sumudu-udari',
     filename: '1.png',
     title: 'Galle Fort Lighthouse with blue sky',
@@ -42,6 +46,7 @@ export const artworks = [
   // ── Nimthaka Jayavihan USKG3 ─────────────────────────────────
   {
     id: 'nimthaka-jayavihan-1',
+    artistId: 'USKG3',
     artistSlug: 'nimthaka-jayavihan',
     filename: '1.png',
     title: 'Galle lighthouse ',
@@ -50,6 +55,7 @@ export const artworks = [
   },
   {
     id: 'nimthaka-jayavihan-2',
+    artistId: 'USKG3',
     artistSlug: 'nimthaka-jayavihan',
     filename: '2.png',
     title: 'Galle fort clock tower',
@@ -58,6 +64,7 @@ export const artworks = [
   },
   {
     id: 'nimthaka-jayavihan-3',
+    artistId: 'USKG3',
     artistSlug: 'nimthaka-jayavihan',
     filename: '3.png',
     title: 'Galle fort light-house',
@@ -67,6 +74,7 @@ export const artworks = [
   // ── Lakshana Samadhi USKG4 ─────────────────────────────────
   {
     id: 'lakshana-samadhi-1',
+    artistId: 'USKG4',
     artistSlug: 'lakshana-samadhi',
     filename: '1.png',
     title: 'Galle light house',
@@ -77,22 +85,24 @@ export const artworks = [
   // ── Sachith Vithanage USKG5 ─────────────────────────────────
   {
     id: 'sachith-vithanage-1',
+    artistId: 'USKG5',
     artistSlug: 'sachith-vithanage',
     filename: '1.png',
     title: 'Galle Fort lighthouse',
     description: '',
     event: 'meet-up-04'
   },
-
-
-
 ];
 
-export function getArtworkMetadata(artistSlug, filename) {
+export function getArtworkMetadata(identifier, filename) {
+  if (!identifier || !filename) return null;
+  const idLower = String(identifier).toLowerCase();
   return (
     artworks.find(
       (art) =>
-        (art.artistSlug === artistSlug || art.folder === artistSlug) &&
+        ((art.artistId && art.artistId.toLowerCase() === idLower) ||
+         (art.artistSlug && art.artistSlug.toLowerCase() === idLower) ||
+         (art.folder && art.folder.toLowerCase() === idLower)) &&
         art.filename === filename
     ) || null
   );

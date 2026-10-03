@@ -208,24 +208,27 @@ export function getProfileImagePath(input) {
 export function getArtworksForArtist(input) {
   if (!input) return [];
 
-  let folder = null;
-  let altFolder = null;
+  let artist = null;
+  let primaryFolder = null;
+  let secondaryFolder = null;
 
   if (typeof input === 'object' && input !== null) {
-    folder = input.slug || input.folder || input.id;
-    altFolder = input.id;
+    artist = input;
+    primaryFolder = input.id;
+    secondaryFolder = input.slug || input.folder;
   } else if (typeof input === 'string') {
-    const artist = getArtistById(input) || getArtistBySlug(input);
+    artist = getArtistById(input) || getArtistBySlug(input);
     if (artist) {
-      folder = artist.slug || artist.folder || artist.id;
-      altFolder = artist.id;
+      primaryFolder = artist.id;
+      secondaryFolder = artist.slug || artist.folder;
     } else {
-      folder = input;
+      primaryFolder = input;
     }
   }
 
   let targetDir = null;
-  const candidates = [folder, altFolder].filter(Boolean);
+  // Prioritize artist ID folder (e.g. USKG1), fallback to slug (e.g. yasith-arangala)
+  const candidates = [primaryFolder, secondaryFolder].filter(Boolean);
 
   for (const name of candidates) {
     const dirPath = path.join(process.cwd(), 'public', 'artworks-images', name);
@@ -250,7 +253,10 @@ export function getArtworksForArtist(input) {
       });
 
     return imageFiles.map((filename, index) => {
-      const meta = getArtworkMetadata(targetDir.name, filename);
+      const meta =
+        getArtworkMetadata(targetDir.name, filename) ||
+        (artist?.id ? getArtworkMetadata(artist.id, filename) : null) ||
+        (artist?.slug ? getArtworkMetadata(artist.slug, filename) : null);
 
       return {
         id: meta?.id || `${targetDir.name}-${index + 1}`,
@@ -277,7 +283,7 @@ export function getAllArtworks() {
       artistId: artist.id,
       artistName: artist.name,
       artistSlug: artist.slug,
-      artistFolder: artist.slug,
+      artistFolder: artist.id,
     }));
     allArtworks = allArtworks.concat(mapped);
   }

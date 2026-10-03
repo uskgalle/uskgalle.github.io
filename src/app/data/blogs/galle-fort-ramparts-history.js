@@ -35,11 +35,11 @@ const post = {
 
     <div class="image-grid-2">
       <figure class="article-figure">
-        <img src="/artworks-images/sumudu-udari/1.png" alt="Watercolor painting of Galle Fort Lighthouse by Sumudu Udari" />
+        <img src="/artworks-images/USKG2/1.png" alt="Watercolor painting of Galle Fort Lighthouse by Sumudu Udari" />
         <figcaption>"Galle Fort Lighthouse with Blue Sky" - watercolor & pen study by Sumudu Udari.</figcaption>
       </figure>
       <figure class="article-figure">
-        <img src="/artworks-images/nimthaka-jayavihan/3.png" alt="Ground level perspective sketch of Galle Fort Lighthouse by Nimthaka Jayavihan" />
+        <img src="/artworks-images/USKG3/3.png" alt="Ground level perspective sketch of Galle Fort Lighthouse by Nimthaka Jayavihan" />
         <figcaption>Ground-level perspective of the lighthouse by Nimthaka Jayavihan.</figcaption>
       </figure>
     </div>
