@@ -28,8 +28,8 @@ export default async function ArtistPage({ params }) {
 
     if (!artist) return notFound();
 
-    const artworks = getArtworksForArtist(artist.folder);
-    const profileImage = getProfileImagePath(artist.folder);
+    const artworks = getArtworksForArtist(artist);
+    const profileImage = getProfileImagePath(artist);
 
     // Get any blog articles written by or attributed to this profile
     const articles = blogPosts.filter(

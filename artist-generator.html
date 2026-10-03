@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USK Galle — Artist Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #f6f3ee;
+      --bg-surface: #ffffff;
+      --bg-card: #fcfbf9;
+      --bg-subtle: #eae3d7;
+      --border-light: #e4dcce;
+      --border-focus: #b8854a;
+      
+      --color-primary: #b8854a;
+      --color-primary-hover: #9c6e3b;
+      --color-dark: #2a201a;
+      --color-brown: #5c4a32;
+      --color-text: #3a2e22;
+      --color-muted: #7c6b58;
+      --color-code-bg: #1c1815;
+      --color-code-text: #f3efe9;
+      --color-accent: #2e7d32;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --shadow-sm: 0 2px 8px rgba(42, 32, 26, 0.05);
+      --shadow-md: 0 8px 24px rgba(42, 32, 26, 0.08);
+      --shadow-lg: 0 16px 36px rgba(42, 32, 26, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--color-text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    /* ─── Top Header ─── */
+    header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-light);
+      padding: 1.25rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .brand-badge {
+      background: var(--color-dark);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      letter-spacing: 0.05em;
+    }
+
+    .brand-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--color-dark);
+      font-weight: 600;
+    }
+
+    .brand-desc {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    /* ─── Layout ─── */
+    .container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 1080px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ─── Cards & Panels ─── */
+    .panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-header {
+      padding: 1.25rem 1.75rem;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-card);
+    }
+
+    .panel-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .panel-body {
+      padding: 1.75rem;
+    }
+
+    /* ─── Form Controls ─── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .col-span-2 {
+      grid-column: span 2;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .label-hint {
+      font-size: 0.74rem;
+      font-weight: 400;
+      color: var(--color-muted);
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.75rem 0.95rem;
+      font-family: inherit;
+      font-size: 0.92rem;
+      background: #faf8f5;
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      color: var(--color-text);
+      transition: all 0.15s ease;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(184, 133, 74, 0.15);
+    }
+
+    textarea {
+      min-height: 95px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    .input-with-action {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-action-btn {
+      position: absolute;
+      right: 8px;
+      background: var(--bg-subtle);
+      border: none;
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--color-brown);
+      transition: background 0.15s;
+    }
+
+    .input-action-btn:hover {
+      background: #d6ccbd;
+    }
+
+    .helper-text {
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      margin-top: 0.15rem;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+      padding: 0.65rem 0.85rem;
+      background: #faf8f5;
+      border-radius: var(--radius-sm);
+      border: 1px dashed var(--border-light);
+      cursor: pointer;
+    }
+
+    .checkbox-group input {
+      cursor: pointer;
+      accent-color: var(--color-primary);
+      width: 16px;
+      height: 16px;
+    }
+
+    .checkbox-group span {
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--color-dark);
+    }
+
+    /* ─── Buttons ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.35rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border: none;
+      font-family: inherit;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(184, 133, 74, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-dark {
+      background: var(--color-dark);
+      color: #fff;
+    }
+
+    .btn-dark:hover {
+      background: #1c1511;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--border-light);
+      color: var(--color-dark);
+    }
+
+    .btn-outline:hover {
+      background: var(--bg-card);
+      border-color: var(--color-muted);
+    }
+
+    .btn-sm {
+      padding: 0.45rem 0.85rem;
+      font-size: 0.78rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* ─── Tabs & Code Output ─── */
+    .tabs-nav {
+      display: flex;
+      border-bottom: 1px solid var(--border-light);
+      background: var(--bg-card);
+      padding: 0 1.25rem;
+    }
+
+    .tab-btn {
+      padding: 0.85rem 1.15rem;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--color-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+      background: var(--bg-surface);
+    }
+
+    .code-container {
+      position: relative;
+      background: var(--color-code-bg);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 1rem;
+      background: #14110f;
+      border-bottom: 1px solid #2e2823;
+    }
+
+    .code-lang {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #9c9184;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    pre code {
+      display: block;
+      padding: 1.2rem 1.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: var(--color-code-text);
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* ─── Preview Card ─── */
+    .artist-preview-card {
+      background: var(--bg-canvas);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    .preview-avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      border: 2px solid var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--color-brown);
+      font-size: 1.35rem;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .preview-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .preview-header-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .preview-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .preview-id-badge {
+      background: #e2d7c5;
+      color: var(--color-dark);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .preview-role {
+      font-size: 0.78rem;
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .preview-bio {
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 0.35rem;
+    }
+
+    .preview-insta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.74rem;
+      color: var(--color-brown);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    /* ─── Checklist Box ─── */
+    .checklist-box {
+      background: #fdfbf7;
+      border: 1px solid #ebd9c0;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .checklist-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-dark);
+      margin-bottom: 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      margin-bottom: 0.85rem;
+      font-size: 0.82rem;
+      color: var(--color-text);
+    }
+
+    .checklist-item code {
+      background: #f0ebe3;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--color-dark);
+      font-weight: 600;
+      user-select: all;
+    }
+
+    /* ─── Current Array Table ─── */
+    .artists-table-container {
+      margin-top: 2rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .table-header {
+      padding: 1.25rem 1.75rem;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .artists-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+
+    .artists-table th {
+      text-align: left;
+      padding: 0.85rem 1.25rem;
+      background: #faf7f2;
+      color: var(--color-muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .artists-table td {
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: middle;
+    }
+
+    .artists-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .artists-table tr:hover {
+      background: #fdfcf9;
+    }
+
+    .badge-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      background: #efe7db;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.74rem;
+      color: var(--color-dark);
+    }
+
+    .badge-new {
+      background: #d4edda;
+      color: #155724;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      margin-left: 0.4rem;
+      text-transform: uppercase;
+    }
+
+    /* ─── Toast Alert ─── */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--color-dark);
+      color: #fff;
+      padding: 0.85rem 1.4rem;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.25s ease;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast-icon {
+      color: #4ade80;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      margin-top: auto;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      border-top: 1px solid var(--border-light);
+      background: var(--bg-surface);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header>
+    <div class="header-content">
+      <div class="brand">
+        <span class="brand-badge">USK GALLE</span>
+        <div>
+          <h1 class="brand-title">Artist Profile Generator</h1>
+          <p class="brand-desc">Quickly create new artist entries and generate copy-paste code for <code>src/app/data/artists.js</code></p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-outline btn-sm" id="btn-reset-initial">Reset to Default List</button>
+        <button class="btn btn-dark btn-sm" id="btn-quick-copy">📋 Quick Copy Snippet</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- LEFT COLUMN: Input Form -->
+    <section class="panel">
+      <div class="panel-header">
+        <h2 class="panel-title">
+          <span>✏️</span> Add New Artist
+        </h2>
+        <span class="helper-text">Slug handles routing & artworks folder</span>
+      </div>
+
+      <div class="panel-body">
+        <form id="artist-form" onsubmit="event.preventDefault();">
+          <div class="form-grid">
+            
+            <!-- Full Name -->
+            <div class="form-group col-span-2">
+              <label for="artist-name">
+                Full Name <span style="color:#d9534f;">*</span>
+                <span class="label-hint">e.g. Kasun Miuranga</span>
+              </label>
+              <input type="text" id="artist-name" placeholder="Enter artist name..." required autofocus>
+            </div>
+
+            <!-- Artist ID -->
+            <div class="form-group">
+              <label for="artist-id">
+                Artist ID
+                <span class="label-hint">Profile Image uses this ID</span>
+              </label>
+              <div class="input-with-action">
+                <input type="text" id="artist-id" placeholder="USKG6">
+                <button type="button" class="input-action-btn" id="btn-next-id" title="Auto calculate next ID">Next</button>
+              </div>
+              <span class="helper-text">e.g. <code>USKG6.png</code></span>
+            </div>
+
+            <!-- Slug -->
+            <div class="form-group">
+              <label for="artist-slug">
+                URL & Folder Slug
+                <span class="label-hint">Auto-synced from name</span>
+              </label>
+              <input type="text" id="artist-slug" placeholder="e.g. kasun-miuranga">
+              <span class="helper-text">URL: /artists/<strong>slug</strong></span>
+            </div>
+
+            <!-- Instagram -->
+            <div class="form-group col-span-2">
+              <label for="artist-instagram">
+                Instagram Profile
+                <span class="label-hint">Handle or Full URL</span>
+              </label>
+              <input type="text" id="artist-instagram" placeholder="@username or https://instagram.com/username">
+              <span class="helper-text">Auto-formats to: <code>https://instagram.com/username</code></span>
+            </div>
+
+            <!-- Bio -->
+            <div class="form-group col-span-2">
+              <label for="artist-bio">
+                Artist Bio / Description
+                <span class="label-hint" id="bio-count">0 chars</span>
+              </label>
+              <textarea id="artist-bio" placeholder="Write a short bio (e.g. Architecture student & sketcher exploring watercolor and pen in Galle Fort...)"></textarea>
+            </div>
+
+            <!-- Special Profile Option (Admin / Lead) -->
+            <div class="form-group col-span-2">
+              <label class="checkbox-group" id="special-toggle-label">
+                <input type="checkbox" id="artist-is-special">
+                <span>This is a Special Profile (Admin, Developer, Lead)</span>
+              </label>
+            </div>
+
+            <div class="form-group col-span-2" id="role-group" style="display: none;">
+              <label for="artist-role">
+                Special Role / Title
+                <span class="label-hint">e.g. Admin & Event Lead</span>
+              </label>
+              <input type="text" id="artist-role" placeholder="e.g. Community Coordinator">
+            </div>
+
+          </div>
+
+          <!-- Buttons -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" id="btn-add-and-next">
+              <span>➕</span> Add to Artists Array & Next
+            </button>
+            <button type="button" class="btn btn-outline" id="btn-clear-form">
+              Clear Form
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: Output & Live Preview -->
+    <section class="panel">
+      <!-- Tabs -->
+      <nav class="tabs-nav">
+        <button class="tab-btn active" data-tab="snippet">Single Item Snippet</button>
+        <button class="tab-btn" data-tab="full-array">Full artists Array</button>
+        <button class="tab-btn" data-tab="checklist">Asset Checklist</button>
+      </nav>
+
+      <div class="panel-body">
+        
+        <!-- Live Card Preview -->
+        <div>
+          <label style="margin-bottom: 0.5rem; display: block;">Live Profile Preview</label>
+          <div class="artist-preview-card">
+            <div class="preview-avatar" id="prev-avatar">?</div>
+            <div class="preview-info">
+              <div class="preview-header-line">
+                <div class="preview-name" id="prev-name">Artist Name</div>
+                <span class="preview-id-badge" id="prev-id">USKG#</span>
+              </div>
+              <div class="preview-role" id="prev-role" style="display: none;">Role</div>
+              <p class="preview-bio" id="prev-bio">Bio description will appear here as you type...</p>
+              <a href="#" class="preview-insta" id="prev-insta" target="_blank" rel="noopener noreferrer">
+                📸 <span id="prev-insta-text">@instagram</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 1: Single Snippet -->
+        <div class="tab-content" id="tab-snippet">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label>Copy this object and paste inside <code>artists = [ ... ]</code>:</label>
+            <button class="btn btn-dark btn-sm" id="btn-copy-snippet">
+              <span>📋</span> Copy Snippet
+            </button>
+          </div>
+          <div class="code-container">
+            <div class="code-header">
+              <span class="code-lang">JavaScript (Snippet)</span>
+              <span style="font-size: 0.72rem; color: #9c9184;">Press Ctrl+Enter to copy</span>
+            </div>
+            <pre><code id="code-snippet">// Fill the form on the left to generate code...</code></pre>
+          </div>
+        </div>
+
+        <!-- TAB 2: Full Array -->
+        <div class="tab-content" id="tab-full-array" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label>Replace entire <code>export const artists = [ ... ]</code> block:</label>
+            <button class="btn btn-dark btn-sm" id="btn-copy-full">
+              <span>📋</span> Copy Entire Array
+            </button>
+          </div>
+          <div class="code-container">
+            <div class="code-header">
+              <span class="code-lang">JavaScript (Full Array)</span>
+              <span style="font-size: 0.72rem; color: #9c9184;" id="code-full-count">5 Artists</span>
+            </div>
+            <pre><code id="code-full">// Loading complete array...</code></pre>
+          </div>
+        </div>
+
+        <!-- TAB 3: Checklist -->
+        <div class="tab-content" id="tab-checklist" style="display: none;">
+          <div class="checklist-box">
+            <div class="checklist-title">
+              <span>📁</span> File Checklist for this Artist:
+            </div>
+            <div class="checklist-item">
+              <span>🖼️</span>
+              <div>
+                <strong>Profile Photo:</strong> Save using their <strong>Artist ID</strong>:<br>
+                <code id="check-profile-path">public/artists-images/USKG6.png</code>
+                <div class="helper-text">(Also supports .webp or .jpg)</div>
+              </div>
+            </div>
+            <div class="checklist-item">
+              <span>📂</span>
+              <div>
+                <strong>Artworks Folder:</strong> Folder for sketches uses <strong>Slug</strong>:<br>
+                <code id="check-artworks-path">public/artworks-images/artist-slug/</code>
+                <div class="helper-text">(Add 1.png, 2.png, etc. inside this folder)</div>
+              </div>
+            </div>
+            <div class="checklist-item" style="margin-top: 1rem;">
+              <span>⚡</span>
+              <div>
+                <strong>Quick Command to Create Artworks Folder:</strong><br>
+                <code id="check-cmd">mkdir "public\artworks-images\artist-slug"</code>
+                <button type="button" class="btn btn-outline btn-sm" style="margin-top: 0.5rem; display: block;" id="btn-copy-cmd">
+                  Copy Command
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BOTTOM SECTION: Current Artists in Array -->
+    <section class="panel col-span-2" style="grid-column: span 2;">
+      <div class="table-header">
+        <div>
+          <h2 class="panel-title">👥 Current Artists in Array (<span id="artist-count">5</span>)</h2>
+          <p class="brand-desc">Loaded from artists.js. New additions appear here.</p>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <button class="btn btn-outline btn-sm" id="btn-export-json">Export JSON</button>
+        </div>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="artists-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Slug</th>
+              <th>Bio</th>
+              <th>Instagram</th>
+              <th style="text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="artists-table-body">
+            <!-- Populated by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">✓</span>
+    <span id="toast-message">Copied to clipboard! Ready to paste into artists.js</span>
+  </div>
+
+  <footer>
+    Urban Sketchers Galle — Designed for fast local content updates.
+  </footer>
+
+  <!-- Logic Script -->
+  <script>
+    // Initial Artists loaded from artists.js (simplified without redundant folder)
+    const DEFAULT_ARTISTS = [
+      {
+        id: 'USKG1',
+        name: 'Yasith Arangala',
+        slug: 'yasith-arangala',
+        bio: 'Architecture student & artist, exploring watercolor with pen and ink.',
+        instagram: 'https://instagram.com/yasitharangala',
+      },
+      {
+        id: 'USKG2',
+        name: 'Sumudu Udari',
+        slug: 'sumudu-udari',
+        bio: 'Interior Designer | Sketcher | Artist',
+        instagram: 'https://instagram.com/_udarii_',
+      },
+      {
+        id: 'USKG3',
+        name: 'Nimthaka Jayavihan',
+        slug: 'nimthaka-jayavihan',
+        bio: 'I’m an architecture student at the University of Moratuwa, and I enjoy urban sketching in Galle.',
+        instagram: 'https://instagram.com/nimthakajayavihan',
+      },
+      {
+        id: 'USKG4',
+        name: 'Lakshana Samadhi',
+        slug: 'lakshana-samadhi',
+        bio: 'I sketch what catches my eye, paint what I feel, and love discovering new perspectives through art.',
+        instagram: 'https://instagram.com/_samadhiiii',
+      },
+      {
+        id: 'USKG5',
+        name: 'Sachith Vithanage',
+        slug: 'sachith-vithanage',
+        bio: 'As a traveling artist I enjoy sketching at different places. I’m interested in sketching architecture and landscape. I believe each city and place has something to offer, and sketching them can be a good way to understand what it is.',
+        instagram: 'https://instagram.com/sachithvithanage',
+      },
+    ];
+
+    // State
+    let artistsList = JSON.parse(JSON.stringify(DEFAULT_ARTISTS));
+    let isSlugManual = false;
+
+    // Elements
+    const nameInput = document.getElementById('artist-name');
+    const idInput = document.getElementById('artist-id');
+    const slugInput = document.getElementById('artist-slug');
+    const instaInput = document.getElementById('artist-instagram');
+    const bioInput = document.getElementById('artist-bio');
+    const specialCheckbox = document.getElementById('artist-is-special');
+    const roleInput = document.getElementById('artist-role');
+    const roleGroup = document.getElementById('role-group');
+    const bioCount = document.getElementById('bio-count');
+
+    // Preview Elements
+    const prevAvatar = document.getElementById('prev-avatar');
+    const prevName = document.getElementById('prev-name');
+    const prevId = document.getElementById('prev-id');
+    const prevRole = document.getElementById('prev-role');
+    const prevBio = document.getElementById('prev-bio');
+    const prevInsta = document.getElementById('prev-insta');
+    const prevInstaText = document.getElementById('prev-insta-text');
+
+    // Code Elements
+    const codeSnippet = document.getElementById('code-snippet');
+    const codeFull = document.getElementById('code-full');
+    const codeFullCount = document.getElementById('code-full-count');
+
+    // Checklist Elements
+    const checkProfilePath = document.getElementById('check-profile-path');
+    const checkArtworksPath = document.getElementById('check-artworks-path');
+    const checkCmd = document.getElementById('check-cmd');
+
+    // Table Elements
+    const tableBody = document.getElementById('artists-table-body');
+    const artistCountSpan = document.getElementById('artist-count');
+
+    // Toast
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toast-message');
+
+    function showToast(msg) {
+      toastMessage.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2600);
+    }
+
+    // Helper: Slugify string
+    function slugify(text) {
+      return text
+        .toString()
+        .toLowerCase()
+        .trim()
+        .replace(/[\s\W-]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    // Helper: Escape JS string for output
+    function escapeJsString(str) {
+      if (!str) return '';
+      return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    }
+
+    // Helper: Clean Instagram URL/Handle
+    function formatInstagram(input) {
+      if (!input) return '';
+      let clean = input.trim();
+      if (!clean) return '';
+      if (clean.startsWith('http://') || clean.startsWith('https://')) {
+        return clean.replace(/\/+$/, '');
+      }
+      clean = clean.replace(/^@/, '');
+      return `https://instagram.com/${clean}`;
+    }
+
+    // Calculate next USKG ID
+    function getNextId() {
+      let maxNum = 0;
+      for (const a of artistsList) {
+        const match = a.id && a.id.match(/^USKG(\d+)$/i);
+        if (match) {
+          const num = parseInt(match[1], 10);
+          if (num > maxNum) maxNum = num;
+        }
+      }
+      return `USKG${maxNum + 1}`;
+    }
+
+    // Generate single artist JS code without redundant folder
+    function formatArtistObject(a, indent = '  ') {
+      const lines = [];
+      lines.push(`${indent}{`);
+      lines.push(`${indent}  id: '${escapeJsString(a.id)}',`);
+      lines.push(`${indent}  name: '${escapeJsString(a.name)}',`);
+      lines.push(`${indent}  slug: '${escapeJsString(a.slug)}',`);
+      if (a.role) {
+        lines.push(`${indent}  role: '${escapeJsString(a.role)}',`);
+      }
+      lines.push(`${indent}  bio: '${escapeJsString(a.bio)}',`);
+      if (a.instagram) {
+        lines.push(`${indent}  instagram: '${escapeJsString(a.instagram)}',`);
+      }
+      if (a.isSpecial) {
+        lines.push(`${indent}  isSpecial: true,`);
+      }
+      lines.push(`${indent}},`);
+      return lines.join('\n');
+    }
+
+    // Current form values as an object
+    function getCurrentFormArtist() {
+      const name = nameInput.value.trim() || 'Artist Name';
+      const id = idInput.value.trim() || getNextId();
+      const slug = slugInput.value.trim() || slugify(name);
+      const bio = bioInput.value.trim() || '';
+      const instagram = formatInstagram(instaInput.value);
+      const isSpecial = specialCheckbox.checked;
+      const role = isSpecial ? roleInput.value.trim() : '';
+
+      return { id, name, slug, bio, instagram, isSpecial, role };
+    }
+
+    // Update code outputs and preview
+    function updateOutputs() {
+      const artist = getCurrentFormArtist();
+
+      // Snippet Code
+      const snippet = formatArtistObject(artist, '  ');
+      codeSnippet.textContent = snippet;
+
+      // Full Array Code
+      const previewList = [...artistsList];
+      const isNameEntered = nameInput.value.trim().length > 0;
+      let displayList = previewList;
+      if (isNameEntered && !artistsList.some(a => a.id === artist.id || a.slug === artist.slug)) {
+        displayList = [...previewList, artist];
+      }
+
+      let fullArrayCode = `export const artists = [\n`;
+      fullArrayCode += displayList.map(a => formatArtistObject(a, '  ')).join('\n');
+      fullArrayCode += `\n];`;
+      codeFull.textContent = fullArrayCode;
+      codeFullCount.textContent = `${displayList.length} Artists`;
+
+      // Live Card Preview
+      prevName.textContent = artist.name;
+      prevId.textContent = artist.id;
+      prevBio.textContent = artist.bio || 'Bio description will appear here as you type...';
+      
+      const initials = artist.name
+        .split(' ')
+        .map(n => n[0])
+        .filter(Boolean)
+        .slice(0, 2)
+        .join('')
+        .toUpperCase() || '?';
+      prevAvatar.textContent = initials;
+
+      if (artist.isSpecial && artist.role) {
+        prevRole.style.display = 'block';
+        prevRole.textContent = artist.role;
+      } else {
+        prevRole.style.display = 'none';
+      }
+
+      if (artist.instagram) {
+        prevInsta.style.display = 'inline-flex';
+        const handle = artist.instagram.replace(/^https?:\/\/(www\.)?instagram\.com\//, '@').replace(/\/+$/, '');
+        prevInstaText.textContent = handle;
+        prevInsta.href = artist.instagram;
+      } else {
+        prevInsta.style.display = 'none';
+      }
+
+      // Checklist Tab
+      const effectiveId = artist.id || 'USKG#';
+      const effectiveSlug = artist.slug || 'artist-slug';
+      checkProfilePath.textContent = `public/artists-images/${effectiveId}.png`;
+      checkArtworksPath.textContent = `public/artworks-images/${effectiveSlug}/`;
+      checkCmd.textContent = `mkdir "public\\artworks-images\\${effectiveSlug}"`;
+
+      // Bio counter
+      bioCount.textContent = `${bioInput.value.length} chars`;
+    }
+
+    // Render Table of artists
+    function renderTable() {
+      tableBody.innerHTML = '';
+      artistCountSpan.textContent = artistsList.length;
+
+      artistsList.forEach((artist, index) => {
+        const tr = document.createElement('tr');
+        const isDefault = index < 5;
+
+        tr.innerHTML = `
+          <td>
+            <span class="badge-id">${escapeHtml(artist.id)}</span>
+            ${!isDefault ? '<span class="badge-new">NEW</span>' : ''}
+          </td>
+          <td><strong>${escapeHtml(artist.name)}</strong></td>
+          <td>
+            <code>${escapeHtml(artist.slug)}</code>
+          </td>
+          <td style="max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--color-muted);">
+            ${escapeHtml(artist.bio)}
+          </td>
+          <td>
+            ${artist.instagram ? `<a href="${escapeHtml(artist.instagram)}" target="_blank" style="color:var(--color-brown); font-weight:600;">${escapeHtml(artist.instagram.replace(/^https?:\/\/(www\.)?instagram\.com\//, '@'))}</a>` : '—'}
+          </td>
+          <td style="text-align: right; white-space: nowrap;">
+            <button class="btn btn-outline btn-sm" onclick="loadArtistToForm(${index})">Load</button>
+            <button class="btn btn-outline btn-sm" style="color:#d9534f; border-color:#eec4c4;" onclick="deleteArtist(${index})">✕</button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, function(m) {
+        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[m];
+      });
+    }
+
+    // Form Events
+    nameInput.addEventListener('input', () => {
+      if (!isSlugManual) {
+        slugInput.value = slugify(nameInput.value);
+      }
+      updateOutputs();
+    });
+
+    slugInput.addEventListener('input', () => {
+      isSlugManual = slugInput.value.trim().length > 0;
+      updateOutputs();
+    });
+
+    idInput.addEventListener('input', updateOutputs);
+    instaInput.addEventListener('input', updateOutputs);
+    bioInput.addEventListener('input', updateOutputs);
+    roleInput.addEventListener('input', updateOutputs);
+
+    specialCheckbox.addEventListener('change', () => {
+      roleGroup.style.display = specialCheckbox.checked ? 'flex' : 'none';
+      updateOutputs();
+    });
+
+    document.getElementById('btn-next-id').addEventListener('click', () => {
+      idInput.value = getNextId();
+      updateOutputs();
+    });
+
+    // Add to list and clear for next
+    function addArtistAndNext() {
+      if (!nameInput.value.trim()) {
+        nameInput.focus();
+        showToast('Please enter an artist name first!');
+        return;
+      }
+
+      const artist = getCurrentFormArtist();
+
+      // Check if already in list
+      const existingIdx = artistsList.findIndex(a => a.id.toLowerCase() === artist.id.toLowerCase() || a.slug.toLowerCase() === artist.slug.toLowerCase());
+      if (existingIdx !== -1) {
+        artistsList[existingIdx] = artist;
+        showToast(`Updated existing artist ${artist.id}`);
+      } else {
+        artistsList.push(artist);
+        showToast(`Added ${artist.name} (${artist.id}) to array!`);
+      }
+
+      renderTable();
+
+      // Reset form fields
+      nameInput.value = '';
+      slugInput.value = '';
+      instaInput.value = '';
+      bioInput.value = '';
+      roleInput.value = '';
+      specialCheckbox.checked = false;
+      roleGroup.style.display = 'none';
+      isSlugManual = false;
+
+      // Auto-set next ID
+      idInput.value = getNextId();
+      nameInput.focus();
+      updateOutputs();
+    }
+
+    document.getElementById('btn-add-and-next').addEventListener('click', addArtistAndNext);
+
+    document.getElementById('btn-clear-form').addEventListener('click', () => {
+      nameInput.value = '';
+      slugInput.value = '';
+      instaInput.value = '';
+      bioInput.value = '';
+      roleInput.value = '';
+      specialCheckbox.checked = false;
+      roleGroup.style.display = 'none';
+      isSlugManual = false;
+      idInput.value = getNextId();
+      nameInput.focus();
+      updateOutputs();
+      showToast('Form cleared');
+    });
+
+    // Global load/delete from table
+    window.loadArtistToForm = function(index) {
+      const a = artistsList[index];
+      if (!a) return;
+      nameInput.value = a.name || '';
+      idInput.value = a.id || '';
+      slugInput.value = a.slug || '';
+      instaInput.value = a.instagram || '';
+      bioInput.value = a.bio || '';
+      specialCheckbox.checked = !!a.isSpecial;
+      roleGroup.style.display = a.isSpecial ? 'flex' : 'none';
+      roleInput.value = a.role || '';
+      isSlugManual = true;
+      updateOutputs();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showToast(`Loaded ${a.name} into form`);
+    };
+
+    window.deleteArtist = function(index) {
+      const a = artistsList[index];
+      if (!confirm(`Remove ${a.name} (${a.id}) from the array?`)) return;
+      artistsList.splice(index, 1);
+      renderTable();
+      idInput.value = getNextId();
+      updateOutputs();
+      showToast(`Removed ${a.name}`);
+    };
+
+    // Reset initial list
+    document.getElementById('btn-reset-initial').addEventListener('click', () => {
+      if (!confirm('Reset artists list back to the initial 5 USK Galle artists?')) return;
+      artistsList = JSON.parse(JSON.stringify(DEFAULT_ARTISTS));
+      renderTable();
+      idInput.value = getNextId();
+      updateOutputs();
+      showToast('Reset to original artists list');
+    });
+
+    // Copy to clipboard helper
+    async function copyText(text, successMsg) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast(successMsg);
+      } catch (err) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast(successMsg);
+      }
+    }
+
+    // Copy buttons
+    document.getElementById('btn-copy-snippet').addEventListener('click', () => {
+      copyText(codeSnippet.textContent, 'Copied snippet to clipboard! Paste into artists.js');
+    });
+
+    document.getElementById('btn-quick-copy').addEventListener('click', () => {
+      copyText(codeSnippet.textContent, 'Copied snippet to clipboard! Paste into artists.js');
+    });
+
+    document.getElementById('btn-copy-full').addEventListener('click', () => {
+      copyText(codeFull.textContent, 'Copied full artists array to clipboard!');
+    });
+
+    document.getElementById('btn-copy-cmd').addEventListener('click', () => {
+      copyText(checkCmd.textContent, 'Copied folder creation command!');
+    });
+
+    // Export JSON
+    document.getElementById('btn-export-json').addEventListener('click', () => {
+      copyText(JSON.stringify(artistsList, null, 2), 'Copied artists array as JSON!');
+    });
+
+    // Tab Navigation
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const tabKey = btn.getAttribute('data-tab');
+        document.getElementById('tab-snippet').style.display = tabKey === 'snippet' ? 'block' : 'none';
+        document.getElementById('tab-full-array').style.display = tabKey === 'full-array' ? 'block' : 'none';
+        document.getElementById('tab-checklist').style.display = tabKey === 'checklist' ? 'block' : 'none';
+      });
+    });
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        if (e.shiftKey) {
+          addArtistAndNext();
+        } else {
+          copyText(codeSnippet.textContent, 'Copied snippet to clipboard! (Ctrl+Enter)');
+        }
+      }
+    });
+
+    // Initial setup
+    idInput.value = getNextId();
+    renderTable();
+    updateOutputs();
+  </script>
+</body>
+</html>

@@ -12,7 +12,6 @@ export const artists = [
     id: 'USKG1',
     name: 'Yasith Arangala',
     slug: 'yasith-arangala',
-    folder: 'yasith-arangala',
     bio: 'Architecture student & artist, exploring watercolor with pen and ink.',
     instagram: 'https://instagram.com/yasitharangala',
   },
@@ -20,7 +19,6 @@ export const artists = [
     id: 'USKG2',
     name: 'Sumudu Udari',
     slug: 'sumudu-udari',
-    folder: 'sumudu-udari',
     bio: 'Interior Designer | Sketcher | Artist',
     instagram: 'https://instagram.com/_udarii_',
   },
@@ -28,7 +26,6 @@ export const artists = [
     id: 'USKG3',
     name: 'Nimthaka Jayavihan',
     slug: 'nimthaka-jayavihan',
-    folder: 'nimthaka-jayavihan',
     bio: 'I’m an architecture student at the University of Moratuwa, and I enjoy urban sketching in Galle.',
     instagram: 'https://instagram.com/nimthakajayavihan',
   },
@@ -36,7 +33,6 @@ export const artists = [
     id: 'USKG4',
     name: 'Lakshana Samadhi',
     slug: 'lakshana-samadhi',
-    folder: 'lakshana-samadhi',
     bio: 'I sketch what catches my eye, paint what I feel, and love discovering new perspectives through art.',
     instagram: 'https://instagram.com/_samadhiiii',
   },
@@ -44,10 +40,73 @@ export const artists = [
     id: 'USKG5',
     name: 'Sachith Vithanage',
     slug: 'sachith-vithanage',
-    folder: 'sachith-vithanage',
     bio: 'As a traveling artist I enjoy sketching at different places. I’m interested in sketching architecture and landscape. I believe each city and place has something to offer, and sketching them can be a good way to understand what it is.',
     instagram: 'https://instagram.com/sachithvithanage',
   },
+  {
+    id: 'USKG6',
+    name: 'Shifteh',
+    slug: 'shifteh',
+    bio: 'former maha.workroom | temporary super slow traveler | postcard painter  | stubborn experiencer | skill collector',
+    instagram: 'https://instagram.com/shifis.way',
+  },
+  {
+    id: 'USKG7',
+    name: 'Amodi Kodithuwakku',
+    slug: 'amodi-kodithuwakku',
+    bio: 'Colouring outside the lines ofc',
+    instagram: 'https://instagram.com/artis_tmaybe',
+  },
+  {
+    id: 'USKG8',
+    name: 'Nelum Buddhadasa',
+    slug: 'nelum-buddhadasa',
+    bio: 'Rediscovering my sketching abilities after some years!',
+    instagram: 'https://instagram.com/nelum_ventures',
+  },
+  {
+    id: 'USKG9',
+    name: 'Rachel West',
+    slug: 'rachel-west',
+    bio: 'Artist dabbling in illustration and murals wanting to spend more time sketching.',
+    instagram: 'https://instagram.com/Rwestarts',
+  },
+  {
+    id: 'USKG10',
+    name: 'Maheema Mahimani',
+    slug: 'maheema-mahimani',
+    bio: 'Finely imperfect',
+    instagram: 'https://instagram.com/__hibee.___',
+  },
+  {
+    id: 'USKG11',
+    name: 'Rashmi Wimalasiri',
+    slug: 'rashmi-wimalasiri',
+    bio: 'Just started, so let’s see',
+    instagram: 'https://instagram.com/rashmi_ww',
+  },
+  {
+    id: 'USKG12',
+    name: 'Lakdini Lisakya',
+    slug: 'lakdini-lisakya',
+    bio: 'Enjoy and busy with architectural journey',
+    instagram: 'https://instagram.com/lakdinilisakya',
+  },
+  {
+    id: 'USKG13',
+    name: 'Kathya Ruhansi',
+    slug: 'kathya-ruhansi',
+    bio: 'Learning architecture, observing the world through lines | archi student in university of moratuwa',
+    instagram: 'https://instagram.com/_kathya_rk_',
+  },
+  {
+    id: 'USKG14',
+    name: 'Isuri Kumarasinghe',
+    slug: 'isuri-kumarasinghe',
+    bio: 'Plant Lover | Agriculturist | Cooking & Backing | Artist',
+    instagram: 'https://instagram.com/isuri_k_',
+  },
+
 ];
 
 /**
@@ -60,7 +119,6 @@ export const specialProfiles = [
     id: 'USK-SYS',
     name: 'System',
     slug: 'system',
-    folder: 'system',
     role: 'AI Agent & Archival Storyteller',
     bio: 'AI agent thinking about art, Galle Fort history, and culture. Writing blogs and field guides to inspire artists, preserve heritage, and document the living pulse of USK Galle.',
     isSpecial: true,
@@ -69,7 +127,6 @@ export const specialProfiles = [
     id: 'USK-ADM',
     name: 'Sandeepa Vithanage',
     slug: 'sandeepa-vithanage',
-    folder: 'sandeepa-vithanage',
     role: 'Admin & Event Lead',
     bio: 'Admin of USK Galle, handling and organizing community sketch meets and events. Professional artist exploring the historic architecture and vibrant streets of Sri Lanka.',
     isSpecial: true,
@@ -78,7 +135,6 @@ export const specialProfiles = [
     id: 'USK-DEV',
     name: 'Kasun Miuranga',
     slug: 'kasun-miuranga',
-    folder: 'kasun-miuranga',
     role: 'Technical Lead & Web Developer',
     bio: 'Handling the technical sides, website development, and digital maintenance for USK Galle. Hobbyist artist passionate about open culture, creative technology, and building digital archives.',
     isSpecial: true,
@@ -109,28 +165,82 @@ export function getAllArtistsAndProfiles() {
   return [...artists, ...specialProfiles];
 }
 
-export function getProfileImagePath(folder) {
-  if (!folder) return '/artists-images/no_profile.png';
-  if (folder.toLowerCase() === 'system') return '/icon.png';
+export function getProfileImagePath(input) {
+  if (!input) return '/artists-images/no_profile.png';
 
-  for (const ext of ['webp', 'png', 'jpg', 'jpeg']) {
-    const imgPath = path.join(process.cwd(), 'public', 'artists-images', `${folder}.${ext}`);
-    if (fs.existsSync(imgPath)) {
-      return `/artists-images/${folder}.${ext}`;
+  let artist = null;
+  const candidates = [];
+
+  if (typeof input === 'object' && input !== null) {
+    artist = input;
+  } else if (typeof input === 'string') {
+    const str = input.trim();
+    if (str.toLowerCase() === 'system') return '/icon.png';
+    artist = getArtistById(str) || getArtistBySlug(str);
+    if (!artist) {
+      candidates.push(str);
+    }
+  }
+
+  if (artist) {
+    if (artist.slug?.toLowerCase() === 'system' || artist.id?.toLowerCase() === 'system') {
+      return '/icon.png';
+    }
+    // Check ID first (e.g. USKG1.png), then slug (e.g. yasith-arangala.png), then legacy folder
+    if (artist.id) candidates.push(artist.id);
+    if (artist.slug) candidates.push(artist.slug);
+    if (artist.folder && artist.folder !== artist.slug) candidates.push(artist.folder);
+  }
+
+  const extensions = ['png', 'webp', 'jpg', 'jpeg'];
+
+  for (const name of candidates) {
+    for (const ext of extensions) {
+      const imgPath = path.join(process.cwd(), 'public', 'artists-images', `${name}.${ext}`);
+      if (fs.existsSync(imgPath)) {
+        return `/artists-images/${name}.${ext}`;
+      }
     }
   }
   return '/artists-images/no_profile.png';
 }
 
-export function getArtworksForArtist(folder) {
-  if (!folder) return [];
-  const dirPath = path.join(process.cwd(), 'public', 'artworks-images', folder);
-  if (!fs.existsSync(dirPath)) {
+export function getArtworksForArtist(input) {
+  if (!input) return [];
+
+  let folder = null;
+  let altFolder = null;
+
+  if (typeof input === 'object' && input !== null) {
+    folder = input.slug || input.folder || input.id;
+    altFolder = input.id;
+  } else if (typeof input === 'string') {
+    const artist = getArtistById(input) || getArtistBySlug(input);
+    if (artist) {
+      folder = artist.slug || artist.folder || artist.id;
+      altFolder = artist.id;
+    } else {
+      folder = input;
+    }
+  }
+
+  let targetDir = null;
+  const candidates = [folder, altFolder].filter(Boolean);
+
+  for (const name of candidates) {
+    const dirPath = path.join(process.cwd(), 'public', 'artworks-images', name);
+    if (fs.existsSync(dirPath)) {
+      targetDir = { path: dirPath, name };
+      break;
+    }
+  }
+
+  if (!targetDir) {
     return [];
   }
 
   try {
-    const files = fs.readdirSync(dirPath);
+    const files = fs.readdirSync(targetDir.path);
     const imageFiles = files
       .filter((file) => /\.(webp|jpg|jpeg|png)$/i.test(file))
       .sort((a, b) => {
@@ -140,19 +250,19 @@ export function getArtworksForArtist(folder) {
       });
 
     return imageFiles.map((filename, index) => {
-      const meta = getArtworkMetadata(folder, filename);
+      const meta = getArtworkMetadata(targetDir.name, filename);
 
       return {
-        id: meta?.id || `${folder}-${index + 1}`,
+        id: meta?.id || `${targetDir.name}-${index + 1}`,
         filename,
-        src: `/artworks-images/${folder}/${filename}`,
+        src: `/artworks-images/${targetDir.name}/${filename}`,
         title: meta?.title || `Sketch #${filename.replace(/\.[^/.]+$/, '')}`,
         description: meta?.description || '',
         event: meta?.event || null,
       };
     });
   } catch (err) {
-    console.error(`Error reading artworks for ${folder}:`, err);
+    console.error(`Error reading artworks for ${targetDir.name}:`, err);
     return [];
   }
 }
@@ -161,13 +271,13 @@ export function getAllArtworks() {
   let allArtworks = [];
 
   for (const artist of artists) {
-    const artistArtworks = getArtworksForArtist(artist.folder);
+    const artistArtworks = getArtworksForArtist(artist);
     const mapped = artistArtworks.map((art) => ({
       ...art,
       artistId: artist.id,
       artistName: artist.name,
       artistSlug: artist.slug,
-      artistFolder: artist.folder,
+      artistFolder: artist.slug,
     }));
     allArtworks = allArtworks.concat(mapped);
   }

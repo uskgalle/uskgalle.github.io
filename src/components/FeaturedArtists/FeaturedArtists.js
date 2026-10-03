@@ -20,8 +20,8 @@ export default function FeaturedArtists() {
 
         <div className={styles.grid}>
           {artists.map((artist) => {
-            const artworks = getArtworksForArtist(artist.folder);
-            const profileImage = getProfileImagePath(artist.folder);
+            const artworks = getArtworksForArtist(artist);
+            const profileImage = getProfileImagePath(artist);
 
             return (
               <article key={artist.id || artist.slug} className={styles.card}>

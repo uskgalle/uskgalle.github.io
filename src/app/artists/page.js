@@ -9,8 +9,8 @@ export const metadata = {
 export default function ArtistsPage() {
     const artistsData = artists
         .map((artist) => {
-            const artworks = getArtworksForArtist(artist.folder);
-            const profileImage = getProfileImagePath(artist.folder);
+            const artworks = getArtworksForArtist(artist);
+            const profileImage = getProfileImagePath(artist);
 
             return {
                 ...artist,
