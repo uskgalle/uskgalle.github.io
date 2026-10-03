@@ -76,7 +76,7 @@ export const artists = [
     name: 'Maheema Mahimani',
     slug: 'maheema-mahimani',
     bio: 'Finely imperfect',
-    instagram: 'https://instagram.com/__hibee.___',
+    instagram: 'https://instagram.com/__hibee___',
   },
   {
     id: 'USKG11',

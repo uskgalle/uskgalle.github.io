@@ -297,6 +297,220 @@
       color: var(--color-brown);
     }
 
+    /* ─── Searchable Combobox ─── */
+    .artist-combobox {
+      position: relative;
+      width: 100%;
+    }
+
+    .combobox-control {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: #faf8f5;
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      transition: all 0.15s ease;
+    }
+
+    .combobox-control:focus-within {
+      border-color: var(--border-focus);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(184, 133, 74, 0.15);
+    }
+
+    .combobox-icon {
+      padding-left: 0.9rem;
+      font-size: 1rem;
+      user-select: none;
+    }
+
+    .combobox-input {
+      flex: 1;
+      border: none !important;
+      background: transparent !important;
+      padding: 0.75rem 0.65rem !important;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--color-dark);
+      box-shadow: none !important;
+      outline: none !important;
+    }
+
+    .combobox-clear-btn {
+      background: none;
+      border: none;
+      color: var(--color-muted);
+      cursor: pointer;
+      padding: 0.4rem 0.6rem;
+      font-size: 0.85rem;
+      border-radius: 4px;
+      transition: color 0.15s;
+    }
+    .combobox-clear-btn:hover {
+      color: var(--color-dark);
+    }
+
+    .combobox-toggle-btn {
+      background: #efe8dc;
+      border: none;
+      border-left: 1px solid var(--border-light);
+      color: var(--color-brown);
+      cursor: pointer;
+      padding: 0 1rem;
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      border-radius: 0 calc(var(--radius-sm) - 1.5px) calc(var(--radius-sm) - 1.5px) 0;
+      transition: background 0.15s;
+    }
+
+    .combobox-toggle-btn:hover {
+      background: #e2d7c5;
+    }
+
+    .combobox-dropdown {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius-md);
+      box-shadow: 0 12px 32px rgba(42, 32, 26, 0.16);
+      z-index: 1000;
+      overflow: hidden;
+      animation: dropdownFade 0.15s ease-out;
+    }
+
+    @keyframes dropdownFade {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .combobox-quick-bar {
+      padding: 0.55rem 0.85rem;
+      background: #faf6f0;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .quick-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .quick-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+
+    .quick-chip {
+      background: #fff;
+      border: 1px solid var(--border-light);
+      color: var(--color-brown);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+
+    .quick-chip:hover,
+    .quick-chip.active {
+      background: var(--color-dark);
+      color: #fff;
+      border-color: var(--color-dark);
+    }
+
+    .combobox-options-list {
+      max-height: 250px;
+      overflow-y: auto;
+      padding: 0.35rem 0;
+    }
+
+    .combobox-option {
+      padding: 0.6rem 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      cursor: pointer;
+      font-size: 0.86rem;
+      transition: background 0.1s ease;
+    }
+
+    .combobox-option:hover,
+    .combobox-option.highlighted {
+      background: #f5f0e6;
+    }
+
+    .combobox-option.selected {
+      background: #efe6d8;
+      font-weight: 600;
+    }
+
+    .opt-left {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .opt-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 700;
+      background: #efe7db;
+      color: var(--color-dark);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+    }
+
+    .combobox-option.selected .opt-badge {
+      background: var(--color-dark);
+      color: #fff;
+    }
+
+    .opt-name {
+      color: var(--color-dark);
+    }
+
+    .combobox-custom-option {
+      padding: 0.65rem 0.95rem;
+      background: #faf7f2;
+      border-top: 1px dashed var(--border-light);
+      font-size: 0.82rem;
+      color: var(--color-brown);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .combobox-custom-option:hover {
+      background: #f0e9dc;
+      color: var(--color-dark);
+    }
+
+    .combobox-empty {
+      padding: 1.25rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--color-muted);
+    }
+
     /* ─── Buttons ─── */
     .btn {
       display: inline-flex;
@@ -678,29 +892,73 @@
         <form id="artwork-form" onsubmit="event.preventDefault();">
           <div class="form-grid">
             
-            <!-- Artist Selector -->
+            <!-- Artist Selector (Searchable Combobox) -->
             <div class="form-group col-span-2">
-              <label for="artist-select">
+              <label for="artist-search-input">
                 Artist
-                <span class="label-hint">Select who made this sketch</span>
+                <span class="label-hint">Type number (e.g. 5, 16), search name, or pick from dropdown</span>
               </label>
-              <select id="artist-select">
-                <option value="USKG1">USKG1 — Yasith Arangala</option>
-                <option value="USKG2">USKG2 — Sumudu Udari</option>
-                <option value="USKG3">USKG3 — Nimthaka Jayavihan</option>
-                <option value="USKG4">USKG4 — Lakshana Samadhi</option>
-                <option value="USKG5">USKG5 — Sachith Vithanage</option>
-                <option value="USKG6">USKG6 — Shifteh</option>
-                <option value="USKG7">USKG7 — Amodi Kodithuwakku</option>
-                <option value="USKG8">USKG8 — Nelum Buddhadasa</option>
-                <option value="USKG9">USKG9 — Rachel West</option>
-                <option value="USKG10">USKG10 — Maheema Mahimani</option>
-                <option value="USKG11">USKG11 — Rashmi Wimalasiri</option>
-                <option value="USKG12">USKG12 — Lakdini Lisakya</option>
-                <option value="USKG13">USKG13 — Kathya Ruhansi</option>
-                <option value="USKG14">USKG14 — Isuri Kumarasinghe</option>
-                <option value="custom">-- Custom Artist ID --</option>
-              </select>
+
+              <div class="artist-combobox" id="artist-combobox">
+                <div class="combobox-control">
+                  <span class="combobox-icon">🎨</span>
+                  <input 
+                    type="text" 
+                    id="artist-search-input" 
+                    class="combobox-input" 
+                    placeholder="Search name or type number (1–16)..."
+                    autocomplete="off"
+                    spellcheck="false"
+                  >
+                  <button type="button" class="combobox-clear-btn" id="combobox-clear-btn" title="Clear search" style="display:none;">✕</button>
+                  <button type="button" class="combobox-toggle-btn" id="combobox-toggle-btn" title="Toggle artists list">
+                    <span class="arrow-down">▾</span>
+                  </button>
+                </div>
+
+                <!-- Dropdown Menu -->
+                <div class="combobox-dropdown" id="combobox-dropdown" style="display: none;">
+                  <!-- Quick Number Chips Bar -->
+                  <div class="combobox-quick-bar">
+                    <span class="quick-title">⚡ Quick # :</span>
+                    <div class="quick-chips" id="quick-number-chips">
+                      <!-- Populated dynamically: 1, 2, ... 16 -->
+                    </div>
+                  </div>
+
+                  <!-- Filtered Options List -->
+                  <div class="combobox-options-list" id="combobox-options-list">
+                    <!-- Populated dynamically -->
+                  </div>
+
+                  <!-- Custom Artist Option -->
+                  <div class="combobox-custom-option" id="combobox-custom-option" style="display: none;">
+                    <span>➕ Use Custom ID: <strong id="combobox-custom-val"></strong></span>
+                    <span class="opt-hint">Press Enter</span>
+                  </div>
+                </div>
+
+                <!-- Native select kept for compatibility -->
+                <select id="artist-select" style="display: none;">
+                  <option value="USKG1">USKG1 — Yasith Arangala</option>
+                  <option value="USKG2">USKG2 — Sumudu Udari</option>
+                  <option value="USKG3">USKG3 — Nimthaka Jayavihan</option>
+                  <option value="USKG4">USKG4 — Lakshana Samadhi</option>
+                  <option value="USKG5">USKG5 — Sachith Vithanage</option>
+                  <option value="USKG6">USKG6 — Shifteh</option>
+                  <option value="USKG7">USKG7 — Amodi Kodithuwakku</option>
+                  <option value="USKG8">USKG8 — Nelum Buddhadasa</option>
+                  <option value="USKG9">USKG9 — Rachel West</option>
+                  <option value="USKG10">USKG10 — Maheema Mahimani</option>
+                  <option value="USKG11">USKG11 — Rashmi Wimalasiri</option>
+                  <option value="USKG12">USKG12 — Lakdini Lisakya</option>
+                  <option value="USKG13">USKG13 — Kathya Ruhansi</option>
+                  <option value="USKG14">USKG14 — Isuri Kumarasinghe</option>
+                  <option value="USKG15">USKG15 — Ravindu Ramawickrama</option>
+                  <option value="USKG16">USKG16 — Nethmi Pabasara</option>
+                  <option value="custom">-- Custom Artist ID --</option>
+                </select>
+              </div>
             </div>
 
             <!-- Custom Artist ID input (shown if custom selected) -->
@@ -1014,15 +1272,68 @@
         description: '',
         event: 'meet-up-04',
       },
+      {
+        id: 'USKG6-1',
+        filename: '1.png',
+        title: 'Sketch #1',
+        description: '',
+        event: 'meet-up-04',
+      },
+      {
+        id: 'USKG6-2',
+        filename: '2.png',
+        title: 'Sketch #2',
+        description: '',
+        event: 'meet-up-04',
+      },
+      {
+        id: 'USKG10-1',
+        filename: '1.webp',
+        title: 'Sketch #1',
+        description: '',
+        event: 'meet-up-05',
+      },
+    ];
+
+    // 16 Current Artists from artists.js
+    const KNOWN_ARTISTS = [
+      { id: 'USKG1', num: 1, name: 'Yasith Arangala' },
+      { id: 'USKG2', num: 2, name: 'Sumudu Udari' },
+      { id: 'USKG3', num: 3, name: 'Nimthaka Jayavihan' },
+      { id: 'USKG4', num: 4, name: 'Lakshana Samadhi' },
+      { id: 'USKG5', num: 5, name: 'Sachith Vithanage' },
+      { id: 'USKG6', num: 6, name: 'Shifteh' },
+      { id: 'USKG7', num: 7, name: 'Amodi Kodithuwakku' },
+      { id: 'USKG8', num: 8, name: 'Nelum Buddhadasa' },
+      { id: 'USKG9', num: 9, name: 'Rachel West' },
+      { id: 'USKG10', num: 10, name: 'Maheema Mahimani' },
+      { id: 'USKG11', num: 11, name: 'Rashmi Wimalasiri' },
+      { id: 'USKG12', num: 12, name: 'Lakdini Lisakya' },
+      { id: 'USKG13', num: 13, name: 'Kathya Ruhansi' },
+      { id: 'USKG14', num: 14, name: 'Isuri Kumarasinghe' },
+      { id: 'USKG15', num: 15, name: 'Ravindu Ramawickrama' },
+      { id: 'USKG16', num: 16, name: 'Nethmi Pabasara' },
     ];
 
     // State
     let artworksList = JSON.parse(JSON.stringify(DEFAULT_ARTWORKS));
     let selectedExt = 'png';
     let isFilenameManual = false;
+    let currentArtistId = 'USKG1';
+    let highlightedOptionIndex = -1;
+    let filteredArtists = [...KNOWN_ARTISTS];
 
     // Elements
     const artistSelect = document.getElementById('artist-select');
+    const artistCombobox = document.getElementById('artist-combobox');
+    const artistSearchInput = document.getElementById('artist-search-input');
+    const comboboxClearBtn = document.getElementById('combobox-clear-btn');
+    const comboboxToggleBtn = document.getElementById('combobox-toggle-btn');
+    const comboboxDropdown = document.getElementById('combobox-dropdown');
+    const quickChipsContainer = document.getElementById('quick-number-chips');
+    const comboboxOptionsList = document.getElementById('combobox-options-list');
+    const comboboxCustomOption = document.getElementById('combobox-custom-option');
+    const comboboxCustomVal = document.getElementById('combobox-custom-val');
     const customArtistGroup = document.getElementById('custom-artist-group');
     const customArtistId = document.getElementById('custom-artist-id');
     const artNumber = document.getElementById('art-number');
@@ -1173,22 +1484,33 @@
       checkCmd.textContent = `mkdir "public\\artworks-images\\${artistId}"`;
     }
 
-    // Populate filter dropdown
+    // Populate filter dropdown with all 16 artists + extra from list
     function updateFilterDropdown() {
-      const uniqueArtists = new Set();
-      artworksList.forEach(a => {
-        const match = a.id && a.id.match(/^([a-z0-9]+)-/i);
-        if (match) uniqueArtists.add(match[1]);
-      });
-
       const currentVal = filterArtistSelect.value;
       filterArtistSelect.innerHTML = '<option value="ALL">All Artists</option>';
-      Array.from(uniqueArtists).sort().forEach(aid => {
+      
+      // Add all 16 known artists
+      KNOWN_ARTISTS.forEach(a => {
         const opt = document.createElement('option');
-        opt.value = aid;
-        opt.textContent = aid;
-        if (aid === currentVal) opt.selected = true;
+        opt.value = a.id;
+        opt.textContent = `${a.id} — ${a.name}`;
+        if (a.id === currentVal) opt.selected = true;
         filterArtistSelect.appendChild(opt);
+      });
+
+      // Also add any extra custom artists from artworksList
+      artworksList.forEach(a => {
+        const match = a.id && a.id.match(/^([a-z0-9]+)-/i);
+        if (match) {
+          const aid = match[1].toUpperCase();
+          if (!KNOWN_ARTISTS.some(ka => ka.id === aid)) {
+            const opt = document.createElement('option');
+            opt.value = aid;
+            opt.textContent = aid;
+            if (aid === currentVal) opt.selected = true;
+            filterArtistSelect.appendChild(opt);
+          }
+        }
       });
     }
 
@@ -1275,12 +1597,248 @@
       showToast('Form cleared');
     });
 
-    // Form Event Listeners
-    artistSelect.addEventListener('change', () => {
-      customArtistGroup.style.display = artistSelect.value === 'custom' ? 'flex' : 'none';
-      artNumber.value = getNextNumberForArtist(getSelectedArtistId());
+    // ─── Searchable Combobox Controller ───
+    function renderQuickChips() {
+      quickChipsContainer.innerHTML = '';
+      KNOWN_ARTISTS.forEach(a => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = `quick-chip ${a.id.toLowerCase() === currentArtistId.toLowerCase() ? 'active' : ''}`;
+        chip.textContent = a.num;
+        chip.title = `${a.id} — ${a.name}`;
+        chip.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selectArtist(a.id);
+        });
+        quickChipsContainer.appendChild(chip);
+      });
+    }
+
+    function renderComboboxOptions(query = '') {
+      comboboxOptionsList.innerHTML = '';
+      const q = query.trim().toLowerCase();
+      
+      const isPureNumber = /^\d+$/.test(q);
+      const queryNum = isPureNumber ? parseInt(q, 10) : null;
+
+      if (!q) {
+        filteredArtists = [...KNOWN_ARTISTS];
+      } else {
+        filteredArtists = KNOWN_ARTISTS.filter(a => {
+          if (isPureNumber) {
+            return a.num === queryNum || String(a.num).includes(q);
+          }
+          return a.id.toLowerCase().includes(q) || 
+                 a.name.toLowerCase().includes(q) ||
+                 String(a.num) === q;
+        });
+      }
+
+      if (filteredArtists.length === 0) {
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'combobox-empty';
+        emptyDiv.textContent = `No artist found for "${query}"`;
+        comboboxOptionsList.appendChild(emptyDiv);
+      } else {
+        filteredArtists.forEach((a, idx) => {
+          const opt = document.createElement('div');
+          const isSelected = a.id.toLowerCase() === currentArtistId.toLowerCase();
+          const isHighlighted = idx === highlightedOptionIndex;
+          opt.className = `combobox-option ${isSelected ? 'selected' : ''} ${isHighlighted ? 'highlighted' : ''}`;
+          opt.setAttribute('data-id', a.id);
+          opt.innerHTML = `
+            <div class="opt-left">
+              <span class="opt-badge">${escapeHtml(a.id)}</span>
+              <span class="opt-name">${escapeHtml(a.name)}</span>
+            </div>
+            <span class="opt-hint">#${a.num}</span>
+          `;
+          opt.addEventListener('click', () => {
+            selectArtist(a.id);
+          });
+          comboboxOptionsList.appendChild(opt);
+        });
+      }
+
+      // Check if query could be a custom ID (e.g. number not in list or custom text)
+      if (q && (filteredArtists.length === 0 || isPureNumber)) {
+        let proposedId = q.toUpperCase();
+        if (isPureNumber) proposedId = `USKG${queryNum}`;
+        if (!proposedId.startsWith('USKG') && !isPureNumber) proposedId = `USKG-${proposedId}`;
+        
+        comboboxCustomVal.textContent = proposedId;
+        comboboxCustomOption.style.display = 'flex';
+        comboboxCustomOption.onclick = () => {
+          selectCustomArtist(proposedId);
+        };
+      } else {
+        comboboxCustomOption.style.display = 'none';
+      }
+    }
+
+    function openDropdown() {
+      comboboxDropdown.style.display = 'block';
+      highlightedOptionIndex = -1;
+      renderQuickChips();
+      const currentQuery = artistSearchInput.value.includes('—') ? '' : artistSearchInput.value;
+      renderComboboxOptions(currentQuery);
+    }
+
+    function closeDropdown() {
+      comboboxDropdown.style.display = 'none';
+      highlightedOptionIndex = -1;
+      const artist = KNOWN_ARTISTS.find(a => a.id.toLowerCase() === currentArtistId.toLowerCase());
+      if (artist) {
+        artistSearchInput.value = `${artist.id} — ${artist.name}`;
+        comboboxClearBtn.style.display = 'none';
+      } else if (artistSelect.value === 'custom') {
+        artistSearchInput.value = `Custom: ${customArtistId.value.trim() || currentArtistId}`;
+        comboboxClearBtn.style.display = 'none';
+      }
+    }
+
+    function selectArtist(artistId) {
+      currentArtistId = artistId;
+      artistSelect.value = artistId;
+      customArtistGroup.style.display = 'none';
+
+      const artist = KNOWN_ARTISTS.find(a => a.id.toLowerCase() === artistId.toLowerCase());
+      if (artist) {
+        artistSearchInput.value = `${artist.id} — ${artist.name}`;
+      } else {
+        artistSearchInput.value = artistId;
+      }
+      comboboxClearBtn.style.display = 'none';
+      closeDropdown();
+
+      artNumber.value = getNextNumberForArtist(artistId);
       isFilenameManual = false;
       updateOutputs();
+      showToast(`Selected ${artist ? artist.name : artistId} (${artistId})`);
+    }
+
+    function selectCustomArtist(customId) {
+      currentArtistId = customId;
+      artistSelect.value = 'custom';
+      customArtistId.value = customId;
+      customArtistGroup.style.display = 'flex';
+      artistSearchInput.value = `Custom: ${customId}`;
+      comboboxClearBtn.style.display = 'none';
+      closeDropdown();
+
+      artNumber.value = getNextNumberForArtist(customId);
+      isFilenameManual = false;
+      updateOutputs();
+      showToast(`Selected custom artist ID: ${customId}`);
+    }
+
+    // Combobox Event Listeners
+    artistSearchInput.addEventListener('focus', () => {
+      openDropdown();
+      artistSearchInput.select();
+    });
+
+    artistSearchInput.addEventListener('click', () => {
+      if (comboboxDropdown.style.display === 'none') {
+        openDropdown();
+      }
+      artistSearchInput.select();
+    });
+
+    comboboxToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (comboboxDropdown.style.display === 'none') {
+        openDropdown();
+        artistSearchInput.focus();
+      } else {
+        closeDropdown();
+      }
+    });
+
+    comboboxClearBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      artistSearchInput.value = '';
+      artistSearchInput.focus();
+      comboboxClearBtn.style.display = 'none';
+      renderComboboxOptions('');
+    });
+
+    artistSearchInput.addEventListener('input', () => {
+      const val = artistSearchInput.value.trim();
+      comboboxClearBtn.style.display = val.length > 0 ? 'block' : 'none';
+      if (comboboxDropdown.style.display === 'none') {
+        comboboxDropdown.style.display = 'block';
+      }
+      highlightedOptionIndex = 0;
+      renderComboboxOptions(val);
+    });
+
+    artistSearchInput.addEventListener('keydown', (e) => {
+      if (comboboxDropdown.style.display === 'none') {
+        if (e.key === 'ArrowDown' || e.key === 'Enter') {
+          openDropdown();
+          e.preventDefault();
+        }
+        return;
+      }
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (filteredArtists.length > 0) {
+          highlightedOptionIndex = (highlightedOptionIndex + 1) % filteredArtists.length;
+          renderComboboxOptions(artistSearchInput.value.includes('—') ? '' : artistSearchInput.value);
+        }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (filteredArtists.length > 0) {
+          highlightedOptionIndex = (highlightedOptionIndex - 1 + filteredArtists.length) % filteredArtists.length;
+          renderComboboxOptions(artistSearchInput.value.includes('—') ? '' : artistSearchInput.value);
+        }
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        const val = artistSearchInput.value.trim();
+        if (/^\d+$/.test(val)) {
+          const num = parseInt(val, 10);
+          const found = KNOWN_ARTISTS.find(a => a.num === num);
+          if (found) {
+            selectArtist(found.id);
+            return;
+          } else {
+            selectCustomArtist(`USKG${num}`);
+            return;
+          }
+        }
+
+        if (filteredArtists.length > 0) {
+          const targetIndex = highlightedOptionIndex >= 0 ? highlightedOptionIndex : 0;
+          selectArtist(filteredArtists[targetIndex].id);
+        } else if (val) {
+          let customId = val.toUpperCase();
+          if (!customId.startsWith('USKG')) customId = `USKG-${customId}`;
+          selectCustomArtist(customId);
+        }
+      } else if (e.key === 'Escape') {
+        closeDropdown();
+      }
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (!artistCombobox.contains(e.target)) {
+        if (comboboxDropdown.style.display !== 'none') {
+          closeDropdown();
+        }
+      }
+    });
+
+    // Native select change handler (if changed programmatically)
+    artistSelect.addEventListener('change', () => {
+      const val = artistSelect.value;
+      if (val === 'custom') {
+        selectCustomArtist(customArtistId.value.trim() || 'USKG1');
+      } else {
+        selectArtist(val);
+      }
     });
 
     customArtistId.addEventListener('input', () => {
@@ -1363,16 +1921,13 @@
 
       const match = art.id && art.id.match(/^([a-z0-9]+)-(\d+)$/i);
       if (match) {
-        const aid = match[1];
+        const aid = match[1].toUpperCase();
         const num = match[2];
-        const hasOpt = Array.from(artistSelect.options).some(o => o.value.toLowerCase() === aid.toLowerCase());
-        if (hasOpt) {
-          artistSelect.value = aid;
-          customArtistGroup.style.display = 'none';
+        const hasArtist = KNOWN_ARTISTS.some(ka => ka.id.toLowerCase() === aid.toLowerCase());
+        if (hasArtist) {
+          selectArtist(aid);
         } else {
-          artistSelect.value = 'custom';
-          customArtistId.value = aid;
-          customArtistGroup.style.display = 'flex';
+          selectCustomArtist(aid);
         }
         artNumber.value = num;
       }
@@ -1473,9 +2028,9 @@
     });
 
     // Initial setup
-    artNumber.value = getNextNumberForArtist('USKG1');
+    selectArtist('USKG1');
     renderTable();
-    updateOutputs();
+    updateFilterDropdown();
     generateBatch();
   </script>
 </body>

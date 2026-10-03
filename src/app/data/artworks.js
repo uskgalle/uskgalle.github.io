@@ -67,6 +67,20 @@ export const artworks = [
     description: '',
     event: 'meet-up-04',
   },
+  {
+    id: 'USKG6-1',
+    filename: '1.png',
+    title: 'Galle Fort Lighthouse',
+    description: '',
+    event: 'meet-up-04',
+  },
+  {
+    id: 'USKG6-2',
+    filename: '2.png',
+    title: 'Galle Fort Clock Tower',
+    description: '',
+    event: 'meet-up-04',
+  },
 
   //---------- Meetup 5
 
@@ -78,6 +92,7 @@ export const artworks = [
     description: '',
     event: 'meet-up-05',
   },
+
 ];
 
 /**
