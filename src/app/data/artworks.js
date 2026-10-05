@@ -4,6 +4,7 @@
  * Supports .png, .webp, .jpg, and .jpeg files.
  */
 export const artworks = [
+  // USKG1 — Yasith Arangala
   {
     id: 'USKG1-1',
     filename: '1.png',
@@ -25,6 +26,8 @@ export const artworks = [
     description: 'Mix media (water color, ink, etc.)',
     event: 'meet-up-04',
   },
+
+  // USKG2 — Sumudu Udari
   {
     id: 'USKG2-1',
     filename: '1.png',
@@ -32,6 +35,8 @@ export const artworks = [
     description: 'The Galle Fort Lighthouse is a historic symbol of Galle, built in 1939. I sketched its simple white design standing beautifully against the blue sky. Medium used : Watercolors & pen',
     event: 'meet-up-04',
   },
+
+  // USKG3 — Nimthaka Jayavihan
   {
     id: 'USKG3-1',
     filename: '1.png',
@@ -53,6 +58,8 @@ export const artworks = [
     description: 'The iconic Galle Fort Lighthouse is captured from a ground-level perspective, highlighting its beauty, architectural details, surrounding atmosphere, and human activities. A quick sketch with watercolour is used to capture the character and vibrancy of the place.',
     event: 'meet-up-04',
   },
+
+  // USKG4 — Lakshana Samadhi
   {
     id: 'USKG4-1',
     filename: '1.png',
@@ -60,6 +67,8 @@ export const artworks = [
     description: 'Pencil & water colours',
     event: 'meet-up-04',
   },
+
+  // USKG5 — Sachith Vithanage
   {
     id: 'USKG5-1',
     filename: '1.png',
@@ -67,6 +76,8 @@ export const artworks = [
     description: '',
     event: 'meet-up-04',
   },
+
+  // USKG6 — Shifteh
   {
     id: 'USKG6-1',
     filename: '1.png',
@@ -82,9 +93,69 @@ export const artworks = [
     event: 'meet-up-04',
   },
 
-  //---------- Meetup 5
+  // USKG7 — Amodi Kodithuwakku
 
+  // USKG8 — Nelum Buddhadasa
+  {
+    id: 'USKG8-1',
+    filename: '1.webp',
+    title: 'Galle Fish Market',
+    description: '',
+    event: 'meet-up-05',
+  },
+  {
+    id: 'USKG8-2',
+    filename: '2.webp',
+    title: 'Temple in Galle Fort',
+    description: 'A Distant View of the Rooftops and Temple in Galle Fort',
+    event: '',
+  },
+  {
+    id: 'USKG8-3',
+    filename: '3.webp',
+    title: 'Buildings',
+    description: 'Buildings near the Dutch Hospital Galle',
+    event: '',
+  },
+  {
+    id: 'USKG8-4',
+    filename: '4.webp',
+    title: 'House on Church Street',
+    description: 'A House on Church Street',
+    event: '',
+  },
+  {
+    id: 'USKG8-5',
+    filename: '5.webp',
+    title: 'Black Fort',
+    description: 'A Walk Through Black Fort',
+    event: '',
+  },
+  {
+    id: 'USKG8-6',
+    filename: '6.webp',
+    title: 'Church Rooftop',
+    description: 'A Distant View of the Church Rooftop from the Galle Fort Promenade',
+    event: '',
+  },
+  {
+    id: 'USKG8-7',
+    filename: '7.webp',
+    title: 'Bell Tower',
+    description: 'The Bell Tower near the Maritime Museum',
+    event: '',
+  },
+  {
+    id: 'USKG8-8',
+    filename: '8.webp',
+    title: 'Galle Fort Lighthouse',
+    description: 'The Iconic Lighthouse Galle Fort',
+    event: '',
+  },
 
+  // USKG9 — Rachel West
+
+  // USKG10 — Maheema Mahimani
   {
     id: 'USKG10-1',
     filename: '1.webp',
@@ -92,6 +163,30 @@ export const artworks = [
     description: '',
     event: 'meet-up-05',
   },
+
+  // USKG11 — Rashmi Wimalasiri
+  // USKG12 — Lakdini Lisakya
+  // USKG13 — Kathya Ruhansi
+  // USKG14 — Isuri Kumarasinghe
+  // USKG15 — Ravindu Ramawickrama
+  // USKG16 — Nethmi Pabasara
+
+  // USKG17 — Vihasna Geesathmi
+  {
+    id: 'USKG17-1',
+    filename: '1.webp',
+    title: 'Galle Fish Market',
+    description: 'A little piece of Galle, captured in lines and colours. 🎨🌊',
+    event: 'meet-up-05',
+  },
+  {
+    id: 'USKG17-2',
+    filename: '2.webp',
+    title: 'Galle Fish Market',
+    description: 'A little piece of Galle, captured in lines and colours. 🎨🌊',
+    event: 'meet-up-05',
+  },
+
 
 ];
 

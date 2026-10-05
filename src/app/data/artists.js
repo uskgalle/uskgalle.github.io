@@ -120,6 +120,13 @@ export const artists = [
     bio: 'Sketcher',
     instagram: 'https://instagram.com/Thepabee',
   },
+  {
+    id: 'USKG17',
+    name: 'Vihasna Geesathmi',
+    slug: 'vihasna-geesathmi',
+    bio: 'Turning ideas into lines & emotions into art 🎨 Learning • Creating • Improving',
+    instagram: 'https://instagram.com/vihasna_geesathmi',
+  },
 
 ];
 
