@@ -1,0 +1,352 @@
+.dashboardWrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2.5rem 1.75rem 4rem;
+  width: 100%;
+}
+
+.hero {
+  margin-bottom: 2.5rem;
+}
+
+.heroEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--admin-accent-subtle);
+  border: 1px solid rgba(200, 109, 59, 0.3);
+  color: var(--admin-accent);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.heroTitle {
+  font-family: var(--font-admin-display);
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.heroSubtitle {
+  font-size: 1.05rem;
+  color: var(--admin-text-muted);
+  max-width: 750px;
+  line-height: 1.6;
+}
+
+/* Metrics Grid */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.metricCard {
+  background: var(--admin-bg-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: 14px;
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.metricCard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(200, 109, 59, 0.4);
+}
+
+.metricIcon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.metricInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.metricValue {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  font-family: var(--font-admin-display);
+}
+
+.metricLabel {
+  font-size: 0.8rem;
+  color: var(--admin-text-muted);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Section Header */
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Big Tools Grid */
+.toolsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.toolCard {
+  background: var(--admin-bg-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toolCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--admin-accent), transparent);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.toolCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--admin-accent);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 24px var(--admin-accent-glow);
+}
+
+.toolCard:hover::before {
+  opacity: 1;
+}
+
+.toolHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.toolIconBox {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: var(--admin-accent-subtle);
+  border: 1px solid rgba(200, 109, 59, 0.25);
+  color: var(--admin-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+}
+
+.toolBadge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--admin-bg-base);
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text-muted);
+}
+
+.toolTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-admin-display);
+}
+
+.toolDesc {
+  font-size: 0.9rem;
+  color: var(--admin-text-muted);
+  line-height: 1.55;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.toolFeatures {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.toolFeatures li {
+  font-size: 0.8rem;
+  color: var(--admin-text-dim);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolFeatures li::before {
+  content: '✓';
+  color: var(--admin-accent);
+  font-weight: bold;
+}
+
+.toolActionBtn {
+  background: var(--admin-bg-card);
+  border: 1px solid var(--admin-border);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s;
+}
+
+.toolCard:hover .toolActionBtn {
+  background: var(--admin-accent);
+  border-color: var(--admin-accent);
+  box-shadow: 0 4px 14px var(--admin-accent-glow);
+}
+
+/* Templates Section */
+.templatesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+}
+
+.templateMiniCard {
+  background: var(--admin-bg-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+}
+
+.templateMiniCard:hover {
+  transform: translateY(-3px);
+  border-color: var(--admin-accent);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.templateTag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--admin-accent);
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+
+.templateName {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.templateRatio {
+  font-size: 0.75rem;
+  color: var(--admin-text-dim);
+  margin-top: auto;
+}
+
+/* File Paths Table */
+.dataSheetCard {
+  background: var(--admin-bg-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: 14px;
+  padding: 1.75rem;
+}
+
+.dataSheetTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.dataSheetDesc {
+  font-size: 0.85rem;
+  color: var(--admin-text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.pathsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.pathsTable th {
+  text-align: left;
+  padding: 0.65rem 0.85rem;
+  background: var(--admin-bg-base);
+  color: var(--admin-text-muted);
+  font-weight: 600;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.pathsTable td {
+  padding: 0.75rem 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.pathsTable tr:last-child td {
+  border-bottom: none;
+}
+
+.codePath {
+  font-family: var(--font-admin-mono);
+  font-size: 0.78rem;
+  background: var(--admin-bg-base);
+  padding: 3px 7px;
+  border-radius: 4px;
+  color: #e2e8f0;
+  border: 1px solid var(--admin-border);
+}

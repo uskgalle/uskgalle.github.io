@@ -10,12 +10,12 @@ import {
 
 import { events } from '../../app/data/events';
 
-// Upcoming first, then limit to 3
-const sorted = [...events]
-  .sort((a, b) => Number(b.upcoming) - Number(a.upcoming))
-  .slice(0, 3);
-
 export default function SketchMeet() {
+  // Upcoming first, then limit to 3
+  const sorted = [...events]
+    .sort((a, b) => Number(b.upcoming) - Number(a.upcoming))
+    .slice(0, 3);
+
   return (
     <section className={styles.section} id="events">
       <div className={styles.container}>
@@ -54,7 +54,12 @@ export default function SketchMeet() {
                 className={`${styles.dateBadge} ${meet.upcoming ? styles.dateBadgeUpcoming : ''
                   }`}
               >
-                <span className={styles.dateDay}>{meet.date.day}</span>
+                <span
+                  className={styles.dateDay}
+                  style={String(meet.date?.day || '').length > 2 ? { fontSize: '1.05rem', letterSpacing: '0.04em' } : undefined}
+                >
+                  {meet.date.day}
+                </span>
                 <span className={styles.dateMonth}>{meet.date.month}</span>
               </div>
 
@@ -85,8 +90,10 @@ export default function SketchMeet() {
                   }
                   className={`${styles.cardLink} ${meet.upcoming ? styles.cardLinkUpcoming : ''
                     }`}
+                  target={meet.registerLink?.startsWith('http') ? '_blank' : undefined}
+                  rel={meet.registerLink?.startsWith('http') ? 'noopener noreferrer' : undefined}
                 >
-                  {meet.upcoming ? 'Register' : 'View Recap'}
+                  {meet.upcoming ? (meet.actionText || 'Register') : 'View Recap'}
 
                   <FontAwesomeIcon icon={faArrowRight} />
                 </Link>

@@ -1,0 +1,850 @@
+/* =========================================
+   POST TEMPLATE BUILDER - STUDIO STYLES
+   ========================================= */
+
+.builderContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 65px);
+  background: #090a0d;
+}
+
+/* ─── Top Studio Toolbar ─── */
+.toolbar {
+  background: #14171f;
+  border-bottom: 1px solid #252b3b;
+  padding: 0.65rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: sticky;
+  top: 65px;
+  z-index: 800;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  flex-wrap: wrap;
+}
+
+.toolbarLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #1c212c;
+  border: 1px solid #2c3446;
+  color: #cbd5e1;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.18s;
+}
+
+.backBtn:hover {
+  background: #252c3c;
+  color: #fff;
+  border-color: #c86d3b;
+}
+
+.templateSelectorGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.templateLabel {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.templateSelect {
+  background: #1c212c;
+  border: 1px solid #2c3446;
+  color: #f8fafc;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+.templateSelect:focus {
+  border-color: #c86d3b;
+}
+
+.toolbarRight {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.btnToolbar {
+  background: #1c212c;
+  border: 1px solid #2c3446;
+  color: #cbd5e1;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.btnToolbar:hover {
+  background: #252c3c;
+  color: #fff;
+}
+
+.btnExport {
+  background: linear-gradient(135deg, #c86d3b, #b35925);
+  border: 1px solid #c86d3b;
+  color: #fff;
+  padding: 7px 16px;
+  border-radius: 7px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(200, 109, 59, 0.35);
+  transition: all 0.2s;
+}
+
+.btnExport:hover {
+  background: #db7b44;
+  transform: translateY(-1px);
+}
+
+.btnExport:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ─── Studio Workspace Split ─── */
+.workspace {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── Editor Sidebar ─── */
+.sidebar {
+  width: 440px;
+  max-width: 100%;
+  background: #14171f;
+  border-right: 1px solid #252b3b;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 1.5rem;
+  gap: 1.25rem;
+  flex-shrink: 0;
+  transition: margin-left 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: calc(100vh - 120px);
+}
+
+.sidebarCollapsed {
+  margin-left: -440px;
+}
+
+.sectionBox {
+  background: #1a1e28;
+  border: 1px solid #2a3142;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sectionTitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.autofillBanner {
+  background: rgba(200, 109, 59, 0.12);
+  border: 1px solid rgba(200, 109, 59, 0.3);
+  padding: 10px 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.autofillLabel {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #c86d3b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.input, .textarea, .select {
+  background: #0f1218;
+  border: 1px solid #2a3142;
+  color: #f8fafc;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  width: 100%;
+}
+
+.input:focus, .textarea:focus, .select:focus {
+  outline: none;
+  border-color: #c86d3b;
+  box-shadow: 0 0 0 2px rgba(200, 109, 59, 0.2);
+}
+
+.textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.fileDropZone {
+  border: 1.5px dashed #334155;
+  background: #0f1218;
+  border-radius: 8px;
+  padding: 0.85rem;
+  text-align: center;
+  cursor: pointer;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  transition: all 0.2s;
+}
+
+.fileDropZone:hover {
+  border-color: #c86d3b;
+  color: #fff;
+}
+
+/* ─── Preview Stage (Right Canvas) ─── */
+.previewStage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  background: #090a0d;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.canvasWrapper {
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+}
+
+/* ─── 4:5 Portrait Canvas (Instagram Feed) ─── */
+.canvas45 {
+  width: 520px;
+  height: 650px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── 9:16 Vertical Canvas (Instagram Story) ─── */
+.canvas916 {
+  width: 380px;
+  height: 675px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ═══════════════════════════════════════════
+   TEMPLATE 1: MODERN SPLIT MEETUP FLYER
+   ═══════════════════════════════════════════ */
+.splitCanvas {
+  background: #ffffff;
+  color: #0f172a;
+  padding: 22px 24px;
+  font-family: 'Inter', sans-serif;
+  justify-content: space-between;
+}
+
+.splitHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1.5px solid #f1f5f9;
+  padding-bottom: 10px;
+}
+
+.splitBrand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.splitBrandLogo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.splitBrandText {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #0f172a;
+  text-transform: uppercase;
+}
+
+.splitHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.splitEyebrow {
+  background: #faebe2;
+  color: #b85d1b;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+
+.splitMeetupTitle {
+  font-size: 12px;
+  font-weight: 800;
+  color: #0f172a;
+  font-family: 'Outfit', sans-serif;
+}
+
+.splitBody {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 14px;
+  flex: 1;
+  min-height: 0;
+  margin: 12px 0;
+}
+
+.splitArtworkFrame {
+  border-radius: 14px;
+  background-size: cover;
+  background-position: center;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  height: 100%;
+}
+
+.splitDetailsCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+  height: 100%;
+}
+
+.splitIntro {
+  font-size: 11px;
+  color: #475569;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.splitCardsStack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  justify-content: space-around;
+}
+
+.splitInfoCard {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.splitCardLabel {
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #c86d3b;
+}
+
+.splitCardValue {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.2;
+}
+
+.splitBottomCard {
+  border: 1.5px dashed #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.splitQrText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.splitQrBadge {
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #c86d3b;
+  text-transform: uppercase;
+}
+
+.splitQrHeading {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.splitQrSub {
+  font-size: 9px;
+  color: #64748b;
+}
+
+/* ═══════════════════════════════════════════
+   TEMPLATE 2: BLOG ARTICLE HOOK & QR
+   ═══════════════════════════════════════════ */
+.blogCanvas {
+  background: #faf8f5;
+  color: #3a2e22;
+  padding: 22px 24px;
+  font-family: 'Inter', sans-serif;
+  justify-content: space-between;
+}
+
+.blogTopHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ebdccb;
+  margin-bottom: 10px;
+}
+
+.blogLogoText {
+  font-size: 11px;
+  font-weight: 800;
+  color: #2a201a;
+  letter-spacing: 0.8px;
+}
+
+.blogCategoryPill {
+  font-size: 8.5px;
+  font-weight: 800;
+  background: #f7f1e7;
+  color: #b8854a;
+  padding: 2px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+
+.blogCoverImg {
+  width: 100%;
+  height: 250px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #ebdccb;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 14px rgba(42, 32, 26, 0.08);
+}
+
+.blogHookSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.blogArticleTitle {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #2a201a;
+  line-height: 1.2;
+}
+
+.blogHookQuote {
+  font-size: 11.5px;
+  color: #5c4a32;
+  border-left: 2px solid #b8854a;
+  padding-left: 10px;
+  line-height: 1.45;
+  font-style: italic;
+}
+
+.blogBottomBar {
+  border: 1.5px dashed #d5c4b1;
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  height: 72px;
+}
+
+/* ═══════════════════════════════════════════
+   TEMPLATE 3: CLASSIC EDITORIAL FLYER
+   ═══════════════════════════════════════════ */
+.classicCanvas {
+  background: #f5f0e6;
+  color: #1f2421;
+  padding: 24px;
+  font-family: 'Inter', sans-serif;
+  justify-content: space-between;
+}
+
+.classicHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.classicBrand {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #1f2421;
+}
+
+.classicEyebrow {
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: rgba(200, 109, 59, 0.12);
+  color: #c86d3b;
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.classicHeroImg {
+  width: 100%;
+  height: 190px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(31, 36, 33, 0.12);
+  margin-bottom: 12px;
+}
+
+.classicTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #1f2421;
+  margin-bottom: 6px;
+}
+
+.classicIntro {
+  font-size: 11px;
+  color: #5c645d;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.classicGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.classicGridCard {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(31, 36, 33, 0.12);
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.classicGridLabel {
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #c86d3b;
+  margin-bottom: 2px;
+}
+
+.classicGridValue {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1f2421;
+}
+
+.classicQrRow {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1.5px dashed rgba(31, 36, 33, 0.15);
+  border-radius: 10px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+
+/* ═══════════════════════════════════════════
+   TEMPLATE 4: FULL-BLEED IMAGE OVERLAY
+   ═══════════════════════════════════════════ */
+.overlayCanvas {
+  background: #141716;
+  color: #ffffff;
+  position: relative;
+  justify-content: space-between;
+  padding: 24px;
+}
+
+.overlayBgImage {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.overlayScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.92) 100%);
+}
+
+.overlayTop {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.overlayBrand {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.overlayBadge {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 8.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.overlayBottomContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.overlayTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1.1;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+.overlayGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.overlayBox {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+/* ═══════════════════════════════════════════
+   TEMPLATE 5: MINIMALIST POSTER
+   ═══════════════════════════════════════════ */
+.minimalCanvas {
+  background: #ffffff;
+  color: #0f172a;
+  padding: 24px;
+  font-family: 'Inter', sans-serif;
+  justify-content: space-between;
+}
+
+.minimalTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: -0.8px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.minimalHeroImg {
+  width: 100%;
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+/* ═══════════════════════════════════════════
+   TEMPLATE 6: INSTAGRAM STORY (9:16)
+   ═══════════════════════════════════════════ */
+.storyCanvas {
+  background: #141716;
+  color: #ffffff;
+  position: relative;
+  justify-content: space-between;
+  padding: 30px 24px;
+}
+
+.storyBgImg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.storyScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.92) 100%);
+}
+
+.storyTopBar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.storyBottomContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.storyTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.storyPillStack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.storyPill {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* QR Canvas Frame */
+.qrCanvasElement {
+  border-radius: 6px;
+  display: block;
+}

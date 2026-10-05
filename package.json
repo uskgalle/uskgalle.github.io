@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "admin": "start http://localhost:3000/admin",
     "add-artist": "start artist-generator.html",
     "add-artwork": "start artwork-generator.html"
   },
@@ -14,7 +15,9 @@
     "@fortawesome/free-brands-svg-icons": "^7.2.0",
     "@fortawesome/free-solid-svg-icons": "^7.2.0",
     "@fortawesome/react-fontawesome": "^3.3.1",
+    "html2canvas": "^1.4.1",
     "next": "^15.5.18",
+    "qrcode": "^1.5.4",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   }

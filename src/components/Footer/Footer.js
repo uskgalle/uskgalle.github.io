@@ -1,3 +1,6 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebookF, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import styles from './Footer.module.css';
@@ -30,7 +33,12 @@ const socials = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
   const year = new Date().getFullYear();
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   return (
     <footer className={styles.footer}>

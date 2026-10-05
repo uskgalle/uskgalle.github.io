@@ -18,7 +18,12 @@ export default function EventCard({ event }) {
                 <span className={styles.dateYear}>{event.year}</span>
 
                 <div className={styles.dateMain}>
-                    <span className={styles.dateDay}>{event.date.day}</span>
+                    <span
+                        className={styles.dateDay}
+                        style={String(event.date?.day || '').length > 2 ? { fontSize: '1.05rem', letterSpacing: '0.04em' } : undefined}
+                    >
+                        {event.date.day}
+                    </span>
                     <span className={styles.dateMonth}>{event.date.month}</span>
                 </div>
             </div>
@@ -41,10 +46,13 @@ export default function EventCard({ event }) {
 
                 <div className={styles.action}>
                     {event.upcoming ? (
-                        <Link href={event.registerLink || `/events/${event.slug}/register`}
+                        <Link
+                            href={event.registerLink || `/events/${event.slug}/register`}
                             className={`${styles.cardLink} ${styles.cardLinkUpcoming}`}
+                            target={event.registerLink?.startsWith('http') ? '_blank' : undefined}
+                            rel={event.registerLink?.startsWith('http') ? 'noopener noreferrer' : undefined}
                         >
-                            Register <FontAwesomeIcon icon={faArrowRight} />
+                            {event.actionText || 'Register'} <FontAwesomeIcon icon={faArrowRight} />
                         </Link>
                     ) : (
                         <Link href={`/events/${event.slug}`} className={styles.cardLink}>

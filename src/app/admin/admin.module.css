@@ -1,0 +1,222 @@
+/* =========================================
+   USK GALLE ADMIN STUDIO - DESIGN SYSTEM
+   ========================================= */
+
+.adminRoot {
+  --admin-bg-base: #0c0e12;
+  --admin-bg-surface: #14171f;
+  --admin-bg-card: #1a1e28;
+  --admin-bg-card-hover: #222735;
+  --admin-bg-subtle: #272d3c;
+  --admin-border: #2a3142;
+  --admin-border-focus: #c86d3b;
+
+  --admin-accent: #c86d3b;
+  --admin-accent-hover: #db7b44;
+  --admin-accent-glow: rgba(200, 109, 59, 0.25);
+  --admin-accent-subtle: rgba(200, 109, 59, 0.12);
+
+  --admin-green: #10b981;
+  --admin-green-glow: rgba(16, 185, 129, 0.2);
+  --admin-blue: #38bdf8;
+
+  --admin-text-main: #f8fafc;
+  --admin-text-muted: #94a3b8;
+  --admin-text-dim: #64748b;
+
+  --font-admin-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-admin-display: 'Outfit', sans-serif;
+  --font-admin-serif: 'Playfair Display', Georgia, serif;
+  --font-admin-mono: 'JetBrains Mono', monospace;
+
+  min-height: 100vh;
+  background-color: var(--admin-bg-base);
+  color: var(--admin-text-main);
+  font-family: var(--font-admin-sans);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Top Header ─── */
+.topNav {
+  background: var(--admin-bg-surface);
+  border-bottom: 1px solid var(--admin-border);
+  padding: 0.85rem 1.75rem;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.topNavInner {
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.brandGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brandBadge {
+  background: linear-gradient(135deg, #c86d3b, #b35925);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 8px var(--admin-accent-glow);
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandTitle {
+  font-family: var(--font-admin-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brandTag {
+  font-size: 0.72rem;
+  color: var(--admin-text-dim);
+  font-weight: 500;
+}
+
+/* Nav Links */
+.navTabs {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--admin-bg-base);
+  padding: 0.3rem;
+  border-radius: 10px;
+  border: 1px solid var(--admin-border);
+}
+
+.tabLink {
+  padding: 0.45rem 0.95rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--admin-text-muted);
+  text-decoration: none;
+  border-radius: 7px;
+  transition: all 0.18s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.tabLink:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tabLinkActive {
+  background: var(--admin-accent);
+  color: #fff;
+  box-shadow: 0 2px 10px var(--admin-accent-glow);
+}
+
+.tabLinkActive:hover {
+  background: var(--admin-accent-hover);
+  color: #fff;
+}
+
+.exitSiteBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--admin-bg-card);
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text-muted);
+  padding: 0.45rem 0.85rem;
+  border-radius: 7px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.exitSiteBtn:hover {
+  color: #fff;
+  border-color: var(--admin-accent);
+  background: var(--admin-bg-subtle);
+}
+
+/* ─── Main Content Container ─── */
+.adminContainer {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Shared UI Elements ─── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #1e293b;
+  color: #f8fafc;
+  border: 1px solid #334155;
+  border-left: 4px solid var(--admin-accent);
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  font-size: 0.85rem;
+  font-weight: 600;
+  z-index: 9999;
+  animation: slideToast 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@keyframes slideToast {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 900px) {
+  .navTabs {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  .brandTag {
+    display: none;
+  }
+}
