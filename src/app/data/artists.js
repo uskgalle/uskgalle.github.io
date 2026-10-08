@@ -127,6 +127,13 @@ export const artists = [
     bio: 'Turning ideas into lines & emotions into art 🎨 Learning • Creating • Improving',
     instagram: 'https://instagram.com/vihasna_geesathmi',
   },
+  {
+    id: 'USKG18',
+    name: 'Rakshana Sharifudeen',
+    slug: 'rakshana-sharifudeen',
+    bio: 'Rakshana Sharifudeen is a Sri Lankan urban sketcher, location artist, and active member of Urban Sketchers Colombo, best known for her striking vertical compositions of architectural heritage and streetscapes. Working fluidly across pencil, charcoal, ink, and watercolor wash, her on-site drawings capture the character and depth of historic urban landscapes.',
+    instagram: 'https://instagram.com/rakshysdeen',
+  },
 
 ];
 

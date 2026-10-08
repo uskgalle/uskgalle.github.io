@@ -187,6 +187,16 @@ export const artworks = [
     event: 'meet-up-05',
   },
 
+  // USKG18 — Rakshana Sharifudeen
+  {
+    id: 'USKG18-1',
+    filename: '1.webp',
+    title: 'Statue of a "Kodithuwakku" at Galle Black Fort',
+    description: "This life-sized replica at Galle’s Black Fort depicts a Kodithuwakku, the administrative commanding officer of the King’s Flag and Light Artillery Corps. ​He wears a fitted red tunic with gold cross- belts, a draped off - white waistcloth(tuppotiya), and a traditional red and gold brimmed headpiece(kasthale).Slung across his chest is a gunpowder horn, an essential tool for managing field artillery(gingals) and signaling logistics on the ramparts.His vigilant posture honors the local military leaders who directed the island’s defense during the transition into the British period.",
+    event: 'meet-up-03',
+  },
+
+
 
 ];
 
