@@ -4,200 +4,251 @@
  * Supports .png, .webp, .jpg, and .jpeg files.
  */
 export const artworks = [
-  // USKG1 — Yasith Arangala
   {
-    id: 'USKG1-1',
-    filename: '1.png',
-    title: 'Symbols of Galle fort',
-    description: 'Mix media (water color, ink, etc.)',
-    event: 'meet-up-04',
+    "description": "Mix media (water color, ink, etc.)",
+    "event": "meet-up-04",
+    "filename": "1.png",
+    "id": "USKG1-1",
+    "title": "Symbols of Galle fort"
   },
   {
-    id: 'USKG1-2',
-    filename: '2.png',
-    title: 'Symbols of Galle fort',
-    description: 'Mix media (water color, ink, etc.)',
-    event: 'meet-up-04',
+    "description": "Mix media (water color, ink, etc.)",
+    "event": "meet-up-04",
+    "filename": "2.png",
+    "id": "USKG1-2",
+    "title": "Symbols of Galle fort"
   },
   {
-    id: 'USKG1-3',
-    filename: '3.png',
-    title: 'Symbols of Galle fort',
-    description: 'Mix media (water color, ink, etc.)',
-    event: 'meet-up-04',
-  },
-
-  // USKG2 — Sumudu Udari
-  {
-    id: 'USKG2-1',
-    filename: '1.png',
-    title: 'Galle Fort Lighthouse with blue sky',
-    description: 'The Galle Fort Lighthouse is a historic symbol of Galle, built in 1939. I sketched its simple white design standing beautifully against the blue sky. Medium used : Watercolors & pen',
-    event: 'meet-up-04',
-  },
-
-  // USKG3 — Nimthaka Jayavihan
-  {
-    id: 'USKG3-1',
-    filename: '1.png',
-    title: 'Galle lighthouse ',
-    description: 'I captured the lighthouse and the beautiful landscape using watercolors and markers to showcase the beauty of Galle.',
-    event: 'meet-up-04',
+    "description": "Mix media (water color, ink, etc.)",
+    "event": "meet-up-04",
+    "filename": "3.png",
+    "id": "USKG1-3",
+    "title": "Symbols of Galle fort"
   },
   {
-    id: 'USKG3-2',
-    filename: '2.png',
-    title: 'Galle fort clock tower',
-    description: 'Seen from a distance, the Galle Fort Clock Tower rises as a distinctive landmark within the historic fort. The sketch focuses on its relationship with the surrounding buildings, open space, and everyday human activity, capturing the atmosphere and character of the place through quick sketching and watercolour.',
-    event: 'meet-up-04',
+    "description": "The Galle Fort Lighthouse is a historic symbol of Galle, built in 1939. I sketched its simple white design standing beautifully against the blue sky. Medium used : Watercolors & pen",
+    "event": "meet-up-04",
+    "filename": "1.png",
+    "id": "USKG2-1",
+    "title": "Galle Fort Lighthouse with blue sky"
   },
   {
-    id: 'USKG3-3',
-    filename: '3.png',
-    title: 'Galle fort light-house',
-    description: 'The iconic Galle Fort Lighthouse is captured from a ground-level perspective, highlighting its beauty, architectural details, surrounding atmosphere, and human activities. A quick sketch with watercolour is used to capture the character and vibrancy of the place.',
-    event: 'meet-up-04',
-  },
-
-  // USKG4 — Lakshana Samadhi
-  {
-    id: 'USKG4-1',
-    filename: '1.png',
-    title: 'Galle light house',
-    description: 'Pencil & water colours',
-    event: 'meet-up-04',
-  },
-
-  // USKG5 — Sachith Vithanage
-  {
-    id: 'USKG5-1',
-    filename: '1.png',
-    title: 'Galle Fort lighthouse',
-    description: '',
-    event: 'meet-up-04',
-  },
-
-  // USKG6 — Shifteh
-  {
-    id: 'USKG6-1',
-    filename: '1.png',
-    title: 'Galle Fort Lighthouse',
-    description: '',
-    event: 'meet-up-04',
+    "description": "I captured the lighthouse and the beautiful landscape using watercolors and markers to showcase the beauty of Galle.",
+    "event": "meet-up-04",
+    "filename": "1.png",
+    "id": "USKG3-1",
+    "title": "Galle lighthouse "
   },
   {
-    id: 'USKG6-2',
-    filename: '2.png',
-    title: 'Galle Fort Clock Tower',
-    description: '',
-    event: 'meet-up-04',
-  },
-
-  // USKG7 — Amodi Kodithuwakku
-
-  // USKG8 — Nelum Buddhadasa
-  {
-    id: 'USKG8-1',
-    filename: '1.webp',
-    title: 'Galle Fish Market',
-    description: '',
-    event: 'meet-up-05',
+    "description": "Seen from a distance, the Galle Fort Clock Tower rises as a distinctive landmark within the historic fort. The sketch focuses on its relationship with the surrounding buildings, open space, and everyday human activity, capturing the atmosphere and character of the place through quick sketching and watercolour.",
+    "event": "meet-up-04",
+    "filename": "2.png",
+    "id": "USKG3-2",
+    "title": "Galle fort clock tower"
   },
   {
-    id: 'USKG8-2',
-    filename: '2.webp',
-    title: 'Temple in Galle Fort',
-    description: 'A Distant View of the Rooftops and Temple in Galle Fort',
-    event: '',
+    "description": "The iconic Galle Fort Lighthouse is captured from a ground-level perspective, highlighting its beauty, architectural details, surrounding atmosphere, and human activities. A quick sketch with watercolour is used to capture the character and vibrancy of the place.",
+    "event": "meet-up-04",
+    "filename": "3.png",
+    "id": "USKG3-3",
+    "title": "Galle fort light-house"
   },
   {
-    id: 'USKG8-3',
-    filename: '3.webp',
-    title: 'Buildings',
-    description: 'Buildings near the Dutch Hospital Galle',
-    event: '',
+    "description": "Pencil & water colours",
+    "event": "meet-up-04",
+    "filename": "1.png",
+    "id": "USKG4-1",
+    "title": "Galle light house"
   },
   {
-    id: 'USKG8-4',
-    filename: '4.webp',
-    title: 'House on Church Street',
-    description: 'A House on Church Street',
-    event: '',
+    "description": "",
+    "event": "meet-up-04",
+    "filename": "1.png",
+    "id": "USKG5-1",
+    "title": "Galle Fort lighthouse"
   },
   {
-    id: 'USKG8-5',
-    filename: '5.webp',
-    title: 'Black Fort',
-    description: 'A Walk Through Black Fort',
-    event: '',
+    "description": "",
+    "event": "meet-up-04",
+    "filename": "1.png",
+    "id": "USKG6-1",
+    "title": "Galle Fort Lighthouse"
   },
   {
-    id: 'USKG8-6',
-    filename: '6.webp',
-    title: 'Church Rooftop',
-    description: 'A Distant View of the Church Rooftop from the Galle Fort Promenade',
-    event: '',
+    "description": "",
+    "event": "meet-up-04",
+    "filename": "2.png",
+    "id": "USKG6-2",
+    "title": "Galle Fort Clock Tower"
   },
   {
-    id: 'USKG8-7',
-    filename: '7.webp',
-    title: 'Bell Tower',
-    description: 'The Bell Tower near the Maritime Museum',
-    event: '',
+    "description": "",
+    "event": "meet-up-05",
+    "filename": "1.webp",
+    "id": "USKG8-1",
+    "title": "Galle Fish Market"
   },
   {
-    id: 'USKG8-8',
-    filename: '8.webp',
-    title: 'Galle Fort Lighthouse',
-    description: 'The Iconic Lighthouse Galle Fort',
-    event: '',
-  },
-
-  // USKG9 — Rachel West
-
-  // USKG10 — Maheema Mahimani
-  {
-    id: 'USKG10-1',
-    filename: '1.webp',
-    title: 'Sketch #1',
-    description: '',
-    event: 'meet-up-05',
-  },
-
-  // USKG11 — Rashmi Wimalasiri
-  // USKG12 — Lakdini Lisakya
-  // USKG13 — Kathya Ruhansi
-  // USKG14 — Isuri Kumarasinghe
-  // USKG15 — Ravindu Ramawickrama
-  // USKG16 — Nethmi Pabasara
-
-  // USKG17 — Vihasna Geesathmi
-  {
-    id: 'USKG17-1',
-    filename: '1.webp',
-    title: 'Galle Fish Market',
-    description: 'A little piece of Galle, captured in lines and colours. 🎨🌊',
-    event: 'meet-up-05',
+    "description": "A Distant View of the Rooftops and Temple in Galle Fort",
+    "event": "",
+    "filename": "2.webp",
+    "id": "USKG8-2",
+    "title": "Temple in Galle Fort"
   },
   {
-    id: 'USKG17-2',
-    filename: '2.webp',
-    title: 'Galle Fish Market',
-    description: 'A little piece of Galle, captured in lines and colours. 🎨🌊',
-    event: 'meet-up-05',
+    "description": "Buildings near the Dutch Hospital Galle",
+    "event": "",
+    "filename": "3.webp",
+    "id": "USKG8-3",
+    "title": "Buildings"
   },
-
-  // USKG18 — Rakshana Sharifudeen
   {
-    id: 'USKG18-1',
-    filename: '1.webp',
-    title: 'Statue of a "Kodithuwakku" at Galle Black Fort',
-    description: "This life-sized replica at Galle’s Black Fort depicts a Kodithuwakku, the administrative commanding officer of the King’s Flag and Light Artillery Corps. ​He wears a fitted red tunic with gold cross- belts, a draped off - white waistcloth(tuppotiya), and a traditional red and gold brimmed headpiece(kasthale).Slung across his chest is a gunpowder horn, an essential tool for managing field artillery(gingals) and signaling logistics on the ramparts.His vigilant posture honors the local military leaders who directed the island’s defense during the transition into the British period.",
-    event: 'meet-up-03',
+    "description": "A House on Church Street",
+    "event": "",
+    "filename": "4.webp",
+    "id": "USKG8-4",
+    "title": "House on Church Street"
   },
-
-
-
+  {
+    "description": "A Walk Through Black Fort",
+    "event": "",
+    "filename": "5.webp",
+    "id": "USKG8-5",
+    "title": "Black Fort"
+  },
+  {
+    "description": "A Distant View of the Church Rooftop from the Galle Fort Promenade",
+    "event": "",
+    "filename": "6.webp",
+    "id": "USKG8-6",
+    "title": "Church Rooftop"
+  },
+  {
+    "description": "The Bell Tower near the Maritime Museum",
+    "event": "",
+    "filename": "7.webp",
+    "id": "USKG8-7",
+    "title": "Bell Tower"
+  },
+  {
+    "description": "The Iconic Lighthouse Galle Fort",
+    "event": "",
+    "filename": "8.webp",
+    "id": "USKG8-8",
+    "title": "Galle Fort Lighthouse"
+  },
+  {
+    "description": "",
+    "event": "meet-up-05",
+    "filename": "1.webp",
+    "id": "USKG10-1",
+    "title": "Sketch #1"
+  },
+  {
+    "description": "A little piece of Galle, captured in lines and colours. 🎨🌊",
+    "event": "meet-up-05",
+    "filename": "1.webp",
+    "id": "USKG17-1",
+    "title": "Galle Fish Market"
+  },
+  {
+    "description": "A little piece of Galle, captured in lines and colours. 🎨🌊",
+    "event": "meet-up-05",
+    "filename": "2.webp",
+    "id": "USKG17-2",
+    "title": "Galle Fish Market"
+  },
+  {
+    "description": "This life-sized replica at Galle’s Black Fort depicts a Kodithuwakku, the administrative commanding officer of the King’s Flag and Light Artillery Corps. ​He wears a fitted red tunic with gold cross- belts, a draped off - white waistcloth(tuppotiya), and a traditional red and gold brimmed headpiece(kasthale).Slung across his chest is a gunpowder horn, an essential tool for managing field artillery(gingals) and signaling logistics on the ramparts.His vigilant posture honors the local military leaders who directed the island’s defense during the transition into the British period.",
+    "event": "meet-up-03",
+    "filename": "1.webp",
+    "id": "USKG18-1",
+    "title": "Statue of a \"Kodithuwakku\" at Galle Black Fort"
+  },
+  {
+    "description": "",
+    "event": null,
+    "filename": "2.webp",
+    "id": "USKG4-2",
+    "title": "Sketch 2"
+  },
+  {
+    "description": "",
+    "event": null,
+    "filename": "2.webp",
+    "id": "USKG5-2",
+    "title": "Sketch 2"
+  },
+  {
+    "description": "",
+    "event": null,
+    "filename": "1.webp",
+    "id": "USKG7-1",
+    "title": "Sketch 1"
+  },
+  {
+    "description": "A simple sketch of the  Galle Fort exterior as you approach the main entrance.",
+    "event": null,
+    "filename": "9.png",
+    "id": "USKG8-9",
+    "title": "Galle Fort From Afar"
+  },
+  {
+    "description": "",
+    "event": null,
+    "filename": "1.webp",
+    "id": "USKG9-1",
+    "title": "Sketch 1"
+  },
+  {
+    "description": "",
+    "event": null,
+    "filename": "1.webp",
+    "id": "USKG11-1",
+    "title": "Sketch 1"
+  },
+  {
+    "description": "",
+    "event": null,
+    "filename": "2.webp",
+    "id": "USKG11-2",
+    "title": "Sketch 2"
+  },
+  {
+    "description": "",
+    "event": null,
+    "filename": "1.webp",
+    "id": "USKG12-1",
+    "title": "Sketch 1"
+  },
+  {
+    "description": "",
+    "event": null,
+    "filename": "1.png",
+    "id": "USKG13-1",
+    "title": "Sketch 1"
+  },
+  {
+    "description": "",
+    "event": null,
+    "filename": "1.webp",
+    "id": "USKG14-1",
+    "title": "Sketch 1"
+  },
+  {
+    "description": "",
+    "event": null,
+    "filename": "1.webp",
+    "id": "USKG15-1",
+    "title": "Sketch 1"
+  },
+  {
+    "description": "",
+    "event": null,
+    "filename": "1.webp",
+    "id": "USKG16-1",
+    "title": "Sketch 1"
+  }
 ];
 
 /**

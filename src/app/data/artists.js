@@ -9,132 +9,132 @@ export { artworks, getArtworkMetadata };
  */
 export const artists = [
   {
-    id: 'USKG1',
-    name: 'Yasith Arangala',
-    slug: 'yasith-arangala',
-    bio: 'Architecture student & artist, exploring watercolor with pen and ink.',
-    instagram: 'https://instagram.com/yasitharangala',
+    "bio": "Architecture student & artist, exploring watercolor with pen and ink.",
+    "id": "USKG1",
+    "instagram": "https://instagram.com/yasitharangala",
+    "name": "Yasith Arangala",
+    "slug": "yasith-arangala"
   },
   {
-    id: 'USKG2',
-    name: 'Sumudu Udari',
-    slug: 'sumudu-udari',
-    bio: 'Interior Designer | Sketcher | Artist',
-    instagram: 'https://instagram.com/_udarii_',
+    "bio": "Interior Designer | Sketcher | Artist",
+    "id": "USKG2",
+    "instagram": "https://instagram.com/_udarii_",
+    "name": "Sumudu Udari",
+    "slug": "sumudu-udari"
   },
   {
-    id: 'USKG3',
-    name: 'Nimthaka Jayavihan',
-    slug: 'nimthaka-jayavihan',
-    bio: 'I’m an architecture student at the University of Moratuwa, and I enjoy urban sketching in Galle.',
-    instagram: 'https://instagram.com/nimthakajayavihan',
+    "bio": "I’m an architecture student at the University of Moratuwa, and I enjoy urban sketching in Galle.",
+    "id": "USKG3",
+    "instagram": "https://instagram.com/nimthakajayavihan",
+    "name": "Nimthaka Jayavihan",
+    "slug": "nimthaka-jayavihan"
   },
   {
-    id: 'USKG4',
-    name: 'Lakshana Samadhi',
-    slug: 'lakshana-samadhi',
-    bio: 'I sketch what catches my eye, paint what I feel, and love discovering new perspectives through art.',
-    instagram: 'https://instagram.com/_samadhiiii',
+    "bio": "I sketch what catches my eye, paint what I feel, and love discovering new perspectives through art.",
+    "id": "USKG4",
+    "instagram": "https://instagram.com/_samadhiiii",
+    "name": "Lakshana Samadhi",
+    "slug": "lakshana-samadhi"
   },
   {
-    id: 'USKG5',
-    name: 'Sachith Vithanage',
-    slug: 'sachith-vithanage',
-    bio: 'As a traveling artist I enjoy sketching at different places. I’m interested in sketching architecture and landscape. I believe each city and place has something to offer, and sketching them can be a good way to understand what it is.',
-    instagram: 'https://instagram.com/sachithvithanage',
+    "bio": "As a traveling artist I enjoy sketching at different places. I’m interested in sketching architecture and landscape. I believe each city and place has something to offer, and sketching them can be a good way to understand what it is.",
+    "id": "USKG5",
+    "instagram": "https://instagram.com/sachithvithanage",
+    "name": "Sachith Vithanage",
+    "slug": "sachith-vithanage"
   },
   {
-    id: 'USKG6',
-    name: 'Shifteh',
-    slug: 'shifteh',
-    bio: 'former maha.workroom | temporary super slow traveler | postcard painter  | stubborn experiencer | skill collector',
-    instagram: 'https://instagram.com/shifis.way',
+    "bio": "former maha.workroom | temporary super slow traveler | postcard painter  | stubborn experiencer | skill collector",
+    "id": "USKG6",
+    "instagram": "https://instagram.com/shifis.way",
+    "name": "Shifteh",
+    "slug": "shifteh"
   },
   {
-    id: 'USKG7',
-    name: 'Amodi Kodithuwakku',
-    slug: 'amodi-kodithuwakku',
-    bio: 'Colouring outside the lines ofc',
-    instagram: 'https://instagram.com/artis_tmaybe',
+    "bio": "Colouring outside the lines ofc",
+    "id": "USKG7",
+    "instagram": "https://instagram.com/artis_tmaybe",
+    "name": "Amodi Kodithuwakku",
+    "slug": "amodi-kodithuwakku"
   },
   {
-    id: 'USKG8',
-    name: 'Nelum Buddhadasa',
-    slug: 'nelum-buddhadasa',
-    bio: 'Rediscovering my sketching abilities after some years!',
-    instagram: 'https://instagram.com/nelum_ventures',
+    "bio": "Rediscovering my sketching abilities after some years! I am an active member of Urban Sketchers Colombo since 2024 and I love to dabble in pencil sketching, using light outlines and colour pencils to shade in my drawings... I have my own distinctive style where detail is subtle but vivid!",
+    "id": "USKG8",
+    "instagram": "https://instagram.com/nelum_ventures",
+    "name": "Nelum Buddhadasa",
+    "role": "",
+    "slug": "nelum-buddhadasa"
   },
   {
-    id: 'USKG9',
-    name: 'Rachel West',
-    slug: 'rachel-west',
-    bio: 'Artist dabbling in illustration and murals wanting to spend more time sketching.',
-    instagram: 'https://instagram.com/Rwestarts',
+    "bio": "Artist dabbling in illustration and murals wanting to spend more time sketching.",
+    "id": "USKG9",
+    "instagram": "https://instagram.com/Rwestarts",
+    "name": "Rachel West",
+    "slug": "rachel-west"
   },
   {
-    id: 'USKG10',
-    name: 'Maheema Mahimani',
-    slug: 'maheema-mahimani',
-    bio: 'Finely imperfect',
-    instagram: 'https://instagram.com/__hibee___',
+    "bio": "Finely imperfect",
+    "id": "USKG10",
+    "instagram": "https://instagram.com/__hibee___",
+    "name": "Maheema Mahimani",
+    "slug": "maheema-mahimani"
   },
   {
-    id: 'USKG11',
-    name: 'Rashmi Wimalasiri',
-    slug: 'rashmi-wimalasiri',
-    bio: 'Just started, so let’s see',
-    instagram: 'https://instagram.com/rashmi_ww',
+    "bio": "Just started, so let’s see",
+    "id": "USKG11",
+    "instagram": "https://instagram.com/rashmi_ww",
+    "name": "Rashmi Wimalasiri",
+    "slug": "rashmi-wimalasiri"
   },
   {
-    id: 'USKG12',
-    name: 'Lakdini Lisakya',
-    slug: 'lakdini-lisakya',
-    bio: 'Enjoy and busy with architectural journey',
-    instagram: 'https://instagram.com/lakdinilisakya',
+    "bio": "Enjoy and busy with architectural journey",
+    "id": "USKG12",
+    "instagram": "https://instagram.com/lakdinilisakya",
+    "name": "Lakdini Lisakya",
+    "slug": "lakdini-lisakya"
   },
   {
-    id: 'USKG13',
-    name: 'Kathya Ruhansi',
-    slug: 'kathya-ruhansi',
-    bio: 'Learning architecture, observing the world through lines | archi student in university of moratuwa',
-    instagram: 'https://instagram.com/_kathya_rk_',
+    "bio": "Learning architecture, observing the world through lines | archi student in university of moratuwa",
+    "id": "USKG13",
+    "instagram": "https://instagram.com/_kathya_rk_",
+    "name": "Kathya Ruhansi",
+    "slug": "kathya-ruhansi"
   },
   {
-    id: 'USKG14',
-    name: 'Isuri Kumarasinghe',
-    slug: 'isuri-kumarasinghe',
-    bio: 'Plant Lover | Agriculturist | Cooking & Baking | Artist',
-    instagram: 'https://instagram.com/isuri_k_',
+    "bio": "Plant Lover | Agriculturist | Cooking & Baking | Artist",
+    "id": "USKG14",
+    "instagram": "https://instagram.com/isuri_k_",
+    "name": "Isuri Kumarasinghe",
+    "slug": "isuri-kumarasinghe"
   },
   {
-    id: 'USKG15',
-    name: 'Ravindu Ramawickrama',
-    slug: 'ravindu-ramawickrama',
-    bio: 'Blender Artist | Architect Student | Sketcher',
-    instagram: 'https://instagram.com/ravindu_ramawickrama',
+    "bio": "Blender Artist | Architect Student | Sketcher",
+    "id": "USKG15",
+    "instagram": "https://instagram.com/ravindu_ramawickrama",
+    "name": "Ravindu Ramawickrama",
+    "slug": "ravindu-ramawickrama"
   },
   {
-    id: 'USKG16',
-    name: 'Nethmi Pabasara',
-    slug: 'nethmi-pabasara',
-    bio: 'Sketcher',
-    instagram: 'https://instagram.com/Thepabee',
+    "bio": "Sketcher",
+    "id": "USKG16",
+    "instagram": "https://instagram.com/Thepabee",
+    "name": "Nethmi Pabasara",
+    "slug": "nethmi-pabasara"
   },
   {
-    id: 'USKG17',
-    name: 'Vihasna Geesathmi',
-    slug: 'vihasna-geesathmi',
-    bio: 'Turning ideas into lines & emotions into art 🎨 Learning • Creating • Improving',
-    instagram: 'https://instagram.com/vihasna_geesathmi',
+    "bio": "Turning ideas into lines & emotions into art 🎨 Learning • Creating • Improving",
+    "id": "USKG17",
+    "instagram": "https://instagram.com/vihasna_geesathmi",
+    "name": "Vihasna Geesathmi",
+    "slug": "vihasna-geesathmi"
   },
   {
-    id: 'USKG18',
-    name: 'Rakshana Sharifudeen',
-    slug: 'rakshana-sharifudeen',
-    bio: 'Rakshana Sharifudeen is a Sri Lankan urban sketcher, location artist, and active member of Urban Sketchers Colombo, best known for her striking vertical compositions of architectural heritage and streetscapes. Working fluidly across pencil, charcoal, ink, and watercolor wash, her on-site drawings capture the character and depth of historic urban landscapes.',
-    instagram: 'https://instagram.com/rakshysdeen',
-  },
-
+    "bio": "Rakshana Sharifudeen is a Sri Lankan urban sketcher, location artist, and active member of Urban Sketchers Colombo, best known for her striking vertical compositions of architectural heritage and streetscapes. Working fluidly across pencil, charcoal, ink, and watercolor wash, her on-site drawings capture the character and depth of historic urban landscapes.",
+    "id": "USKG18",
+    "instagram": "https://instagram.com/rakshysdeen",
+    "name": "Rakshana Sharifudeen",
+    "slug": "rakshana-sharifudeen"
+  }
 ];
 
 /**
@@ -144,29 +144,29 @@ export const artists = [
  */
 export const specialProfiles = [
   {
-    id: 'USK-SYS',
-    name: 'System',
-    slug: 'system',
-    role: 'AI Agent & Archival Storyteller',
-    bio: 'AI agent thinking about art, Galle Fort history, and culture. Writing blogs and field guides to inspire artists, preserve heritage, and document the living pulse of USK Galle.',
-    isSpecial: true,
+    "bio": "AI agent thinking about art, Galle Fort history, and culture. Writing blogs and field guides to inspire artists, preserve heritage, and document the living pulse of USK Galle.",
+    "id": "USK-SYS",
+    "isSpecial": true,
+    "name": "System",
+    "role": "AI Agent & Archival Storyteller",
+    "slug": "system"
   },
   {
-    id: 'USK-ADM',
-    name: 'Sandeepa Vithanage',
-    slug: 'sandeepa-vithanage',
-    role: 'Admin & Event Lead',
-    bio: 'Admin of USK Galle, handling and organizing community sketch meets and events. Professional artist exploring the historic architecture and vibrant streets of Sri Lanka.',
-    isSpecial: true,
+    "bio": "Admin of USK Galle, handling and organizing community sketch meets and events. Professional artist exploring the historic architecture and vibrant streets of Sri Lanka.",
+    "id": "USK-ADM",
+    "isSpecial": true,
+    "name": "Sandeepa Vithanage",
+    "role": "Admin & Event Lead",
+    "slug": "sandeepa-vithanage"
   },
   {
-    id: 'USK-DEV',
-    name: 'Kasun Miuranga',
-    slug: 'kasun-miuranga',
-    role: 'Technical Lead & Web Developer',
-    bio: 'Handling the technical sides, website development, and digital maintenance for USK Galle. Hobbyist artist passionate about open culture, creative technology, and building digital archives.',
-    isSpecial: true,
-  },
+    "bio": "Handling the technical sides, website development, and digital maintenance for USK Galle. Hobbyist artist passionate about open culture, creative technology, and building digital archives.",
+    "id": "USK-DEV",
+    "isSpecial": true,
+    "name": "Kasun Miuranga",
+    "role": "Technical Lead & Web Developer",
+    "slug": "kasun-miuranga"
+  }
 ];
 
 export function getArtistBySlug(slug) {
