@@ -1,6 +1,7 @@
 import { events } from '../../../data/events';
 import { notFound } from 'next/navigation';
 import RegisterClient from './RegisterClient';
+import { artists } from '../../../data/artists';
 
 export async function generateStaticParams() {
     return events.map((e) => ({ slug: e.slug }));
@@ -39,5 +40,5 @@ export default async function RegisterPage({ params }) {
 
     if (!event) return notFound();
 
-    return <RegisterClient event={event} />;
+    return <RegisterClient event={event} registeredArtists={artists.map(({ id, name, country, instagram }) => ({ id, name, country: country || '', instagram: instagram || '' }))} />;
 }

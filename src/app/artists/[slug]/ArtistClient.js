@@ -6,6 +6,7 @@ import ImageLightbox from '../../../components/ImageLightbox/ImageLightbox';
 import BlurImage from '../../../components/BlurImage/BlurImage';
 import styles from './ArtistClient.module.css';
 import StoryMaker from '../../../components/StoryMaker/StoryMaker';
+import CountryBadge from '../../../components/CountryBadge/CountryBadge';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
     faShareNodes, 
@@ -70,7 +71,7 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
                         <span className={styles.eyebrow}>
                             {artist.role || 'USK Galle Artist'}
                         </span>
-                        {artist.id && <span className={styles.artistId}>{artist.id}</span>}
+                        {artist.id && <><span className={styles.artistId}>{artist.id}</span><CountryBadge country={artist.country} bare /></>}
                     </div>
                     <h1 className={styles.name}>{artist.name}</h1>
 

@@ -11,55 +11,70 @@ export { artworks, getArtworkMetadata };
 export const artists = [
   {
     "bio": "Architecture student & artist, exploring watercolor with pen and ink.",
+    "country": "LK",
     "id": "USKG1",
     "instagram": "https://instagram.com/yasitharangala",
     "name": "Yasith Arangala",
+    "role": "",
     "slug": "yasith-arangala"
   },
   {
     "bio": "Interior Designer | Sketcher | Artist",
+    "country": "LK",
     "id": "USKG2",
     "instagram": "https://instagram.com/_udarii_",
     "name": "Sumudu Udari",
+    "role": "",
     "slug": "sumudu-udari"
   },
   {
     "bio": "I’m an architecture student at the University of Moratuwa, and I enjoy urban sketching in Galle.",
+    "country": "LK",
     "id": "USKG3",
     "instagram": "https://instagram.com/nimthakajayavihan",
     "name": "Nimthaka Jayavihan",
+    "role": "",
     "slug": "nimthaka-jayavihan"
   },
   {
     "bio": "I sketch what catches my eye, paint what I feel, and love discovering new perspectives through art.",
+    "country": "LK",
     "id": "USKG4",
     "instagram": "https://instagram.com/_samadhiiii",
     "name": "Lakshana Samadhi",
+    "role": "",
     "slug": "lakshana-samadhi"
   },
   {
     "bio": "As a traveling artist I enjoy sketching at different places. I’m interested in sketching architecture and landscape. I believe each city and place has something to offer, and sketching them can be a good way to understand what it is.",
+    "country": "LK",
     "id": "USKG5",
     "instagram": "https://instagram.com/sachithvithanage",
     "name": "Sachith Vithanage",
+    "role": "",
     "slug": "sachith-vithanage"
   },
   {
     "bio": "former maha.workroom | temporary super slow traveler | postcard painter  | stubborn experiencer | skill collector",
+    "country": "IR",
     "id": "USKG6",
     "instagram": "https://instagram.com/shifis.way",
     "name": "Shifteh",
+    "role": "",
     "slug": "shifteh"
   },
   {
     "bio": "Colouring outside the lines ofc",
+    "country": "LK",
     "id": "USKG7",
     "instagram": "https://instagram.com/artis_tmaybe",
     "name": "Amodi Kodithuwakku",
+    "role": "",
     "slug": "amodi-kodithuwakku"
   },
   {
     "bio": "Rediscovering my sketching abilities after some years! I am an active member of Urban Sketchers Colombo since 2024 and I love to dabble in pencil sketching, using light outlines and colour pencils to shade in my drawings... I have my own distinctive style where detail is subtle but vivid!",
+    "country": "LK",
     "id": "USKG8",
     "instagram": "https://instagram.com/nelum_ventures",
     "name": "Nelum Buddhadasa",
@@ -68,72 +83,92 @@ export const artists = [
   },
   {
     "bio": "Artist dabbling in illustration and murals wanting to spend more time sketching.",
+    "country": "IR",
     "id": "USKG9",
     "instagram": "https://instagram.com/Rwestarts",
     "name": "Rachel West",
+    "role": "",
     "slug": "rachel-west"
   },
   {
     "bio": "Finely imperfect",
+    "country": "LK",
     "id": "USKG10",
     "instagram": "https://instagram.com/__hibee___",
     "name": "Maheema Mahimani",
+    "role": "",
     "slug": "maheema-mahimani"
   },
   {
     "bio": "Just started, so let’s see",
+    "country": "LK",
     "id": "USKG11",
     "instagram": "https://instagram.com/rashmi_ww",
     "name": "Rashmi Wimalasiri",
+    "role": "",
     "slug": "rashmi-wimalasiri"
   },
   {
     "bio": "Enjoy and busy with architectural journey",
+    "country": "LK",
     "id": "USKG12",
     "instagram": "https://instagram.com/lakdinilisakya",
     "name": "Lakdini Lisakya",
+    "role": "",
     "slug": "lakdini-lisakya"
   },
   {
     "bio": "Learning architecture, observing the world through lines | archi student in university of moratuwa",
+    "country": "LK",
     "id": "USKG13",
     "instagram": "https://instagram.com/_kathya_rk_",
     "name": "Kathya Ruhansi",
+    "role": "",
     "slug": "kathya-ruhansi"
   },
   {
     "bio": "Plant Lover | Agriculturist | Cooking & Baking | Artist",
+    "country": "LK",
     "id": "USKG14",
     "instagram": "https://instagram.com/isuri_k_",
     "name": "Isuri Kumarasinghe",
+    "role": "",
     "slug": "isuri-kumarasinghe"
   },
   {
     "bio": "Blender Artist | Architect Student | Sketcher",
+    "country": "LK",
     "id": "USKG15",
     "instagram": "https://instagram.com/ravindu_ramawickrama",
     "name": "Ravindu Ramawickrama",
+    "role": "",
     "slug": "ravindu-ramawickrama"
   },
   {
     "bio": "Sketcher",
+    "country": "LK",
     "id": "USKG16",
     "instagram": "https://instagram.com/Thepabee",
     "name": "Nethmi Pabasara",
+    "role": "",
     "slug": "nethmi-pabasara"
   },
   {
     "bio": "Turning ideas into lines & emotions into art 🎨 Learning • Creating • Improving",
+    "country": "LK",
     "id": "USKG17",
     "instagram": "https://instagram.com/vihasna_geesathmi",
     "name": "Vihasna Geesathmi",
+    "role": "",
     "slug": "vihasna-geesathmi"
   },
   {
     "bio": "Rakshana Sharifudeen is a Sri Lankan urban sketcher, location artist, and active member of Urban Sketchers Colombo, best known for her striking vertical compositions of architectural heritage and streetscapes. Working fluidly across pencil, charcoal, ink, and watercolor wash, her on-site drawings capture the character and depth of historic urban landscapes.",
+    "country": "LK",
     "id": "USKG18",
     "instagram": "https://instagram.com/rakshysdeen",
     "name": "Rakshana Sharifudeen",
+    "role": "",
     "slug": "rakshana-sharifudeen"
   }
 ];

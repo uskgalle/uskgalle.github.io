@@ -4,10 +4,11 @@ import BlurImage from '../BlurImage/BlurImage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { getAllArtworks } from '../../app/data/artists';
+import { newestArtworksFirst } from '../../app/data/artwork-order';
 
 export default function RecentSketches() {
   const allArtworks = getAllArtworks();
-  const displaySketches = allArtworks.slice(0, 6);
+  const displaySketches = newestArtworksFirst(allArtworks).slice(0, 6);
 
   return (
     <section className={styles.section} id="gallery">
@@ -35,8 +36,8 @@ export default function RecentSketches() {
         </div>
 
         <div className={styles.viewAll}>
-          <Link href="/gallery" className={styles.viewAllBtn}>
-            View Full Gallery <FontAwesomeIcon icon={faArrowRight} />
+          <Link href="/artworks" className={styles.viewAllBtn}>
+            View All Artworks <FontAwesomeIcon icon={faArrowRight} />
           </Link>
         </div>
 

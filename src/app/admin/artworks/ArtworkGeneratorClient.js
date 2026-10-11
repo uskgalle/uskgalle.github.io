@@ -474,7 +474,7 @@ export default function ArtworkGeneratorClient({ initialArtists = [], initialArt
                 <span style={{ fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase', color: '#94a3b8' }}>
                   Live Gallery Card Preview
                 </span>
-                <span style={{ fontSize: '0.72rem', color: '#64748b' }}>/gallery</span>
+                <span style={{ fontSize: '0.72rem', color: '#64748b' }}>/artworks</span>
               </div>
 
               <div className={styles.artworkCardPreview}>

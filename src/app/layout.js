@@ -1,4 +1,5 @@
 import './globals.css';
+import 'flag-icons/css/flag-icons.min.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config, icon } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false;

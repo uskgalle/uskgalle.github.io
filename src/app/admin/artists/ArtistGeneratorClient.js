@@ -17,6 +17,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import styles from './artist.module.css';
+import { countries } from '../../data/countries';
+import CountryBadge from '../../../components/CountryBadge/CountryBadge';
 
 function slugify(text) {
   return text
@@ -57,6 +59,7 @@ function formatArtistObject(a, indent = '  ') {
   lines.push(`${indent}  id: '${(a.id || '').replace(/'/g, "\\'")}',`);
   lines.push(`${indent}  name: '${(a.name || '').replace(/'/g, "\\'")}',`);
   lines.push(`${indent}  slug: '${(a.slug || '').replace(/'/g, "\\'")}',`);
+  if (a.country) lines.push(`${indent}  country: '${a.country}',`);
   if (a.role) {
     lines.push(`${indent}  role: '${(a.role || '').replace(/'/g, "\\'")}',`);
   }
@@ -80,6 +83,7 @@ export default function ArtistGeneratorClient({ initialArtists = [] }) {
   const [slug, setSlug] = useState('');
   const [isSlugManual, setIsSlugManual] = useState(false);
   const [bio, setBio] = useState('');
+  const [country, setCountry] = useState('');
   const [instagram, setInstagram] = useState('');
   const [isSpecial, setIsSpecial] = useState(false);
   const [role, setRole] = useState('');
@@ -141,6 +145,7 @@ export default function ArtistGeneratorClient({ initialArtists = [] }) {
     setSlug('');
     setIsSlugManual(false);
     setBio('');
+    setCountry('');
     setInstagram('');
     setIsSpecial(false);
     setRole('');
@@ -157,6 +162,7 @@ export default function ArtistGeneratorClient({ initialArtists = [] }) {
     setSlug(a.slug || '');
     setIsSlugManual(true);
     setBio(a.bio || '');
+    setCountry(a.country || '');
     setInstagram(a.instagram || '');
     setIsSpecial(Boolean(a.isSpecial));
     setRole(a.role || '');
@@ -176,6 +182,7 @@ export default function ArtistGeneratorClient({ initialArtists = [] }) {
       name: name.trim(),
       slug: slug.trim() || slugify(name),
       bio: bio.trim(),
+      country,
       instagram: formatInstagram(instagram),
       isSpecial,
       role: isSpecial ? role.trim() : undefined,
@@ -216,11 +223,12 @@ export default function ArtistGeneratorClient({ initialArtists = [] }) {
       name: name.trim() || 'Artist Name',
       slug: slug.trim() || slugify(name || 'Artist Name'),
       bio: bio.trim(),
+      country,
       instagram: formatInstagram(instagram),
       isSpecial,
       role: isSpecial ? role.trim() : '',
     };
-  }, [id, name, slug, bio, instagram, isSpecial, role]);
+  }, [id, name, slug, bio, country, instagram, isSpecial, role]);
 
   const initials = useMemo(() => {
     const parts = (currentArtistObj.name || '').trim().split(' ').filter(Boolean);
@@ -418,6 +426,7 @@ export default function ArtistGeneratorClient({ initialArtists = [] }) {
             </div>
 
             {/* Bio textarea */}
+            <div className={styles.formGroup}><label className={styles.label} htmlFor="artist-country">Country</label><select id="artist-country" className={styles.input} value={country} onChange={e => setCountry(e.target.value)}><option value="">Not set</option>{countries.map(item => <option key={item.code} value={item.code}>{item.name}</option>)}</select></div>
             <div className={styles.formGroup}>
               <label className={styles.label}>
                 <span>Biography</span>
@@ -498,7 +507,7 @@ export default function ArtistGeneratorClient({ initialArtists = [] }) {
                 <div className={styles.cardTop}>
                   <div className={styles.avatarInitial}>{initials}</div>
                   <div className={styles.cardHeadInfo}>
-                    <div className={styles.cardName}>{currentArtistObj.name}</div>
+                    <div className={styles.cardName}>{currentArtistObj.name}<CountryBadge country={country} /></div>
                     <div className={styles.cardBadges}>
                       <span className={styles.idBadge}>{currentArtistObj.id}</span>
                       {currentArtistObj.role && (

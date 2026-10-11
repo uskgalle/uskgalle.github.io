@@ -10,6 +10,7 @@ const footerLinks = {
     { label: 'Events',       href: '/events' },
     { label: 'Artists',      href: '/artists' },
     { label: 'Gallery',      href: '/gallery' },
+    { label: 'Artworks',     href: '/artworks' },
     { label: 'Blog',         href: '/blog' },
   ],
   Community: [

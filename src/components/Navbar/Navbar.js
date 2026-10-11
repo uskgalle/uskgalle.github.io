@@ -10,6 +10,7 @@ const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Events', href: '/events' },
   { label: 'Gallery', href: '/gallery' },
+  { label: 'Artworks', href: '/artworks' },
   { label: 'Artists', href: '/artists' },
   /* { label: 'About', href: '/about' }, */
   { label: 'Blog', href: '/blog' },

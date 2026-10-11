@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './register.module.css';
+import { countries } from '../../../data/countries';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faArrowLeft,
@@ -25,9 +26,13 @@ import {
     faXTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 
-export default function RegisterClient({ event }) {
+export default function RegisterClient({ event, registeredArtists = [] }) {
+    const [returning, setReturning] = useState(false);
+    const [artistId, setArtistId] = useState('');
+    const matchedArtist = registeredArtists.find(artist => artist.id.toUpperCase() === artistId.trim().toUpperCase());
     const [formData, setFormData] = useState({
         fullName: '',
+        country: '',
         email: '',
         phone: '',
         instagram: '',
@@ -67,6 +72,10 @@ export default function RegisterClient({ event }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (returning && !matchedArtist) {
+            showToast('Please enter a registered artist ID, such as USKG8.');
+            return;
+        }
         if (!formData.agreedToGuidelines) {
             showToast('Please accept the event guidelines to confirm registration.');
             return;
@@ -79,10 +88,13 @@ export default function RegisterClient({ event }) {
                 const params = new URLSearchParams({
                     event: event.title,
                     timestamp: new Date().toISOString(),
-                    fullName: formData.fullName,
-                    email: formData.email,
-                    phone: formData.phone,
-                    instagram: formData.instagram || '',
+                    artistId: returning ? matchedArtist.id : '',
+                    registrationType: returning ? 'returning' : 'new',
+                    fullName: returning ? matchedArtist.name : formData.fullName,
+                    country: returning ? matchedArtist.country : formData.country,
+                    email: returning ? '' : formData.email,
+                    phone: returning ? '' : formData.phone,
+                    instagram: returning ? matchedArtist.instagram : formData.instagram || '',
                     attendees: formData.attendees,
                     notes: formData.notes || '',
                 });
@@ -97,6 +109,9 @@ export default function RegisterClient({ event }) {
                 });
             } catch (err) {
                 console.error('Error submitting form data to endpoint:', err);
+                setIsSubmitting(false);
+                showToast('Could not send your registration. Please try again.');
+                return;
             }
         }
 
@@ -363,7 +378,7 @@ export default function RegisterClient({ event }) {
                         </div>
                         <h2 className={styles.successTitle}>Registration Confirmed</h2>
                         <p className={styles.successBody}>
-                            Thank you, <strong>{formData.fullName}</strong>. Your spot is reserved for <strong>{event.title}</strong> on <strong>{event.date.day} {event.date.month} {event.year}</strong>.
+                            Thank you, <strong>{returning ? matchedArtist?.name : formData.fullName}</strong>. Your spot is reserved for <strong>{event.title}</strong> on <strong>{event.date.day} {event.date.month} {event.year}</strong>.
                         </p>
 
                         <a
@@ -395,7 +410,13 @@ export default function RegisterClient({ event }) {
                         </p>
 
                         <form onSubmit={handleSubmit}>
+                            <div className={styles.formGroup} style={{ marginBottom: 24 }}>
+                                <label><input type="checkbox" checked={returning} onChange={e => setReturning(e.target.checked)} /> I already have an artist ID — register quickly</label>
+                                {returning && <><label htmlFor="returning-artist-id" className={styles.label}>Artist ID</label><input id="returning-artist-id" className={styles.input} value={artistId} onChange={e => setArtistId(e.target.value)} placeholder="e.g. USKG8" required />
+                                    <p role="status">{matchedArtist ? `Welcome back, ${matchedArtist.name}! Your published profile details will be used.` : 'Enter the ID shown on your artist profile. No need to fill your details again.'}</p></>}
+                            </div>
                             <div className={styles.formGrid}>
+                                {!returning && <>
                                 <div className={styles.formGroup}>
                                     <label className={styles.label}>
                                         Full Name <span className={styles.required}>*</span>
@@ -455,6 +476,8 @@ export default function RegisterClient({ event }) {
                                     />
                                 </div>
 
+                                <div className={styles.formGroup}><label htmlFor="event-country" className={styles.label}>Country <span className={styles.required}>*</span></label><select id="event-country" name="country" value={formData.country} onChange={handleChange} required className={styles.select}><option value="">Choose your country</option>{countries.map(country => <option key={country.code} value={country.code}>{country.name}</option>)}</select></div>
+                                </>}
                                 <div className={styles.formGroup}>
                                     <label className={styles.label}>Number of Sketchers</label>
                                     <select
