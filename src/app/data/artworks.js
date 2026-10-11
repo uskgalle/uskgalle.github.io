@@ -142,7 +142,7 @@ export const artworks = [
     "event": "meet-up-05",
     "filename": "1.webp",
     "id": "USKG10-1",
-    "title": "Sketch #1"
+    "title": "Galle Fish Market"
   },
   {
     "description": "A little piece of Galle, captured in lines and colours. 🎨🌊",
@@ -167,24 +167,24 @@ export const artworks = [
   },
   {
     "description": "",
-    "event": null,
+    "event": "meet-up-05",
     "filename": "2.webp",
     "id": "USKG4-2",
-    "title": "Sketch 2"
+    "title": "Galle Fish Market"
   },
   {
     "description": "",
-    "event": null,
+    "event": "meet-up-05",
     "filename": "2.webp",
     "id": "USKG5-2",
-    "title": "Sketch 2"
+    "title": "Galle Fish Market"
   },
   {
     "description": "",
-    "event": null,
+    "event": "meet-up-05",
     "filename": "1.webp",
     "id": "USKG7-1",
-    "title": "Sketch 1"
+    "title": "Galle Fish Market"
   },
   {
     "description": "A simple sketch of the  Galle Fort exterior as you approach the main entrance.",
@@ -195,59 +195,59 @@ export const artworks = [
   },
   {
     "description": "",
-    "event": null,
+    "event": "meet-up-05",
     "filename": "1.webp",
     "id": "USKG9-1",
-    "title": "Sketch 1"
+    "title": "Galle Fish Market"
   },
   {
     "description": "",
-    "event": null,
+    "event": "meet-up-05",
     "filename": "1.webp",
     "id": "USKG11-1",
-    "title": "Sketch 1"
+    "title": "Galle Fish Market"
   },
   {
     "description": "",
-    "event": null,
+    "event": "meet-up-05",
     "filename": "2.webp",
     "id": "USKG11-2",
-    "title": "Sketch 2"
+    "title": "Galle Fish Market"
   },
   {
     "description": "",
-    "event": null,
+    "event": "meet-up-05",
     "filename": "1.webp",
     "id": "USKG12-1",
-    "title": "Sketch 1"
+    "title": "Galle Fish Market"
   },
   {
     "description": "",
-    "event": null,
+    "event": "meet-up-05",
     "filename": "1.png",
     "id": "USKG13-1",
-    "title": "Sketch 1"
+    "title": "Galle Fish Market"
   },
   {
     "description": "",
-    "event": null,
+    "event": "meet-up-05",
     "filename": "1.webp",
     "id": "USKG14-1",
-    "title": "Sketch 1"
+    "title": "Galle Fish Market"
   },
   {
     "description": "",
-    "event": null,
+    "event": "meet-up-05",
     "filename": "1.webp",
     "id": "USKG15-1",
-    "title": "Sketch 1"
+    "title": "Galle Fish Market"
   },
   {
     "description": "",
-    "event": null,
+    "event": "meet-up-05",
     "filename": "1.webp",
     "id": "USKG16-1",
-    "title": "Sketch 1"
+    "title": "Galle Fish Market"
   }
 ];
 

@@ -148,7 +148,11 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNext, on
                             )}
                         </div>
 
-                        {description && <p className={styles.captionDescription}>{description}</p>}
+                        {description && <p className={styles.captionDescription}>{currentItem.descriptionDetails ? <>
+                            An illustration of <strong>{currentItem.descriptionDetails.title}</strong>, created by <strong>{currentItem.descriptionDetails.artistName}</strong>
+                            {currentItem.descriptionDetails.meetup && <> during the <strong>{currentItem.descriptionDetails.meetup}</strong></>}.
+                            {' '}This artwork captures the artist’s unique perspective and experience from the sketching session.
+                        </> : description}</p>}
                     </div>
                 )}
             </div>

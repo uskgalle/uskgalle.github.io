@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { artworks, getArtworkMetadata } from './artworks';
+import { getArtworkDescription } from './artwork-description';
 
 export { artworks, getArtworkMetadata };
 
@@ -286,12 +287,13 @@ export function getArtworksForArtist(input) {
         (artist?.id ? getArtworkMetadata(artist.id, filename) : null) ||
         (artist?.slug ? getArtworkMetadata(artist.slug, filename) : null);
 
+      const title = meta?.title || `Sketch #${filename.replace(/\.[^/.]+$/, '')}`;
       return {
         id: meta?.id || `${targetDir.name}-${index + 1}`,
         filename,
         src: `/artworks-images/${targetDir.name}/${filename}`,
-        title: meta?.title || `Sketch #${filename.replace(/\.[^/.]+$/, '')}`,
-        description: meta?.description || '',
+        title,
+        ...getArtworkDescription(meta?.description, title, artist?.name, meta?.event),
         event: meta?.event || null,
       };
     });
