@@ -5,6 +5,7 @@ import Link from 'next/link';
 import ImageLightbox from '../../../components/ImageLightbox/ImageLightbox';
 import BlurImage from '../../../components/BlurImage/BlurImage';
 import styles from './ArtistClient.module.css';
+import StoryMaker from '../../../components/StoryMaker/StoryMaker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
     faShareNodes, 
@@ -19,6 +20,7 @@ import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 export default function ArtistClient({ artist, artworks = [], profileImage, articles = [] }) {
     const [lightboxIndex, setLightboxIndex] = useState(null);
     const [copied, setCopied] = useState(false);
+    const [storyOpen, setStoryOpen] = useState(false);
 
     const handleShare = async () => {
         const shareData = {
@@ -79,6 +81,10 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
                             <FontAwesomeIcon icon={faShareNodes} /> Share Profile
                         </button>
 
+                        <button onClick={() => setStoryOpen(true)} className={styles.btnSecondary}>
+                            <FontAwesomeIcon icon={faPalette} /> Make a Story
+                        </button>
+
                         {artist.instagram && (
                             <a
                                 href={artist.instagram}
@@ -100,6 +106,7 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
             </header>
 
             {copied && <div className={styles.toast}>Link copied to clipboard!</div>}
+            {storyOpen && <StoryMaker artist={artist} artworks={artworks} profileImage={profileImage} onClose={() => setStoryOpen(false)} />}
 
             {/* Artworks Gallery (if any) */}
             {(artworks.length > 0 || !artist.isSpecial) && (
