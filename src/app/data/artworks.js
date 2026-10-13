@@ -269,6 +269,13 @@ export const artworks = [
     "filename": "3.webp",
     "id": "USKG19-3",
     "title": "My sketchbook never says no to Galle Fort"
+  },
+  {
+    "description": "This charming building, framed by heritage walls and draped in bougainvillea, stole my heart at first sight.\n\nAt pedler street Dutch hospital end.",
+    "event": null,
+    "filename": "4.webp",
+    "id": "USKG19-4",
+    "title": "Bougainvillea Vail"
   }
 ];
 
