@@ -252,9 +252,23 @@ export const artworks = [
   {
     "description": "On location Live sketch , watercolor on paper",
     "event": null,
-    "filename": "1.png",
+    "filename": "1.webp",
     "id": "USKG19-1",
     "title": "Peddler street, Galle fort"
+  },
+  {
+    "description": "On location sketch | watercolor on paper ",
+    "event": null,
+    "filename": "2.webp",
+    "id": "USKG19-2",
+    "title": "In between colorful streets at galle fort"
+  },
+  {
+    "description": "On location sketch | watercolor on paper ",
+    "event": null,
+    "filename": "3.webp",
+    "id": "USKG19-3",
+    "title": "My sketchbook never says no to Galle Fort"
   }
 ];
 
