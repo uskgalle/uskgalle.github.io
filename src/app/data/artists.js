@@ -170,6 +170,15 @@ export const artists = [
     "name": "Rakshana Sharifudeen",
     "role": "",
     "slug": "rakshana-sharifudeen"
+  },
+  {
+    "bio": "Rashani Weerakoon is a Sri Lankan multidisciplinary artist, Designer, urban sketcher, illustrator, and active member of Urban Sketchers Colombo. she captures the character of places, architectural details, and the rhythms of everyday life through ink, and watercolour. Beyond urban sketching, her creative practice spans illustration, brand identity design, and costume design, reflecting a diverse artistic perspective shaped by her background in engineering and design. Through her work, Rashani explores the intersection of observation, storytelling, and visual expression, documenting the world around her.",
+    "country": "LK",
+    "id": "USKG19",
+    "instagram": "https://instagram.com/the_illustratress",
+    "name": "Rashani Weerakoon",
+    "role": "",
+    "slug": "rashani-weerakoon"
   }
 ];
 

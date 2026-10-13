@@ -248,6 +248,13 @@ export const artworks = [
     "filename": "1.webp",
     "id": "USKG16-1",
     "title": "Galle Fish Market"
+  },
+  {
+    "description": "On location Live sketch , watercolor on paper",
+    "event": null,
+    "filename": "1.png",
+    "id": "USKG19-1",
+    "title": "Peddler street, Galle fort"
   }
 ];
 
