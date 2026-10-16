@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from './RecentSketches.module.css';
-import BlurImage from '../BlurImage/BlurImage';
+import RecentSketchesGallery from './RecentSketchesGallery';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { getAllArtworks } from '../../app/data/artists';
@@ -8,7 +8,7 @@ import { newestArtworksFirst } from '../../app/data/artwork-order';
 
 export default function RecentSketches() {
   const allArtworks = getAllArtworks();
-  const displaySketches = newestArtworksFirst(allArtworks).slice(0, 6);
+  const displaySketches = newestArtworksFirst(allArtworks).slice(0, 12);
 
   return (
     <section className={styles.section} id="gallery">
@@ -22,18 +22,7 @@ export default function RecentSketches() {
           </p>
         </div>
 
-        {/* Gallery of sketches using recap gallery style */}
-        <div className={styles.gallery}>
-          {displaySketches.map((s) => (
-            <div key={s.id} className={styles.imgWrap}>
-              <BlurImage src={s.src} alt={s.title} loading="lazy" />
-              <div className={styles.overlay}>
-                {s.title && <h3 className={styles.overlayTitle}>{s.title}</h3>}
-                <p className={styles.overlayArtist}>by {s.artistName}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <RecentSketchesGallery sketches={displaySketches} />
 
         <div className={styles.viewAll}>
           <Link href="/artworks" className={styles.viewAllBtn}>
