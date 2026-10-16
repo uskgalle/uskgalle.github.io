@@ -8,5 +8,5 @@ export const metadata = {
 
 export default function GalleryPage() {
     const { images, meetups } = getRecapGallery();
-    return <GalleryClient images={images} meetups={meetups} />;
+    return <GalleryClient key="all" images={images} meetups={meetups} />;
 }
