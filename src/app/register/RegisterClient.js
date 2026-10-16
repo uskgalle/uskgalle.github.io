@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCamera, faCheckCircle, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 const ENDPOINT = process.env.NEXT_PUBLIC_ARTIST_REGISTRATION_URL || '';
-const EMPTY = { name: '', email: '', country: '', bio: '', instagram: '', link2: '', link3: '', link4: '', website: '' };
+const EMPTY = { name: '', email: '', country: 'LK', bio: '', instagram: '', link2: '', link3: '', link4: '', website: '' };
 
 async function preparePhoto(file) {
   const bitmap = await createImageBitmap(file);
@@ -83,13 +83,30 @@ export default function RegisterClient({ artist = null, profileImage = '' }) {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [testMode, setTestMode] = useState(false);
-  const [extraLinks, setExtraLinks] = useState(artist ? Math.max(0, ...['link2', 'link3', 'link4'].map((key, index) => artist[key] ? index + 1 : 0)) : 0);
+  const [extraLinks, setExtraLinks] = useState(() => ['link2', 'link3', 'link4'].filter(key => artist?.[key]));
+  const linkFocus = useRef(null);
   const pending = useRef(null);
   const busy = useRef(false);
 
   useEffect(() => {
-    if (extraLinks > 0) document.getElementById(`link${extraLinks + 1}`)?.focus();
+    if (linkFocus.current) {
+      document.getElementById(linkFocus.current)?.focus();
+      linkFocus.current = null;
+    }
   }, [extraLinks]);
+
+  const addLink = () => {
+    const next = ['link2', 'link3', 'link4'].find(key => !extraLinks.includes(key));
+    if (!next) return;
+    linkFocus.current = next;
+    setExtraLinks(current => [...current, next]);
+  };
+
+  const removeLink = (name) => {
+    setData(current => ({ ...current, [name]: '' }));
+    linkFocus.current = 'add-artist-link';
+    setExtraLinks(current => current.filter(key => key !== name));
+  };
 
   useEffect(() => {
     // A local preview can exercise the form without sending personal data.
@@ -208,14 +225,17 @@ export default function RegisterClient({ artist = null, profileImage = '' }) {
                 ['link2', 'Link 2', 'https://www.behance.net/yourname'],
                 ['link3', 'Link 3', 'https://yourportfolio.com'],
                 ['link4', 'Link 4', 'https://example.com/yourname'],
-              ].slice(0, extraLinks + 1).map(([name, label, placeholder]) => (
+              ].filter(([name]) => name === 'instagram' || extraLinks.includes(name)).map(([name, label, placeholder]) => (
                 <div className={styles.fieldGroup} key={name}>
+                  <div className={styles.linkHeading}>
                   <label htmlFor={name} className={styles.label}>{label} <span className={styles.optionalTag}>(Optional)</span></label>
+                  {name !== 'instagram' && <button type="button" onClick={() => removeLink(name)} className={styles.removeLinkBtn} aria-label={`Remove ${label}`} title={`Remove ${label}`}><span aria-hidden="true">×</span></button>}
+                  </div>
                   <input id={name} name={name} type={name === 'instagram' ? 'text' : 'url'} pattern={name === 'instagram' ? '@?[A-Za-z0-9._]{1,30}' : 'https?://.*'} title={name === 'instagram' ? 'Enter your Instagram handle, with or without @' : 'Use a full link starting with https:// or http://'} maxLength={name === 'instagram' ? 31 : 500} autoCapitalize="none" spellCheck={false} placeholder={placeholder} value={data[name]} onChange={change} className={styles.input} />
                 </div>
               ))}
-              {extraLinks < 3 && (
-                <button type="button" onClick={() => setExtraLinks(count => Math.min(3, count + 1))} className={styles.addLinkBtn}>
+              {extraLinks.length < 3 && (
+                <button id="add-artist-link" type="button" onClick={addLink} className={styles.addLinkBtn}>
                   <span aria-hidden="true">+</span> Add another link
                 </button>
               )}

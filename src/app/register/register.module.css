@@ -761,6 +761,31 @@
 
 .infoBox { overflow-wrap: anywhere; }
 
+.linkHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.removeLinkBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: #6b5a47;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.removeLinkBtn:hover { background: #eee5d8; color: #2a1f14; }
+.removeLinkBtn:focus-visible { outline: 2px solid #b8854a; outline-offset: 2px; }
+
 .spinner {
   display: inline-block;
   width: 1rem;
