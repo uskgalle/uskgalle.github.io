@@ -97,7 +97,9 @@ function drawName(ctx, name) {
     lines.forEach((line, index) => ctx.fillText(line, 312, 1548 + index * 62, 414));
 }
 
-export default function StoryMaker({ artist, artworks, profileImage, onClose }) {
+export default function StoryMaker({ artist, artworks, profileImage, onClose, format = 'story' }) {
+    const isPost = format === 'post';
+    const label = isPost ? 'post' : 'story';
     const sorted = newestFirst(artworks);
     const [selected, setSelected] = useState(() => sorted.slice(0, 1).map(art => art.id));
     const [choosing, setChoosing] = useState(true);
@@ -140,7 +142,29 @@ export default function StoryMaker({ artist, artworks, profileImage, onClose }) 
                 if (cancelled) return;
                 const canvas = canvasRef.current;
                 const ctx = canvas.getContext('2d');
-                ctx.fillStyle = background; ctx.fillRect(0, 0, 1080, 1920);
+                ctx.fillStyle = background; ctx.fillRect(0, 0, 1080, isPost ? 1080 : 1920);
+                if (isPost) {
+                    ctx.fillStyle = foreground;
+                    ctx.font = 'bold 42px Georgia'; ctx.fillText(artist.name, 54, 86, 820);
+                    ctx.font = '24px Arial'; ctx.fillText('Urban Sketchers Galle', 54, 128);
+                    const pictures = images.length ? images : [avatar];
+                    const columns = pictures.length > 1 ? 2 : 1;
+                    const rows = Math.ceil(pictures.length / columns);
+                    pictures.forEach((image, index) => {
+                        const w = (972 - 18 * (columns - 1)) / columns;
+                        const h = (646 - 18 * (rows - 1)) / rows;
+                        const x = 54 + (index % columns) * (w + 18);
+                        const y = 176 + Math.floor(index / columns) * (h + 18);
+                        placeImage(ctx, image, x, y, w, h, artworkDisplay !== 'full',
+                            artworkDisplay === 'left' ? 0 : artworkDisplay === 'right' ? 1 : 0.5,
+                            artworkDisplay === 'top' ? 0 : artworkDisplay === 'bottom' ? 1 : 0.5);
+                    });
+                    ctx.drawImage(qr, 844, 866, 162, 162);
+                    ctx.font = '30px Georgia'; ctx.fillText('From my sketchbook, in Galle.', 54, 936, 740);
+                    ctx.font = '23px Arial'; ctx.fillText('Scan to explore my artist profile', 54, 984, 740);
+                    setReady(true);
+                    return;
+                }
                 placeLogo(ctx, logo);
                 ctx.fillStyle = foreground;
                 drawHeading(ctx, images.length > 1 ? 'My sketchbook, in Galle.' : images.length ? chosen[0].title : 'Meet the sketcher.');
@@ -179,7 +203,7 @@ export default function StoryMaker({ artist, artworks, profileImage, onClose }) 
         }
         render();
         return () => { cancelled = true; };
-    }, [selected, artworks, artist.name, profileImage, url, retry, background, artworkDisplay]);
+    }, [selected, artworks, artist.name, profileImage, url, retry, background, artworkDisplay, isPost]);
 
     function toggle(id) {
         setReady(false); setNotice('');
@@ -190,10 +214,10 @@ export default function StoryMaker({ artist, artworks, profileImage, onClose }) 
         canvasRef.current.toBlob(blob => {
             if (!blob) { setError('Could not save the image. Please try again.'); return; }
             const href = URL.createObjectURL(blob);
-            const link = document.createElement('a'); link.href = href; link.download = `${artist.slug}-usk-galle-story.png`;
+            const link = document.createElement('a'); link.href = href; link.download = `${artist.slug}-usk-galle-${label}.png`;
             document.body.appendChild(link); link.click(); link.remove();
             setTimeout(() => URL.revokeObjectURL(href), 60000);
-            setNotice('Your story is ready. Add the downloaded image to your Instagram Story.');
+            setNotice(isPost ? 'Your post is ready. Share the downloaded image with the caption.' : 'Your story is ready. Add the downloaded image to your Instagram Story.');
         }, 'image/png');
     }
 
@@ -208,13 +232,13 @@ export default function StoryMaker({ artist, artworks, profileImage, onClose }) 
 
     return <div className={styles.overlay} onClick={event => { if (event.target === event.currentTarget) onClose(); }}>
         <section ref={dialogRef} className={styles.dialog} role="dialog" aria-modal="true" aria-labelledby="story-title" onKeyDown={handleKey}>
-            <header className={styles.header}><div><span className={styles.eyebrow}>FROM YOUR SKETCHBOOK</span><h2 id="story-title">Make your story</h2><p>Choose your sketches. We’ll take care of the rest.</p></div><button ref={closeRef} onClick={onClose} aria-label="Close story maker" className={styles.close}>×</button></header>
+            <header className={styles.header}><div><span className={styles.eyebrow}>FROM YOUR SKETCHBOOK</span><h2 id="story-title">Make your {label}</h2><p>Choose your sketches. We’ll take care of the rest.</p></div><button ref={closeRef} onClick={onClose} aria-label={`Close ${label} maker`} className={styles.close}>×</button></header>
             <div className={styles.layout}><div className={styles.controls}>
                 {artworks.length > 0 ? <><div className={styles.modes}>
                     <button aria-expanded={choosing} aria-controls="story-sketches" onClick={() => setChoosing(value => !value)}>Choose sketch(s)</button>
                 </div><p className={styles.help}>{selected.length} of 4 selected · choose one or more published sketches.</p>
                 {choosing && <div id="story-sketches" className={styles.gallery}>{sorted.map(art => <button key={art.id} aria-pressed={selected.includes(art.id)} aria-label={`${selected.includes(art.id) ? 'Remove' : 'Select'} ${art.title}`} disabled={!selected.includes(art.id) && selected.length >= 4} onClick={() => toggle(art.id)}><img src={art.src} alt={art.title} loading="lazy"/><span>{selected.includes(art.id) ? '✓ ' : ''}{art.title}</span></button>)}</div>}
-                </> : <p className={styles.help}>No published sketches yet. You can still share a story with your profile photo and QR code.</p>}
+                </> : <p className={styles.help}>No published sketches yet. You can still share an image with your profile photo and QR code.</p>}
                 {artworks.length > 0 && !selected.length && <p className={styles.help}>Select at least one published sketch.</p>}
                 {artworks.length > 0 && <div className={styles.displayChoice}>
                     <label htmlFor="story-artwork-display">Show sketches</label>
@@ -236,7 +260,7 @@ export default function StoryMaker({ artist, artworks, profileImage, onClose }) 
                 <label htmlFor="story-caption" className={styles.captionLabel}>A caption to go with it</label><textarea id="story-caption" value={caption} readOnly rows={6}/>
                 <button className={styles.copy} onClick={async () => { try { await navigator.clipboard.writeText(caption); setNotice('Caption copied!'); } catch { setNotice('Select the caption above and copy it manually.'); } }}>Copy caption</button>
                 <p role="status" className={styles.help}>{notice}</p>
-            </div><div className={styles.preview}><canvas ref={canvasRef} width={1080} height={1920} aria-label={`Story preview for ${artist.name}`} /><span>YOUR STORY PREVIEW</span><button className={styles.download} disabled={!ready || (artworks.length > 0 && !selected.length)} onClick={download}>{error ? 'Preview unavailable' : ready ? 'Download Story PNG' : 'Creating your story…'}</button></div></div>
+            </div><div className={styles.preview}><canvas ref={canvasRef} width={1080} height={isPost ? 1080 : 1920} aria-label={`${label} preview for ${artist.name}`} /><span>{isPost ? 'YOUR POST PREVIEW' : 'YOUR STORY PREVIEW'}</span><button className={styles.download} disabled={!ready || (artworks.length > 0 && !selected.length)} onClick={download}>{error ? 'Preview unavailable' : ready ? `Download ${isPost ? 'Post' : 'Story'} PNG` : `Creating your ${label}…`}</button></div></div>
         </section>
     </div>;
 }

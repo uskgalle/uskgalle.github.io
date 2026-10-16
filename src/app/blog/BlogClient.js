@@ -15,17 +15,6 @@ import {
     faFeatherPointed
 } from '@fortawesome/free-solid-svg-icons';
 
-function getAuthorAvatar(authorSlug) {
-    if (!authorSlug || authorSlug.toLowerCase() === 'system') {
-        return '/icon.png';
-    }
-    const known = ['yasith-arangala', 'sumudu-udari', 'sachith-vithanage', 'lakshana-samadhi', 'sandeepa-vithanage', 'kasun-miuranga'];
-    if (known.includes(authorSlug.toLowerCase())) {
-        return `/artists-images/${authorSlug}.png`;
-    }
-    return '/artists-images/no_profile.png';
-}
-
 export default function BlogClient({ posts }) {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [searchQuery, setSearchQuery] = useState('');
@@ -177,7 +166,7 @@ export default function BlogClient({ posts }) {
                                 <div className={styles.authorGroup}>
                                     <Link href={`/artists/${featuredPost.authorSlug || 'system'}`}>
                                         <img
-                                            src={getAuthorAvatar(featuredPost.authorSlug)}
+                                            src={featuredPost.authorImage || '/artists-images/no_profile.png'}
                                             alt={featuredPost.author || 'System'}
                                             className={styles.authorAvatar}
                                         />
@@ -268,7 +257,7 @@ export default function BlogClient({ posts }) {
                                             <div className={styles.cardAuthorWrap}>
                                                 <Link href={`/artists/${post.authorSlug || 'system'}`}>
                                                     <img
-                                                        src={getAuthorAvatar(post.authorSlug)}
+                                                        src={post.authorImage || '/artists-images/no_profile.png'}
                                                         alt={post.author || 'System'}
                                                         className={styles.miniAvatar}
                                                     />

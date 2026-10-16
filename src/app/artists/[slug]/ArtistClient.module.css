@@ -155,6 +155,20 @@
     margin: 0 0 24px;
 }
 
+.bioToggle {
+    display: inline;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #2a1f14;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.bioToggle:hover { text-decoration: underline; }
+.bioToggle:focus-visible { outline: 2px solid #b8854a; outline-offset: 3px; }
+
 .actions {
     display: flex;
     flex-wrap: wrap;
@@ -483,4 +497,22 @@
 
 .articleReadBtn:hover {
     gap: 8px;
+}
+
+.settings { position: absolute; top: 16px; right: 16px; }
+.settings summary { cursor: pointer; list-style: none; }
+.settings summary::-webkit-details-marker { display: none; }
+.settingsOptions { position: absolute; top: calc(100% + 8px); right: 0; min-width: 180px; padding: 8px; background: white; border: 1px solid #e8dfd2; border-radius: 4px; box-shadow: 0 6px 20px #0002; z-index: 10; }
+.settingsOptions button, .settingsOptions a { display: block; width: 100%; padding: 12px; color: #2a1f14; background: none; border: 0; text-decoration: none; text-align: left; font: inherit; cursor: pointer; }
+.settingsOptions button:hover, .settingsOptions a:hover { background: #f7f1e6; }
+
+.profileHeader { position: relative; padding-top: 80px; }
+.settingsToggle { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #e8dfd2; border-radius: 3px; background: #fcfaf7; color: #6b5a47; }
+.settingsToggle:hover, .settings[open] .settingsToggle { background: #f7f1e6; color: #2a1f14; }
+.settingsToggle:focus-visible { outline: 2px solid #b8854a; outline-offset: 3px; }
+
+/* Keep click targets on the HTML control, including clicks on SVG paths. */
+.settingsToggle svg,
+.settingsToggle svg * {
+    pointer-events: none;
 }

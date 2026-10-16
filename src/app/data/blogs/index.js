@@ -1,9 +1,11 @@
-import echoesOfBatavia from './echoes-of-batavia-galle-fort-history';
-import urbanSketching101 from './urban-sketching-101-galle-fort';
-import rampartsHistory from './galle-fort-ramparts-history';
 import artistProfiles from './usk-galle-artist-profiles';
-import essentialKit from './essential-urban-sketching-kit';
-import dutchChurch from './dutch-reformed-church-architecture';
+import history from './history-of-usk-galle';
+import sketchWalk from './galle-sketch-walk-december-2025';
+import meetOne from './sketch-meet-01-first-galle-fort-gathering';
+import meetTwo from './sketch-meet-02-returning-to-galle-fort';
+import meetThree from './sketch-meet-03-galle-streets-and-black-fort';
+import meetFour from './sketch-meet-04-lighthouse-and-clock-tower';
+import meetFive from './sketch-meet-05-galle-fish-market';
 
 /**
  * Registry of all blog posts.
@@ -12,12 +14,14 @@ import dutchChurch from './dutch-reformed-church-architecture';
  * 2. Import it here and add it to the `blogPosts` array below.
  */
 export const blogPosts = [
-  echoesOfBatavia,
+  history,
+  meetFive,
+  meetFour,
+  meetThree,
+  meetTwo,
+  meetOne,
+  sketchWalk,
   artistProfiles,
-  urbanSketching101,
-  rampartsHistory,
-  essentialKit,
-  dutchChurch,
 ];
 
 export function getPostBySlug(slug) {

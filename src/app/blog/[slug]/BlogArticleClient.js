@@ -16,17 +16,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 
-function getAuthorAvatar(authorSlug) {
-    if (!authorSlug || authorSlug.toLowerCase() === 'system') {
-        return '/icon.png';
-    }
-    const known = ['yasith-arangala', 'sumudu-udari', 'sachith-vithanage', 'lakshana-samadhi', 'sandeepa-vithanage', 'kasun-miuranga'];
-    if (known.includes(authorSlug.toLowerCase())) {
-        return `/artists-images/${authorSlug}.png`;
-    }
-    return '/artists-images/no_profile.png';
-}
-
 export default function BlogArticleClient({ post, relatedPosts = [], authorData = null }) {
     const [copied, setCopied] = useState(false);
     const [readProgress, setReadProgress] = useState(0);
@@ -169,7 +158,7 @@ export default function BlogArticleClient({ post, relatedPosts = [], authorData 
                         <div className={styles.authorMeta}>
                             <Link href={`/artists/${post.authorSlug || 'system'}`}>
                                 <img
-                                    src={getAuthorAvatar(post.authorSlug)}
+                                    src={post.authorImage || '/artists-images/no_profile.png'}
                                     alt={post.author || 'System'}
                                     className={styles.authorAvatar}
                                 />
@@ -239,7 +228,7 @@ export default function BlogArticleClient({ post, relatedPosts = [], authorData 
                 <div className={styles.authorBox}>
                     <Link href={`/artists/${post.authorSlug || 'system'}`}>
                         <img
-                            src={getAuthorAvatar(post.authorSlug)}
+                            src={post.authorImage || '/artists-images/no_profile.png'}
                             alt={post.author || 'System'}
                             className={styles.authorBoxAvatar}
                         />

@@ -14,7 +14,8 @@ import {
     faClock, 
     faArrowRight, 
     faBookOpen, 
-    faPalette 
+    faPalette,
+    faScrewdriverWrench
 } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 
@@ -22,6 +23,11 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
     const [lightboxIndex, setLightboxIndex] = useState(null);
     const [copied, setCopied] = useState(false);
     const [storyOpen, setStoryOpen] = useState(false);
+    const [makerFormat, setMakerFormat] = useState('story');
+    const [bioExpanded, setBioExpanded] = useState(false);
+    const bio = artist.bio || '';
+    const longBio = bio.length > 220;
+    const shortBio = longBio ? bio.slice(0, 220).replace(/\s+\S*$/, '').trimEnd() : bio;
 
     const handleShare = async () => {
         const shareData = {
@@ -54,6 +60,15 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
             </Link>
 
             <header className={styles.profileHeader}>
+                        <details className={styles.settings}>
+                            <summary className={styles.settingsToggle} aria-label="Artist tools" title="Artist tools"><FontAwesomeIcon icon={faScrewdriverWrench} /></summary>
+                            <div className={styles.settingsOptions}>
+                                <button type="button" onClick={event => { setMakerFormat('story'); setStoryOpen(true); event.currentTarget.closest('details').open = false; }}>Make Story</button>
+                                <button type="button" onClick={event => { setMakerFormat('post'); setStoryOpen(true); event.currentTarget.closest('details').open = false; }}>Make Post</button>
+                                {artist.id && <Link href={`/artists/edit?id=${encodeURIComponent(artist.id)}`}>Edit Details</Link>}
+                                {artist.id && !artist.isSpecial && <Link href={`/artworks/submit?id=${encodeURIComponent(artist.id)}`}>Submit Artwork</Link>}
+                            </div>
+                        </details>
                 <div className={styles.avatarWrapper}>
                     <img
                         src={profileImage || '/artists-images/no_profile.png'}
@@ -75,16 +90,17 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
                     </div>
                     <h1 className={styles.name}>{artist.name}</h1>
 
-                    <p className={styles.bio}>{artist.bio}</p>
+                    <p className={styles.bio}>
+                        <span id="artist-bio">{longBio && !bioExpanded ? `${shortBio}…` : bio}</span>
+                        {longBio && <> <button type="button" className={styles.bioToggle} aria-expanded={bioExpanded} aria-controls="artist-bio" onClick={() => setBioExpanded(expanded => !expanded)}>{bioExpanded ? 'See less' : 'See more'}</button></>}
+                    </p>
 
                     <div className={styles.actions}>
                         <button onClick={handleShare} className={styles.btnPrimary}>
                             <FontAwesomeIcon icon={faShareNodes} /> Share Profile
                         </button>
 
-                        <button onClick={() => setStoryOpen(true)} className={styles.btnSecondary}>
-                            <FontAwesomeIcon icon={faPalette} /> Make a Story
-                        </button>
+
 
                         {artist.instagram && (
                             <a
@@ -107,7 +123,7 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
             </header>
 
             {copied && <div className={styles.toast}>Link copied to clipboard!</div>}
-            {storyOpen && <StoryMaker artist={artist} artworks={artworks} profileImage={profileImage} onClose={() => setStoryOpen(false)} />}
+            {storyOpen && <StoryMaker format={makerFormat} artist={artist} artworks={artworks} profileImage={profileImage} onClose={() => setStoryOpen(false)} />}
 
             {/* Artworks Gallery (if any) */}
             {(artworks.length > 0 || !artist.isSpecial) && (

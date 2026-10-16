@@ -211,14 +211,12 @@ export default function ArtistsClient({ initialArtists }) {
                         <Link href="/register" className={styles.primaryActionBtn}>
                             <FontAwesomeIcon icon={faUserPlus} /> Register Profile
                         </Link>
-                        <a
-                            href="https://forms.gle/6siWSXRDP4S98xPQA"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <Link
+                            href="/artworks/submit"
                             className={styles.secondaryActionBtn}
                         >
                             <FontAwesomeIcon icon={faPalette} /> Submit Artwork
-                        </a>
+                        </Link>
                     </div>
 
                     <p className={styles.requirementNote}>

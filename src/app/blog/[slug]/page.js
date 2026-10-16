@@ -1,5 +1,5 @@
 import { blogPosts, getPostBySlug } from '../../data/blog';
-import { getArtistBySlug } from '../../data/artists';
+import { getArtistBySlug, getProfileImagePath } from '../../data/artists';
 import { notFound } from 'next/navigation';
 import BlogArticleClient from './BlogArticleClient';
 
@@ -44,7 +44,7 @@ export default async function BlogArticlePage({ params }) {
 
     return (
         <BlogArticleClient
-            post={post}
+            post={{ ...post, authorImage: post.authorSlug === 'system' ? '/artists-images/no_profile.png' : getProfileImagePath(authorData || post.authorSlug) }}
             relatedPosts={relatedPosts}
             authorData={authorData}
         />

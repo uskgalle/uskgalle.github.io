@@ -691,3 +691,122 @@
     width: 100%;
   }
 }
+
+/* Unified registration form: use the existing warm card and field styling. */
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.photoUpload {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 1px dashed #d5c4ae;
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.photoPreview {
+  width: 112px;
+  height: 112px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #e8dfd2;
+}
+
+.fileInput {
+  font: inherit;
+  color: var(--color-muted, #6b5a47);
+  width: 100%;
+  min-width: 0;
+  font-size: 0.85rem;
+}
+
+.fileInput::file-selector-button {
+  border: 1px solid #dcd1c2;
+  border-radius: 2px;
+  padding: 0.65rem 0.8rem;
+  margin-right: 0.75rem;
+  background: #fcfaf7;
+  color: var(--color-dark, #2a1f14);
+  font: inherit;
+  cursor: pointer;
+}
+
+.honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.errorBox {
+  padding: 1rem;
+  margin: 0;
+  border: 1px solid #dcb5ac;
+  border-radius: 4px;
+  background: #fff4ef;
+  color: #8c3023;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.infoBox { overflow-wrap: anywhere; }
+
+.spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  border: 2px solid rgb(255 255 255 / 35%);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: registrationSpin 0.85s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes registrationSpin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation-duration: 2s; }
+}
+
+.addLinkBtn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px dashed #d5c4ae;
+  border-radius: 4px;
+  background: #fff;
+  color: var(--color-dark, #2a1f14);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.addLinkBtn:hover {
+  background: #f7f1e6;
+  border-color: var(--color-tan, #b8854a);
+}
+
+.addLinkBtn:focus-visible {
+  outline: 2px solid var(--color-tan, #b8854a);
+  outline-offset: 3px;
+}
+
+.addLinkBtn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
