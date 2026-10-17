@@ -7,8 +7,7 @@ export function meetupPost({ eventSlug, slug, title, excerpt, content }) {
   const upcoming = event.upcoming;
   const gallery = getRecapGallery().meetups.find(item => item.slug === eventSlug);
   const galleryUrl = gallery ? `/gallery/${gallery.gallerySlug}` : '/gallery';
-  const extension = event.recap?.extension || 'jpg';
-  const coverImage = upcoming ? event.image : `/gallery-images/${eventSlug}/1.${extension}`;
+  const coverImage = upcoming ? event.image : `/blog-images/${slug}.webp`;
   const date = upcoming ? 'To be announced' : `${Number(event.date.day)} ${event.date.month} ${event.year}`;
   const archive = upcoming
     ? `<h3>Follow the next announcement</h3><p>The <a href="/events/${eventSlug}/register">Meet #6 information page</a> carries the current plans. Check it before travelling, and use the community WhatsApp link there for announcements.</p>`
@@ -30,8 +29,8 @@ export function meetupPost({ eventSlug, slug, title, excerpt, content }) {
     date: 'October 15, 2026',
     readTime: `${Math.max(1, Math.ceil(body.replace(/<[^>]*>/g, ' ').split(/\s+/).length / 200))} min read`,
     coverImage,
-    coverAlt: upcoming ? 'Illustration for the next USK Galle sketch meet' : `Archive photograph from ${event.title}`,
-    coverCaption: upcoming ? 'The next meet is being planned. Date and venue are still to be announced.' : `${event.title} · ${date} · USK Galle event archive`,
+    coverAlt: upcoming ? 'Illustration for the next USK Galle sketch meet' : `Cover illustration for ${event.title}`,
+    coverCaption: upcoming ? 'The next meet is being planned. Date and venue are still to be announced.' : `${event.title} · ${date}`,
     coverColor: '#c9a87c', featured: false, eventSlug, content: body,
   };
 }

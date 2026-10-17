@@ -220,7 +220,7 @@ export const specialProfiles = [
     "id": "USK-DEV",
     "isSpecial": true,
     "name": "Kasun Miuranga",
-    "role": "=Developer & Admin",
+    "role": "Developer & Admin",
     "slug": "kasun-miuranga"
   }
 ];

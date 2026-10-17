@@ -42,22 +42,11 @@ export default function BlogArticleClient({ post, relatedPosts = [], authorData 
         return () => window.removeEventListener('scroll', updateProgress);
     }, []);
 
-    // Extract all images in article for interactive Lightbox zoom
+    // Extract body images for interactive Lightbox zoom.
     useEffect(() => {
         const imagesList = [];
 
-        // 1. Cover image
-        if (post.coverImage) {
-            imagesList.push({
-                src: post.coverImage,
-                title: post.title,
-                description: post.coverCaption || post.excerpt,
-                artistName: post.author,
-                artistSlug: post.authorSlug,
-            });
-        }
-
-        // 2. Images inside HTML content
+        // Images inside HTML content
         if (contentRef.current) {
             const contentImgs = contentRef.current.querySelectorAll('img');
             contentImgs.forEach((img) => {
@@ -192,7 +181,6 @@ export default function BlogArticleClient({ post, relatedPosts = [], authorData 
                     <figure className={styles.coverFigure}>
                         <div
                             className={styles.coverWrap}
-                            onClick={() => setLightboxIndex(0)}
                         >
                             <BlurImage
                                 src={post.coverImage}

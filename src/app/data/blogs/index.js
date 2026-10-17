@@ -1,7 +1,6 @@
 import artistProfiles from './usk-galle-artist-profiles';
 import { examplePosts } from './example-artist-posts';
 import history from './history-of-usk-galle';
-import sketchWalk from './galle-sketch-walk-december-2025';
 import meetOne from './sketch-meet-01-first-galle-fort-gathering';
 import meetTwo from './sketch-meet-02-returning-to-galle-fort';
 import meetThree from './sketch-meet-03-galle-streets-and-black-fort';
@@ -20,7 +19,6 @@ export const blogPosts = [
   meetThree,
   meetTwo,
   meetOne,
-  sketchWalk,
   artistProfiles,
   history,
 ];

@@ -2,21 +2,21 @@ const post = {
   slug: 'history-of-usk-galle',
   title: 'A History of USK Galle: From a Sketch Walk to a Community Archive',
   category: 'Community',
+  eventSlug: 'sketch-walk-01',
   tags: ['USK Galle', 'Community History', 'Galle Fort', 'Sketch Meets'],
   excerpt: 'Follow the recorded journey from a collaborative sketch walk in December 2025 to shared sketchbooks and a growing archive of Galle.',
   author: 'System',
   authorSlug: 'system',
   date: 'October 15, 2026',
   readTime: '3 min read',
-  coverImage: '/gallery-images/sketch-walk-01/1.jpg',
-  coverAlt: 'Archive photograph from the December 2025 Galle sketch walk',
-  coverCaption: 'The December 2025 sketch walk is the earliest gathering preserved in our event archive.',
+  coverImage: '/blog-images/history-of-usk-galle.webp',
+  coverAlt: 'Cover illustration for the history of USK Galle',
   coverColor: '#c9a87c',
   featured: false,
   content: `
     <p class="lead">USK Galle's recorded story is a sequence of mornings spent looking closely at a city. A collaborative sketch walk in December 2025 is followed by numbered meets in 2026, with photographs and credited drawings keeping those gatherings connected long after the sketchbooks close.</p>
     <h3>The earliest page: December 2025</h3>
-    <p>The earliest event in the website's archive is the <a href="/blog/galle-sketch-walk-december-2025">Galle sketch walk of 14 December 2025</a>. Organised by Urban Sketchers Colombo in collaboration with the Collective for Historical Dialogue &amp; Memory and ART'O'SAN Gallery, run by <a href="/artists/sandeepa-vithanage">Sandeepa Vithanage</a>, it brought a shared interest in drawing and place to Galle Fort.</p>
+    <p>The earliest event in the website's archive is the <a href="/events/sketch-walk-01">Galle sketch walk of 14 December 2025</a>. Organised by Urban Sketchers Colombo in collaboration with the Collective for Historical Dialogue &amp; Memory and ART'O'SAN Gallery, run by <a href="/artists/sandeepa-vithanage">Sandeepa Vithanage</a>, it brought a shared interest in drawing and place to Galle Fort.</p>
     <p>The walk gives this history its starting point in the available records. It should not be confused with a confirmed formal founding date for USK Galle. What the archive does establish is a gathering, its collaborators, a meeting point at ART'O'SAN Gallery and a collection of photographs.</p>
     <h3>A numbered series takes shape</h3>
     <p><a href="/blog/sketch-meet-01-first-galle-fort-gathering">Sketch Meet #1</a> followed on 1 February 2026. Its description remembers a relaxed morning of walking, observing, drawing and sharing. On 8 March, <a href="/blog/sketch-meet-02-returning-to-galle-fort">Meet #2</a> continued the series with outdoor sketching and conversation.</p>
