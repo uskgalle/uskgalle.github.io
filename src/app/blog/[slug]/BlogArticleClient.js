@@ -5,6 +5,7 @@ import Link from 'next/link';
 import styles from './article.module.css';
 import BlurImage from '../../../components/BlurImage/BlurImage';
 import ImageLightbox from '../../../components/ImageLightbox/ImageLightbox';
+import EventGalleries from './EventGalleries';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faArrowLeft,
@@ -16,12 +17,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 
-export default function BlogArticleClient({ post, relatedPosts = [], authorData = null }) {
+export default function BlogArticleClient({ post, relatedPosts = [], authorData = null, eventMedia = null }) {
     const [copied, setCopied] = useState(false);
     const [readProgress, setReadProgress] = useState(0);
     const [lightboxIndex, setLightboxIndex] = useState(null);
     const [galleryImages, setGalleryImages] = useState([]);
     const contentRef = useRef(null);
+    const closingIndex = eventMedia ? post.content.indexOf('<div class="takeaways-box">') : -1;
+    const articleBody = closingIndex < 0 ? post.content : post.content.slice(0, closingIndex);
+    const closingContent = closingIndex < 0 ? '' : post.content.slice(closingIndex);
 
     // Reading progress tracker
     useEffect(() => {
@@ -209,8 +213,10 @@ export default function BlogArticleClient({ post, relatedPosts = [], authorData 
                     ref={contentRef}
                     onClick={handleContentClick}
                     className={styles.content}
-                    dangerouslySetInnerHTML={{ __html: post.content }}
+                    dangerouslySetInnerHTML={{ __html: articleBody }}
                 />
+                {eventMedia && <EventGalleries photos={eventMedia.photos} artworks={eventMedia.artworks} />}
+                {closingContent && <div className={styles.content} dangerouslySetInnerHTML={{ __html: closingContent }} />}
 
                 {/* Tags */}
                 {post.tags && post.tags.length > 0 && (

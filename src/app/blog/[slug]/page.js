@@ -1,5 +1,6 @@
 import { blogPosts, getPostBySlug, getAllPostsAndExamples } from '../../data/blog';
-import { getArtistBySlug, getProfileImagePath } from '../../data/artists';
+import { getArtistBySlug, getProfileImagePath, getAllArtworks } from '../../data/artists';
+import { getRecapGallery } from '../../data/recap-gallery';
 import { notFound } from 'next/navigation';
 import BlogArticleClient from './BlogArticleClient';
 
@@ -30,6 +31,12 @@ export default async function BlogArticlePage({ params }) {
 
     // Look up author info if artist slug is present
     const authorData = post.authorSlug ? getArtistBySlug(post.authorSlug) : null;
+    const eventMedia = post.eventSlug ? {
+        photos: getRecapGallery().images.filter(image => image.event === post.eventSlug),
+        artworks: post.eventSlug === 'meet-up-05'
+            ? getAllArtworks().filter(image => image.event === post.eventSlug)
+            : [],
+    } : null;
 
     // Related posts: prioritize same category, then other posts
     const otherPosts = (post.isExample ? getAllPostsAndExamples().filter((p) => p.isExample) : blogPosts)
@@ -48,6 +55,7 @@ export default async function BlogArticlePage({ params }) {
             post={{ ...post, authorImage: getProfileImagePath(authorData || post.authorSlug || 'system') }}
             relatedPosts={relatedPosts}
             authorData={authorData}
+            eventMedia={eventMedia}
         />
     );
 }
