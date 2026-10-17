@@ -15,6 +15,7 @@ import {
     faArrowRight, 
     faBookOpen, 
     faPalette,
+    faGlobe,
     faScrewdriverWrench
 } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
@@ -110,6 +111,14 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
                                 title="Instagram"
                             >
                                 <FontAwesomeIcon icon={faInstagram} />
+                            </a>
+                        )}
+
+                        {artist.website && (
+                            <a href={artist.website} target="_blank" rel="noopener noreferrer"
+                                className={`${styles.btnSecondary} ${styles.iconButton}`}
+                                aria-label="Website" title="Website">
+                                <FontAwesomeIcon icon={faGlobe} />
                             </a>
                         )}
 

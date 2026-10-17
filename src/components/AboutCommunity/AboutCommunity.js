@@ -49,25 +49,27 @@ export default function AboutCommunity() {
 
         {/* Right — visual block */}
         <div className={styles.visualCol}>
-          <div className={styles.imgMain}>
-            <img
-              src="/homepage-images/community-group.jpg"
-              alt="Urban Sketchers Galle community members gathered with sketches"
-              className={styles.visualImg}
-              loading="lazy"
-            />
-          </div>
           <div className={styles.statCard}>
             <span className={styles.statNum}>{sketchersCount}</span>
-            <span className={styles.statLabel}>Sketchers<br />& counting</span>
+            <span className={styles.statLabel}>Sketchers & counting</span>
           </div>
-          <div className={styles.imgAccent}>
-            <img
-              src="/homepage-images/community-sketches.jpg"
-              alt="Urban Sketchers Galle open sketchbooks on display"
-              className={styles.visualImg}
-              loading="lazy"
-            />
+          <div className={styles.photoGrid}>
+            {[
+              'sketch-meet-01-first-galle-fort-gathering',
+              'sketch-meet-02-returning-to-galle-fort',
+              'sketch-meet-03-galle-streets-and-black-fort',
+              'sketch-meet-04-lighthouse-and-clock-tower',
+              'sketch-meet-05-galle-fish-market',
+            ].map((slug, index) => (
+              <figure className={styles.groupPhoto} key={slug}>
+                <img
+                  src={`/blog-images/${slug}.webp`}
+                  alt={`Urban Sketchers Galle group at Sketch Meet #${index + 1}`}
+                  className={styles.visualImg}
+                  loading="lazy"
+                />
+              </figure>
+            ))}
           </div>
         </div>
 

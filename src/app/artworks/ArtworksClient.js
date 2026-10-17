@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react';
 import ImageLightbox from '../../components/ImageLightbox/ImageLightbox';
 import BlurImage from '../../components/BlurImage/BlurImage';
 import styles from './artworks.module.css';
+import galleryStyles from '../gallery/gallery.module.css';
 import { newestArtworksFirst } from '../data/artwork-order';
+import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShuffle, faClock, faHistory } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,10 +20,12 @@ function shuffle(array) {
     return arr;
 }
 
-export default function ArtworksClient({ initialArtworks }) {
+export default function ArtworksClient({ initialArtworks, meetups, selectedEvent = 'all' }) {
+    const router = useRouter();
     const [artworks, setArtworks] = useState(initialArtworks);
     const [sortMode, setSortMode] = useState('random');
     const [lightboxIndex, setLightboxIndex] = useState(null);
+    const filteredArtworks = selectedEvent === 'all' ? artworks : artworks.filter(art => art.event === selectedEvent);
 
     // Randomize on initial client mount so every page visit is fresh & different
     useEffect(() => {
@@ -29,6 +33,7 @@ export default function ArtworksClient({ initialArtworks }) {
     }, [initialArtworks]);
 
     const handleSort = (mode) => {
+        setLightboxIndex(null);
         setSortMode(mode);
         if (mode === 'random') {
             setArtworks(shuffle(initialArtworks));
@@ -51,6 +56,19 @@ export default function ArtworksClient({ initialArtworks }) {
                 </p>
             </div>
 
+            <div className={styles.toolbar}>
+            <div className={galleryStyles.eventFilter}>
+                <label htmlFor="artworks-event" className={galleryStyles.filterLabel}>Browse by event</label>
+                <select id="artworks-event" className={galleryStyles.eventSelect} value={selectedEvent}
+                    onChange={event => {
+                        const meetup = meetups.find(item => item.slug === event.target.value);
+                        setLightboxIndex(null);
+                        router.push(meetup ? `/artworks/${meetup.gallerySlug}` : '/artworks', { scroll: false });
+                    }}>
+                    <option value="all">All events</option>
+                    {meetups.map(event => <option key={event.slug} value={event.slug}>{event.title}</option>)}
+                </select>
+            </div>
             <div className={styles.sortBar}>
                 <span className={styles.sortLabel}>Sort by:</span>
                 <button
@@ -72,14 +90,15 @@ export default function ArtworksClient({ initialArtworks }) {
                     <FontAwesomeIcon icon={faHistory} /> Old
                 </button>
             </div>
+            </div>
 
-            {artworks.length === 0 ? (
+            {filteredArtworks.length === 0 ? (
                 <div className={styles.emptyState}>
                     <p>No artworks found.</p>
                 </div>
             ) : (
                 <div className={styles.gallery}>
-                    {artworks.map((art, index) => {
+                    {filteredArtworks.map((art, index) => {
                         const placeholderAspects = ['4/3', '1/1', '3/4', '4/3', '16/11'];
                         return (
                             <div
@@ -100,11 +119,11 @@ export default function ArtworksClient({ initialArtworks }) {
             )}
 
             <ImageLightbox
-                images={artworks}
+                images={filteredArtworks}
                 activeIndex={lightboxIndex}
                 onClose={() => setLightboxIndex(null)}
-                onNext={() => setLightboxIndex((prev) => (prev + 1) % artworks.length)}
-                onPrev={() => setLightboxIndex((prev) => (prev - 1 + artworks.length) % artworks.length)}
+                onNext={() => setLightboxIndex((prev) => (prev + 1) % filteredArtworks.length)}
+                onPrev={() => setLightboxIndex((prev) => (prev - 1 + filteredArtworks.length) % filteredArtworks.length)}
             />
         </main>
     );

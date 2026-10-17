@@ -1,5 +1,6 @@
 import { getAllArtworks } from '../data/artists';
 import ArtworksClient from './ArtworksClient';
+import { getRecapGallery } from '../data/recap-gallery';
 
 export const metadata = {
   title: 'Artworks - USK Galle',
@@ -7,5 +8,7 @@ export const metadata = {
 };
 
 export default function ArtworksPage() {
-  return <ArtworksClient initialArtworks={getAllArtworks()} />;
+  const artworks = getAllArtworks();
+  const meetups = getRecapGallery().meetups.filter(meetup => artworks.some(art => art.event === meetup.slug));
+  return <ArtworksClient initialArtworks={artworks} meetups={meetups} />;
 }

@@ -211,6 +211,8 @@ export const specialProfiles = [
     "id": "USK-ADM",
     "isSpecial": true,
     "name": "Sandeepa Vithanage",
+    "instagram": "https://www.instagram.com/sandeepa_vithanage/",
+    "website": "https://linktr.ee/artosan",
     "role": "Admin & Event Lead",
     "slug": "sandeepa-vithanage"
   },
@@ -220,6 +222,8 @@ export const specialProfiles = [
     "id": "USK-DEV",
     "isSpecial": true,
     "name": "Kasun Miuranga",
+    "instagram": "https://www.instagram.com/kasun.miu/",
+    "website": "https://kasunmiu.github.io/",
     "role": "Developer & Admin",
     "slug": "kasun-miuranga"
   }
