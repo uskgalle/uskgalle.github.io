@@ -17,6 +17,7 @@ const footerLinks = {
     { label: 'About Us',     href: '/#about' },
     { label: 'Join Us',      href: '/#join' },
     { label: 'Sketch Meets', href: '/events' },
+    { label: 'Support',      href: '/support' },
     /* { label: 'Manifesto',    href: '/' }, */
   ],
   /* Connect: [

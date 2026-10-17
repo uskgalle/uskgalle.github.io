@@ -194,6 +194,10 @@ export const specialProfiles = [
     "id": "USKG0",
     "isSpecial": true,
     "name": "Example Artist",
+    "website": "https://uskgalle.github.io/",
+    "whatsapp": "https://chat.whatsapp.com/IlMO9dqYLKR8i6qhXcnU6l",
+    "facebook": "https://www.facebook.com/share/1L8GtVnbzg",
+    "instagram": "https://www.instagram.com/urbansketchersgalle",
     "role": "Example Profile",
     "slug": "example-artist"
   },

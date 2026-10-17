@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import ImageLightbox from '../../../components/ImageLightbox/ImageLightbox';
 import BlurImage from '../../../components/BlurImage/BlurImage';
@@ -16,11 +16,29 @@ import {
     faBookOpen, 
     faPalette,
     faGlobe,
+    faMobileScreen,
+    faImage,
+    faPenNib,
+    faUserPen,
+    faCloudArrowUp,
+    faCircleQuestion,
     faScrewdriverWrench
 } from '@fortawesome/free-solid-svg-icons';
-import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faWhatsapp, faFacebookF } from '@fortawesome/free-brands-svg-icons';
 
 export default function ArtistClient({ artist, artworks = [], profileImage, articles = [] }) {
+    const toolsRef = useRef(null);
+
+    useEffect(() => {
+        const closeTools = (event) => {
+            if (toolsRef.current?.open && !toolsRef.current.contains(event.target)) {
+                toolsRef.current.open = false;
+            }
+        };
+        document.addEventListener('pointerdown', closeTools);
+        return () => document.removeEventListener('pointerdown', closeTools);
+    }, []);
+
     const [lightboxIndex, setLightboxIndex] = useState(null);
     const [copied, setCopied] = useState(false);
     const [storyOpen, setStoryOpen] = useState(false);
@@ -61,14 +79,15 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
             </Link>
 
             <header className={styles.profileHeader}>
-                        <details className={styles.settings}>
+                        <details ref={toolsRef} className={styles.settings}>
                             <summary className={styles.settingsToggle} aria-label="Artist tools" title="Artist tools"><FontAwesomeIcon icon={faScrewdriverWrench} /></summary>
                             <div className={styles.settingsOptions}>
-                                <button type="button" onClick={event => { setMakerFormat('story'); setStoryOpen(true); event.currentTarget.closest('details').open = false; }}>Make Story</button>
-                                <button type="button" onClick={event => { setMakerFormat('post'); setStoryOpen(true); event.currentTarget.closest('details').open = false; }}>Make Post</button>
-                                {artist.id && <Link href={`/blog/submit?id=${encodeURIComponent(artist.id)}`}>Write Blog</Link>}
-                                {artist.id && <Link href={`/artists/edit?id=${encodeURIComponent(artist.id)}`}>Edit Details</Link>}
-                                {artist.id && (!artist.isSpecial || artist.id === 'USKG0') && <Link href={`/artworks/submit?id=${encodeURIComponent(artist.id)}`}>Submit Artwork</Link>}
+                                <button type="button" onClick={event => { setMakerFormat('story'); setStoryOpen(true); event.currentTarget.closest('details').open = false; }}><FontAwesomeIcon icon={faMobileScreen} /> Make Story</button>
+                                <button type="button" onClick={event => { setMakerFormat('post'); setStoryOpen(true); event.currentTarget.closest('details').open = false; }}><FontAwesomeIcon icon={faImage} /> Make Post</button>
+                                {artist.id && <Link href={`/blog/submit?id=${encodeURIComponent(artist.id)}`}><FontAwesomeIcon icon={faPenNib} /> Write Blog</Link>}
+                                {artist.id && <Link href={`/artists/edit?id=${encodeURIComponent(artist.id)}`}><FontAwesomeIcon icon={faUserPen} /> Edit Details</Link>}
+                                {artist.id && (!artist.isSpecial || artist.id === 'USKG0') && <Link href={`/artworks/submit?id=${encodeURIComponent(artist.id)}`}><FontAwesomeIcon icon={faCloudArrowUp} /> Submit Artwork</Link>}
+                                <Link href="/support"><FontAwesomeIcon icon={faCircleQuestion} /> Support</Link>
                             </div>
                         </details>
                 <div className={styles.avatarWrapper}>
@@ -122,6 +141,18 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
                             </a>
                         )}
 
+                        {[
+                            { href: artist.whatsapp, label: 'WhatsApp', icon: faWhatsapp },
+                            { href: artist.facebook, label: 'Facebook', icon: faFacebookF },
+                        ].filter(link => link.href).map(link => (
+                            <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer"
+                                className={`${styles.btnSecondary} ${styles.iconButton}`}
+                                aria-label={link.label} title={link.label}>
+                                <FontAwesomeIcon icon={link.icon} />
+                            </a>
+                        ))}
+
+                        <div className={styles.profileTools}>
                         {articles.length > 0 && (
                             <a href="#articles" className={styles.btnSecondary}>
                                 <FontAwesomeIcon icon={faBookOpen} /> {articles.length} {articles.length === 1 ? 'Article' : 'Articles'}
@@ -130,6 +161,7 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
                         <button onClick={handleShare} className={`${styles.btnSecondary} ${styles.iconButton} ${styles.shareButton}`} aria-label="Share profile" title="Share profile">
                             <FontAwesomeIcon icon={faShareNodes} />
                         </button>
+                        </div>
                     </div>
                 </div>
             </header>
