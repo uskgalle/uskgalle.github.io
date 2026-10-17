@@ -10,9 +10,7 @@ export const metadata = {
 export default function BlogPage() {
     const posts = blogPosts.map(post => ({
         ...post,
-        authorImage: post.authorSlug === 'system'
-            ? '/artists-images/no_profile.png'
-            : getProfileImagePath(post.authorSlug),
+        authorImage: getProfileImagePath(post.authorSlug || 'system'),
     }));
     return <BlogClient posts={posts} />;
 }

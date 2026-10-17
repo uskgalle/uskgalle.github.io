@@ -45,7 +45,7 @@ export default async function BlogArticlePage({ params }) {
 
     return (
         <BlogArticleClient
-            post={{ ...post, authorImage: post.authorSlug === 'system' ? '/artists-images/no_profile.png' : getProfileImagePath(authorData || post.authorSlug) }}
+            post={{ ...post, authorImage: getProfileImagePath(authorData || post.authorSlug || 'system') }}
             relatedPosts={relatedPosts}
             authorData={authorData}
         />

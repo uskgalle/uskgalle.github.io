@@ -15,7 +15,6 @@ import meetFive from './sketch-meet-05-galle-fish-market';
  * 2. Import it here and add it to the `blogPosts` array below.
  */
 export const blogPosts = [
-  history,
   meetFive,
   meetFour,
   meetThree,
@@ -23,6 +22,7 @@ export const blogPosts = [
   meetOne,
   sketchWalk,
   artistProfiles,
+  history,
 ];
 
 export function getPostBySlug(slug) {

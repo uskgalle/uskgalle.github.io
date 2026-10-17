@@ -207,6 +207,7 @@ export const specialProfiles = [
   },
   {
     "bio": "Admin of USK Galle, handling and organizing community sketch meets and events. Professional artist exploring the historic architecture and vibrant streets of Sri Lanka.",
+    "country": "LK",
     "id": "USK-ADM",
     "isSpecial": true,
     "name": "Sandeepa Vithanage",
@@ -215,10 +216,11 @@ export const specialProfiles = [
   },
   {
     "bio": "Handling the technical sides, website development, and digital maintenance for USK Galle. Hobbyist artist passionate about open culture, creative technology, and building digital archives.",
+    "country": "LK",
     "id": "USK-DEV",
     "isSpecial": true,
     "name": "Kasun Miuranga",
-    "role": "Technical Lead & Web Developer",
+    "role": "=Developer & Admin",
     "slug": "kasun-miuranga"
   }
 ];

@@ -130,6 +130,7 @@ export default function BlogClient({ posts }) {
                                     src={featuredPost.coverImage || '/hero-images/1.jpg'}
                                     alt={featuredPost.coverAlt || featuredPost.title}
                                     className={styles.featuredImage}
+                                    imgClassName={styles.featuredPhoto}
                                 />
                                 <span className={styles.featuredRibbon}>Featured Story</span>
                             </div>
