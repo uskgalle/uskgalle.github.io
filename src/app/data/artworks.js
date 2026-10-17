@@ -5,6 +5,27 @@
  */
 export const artworks = [
   {
+    "id": "USKG0-1",
+    "filename": "1.webp",
+    "title": "Example sketch: Coastal lighthouse",
+    "description": "Fictional pen-and-wash illustration for demonstrating an artist gallery. This is a placeholder, not a community submission.",
+    "event": ""
+  },
+  {
+    "id": "USKG0-2",
+    "filename": "2.webp",
+    "title": "Example sketch: A quiet street",
+    "description": "Illustrative street scene created as dummy content for this example profile.",
+    "event": ""
+  },
+  {
+    "id": "USKG0-3",
+    "filename": "3.webp",
+    "title": "Example sketch: A seaside afternoon",
+    "description": "Illustrative sailing boat created as dummy content for this example profile.",
+    "event": ""
+  },
+  {
     "description": "Mix media (water color, ink, etc.)",
     "event": "meet-up-04",
     "filename": "1.png",

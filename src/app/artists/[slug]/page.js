@@ -4,7 +4,7 @@ import {
     getArtworksForArtist, 
     getProfileImagePath 
 } from '../../data/artists';
-import { blogPosts } from '../../data/blog';
+import { getAllPostsAndExamples } from '../../data/blog';
 import { notFound } from 'next/navigation';
 import ArtistClient from './ArtistClient';
 
@@ -32,7 +32,7 @@ export default async function ArtistPage({ params }) {
     const profileImage = getProfileImagePath(artist);
 
     // Get any blog articles written by or attributed to this profile
-    const articles = blogPosts.filter(
+    const articles = getAllPostsAndExamples().filter(
         (p) => p.authorSlug === slug || (slug === 'system' && (!p.authorSlug || p.authorSlug === 'system'))
     );
 

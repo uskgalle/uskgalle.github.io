@@ -82,7 +82,9 @@ export default function RegisterClient({ artist = null, profileImage = '' }) {
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [testMode, setTestMode] = useState(false);
+  const [localTestMode, setTestMode] = useState(false);
+  const example = artist?.id === 'USKG0';
+  const testMode = example || localTestMode;
   const [extraLinks, setExtraLinks] = useState(() => ['link2', 'link3', 'link4'].filter(key => artist?.[key]));
   const linkFocus = useRef(null);
   const pending = useRef(null);
@@ -173,7 +175,7 @@ export default function RegisterClient({ artist = null, profileImage = '' }) {
         {submitted ? (
           <div className={styles.successCard} role="status">
             <div className={styles.checkCircle}><FontAwesomeIcon icon={faCheckCircle} /></div>
-            <h2 className={styles.successTitle}>{testMode ? 'Local Test Complete!' : editing ? 'Change Request Received!' : 'Registration Received!'}</h2>
+            <h2 className={styles.successTitle}>{example ? 'Example Preview Complete' : testMode ? 'Local Test Complete!' : editing ? 'Change Request Received!' : 'Registration Received!'}</h2>
             <p className={styles.successText}>{testMode ? <>Thanks, <strong>{data.name}</strong>. Your form and photo passed the local preview.</> : <>Thank you, <strong>{data.name}</strong>. {editing ? 'Your requested changes have been received.' : 'Your details and profile picture have been received together.'}</>}</p>
             <div className={styles.infoBox}>{testMode ? 'Test only: nothing was sent or saved. Connect the registration service to receive real submissions.' : editing ? 'Our team will verify your request before updating your public profile.' : 'Our team will review your submission and manually create your artist profile.'}</div>
             <div className={styles.actionGroup}>
@@ -245,7 +247,7 @@ export default function RegisterClient({ artist = null, profileImage = '' }) {
               </div>
               <p className={styles.helpText}>By submitting, you agree that we may publish your name, country, bio, picture and optional links on your artist profile after review.</p>
             </fieldset>
-            {!endpoint && <p className={styles.infoBox} role="status">{testMode ? 'Local test mode: try the form and upload a photo. Nothing will be sent or saved.' : editing ? 'Profile change requests are being set up. Please check back soon.' : 'Registration is being set up. Please check back soon.'}</p>}
+            {(example || !endpoint) && <p className={styles.infoBox} role="status">{example ? 'Example mode: try editing this profile. Nothing will be sent or saved.' : testMode ? 'Local test mode: try the form and upload a photo. Nothing will be sent or saved.' : editing ? 'Profile change requests are being set up. Please check back soon.' : 'Registration is being set up. Please check back soon.'}</p>}
             {error && <p className={styles.errorBox} role="alert">{error}</p>}
             <button type="submit" disabled={submitting || (!endpoint && !testMode)} aria-busy={submitting} className={styles.submitBtn}>
               {submitting ? <span className={styles.spinner} aria-hidden="true" /> : <FontAwesomeIcon icon={faUserPlus} />}

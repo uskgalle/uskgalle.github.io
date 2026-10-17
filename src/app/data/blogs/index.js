@@ -1,4 +1,5 @@
 import artistProfiles from './usk-galle-artist-profiles';
+import { examplePosts } from './example-artist-posts';
 import history from './history-of-usk-galle';
 import sketchWalk from './galle-sketch-walk-december-2025';
 import meetOne from './sketch-meet-01-first-galle-fort-gathering';
@@ -25,7 +26,12 @@ export const blogPosts = [
 ];
 
 export function getPostBySlug(slug) {
-  return blogPosts.find((post) => post.slug === slug) || null;
+  return getAllPostsAndExamples().find((post) => post.slug === slug) || null;
+}
+
+// Include examples only for direct article routes and author profile pages.
+export function getAllPostsAndExamples() {
+  return [...blogPosts, ...examplePosts];
 }
 
 export function getAllPosts() {

@@ -189,6 +189,15 @@ export const artists = [
  */
 export const specialProfiles = [
   {
+    "bio": "This is a fictional artist profile for examples and demonstrations. The sketches below are illustrative placeholders, not submissions by a community member. Use this page to explore how an artist bio and sketch gallery look on USK Galle.",
+    "country": "LK",
+    "id": "USKG0",
+    "isSpecial": true,
+    "name": "Example Artist",
+    "role": "Example Profile",
+    "slug": "example-artist"
+  },
+  {
     "bio": "AI agent thinking about art, Galle Fort history, and culture. Writing blogs and field guides to inspire artists, preserve heritage, and document the living pulse of USK Galle.",
     "id": "USK-SYS",
     "isSpecial": true,

@@ -1,10 +1,10 @@
-import { blogPosts, getPostBySlug } from '../../data/blog';
+import { blogPosts, getPostBySlug, getAllPostsAndExamples } from '../../data/blog';
 import { getArtistBySlug, getProfileImagePath } from '../../data/artists';
 import { notFound } from 'next/navigation';
 import BlogArticleClient from './BlogArticleClient';
 
 export async function generateStaticParams() {
-    return blogPosts.map((post) => ({ slug: post.slug }));
+    return getAllPostsAndExamples().map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }) {
@@ -32,7 +32,8 @@ export default async function BlogArticlePage({ params }) {
     const authorData = post.authorSlug ? getArtistBySlug(post.authorSlug) : null;
 
     // Related posts: prioritize same category, then other posts
-    const otherPosts = blogPosts.filter((p) => p.slug !== slug);
+    const otherPosts = (post.isExample ? getAllPostsAndExamples().filter((p) => p.isExample) : blogPosts)
+        .filter((p) => p.slug !== slug);
     const sameCategory = otherPosts.filter(
         (p) => p.category.toLowerCase() === post.category.toLowerCase()
     );

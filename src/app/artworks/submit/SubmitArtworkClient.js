@@ -62,7 +62,9 @@ export default function SubmitArtworkClient({ artists, sketchMeets = [] }) {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState('');
   const [error, setError] = useState('');
-  const [testMode, setTestMode] = useState(false);
+  const [localTestMode, setTestMode] = useState(false);
+  const example = artistId === 'USKG0';
+  const testMode = example || localTestMode;
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const busy = useRef(false);
@@ -129,9 +131,9 @@ export default function SubmitArtworkClient({ artists, sketchMeets = [] }) {
     </header>
     <div className={styles.formCard}>
       {submitted ? <div className={styles.successCard} role="status">
-        <h2 className={styles.successTitle}>{testMode ? 'Artwork Test Complete!' : 'Artwork Received!'}</h2>
+        <h2 className={styles.successTitle}>{example ? 'Example Preview Complete' : testMode ? 'Artwork Test Complete!' : 'Artwork Received!'}</h2>
         <p className={styles.successText}><strong>{title.trim()}</strong> {testMode ? 'is ready for submission under' : 'was received for'} <strong>{artist.name} ({artist.id})</strong>.</p>
-        <p className={styles.infoBox}>{testMode ? 'Local test only. Nothing was uploaded or saved.' : 'Our team will review your artwork before publishing it on your profile.'}</p>
+        <p className={styles.infoBox}>{example ? 'Example only. Nothing was uploaded, submitted or saved.' : testMode ? 'Local test only. Nothing was uploaded or saved.' : 'Our team will review your artwork before publishing it on your profile.'}</p>
         <Link href={`/artists/${artist.slug}`} className={styles.backBtn}>Back to Profile</Link>
       </div> : <form onSubmit={submit} className={styles.form}>
         <fieldset className={styles.fields} disabled={submitting || Boolean(pending.current)}>
@@ -168,11 +170,11 @@ export default function SubmitArtworkClient({ artists, sketchMeets = [] }) {
           </div>
           <p className={styles.helpText}>Submit your own artwork. Your submission will be reviewed before it appears on the website.</p>
         </fieldset>
-        <p className={styles.infoBox} role="status">{testMode ? 'Local test mode: try the form and image preview. Nothing will be uploaded or saved.' : ENDPOINT ? 'Your artwork will be reviewed before publishing.' : 'Artwork submissions are being set up. Please check back soon.'}</p>
+        <p className={styles.infoBox} role="status">{example ? 'Example mode: try the form and image preview. Nothing will be uploaded or saved.' : testMode ? 'Local test mode: try the form and image preview. Nothing will be uploaded or saved.' : ENDPOINT ? 'Your artwork will be reviewed before publishing.' : 'Artwork submissions are being set up. Please check back soon.'}</p>
         {error && <p className={styles.errorBox} role="alert">{error}</p>}
         <button type="submit" disabled={submitting || (!ENDPOINT && !testMode)} aria-busy={submitting} className={styles.submitBtn}>
           {submitting && <span className={styles.spinner} aria-hidden="true" />}
-          {submitting ? 'Submitting Artwork…' : testMode ? 'Test Artwork Submission' : pending.current ? 'Retry Submission' : 'Submit Artwork for Review'}
+          {submitting ? 'Submitting Artwork…' : example ? 'Preview Example Submission' : testMode ? 'Test Artwork Submission' : pending.current ? 'Retry Submission' : 'Submit Artwork for Review'}
         </button>
       </form>}
     </div>

@@ -65,8 +65,9 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
                             <div className={styles.settingsOptions}>
                                 <button type="button" onClick={event => { setMakerFormat('story'); setStoryOpen(true); event.currentTarget.closest('details').open = false; }}>Make Story</button>
                                 <button type="button" onClick={event => { setMakerFormat('post'); setStoryOpen(true); event.currentTarget.closest('details').open = false; }}>Make Post</button>
+                                {artist.id && <Link href={`/blog/submit?id=${encodeURIComponent(artist.id)}`}>Write Blog</Link>}
                                 {artist.id && <Link href={`/artists/edit?id=${encodeURIComponent(artist.id)}`}>Edit Details</Link>}
-                                {artist.id && !artist.isSpecial && <Link href={`/artworks/submit?id=${encodeURIComponent(artist.id)}`}>Submit Artwork</Link>}
+                                {artist.id && (!artist.isSpecial || artist.id === 'USKG0') && <Link href={`/artworks/submit?id=${encodeURIComponent(artist.id)}`}>Submit Artwork</Link>}
                             </div>
                         </details>
                 <div className={styles.avatarWrapper}>
