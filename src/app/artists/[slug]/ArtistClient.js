@@ -96,9 +96,6 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
                     </p>
 
                     <div className={styles.actions}>
-                        <button onClick={handleShare} className={styles.btnPrimary}>
-                            <FontAwesomeIcon icon={faShareNodes} /> Share Profile
-                        </button>
 
 
 
@@ -107,9 +104,11 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
                                 href={artist.instagram}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className={styles.btnSecondary}
+                                className={`${styles.btnSecondary} ${styles.iconButton}`}
+                                aria-label="Instagram"
+                                title="Instagram"
                             >
-                                <FontAwesomeIcon icon={faInstagram} /> Instagram
+                                <FontAwesomeIcon icon={faInstagram} />
                             </a>
                         )}
 
@@ -118,6 +117,9 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
                                 <FontAwesomeIcon icon={faBookOpen} /> {articles.length} {articles.length === 1 ? 'Article' : 'Articles'}
                             </a>
                         )}
+                        <button onClick={handleShare} className={`${styles.btnSecondary} ${styles.iconButton} ${styles.shareButton}`} aria-label="Share profile" title="Share profile">
+                            <FontAwesomeIcon icon={faShareNodes} />
+                        </button>
                     </div>
                 </div>
             </header>
