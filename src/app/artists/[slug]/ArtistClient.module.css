@@ -276,6 +276,14 @@
     z-index: 9999;
 }
 
+.section {
+    display: flow-root;
+}
+
+.section + .section {
+    margin-top: 48px;
+}
+
 /* Section Header */
 .sectionHeader {
     display: flex;
@@ -480,6 +488,13 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+}
+
+.articleThumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .articleCard:hover .articleThumb {

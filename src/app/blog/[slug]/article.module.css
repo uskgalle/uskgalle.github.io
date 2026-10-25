@@ -231,6 +231,13 @@
     display: block;
 }
 
+.coverImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 .coverCaption {
     font-family: var(--font-sans);
     font-size: 0.82rem;
@@ -666,6 +673,13 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+}
+
+.relatedThumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .relatedCard:hover .relatedThumb {

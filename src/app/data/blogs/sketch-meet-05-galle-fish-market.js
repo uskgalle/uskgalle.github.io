@@ -1,6 +1,7 @@
 import { meetupPost } from './meetup-post';
 
 export default meetupPost({
+  featured: true,
   eventSlug: 'meet-up-05',
   slug: 'sketch-meet-05-galle-fish-market',
   title: 'Sketch Meet #5: Drawing the Morning at Galle Fish Market',

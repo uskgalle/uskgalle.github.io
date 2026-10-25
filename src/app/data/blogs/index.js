@@ -1,4 +1,6 @@
 import artistProfiles from './usk-galle-artist-profiles';
+import bellTower from './sketching-bell-tower-national-maritime-museum-galle';
+import churchStreet from './sketching-house-church-street-galle-fort';
 import { examplePosts } from './example-artist-posts';
 import history from './history-of-usk-galle';
 import meetOne from './sketch-meet-01-first-galle-fort-gathering';
@@ -14,6 +16,8 @@ import meetFive from './sketch-meet-05-galle-fish-market';
  * 2. Import it here and add it to the `blogPosts` array below.
  */
 export const blogPosts = [
+  churchStreet,
+  bellTower,
   meetFive,
   meetFour,
   meetThree,

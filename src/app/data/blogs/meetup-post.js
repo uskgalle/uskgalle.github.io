@@ -2,7 +2,7 @@ import { events } from '../events';
 import { getRecapGallery } from '../recap-gallery';
 
 // Event facts stay in the event archive; each article adds its own editorial text.
-export function meetupPost({ eventSlug, slug, title, excerpt, content }) {
+export function meetupPost({ eventSlug, slug, title, excerpt, content, featured = false }) {
   const event = events.find(item => item.slug === eventSlug);
   const upcoming = event.upcoming;
   const gallery = getRecapGallery().meetups.find(item => item.slug === eventSlug);
@@ -31,6 +31,6 @@ export function meetupPost({ eventSlug, slug, title, excerpt, content }) {
     coverImage,
     coverAlt: upcoming ? 'Illustration for the next USK Galle sketch meet' : `Cover illustration for ${event.title}`,
     coverCaption: upcoming ? 'The next meet is being planned. Date and venue are still to be announced.' : `${event.title} · ${date}`,
-    coverColor: '#c9a87c', featured: false, eventSlug, content: body,
+    coverColor: '#c9a87c', featured, eventSlug, content: body,
   };
 }
