@@ -344,6 +344,17 @@
     line-height: 1.5;
 }
 
+.content :global(figure.article-figure-small) {
+    max-width: 420px;
+    margin: 32px auto;
+}
+
+.content :global(figure.article-figure-small img) {
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+}
+
 /* Wide Figure Breakout */
 .content :global(figure.article-figure-wide) {
     margin: 44px -40px;

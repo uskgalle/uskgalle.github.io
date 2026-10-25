@@ -18,6 +18,11 @@ const post = {
 
     <p>Since I generally never fail to visit the museum, I decided to sketch it, capturing its basic structure and historic charm in my own unique style using coloured pencils and HB pencils for outlining. The sketch itself took approximately 30 minutes as I prefer to capture the general essence of a structure without going too much into extensive detail.</p>
 
+    <figure class="article-figure article-figure-small">
+      <img src="/artworks-images/USKG8/7.webp" alt="Bell Tower, a sketch by Nelum Buddhadasa" loading="lazy" />
+      <figcaption>Bell Tower by Nelum Buddhadasa.</figcaption>
+    </figure>
+
     <p>Sometimes, travelling is not just about seeing new places, but about slowing down, observing the basic details, and preserving memories through art.</p>
   `,
 };
