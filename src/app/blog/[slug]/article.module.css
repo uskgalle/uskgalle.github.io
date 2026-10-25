@@ -355,6 +355,20 @@
     object-fit: contain;
 }
 
+.content :global(.artwork-row) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin: 32px 0;
+    align-items: start;
+}
+
+.content :global(.artwork-row figure.article-figure-small) {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+}
+
 /* Wide Figure Breakout */
 .content :global(figure.article-figure-wide) {
     margin: 44px -40px;

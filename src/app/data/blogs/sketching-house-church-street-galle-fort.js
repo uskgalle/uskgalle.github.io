@@ -18,10 +18,17 @@ const post = {
 
     <p>There is something special about sketching old houses. Beyond their architectural beauty, it is the little details that make each one unique. Sketching allows me to slow down, observe my surroundings more closely and appreciate the character of a place in a way that a quick photograph on a mobile phone sometimes cannot capture. While I did not go into extensive detail, I used my HB pencils to quickly draw the basic outlines, adding a few dashes of light colour with colouring pencils. I try to create a feeling of realism in my pencil sketches that captures the essence of a location or scene.</p>
 
+    <div class="artwork-row">
+    <figure class="article-figure article-figure-small">
+      <img src="/artworks-images/USKG8/4.webp" alt="House on Church Street, a sketch by Nelum Buddhadasa" loading="lazy" />
+      <figcaption>House on Church Street by Nelum Buddhadasa.</figcaption>
+    </figure>
+
     <figure class="article-figure article-figure-small">
       <img src="/artworks-images/USKG8/6.webp" alt="Church Rooftop, a sketch by Nelum Buddhadasa" loading="lazy" />
       <figcaption>Church Rooftop by Nelum Buddhadasa.</figcaption>
     </figure>
+    </div>
 
     <p>Galle Fort is filled with stories, and through my sketch, I wanted to preserve a small piece of its old-world charm. For me, sketching while travelling is more than just an artistic exercise; it is a way of connecting with a place and creating lasting memories.</p>
 
