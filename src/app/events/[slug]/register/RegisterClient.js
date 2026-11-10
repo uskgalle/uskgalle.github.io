@@ -72,6 +72,10 @@ export default function RegisterClient({ event, registeredArtists = [] }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!event.sheetEndpointUrl) {
+            showToast('Online registration is not connected yet. Please contact USK Galle using the WhatsApp link above. Your registration has not been sent.');
+            return;
+        }
         if (returning && !matchedArtist) {
             showToast('Please enter a registered artist ID, such as USKG8.');
             return;

@@ -41,6 +41,7 @@ export const events = [
         upcoming: true,
         registerLink: '/events/meet-up-06/register',
         actionText: 'Register',
+        sheetEndpointUrl: 'https://script.google.com/macros/s/AKfycbwaGLRzDY1hbS_JhrXl8JKSePD3iDLDIXSVbFmgw-FsfUi1tYiOvpl1CeCAK7xS13ktBQ/exec',
         image: '/doodles/hero.jpg',
         whoCanJoinImage: '/doodles/who-can-join.jpg',
         whatToBringImage: '/doodles/what-to-bring.jpg',
