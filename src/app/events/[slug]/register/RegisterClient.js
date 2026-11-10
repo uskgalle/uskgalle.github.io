@@ -142,7 +142,7 @@ export default function RegisterClient({ event, registeredArtists = [] }) {
         const monthNum = monthMap[event.date.month.toUpperCase()] || '08';
         const dayStr = String(event.date.day).padStart(2, '0');
         const dateStr = `${event.year}${monthNum}${dayStr}`;
-        const dates = `${dateStr}T083000/${dateStr}T123000`;
+        const dates = `${dateStr}T${event.calendarStartTime || '083000'}/${dateStr}T${event.calendarEndTime || '123000'}`;
 
         const title = encodeURIComponent(`Urban Sketchers Galle - ${event.title}`);
         const details = encodeURIComponent(
@@ -150,7 +150,7 @@ export default function RegisterClient({ event, registeredArtists = [] }) {
         );
         const location = encodeURIComponent(event.location);
 
-        return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
+        return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&ctz=Asia%2FColombo&details=${details}&location=${location}`;
     };
 
     const shareText = `Join me at Urban Sketchers Galle for ${event.title} on ${event.date.day} ${event.date.month} ${event.year} at ${event.location}! Register here:`;
