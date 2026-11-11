@@ -297,6 +297,13 @@ export const artworks = [
     "filename": "4.webp",
     "id": "USKG19-4",
     "title": "Bougainvillea Vail"
+  },
+  {
+    "description": "Galle Fort",
+    "event": null,
+    "filename": "5.webp",
+    "id": "USKG19-5",
+    "title": "Sri Sudarmalaya Viharaya (1889)"
   }
 ];
 
