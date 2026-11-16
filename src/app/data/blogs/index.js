@@ -8,6 +8,7 @@ import meetTwo from './sketch-meet-02-returning-to-galle-fort';
 import meetThree from './sketch-meet-03-galle-streets-and-black-fort';
 import meetFour from './sketch-meet-04-lighthouse-and-clock-tower';
 import meetFive from './sketch-meet-05-galle-fish-market';
+import peopleInTheCity from './people-in-the-city';
 
 /**
  * Registry of all blog posts.
@@ -16,6 +17,7 @@ import meetFive from './sketch-meet-05-galle-fish-market';
  * 2. Import it here and add it to the `blogPosts` array below.
  */
 export const blogPosts = [
+  peopleInTheCity,
   churchStreet,
   bellTower,
   meetFive,

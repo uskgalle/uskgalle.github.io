@@ -2,7 +2,10 @@ import { events } from '../events';
 import { getRecapGallery } from '../recap-gallery';
 
 // Event facts stay in the event archive; each article adds its own editorial text.
-export function meetupPost({ eventSlug, slug, title, excerpt, content, featured = false }) {
+export function meetupPost({
+  eventSlug, slug, title, excerpt, content, featured = false,
+  publishedDate = 'October 15, 2026', coverAlt, coverCaption, photoGroups,
+}) {
   const event = events.find(item => item.slug === eventSlug);
   const upcoming = event.upcoming;
   const gallery = getRecapGallery().meetups.find(item => item.slug === eventSlug);
@@ -26,11 +29,11 @@ export function meetupPost({ eventSlug, slug, title, excerpt, content, featured 
     category: upcoming ? 'Community' : 'Sketch Meets',
     tags: ['USK Galle', 'Galle', upcoming ? 'Upcoming' : event.title],
     author: 'System', authorSlug: 'system',
-    date: 'October 15, 2026',
+    date: publishedDate,
     readTime: `${Math.max(1, Math.ceil(body.replace(/<[^>]*>/g, ' ').split(/\s+/).length / 200))} min read`,
     coverImage,
-    coverAlt: upcoming ? 'Illustration for the next USK Galle sketch meet' : `Cover illustration for ${event.title}`,
-    coverCaption: upcoming ? 'The next meet is being planned. Date and venue are still to be announced.' : `${event.title} · ${date}`,
-    coverColor: '#c9a87c', featured, eventSlug, content: body,
+    coverAlt: coverAlt ?? (upcoming ? 'Illustration for the next USK Galle sketch meet' : `Cover illustration for ${event.title}`),
+    coverCaption: coverCaption ?? (upcoming ? 'The next meet is being planned. Date and venue are still to be announced.' : `${event.title} · ${date}`),
+    coverColor: '#c9a87c', featured, eventSlug, photoGroups, content: body,
   };
 }

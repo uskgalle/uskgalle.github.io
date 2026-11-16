@@ -203,7 +203,7 @@ export default function BlogArticleClient({ post, relatedPosts = [], authorData 
                     className={styles.content}
                     dangerouslySetInnerHTML={{ __html: articleBody }}
                 />
-                {eventMedia && <EventGalleries photos={eventMedia.photos} artworks={eventMedia.artworks} />}
+                {eventMedia && <EventGalleries groups={eventMedia} />}
                 {closingContent && <div className={styles.content} dangerouslySetInnerHTML={{ __html: closingContent }} />}
 
                 {/* Tags */}

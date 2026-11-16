@@ -12,7 +12,7 @@ export async function generateMetadata({ params }) {
     if (!event) return {};
 
     return {
-        title: `${event.title} Recap | Urban Sketchers Galle`,
+        title: `${event.title}${event.recap ? ' Recap' : ''} | Urban Sketchers Galle`,
     };
 }
 

@@ -182,6 +182,10 @@ export default function RegisterClient({ event, registeredArtists = [] }) {
         whatsappLink: 'https://wa.me/94718472636',
     };
 
+    const externalEventLink = event.upcoming && event.registerLink?.startsWith('http')
+        ? event.registerLink
+        : null;
+
     return (
         <main className={styles.page}>
             {/* Back link */}
@@ -198,10 +202,12 @@ export default function RegisterClient({ event, registeredArtists = [] }) {
                 </span>
                 <h1 className={styles.title}>{event.title}</h1>
                 <p className={styles.subtitle}>
-                    Join fellow sketchers for on-location drawing across the streets and ramparts of Galle Fort. Free and open to all skill levels!
+                    {externalEventLink || !event.upcoming
+                        ? event.description
+                        : 'Join fellow sketchers for on-location drawing across the streets and ramparts of Galle Fort. Free and open to all skill levels!'}
                 </p>
 
-                {event.upcoming && !isSubmitted && (
+                {event.upcoming && !externalEventLink && !isSubmitted && (
                     <button onClick={scrollToForm} className={styles.heroCtaBtn}>
                         Register Now <FontAwesomeIcon icon={faArrowDown} />
                     </button>
@@ -373,6 +379,15 @@ export default function RegisterClient({ event, registeredArtists = [] }) {
                             <Link href="/events" className={styles.secondaryBtn}>
                                 View All Events
                             </Link>
+                        </div>
+                    </div>
+                ) : externalEventLink ? (
+                    <div className={styles.closedNotice}>
+                        <h2 className={styles.closedTitle}>Event Updates</h2>
+                        <div className={styles.closedActions}>
+                            <a href={externalEventLink} target="_blank" rel="noopener noreferrer" className={styles.primaryBtn}>
+                                {event.actionText || 'Visit Event Website'} <FontAwesomeIcon icon={faArrowRight} />
+                            </a>
                         </div>
                     </div>
                 ) : isSubmitted ? (

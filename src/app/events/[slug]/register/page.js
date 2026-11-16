@@ -12,8 +12,11 @@ export async function generateMetadata({ params }) {
     const event = events.find((e) => e.slug === slug);
     if (!event) return {};
 
-    const pageTitle = `Register: ${event.title} | Urban Sketchers Galle`;
-    const pageDesc = `Join Urban Sketchers Galle for ${event.title} on ${event.date.day} ${event.date.month} ${event.year} at ${event.location}. Register now to reserve your spot!`;
+    const registrationOpen = event.upcoming && !event.registerLink?.startsWith('http');
+    const pageTitle = `${registrationOpen ? 'Register: ' : ''}${event.title} | Urban Sketchers Galle`;
+    const pageDesc = registrationOpen
+        ? `Join Urban Sketchers Galle for ${event.title} on ${event.date.day} ${event.date.month} ${event.year} at ${event.location}. Register now to reserve your spot!`
+        : event.description;
     const pageUrl = `https://urbansketchersgalle.github.io/events/${event.slug}/register`;
 
     return {

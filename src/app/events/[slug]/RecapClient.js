@@ -70,7 +70,14 @@ export default function RecapClient({ event }) {
                 </span>
             </div>
 
-            <p className={styles.body}>{event.recap?.body || event.description}</p>
+            <p className={styles.body}>
+                {event.recap?.body || event.description}
+                {event.recap?.blogSlug && (
+                    <Link href={`/blog/${event.recap.blogSlug}`} className={styles.blogLink}>
+                        Continue reading on the blog
+                    </Link>
+                )}
+            </p>
 
             {event.recap ? (
                 <>

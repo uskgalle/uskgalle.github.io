@@ -172,6 +172,16 @@
     white-space: pre-line;
 }
 
+.blogLink {
+    display: block;
+    width: fit-content;
+    margin-top: 0.75rem;
+    color: var(--color-dark);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
 /* ─────────────────────────────
    GALLERY  — masonry
 ───────────────────────────── */

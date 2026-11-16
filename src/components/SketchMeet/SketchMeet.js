@@ -12,7 +12,8 @@ import { events } from '../../app/data/events';
 
 export default function SketchMeet() {
   // Upcoming first, then limit to 3
-  const sorted = [...events]
+  const sorted = events
+    .filter((event) => event.showOnHomepage !== false)
     .sort((a, b) => Number(b.upcoming) - Number(a.upcoming))
     .slice(0, 3);
 

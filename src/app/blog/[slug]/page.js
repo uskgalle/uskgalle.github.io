@@ -31,12 +31,18 @@ export default async function BlogArticlePage({ params }) {
 
     // Look up author info if artist slug is present
     const authorData = post.authorSlug ? getArtistBySlug(post.authorSlug) : null;
-    const eventMedia = post.eventSlug ? {
-        photos: getRecapGallery().images.filter(image => image.event === post.eventSlug),
-        artworks: post.eventSlug === 'meet-up-05'
+    let eventMedia = null;
+    if (post.eventSlug) {
+        const photos = getRecapGallery().images.filter(image => image.event === post.eventSlug);
+        const photoGroups = post.photoGroups?.map(({ title, files }) => ({
+            title,
+            items: files.map(file => photos.find(photo => photo.src.endsWith(`/${file}`))).filter(Boolean),
+        })) ?? [{ title: 'Photos from the morning', items: photos }];
+        const artworks = post.eventSlug === 'meet-up-05'
             ? getAllArtworks().filter(image => image.event === post.eventSlug)
-            : [],
-    } : null;
+            : [];
+        eventMedia = [...photoGroups, { title: 'Sketches from the meet', items: artworks }];
+    }
 
     // Related posts: prioritize same category, then other posts
     const otherPosts = (post.isExample ? getAllPostsAndExamples().filter((p) => p.isExample) : blogPosts)
