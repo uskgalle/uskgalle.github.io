@@ -17,8 +17,7 @@ export default function ArtistsPage() {
                 sketchCount: artworks.length,
                 profileImage: profileImage || '/artists-images/no_profile.png',
             };
-        })
-        .filter((artist) => artist.sketchCount > 0);
+        });
 
     return <ArtistsClient initialArtists={artistsData} />;
 }

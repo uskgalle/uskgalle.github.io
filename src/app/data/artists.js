@@ -145,7 +145,7 @@ export const artists = [
     "slug": "ravindu-ramawickrama"
   },
   {
-    "bio": "Sketcher",
+    "bio": "Nethmi Pabasara is a sketcher from Sri Lanka who shares her drawings with the Urban Sketchers Galle community.",
     "country": "LK",
     "id": "USKG16",
     "instagram": "https://instagram.com/Thepabee",
@@ -179,6 +179,115 @@ export const artists = [
     "name": "Rashani Weerakoon",
     "role": "",
     "slug": "rashani-weerakoon"
+  },
+  {
+    "bio": "Astrid Kahane-Seefeld, also known as Astisketcher, is an urban sketcher who lives between Spain and Germany. She began sketching in 2018, first drawing buildings before turning her attention to people and everyday life. She led the People in the City workshop and a live sketching demonstration at Sketch Meet-Up #6.",
+    "id": "USKG20",
+    "name": "Astrid Kahane-Seefeld",
+    "role": "Guest Workshop Instructor",
+    "slug": "astrid-kahane-seefeld"
+  },
+  {
+    "bio": "Took part in Sketch Meet-Up #6 in Galle Fort.",
+    "id": "USKG21",
+    "instagram": "https://instagram.com/tharinda97",
+    "name": "Tharinda Kodikara",
+    "slug": "tharinda-kodikara"
+  },
+  {
+    "bio": "Took part in Sketch Meet-Up #6 in Galle Fort.",
+    "id": "USKG22",
+    "name": "Lakshan Sandakelum",
+    "slug": "lakshan-sandakelum"
+  },
+  {
+    "bio": "Took part in Sketch Meet-Up #6 in Galle Fort.",
+    "id": "USKG23",
+    "instagram": "https://instagram.com/diwya_ramawickrama",
+    "name": "Diwya Ramawickrama",
+    "slug": "diwya-ramawickrama"
+  },
+  {
+    "bio": "Took part in Sketch Meet-Up #6 in Galle Fort.",
+    "id": "USKG24",
+    "name": "T.G.L. Lakruwani",
+    "slug": "tgl-lakruwani"
+  },
+  {
+    "bio": "Took part in Sketch Meet-Up #6 in Galle Fort.",
+    "id": "USKG25",
+    "instagram": "https://instagram.com/ktmawli98",
+    "name": "Mawli De Silva",
+    "slug": "mawli-de-silva"
+  },
+  {
+    "bio": "Took part in Sketch Meet-Up #6 in Galle Fort.",
+    "id": "USKG26",
+    "instagram": "https://instagram.com/Perera.janaki",
+    "name": "Janaki Perera",
+    "slug": "janaki-perera"
+  },
+  {
+    "bio": "Took part in Sketch Meet-Up #6 in Galle Fort.",
+    "id": "USKG27",
+    "instagram": "https://instagram.com/deshan33302",
+    "name": "T. Deshan Mallawa Arachchi",
+    "slug": "t-deshan-mallawa-arachchi"
+  },
+  {
+    "bio": "Took part in Sketch Meet-Up #6 in Galle Fort.",
+    "id": "USKG28",
+    "name": "Lelwala Godakandage Theshara Sankalana",
+    "slug": "lelwala-godakandage-theshara-sankalana"
+  },
+  {
+    "bio": "Took part in Sketch Meet-Up #6 in Galle Fort.",
+    "id": "USKG29",
+    "instagram": "https://instagram.com/isuru.wee",
+    "name": "Isuru Weeraddana",
+    "slug": "isuru-weeraddana"
+  },
+  {
+    "bio": "Took part in Sketch Meet-Up #6 in Galle Fort.",
+    "id": "USKG30",
+    "instagram": "https://instagram.com/Roxyartt",
+    "name": "Roxane Toulouse",
+    "slug": "roxane-toulouse"
+  },
+  {
+    "bio": "Took part in Sketch Meet-Up #6 in Galle Fort.",
+    "id": "USKG31",
+    "instagram": "https://instagram.com/dahami_jay",
+    "name": "Dahami Thathsarani Jayaneththi",
+    "slug": "dahami-thathsarani-jayaneththi"
+  },
+  {
+    "bio": "Took part in Sketch Meet-Up #6 in Galle Fort.",
+    "id": "USKG32",
+    "instagram": "https://instagram.com/dishara_liyanage",
+    "name": "Dishara Liyanage",
+    "slug": "dishara-liyanage"
+  },
+  {
+    "bio": "Took part in Sketch Meet-Up #6 in Galle Fort.",
+    "id": "USKG33",
+    "instagram": "https://instagram.com/delly_2007",
+    "name": "Delini Wijesekara",
+    "slug": "delini-wijesekara"
+  },
+  {
+    "bio": "Took part in Sketch Meet-Up #6 in Galle Fort.",
+    "id": "USKG34",
+    "instagram": "https://instagram.com/_janiiiie",
+    "name": "Janith Kariyawasam",
+    "slug": "janith-kariyawasam"
+  },
+  {
+    "bio": "Took part in Sketch Meet-Up #6 in Galle Fort.",
+    "id": "USKG35",
+    "instagram": "https://instagram.com/sethumi_j_",
+    "name": "Sethumi Jayarathna",
+    "slug": "sethumi-jayarathna"
   }
 ];
 
