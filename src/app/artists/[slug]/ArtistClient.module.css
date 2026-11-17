@@ -174,22 +174,8 @@
 
 .actions {
     display: flex;
-    flex-wrap: wrap;
     gap: 12px;
     justify-content: center;
-}
-
-.profileTools {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-@media (max-width: 767px) {
-    .profileTools {
-        flex-basis: 100%;
-        justify-content: center;
-    }
 }
 
 @media (min-width: 768px) {
@@ -254,6 +240,30 @@
 .iconButton svg {
     width: 18px;
     height: 18px;
+}
+
+.articleCountButton {
+    width: auto;
+    min-width: 44px;
+    padding-inline: 7px;
+    gap: 5px;
+    font-size: 0.78rem;
+}
+
+.articleCountButton svg {
+    width: 14px;
+    height: 14px;
+}
+
+@media (max-width: 440px) {
+    .actions {
+        gap: 4px;
+    }
+
+    .actions .iconButton:not(.articleCountButton) {
+        flex-shrink: 1;
+        min-width: 24px;
+    }
 }
 
 .shareButton svg {

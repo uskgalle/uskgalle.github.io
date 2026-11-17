@@ -152,16 +152,17 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
                             </a>
                         ))}
 
-                        <div className={styles.profileTools}>
                         {articles.length > 0 && (
-                            <a href="#articles" className={styles.btnSecondary}>
-                                <FontAwesomeIcon icon={faBookOpen} /> {articles.length} {articles.length === 1 ? 'Article' : 'Articles'}
+                            <a href="#articles"
+                                className={`${styles.btnSecondary} ${styles.iconButton} ${styles.articleCountButton}`}
+                                aria-label={`${articles.length} ${articles.length === 1 ? 'article' : 'articles'}`}
+                                title="View articles">
+                                <FontAwesomeIcon icon={faBookOpen} /> {articles.length}
                             </a>
                         )}
                         <button onClick={handleShare} className={`${styles.btnSecondary} ${styles.iconButton} ${styles.shareButton}`} aria-label="Share profile" title="Share profile">
                             <FontAwesomeIcon icon={faShareNodes} />
                         </button>
-                        </div>
                     </div>
                 </div>
             </header>
