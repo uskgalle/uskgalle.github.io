@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import styles from './register.module.css';
+import CountrySearch from './CountrySearch';
 import { countries } from '../data/countries';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCamera, faCheckCircle, faUserPlus } from '@fortawesome/free-solid-svg-icons';
@@ -201,10 +202,10 @@ export default function RegisterClient({ artist = null, profileImage = '' }) {
               ))}
               <div className={styles.fieldGroup}>
                 <label htmlFor="country" className={styles.label}>Country <span className={styles.required}>*</span></label>
-                <select id="country" name="country" autoComplete="country" required value={data.country} onChange={change} className={styles.input}>
+                {editing ? <CountrySearch value={data.country} onChange={country => setData(previous => ({ ...previous, country }))} /> : <select id="country" name="country" autoComplete="country" required value={data.country} onChange={change} className={styles.input}>
                   <option value="">Choose your country</option>
                   {countries.map(country => <option key={country.code} value={country.code}>{country.name}</option>)}
-                </select>
+                </select>}
               </div>
               <div className={styles.fieldGroup}>
                 <label htmlFor="bio" className={styles.label}>Short Bio <span className={styles.required}>*</span></label>

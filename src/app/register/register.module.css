@@ -1,3 +1,43 @@
+.countrySearch {
+  position: relative;
+}
+
+.countrySuggestions,
+.countryNoMatches {
+  position: absolute;
+  z-index: 2;
+  inset-inline: 0;
+  top: 100%;
+  max-height: 14rem;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  border: 1px solid #e2d7c7;
+  border-radius: 3px;
+  background: #fff;
+  box-shadow: 0 4px 12px #2a1f141a;
+}
+
+.countrySuggestions:empty {
+  display: none;
+}
+
+.countrySuggestions li,
+.countryNoMatches {
+  padding: 10px 14px;
+  font-size: 0.95rem;
+}
+
+.countrySuggestions li {
+  cursor: pointer;
+}
+
+.countrySuggestions li:hover,
+.countrySuggestions li[aria-selected='true'] {
+  background: #f3eee6;
+}
+
 .page {
   max-width: 1100px;
   margin: 0 auto;
