@@ -348,6 +348,55 @@
     gap: 8px;
 }
 
+.allArtistsToggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    border: 0;
+    background: transparent;
+    color: #7a6350;
+    font: inherit;
+    cursor: pointer;
+}
+
+.allArtistsToggle:hover {
+    color: #2a1f14;
+}
+
+.allArtistsToggle:focus-visible {
+    outline: 2px solid #b8854a;
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+.toggleTrack {
+    width: 32px;
+    height: 18px;
+    padding: 2px;
+    border-radius: 999px;
+    background: #d8cec1;
+    transition: background-color 0.2s ease;
+}
+
+.toggleThumb {
+    display: block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(42, 31, 20, 0.25);
+    transition: transform 0.2s ease;
+}
+
+.allArtistsToggleActive .toggleTrack {
+    background: #b8854a;
+}
+
+.allArtistsToggleActive .toggleThumb {
+    transform: translateX(14px);
+}
+
 .countPill {
     font-weight: 700;
     color: #b8854a;

@@ -17,9 +17,12 @@ import {
 export default function ArtistsClient({ initialArtists }) {
     const [searchQuery, setSearchQuery] = useState('');
     const [sortBy, setSortBy] = useState('sketches'); // 'sketches' | 'id' | 'name'
+    const [showAllArtists, setShowAllArtists] = useState(false);
 
     const filteredArtists = useMemo(() => {
-        let result = [...initialArtists];
+        let result = showAllArtists
+            ? [...initialArtists]
+            : initialArtists.filter((artist) => artist.sketchCount > 0);
 
         // 1. Filter by search query (name, id, bio)
         if (searchQuery.trim()) {
@@ -59,7 +62,7 @@ export default function ArtistsClient({ initialArtists }) {
         });
 
         return result;
-    }, [initialArtists, searchQuery, sortBy]);
+    }, [initialArtists, searchQuery, sortBy, showAllArtists]);
 
     return (
         <main className={styles.page}>
@@ -141,6 +144,18 @@ export default function ArtistsClient({ initialArtists }) {
                         Showing <strong className={styles.countPill}>{filteredArtists.length}</strong>{' '}
                         {filteredArtists.length === 1 ? 'artist' : 'artists'}
                     </span>
+                    <button
+                        type="button"
+                        className={`${styles.allArtistsToggle} ${showAllArtists ? styles.allArtistsToggleActive : ''}`}
+                        onClick={() => setShowAllArtists((current) => !current)}
+                        aria-pressed={showAllArtists}
+                        aria-label="Show all artists, including those without sketches"
+                    >
+                        <span className={styles.toggleTrack} aria-hidden="true">
+                            <span className={styles.toggleThumb} />
+                        </span>
+                        <span>Show all artists</span>
+                    </button>
                 </div>
             </div>
 
@@ -154,6 +169,7 @@ export default function ArtistsClient({ initialArtists }) {
                         onClick={() => {
                             setSearchQuery('');
                             setSortBy('id');
+                            setShowAllArtists(false);
                         }}
                         className={styles.resetBtn}
                     >
