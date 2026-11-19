@@ -120,6 +120,14 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
 
 
 
+                        {artist.website && (
+                            <a href={artist.website} target="_blank" rel="noopener noreferrer"
+                                className={`${styles.btnSecondary} ${styles.iconButton}`}
+                                aria-label="Website" title="Website">
+                                <FontAwesomeIcon icon={faGlobe} />
+                            </a>
+                        )}
+
                         {artist.instagram && (
                             <a
                                 href={artist.instagram}
@@ -130,14 +138,6 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
                                 title="Instagram"
                             >
                                 <FontAwesomeIcon icon={faInstagram} />
-                            </a>
-                        )}
-
-                        {artist.website && (
-                            <a href={artist.website} target="_blank" rel="noopener noreferrer"
-                                className={`${styles.btnSecondary} ${styles.iconButton}`}
-                                aria-label="Website" title="Website">
-                                <FontAwesomeIcon icon={faGlobe} />
                             </a>
                         )}
 

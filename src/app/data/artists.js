@@ -197,6 +197,7 @@ export const artists = [
   {
     "bio": "An artist in the Urban Sketchers Galle community, capturing places and everyday moments through sketching.",
     "id": "USKG22",
+    "instagram": "https://instagram.com/lukyerr_",
     "name": "Lakshan Sandakelum",
     "slug": "lakshan-sandakelum"
   },
@@ -221,24 +222,26 @@ export const artists = [
     "slug": "mawli-de-silva"
   },
   {
-    "bio": "An artist in the Urban Sketchers Galle community, capturing places and everyday moments through sketching.",
+    "bio": "Artist in Sri Lanka. To purchase my work please visit Sri Lankan Art Gallery.",
     "id": "USKG26",
+    "website": "https://www.srilankanartgallery.com/author/janaki-perera",
     "instagram": "https://instagram.com/Perera.janaki",
+    "facebook": "https://www.facebook.com/perera.janaki/",
     "name": "Janaki Perera",
     "slug": "janaki-perera"
   },
   {
-    "bio": "An artist in the Urban Sketchers Galle community, capturing places and everyday moments through sketching.",
+    "bio": "Bringing ideas to life through lines, shades & details.\nArt | Creativity | Expression",
     "id": "USKG27",
     "instagram": "https://instagram.com/deshan33302",
     "name": "T. Deshan Mallawa Arachchi",
-    "slug": "t-deshan-mallawa-arachchi"
+    "slug": "deshan-mallawa-arachchi"
   },
   {
-    "bio": "An artist in the Urban Sketchers Galle community, capturing places and everyday moments through sketching.",
+    "bio": "I love sketching streets, people and everyday city life. I enjoy capturing small moments on location, just as I see them.",
     "id": "USKG28",
-    "name": "Lelwala Godakandage Theshara Sankalana",
-    "slug": "lelwala-godakandage-theshara-sankalana"
+    "name": "Theshara Sankalana",
+    "slug": "theshara-sankalana"
   },
   {
     "bio": "An artist in the Urban Sketchers Galle community, capturing places and everyday moments through sketching.",
@@ -276,7 +279,7 @@ export const artists = [
     "slug": "delini-wijesekara"
   },
   {
-    "bio": "An artist in the Urban Sketchers Galle community, capturing places and everyday moments through sketching.",
+    "bio": "Just a beginner 🤎",
     "id": "USKG34",
     "instagram": "https://instagram.com/_janiiiie",
     "name": "Janith Kariyawasam",
@@ -288,6 +291,13 @@ export const artists = [
     "instagram": "https://instagram.com/sethumi_j_",
     "name": "Sethumi Jayarathna",
     "slug": "sethumi-jayarathna"
+  },
+  {
+    "bio": "I’m a teacher passionate about working with children. I love sketching and making time for my hobbies.",
+    "id": "USKG36",
+    "instagram": "https://instagram.com/mr_mrs_darrens",
+    "name": "Dinnie Dickhinna",
+    "slug": "dinnie-dickhinna"
   }
 ];
 
