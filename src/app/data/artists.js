@@ -211,6 +211,7 @@ export const artists = [
   {
     "bio": "An artist in the Urban Sketchers Galle community, capturing places and everyday moments through sketching.",
     "id": "USKG24",
+    "instagram": "https://www.instagram.com/lakshikalakruwani/",
     "name": "T.G.L. Lakruwani",
     "slug": "tgl-lakruwani"
   },
