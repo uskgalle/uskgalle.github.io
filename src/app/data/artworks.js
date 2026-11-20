@@ -20,7 +20,7 @@ export const artworks = [
   },
   {
     "id": "USKG0-3",
-    "filename": "3.webp",
+    "filename": "3.png",
     "title": "Example sketch: A seaside afternoon",
     "description": "Illustrative sailing boat created as dummy content for this example profile.",
     "event": ""
@@ -42,7 +42,7 @@ export const artworks = [
   {
     "description": "Mix media (water color, ink, etc.)",
     "event": "meet-up-04",
-    "filename": "3.png",
+    "filename": "3.webp",
     "id": "USKG1-3",
     "title": "Symbols of Galle fort"
   },
@@ -180,6 +180,13 @@ export const artworks = [
     "title": "Galle Fish Market"
   },
   {
+    "description": "Sketched during the People in the City workshop at Galle Fort. I tried to capture people walking, waiting and living their everyday moments in the city.",
+    "event": "meet-up-06",
+    "filename": "3.webp",
+    "id": "USKG17-3",
+    "title": "People in the city"
+  },
+  {
     "description": "This life-sized replica at Galle’s Black Fort depicts a Kodithuwakku, the administrative commanding officer of the King’s Flag and Light Artillery Corps. ​He wears a fitted red tunic with gold cross- belts, a draped off - white waistcloth(tuppotiya), and a traditional red and gold brimmed headpiece(kasthale).Slung across his chest is a gunpowder horn, an essential tool for managing field artillery(gingals) and signaling logistics on the ramparts.His vigilant posture honors the local military leaders who directed the island’s defense during the transition into the British period.",
     "event": "meet-up-03",
     "filename": "1.webp",
@@ -304,6 +311,13 @@ export const artworks = [
     "filename": "5.webp",
     "id": "USKG19-5",
     "title": "Sri Sudarmalaya Viharaya (1889)"
+  },
+  {
+    "description": "Sketching helps me see the city in a new way. I love drawing streets, buildings and people, just as they are in that moment",
+    "event": "meet-up-06",
+    "filename": "1.webp",
+    "id": "USKG28-1",
+    "title": "People in the city"
   }
 ];
 
