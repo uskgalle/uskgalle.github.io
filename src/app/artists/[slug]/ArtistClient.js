@@ -22,7 +22,9 @@ import {
     faUserPen,
     faCloudArrowUp,
     faCircleQuestion,
-    faScrewdriverWrench
+    faScrewdriverWrench,
+    faChevronDown,
+    faChevronUp
 } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faWhatsapp, faFacebookF } from '@fortawesome/free-brands-svg-icons';
 
@@ -113,7 +115,7 @@ export default function ArtistClient({ artist, artworks = [], profileImage, arti
 
                     <p className={styles.bio}>
                         <span id="artist-bio">{longBio && !bioExpanded ? `${shortBio}…` : bio}</span>
-                        {longBio && <> <button type="button" className={styles.bioToggle} aria-expanded={bioExpanded} aria-controls="artist-bio" onClick={() => setBioExpanded(expanded => !expanded)}>{bioExpanded ? 'See less' : 'See more'}</button></>}
+                        {longBio && <> <button type="button" className={styles.bioToggle} aria-label={bioExpanded ? 'See less' : 'See more'} title={bioExpanded ? 'See less' : 'See more'} aria-expanded={bioExpanded} aria-controls="artist-bio" onClick={() => setBioExpanded(expanded => !expanded)}><FontAwesomeIcon icon={bioExpanded ? faChevronUp : faChevronDown} aria-hidden="true" /></button></>}
                     </p>
 
                     <div className={styles.actions}>
