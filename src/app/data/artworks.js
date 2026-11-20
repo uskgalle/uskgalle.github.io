@@ -201,6 +201,20 @@ export const artworks = [
     "title": "Galle Fish Market"
   },
   {
+    "description": "Drawn during Astrid's sketching session at Sketch Meet-Up #6.",
+    "event": "meet-up-06",
+    "filename": "3.webp",
+    "id": "USKG4-3",
+    "title": "The Hands That Know the Sea"
+  },
+  {
+    "description": "Drawn during Astrid's sketching session at Sketch Meet-Up #6.",
+    "event": "meet-up-06",
+    "filename": "4.webp",
+    "id": "USKG4-4",
+    "title": "A Moment of Her Own"
+  },
+  {
     "description": "",
     "event": "meet-up-05",
     "filename": "2.webp",

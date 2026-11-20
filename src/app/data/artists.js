@@ -294,11 +294,11 @@ export const artists = [
     "slug": "sethumi-jayarathna"
   },
   {
-    "bio": "I’m a teacher passionate about working with children. I love sketching and making time for my hobbies.",
+    "bio": "I’m Teacher | Content Creator | explore the 🌎 through travelling ✈️ and doing yoga and Pilates are doing the daily routine, 🧘‍♀️\nwhat I love, I tried that all, sketch is a like that 🎨🖌️ make the life full of creative and canvassing throughout.",
     "id": "USKG36",
     "instagram": "https://instagram.com/mr_mrs_darrens",
-    "name": "Dinnie Dickhinna",
-    "slug": "dinnie-dickhinna"
+    "name": "Dinnie Darrens",
+    "slug": "dinnie-darrens"
   }
 ];
 
