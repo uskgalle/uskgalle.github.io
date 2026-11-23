@@ -131,9 +131,9 @@ export const artists = [
     "country": "LK",
     "id": "USKG14",
     "instagram": "https://instagram.com/isuri_k_",
-    "name": "Isuri Kumarasinghe",
+    "name": "Isuri Lakmali",
     "role": "",
-    "slug": "isuri-kumarasinghe"
+    "slug": "isuri-lakmali"
   },
   {
     "bio": "Blender Artist | Architect Student | Sketcher",

@@ -286,6 +286,20 @@ export const artworks = [
   },
   {
     "description": "",
+    "event": null,
+    "filename": "2.webp",
+    "id": "USKG15-2",
+    "title": "Sketch memories"
+  },
+  {
+    "description": "",
+    "event": "meet-up-06",
+    "filename": "3.webp",
+    "id": "USKG15-3",
+    "title": "Galle Fort Ambalama in Courthouse Square"
+  },
+  {
+    "description": "",
     "event": "meet-up-05",
     "filename": "1.webp",
     "id": "USKG16-1",
