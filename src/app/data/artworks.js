@@ -201,6 +201,20 @@ export const artworks = [
     "title": "People in the city"
   },
   {
+    "description": "Sketched during the People in the City workshop at Galle Fort. I tried to capture people walking, waiting and living their everyday moments in the city.",
+    "event": "meet-up-06",
+    "filename": "4.webp",
+    "id": "USKG17-4",
+    "title": "People in the city"
+  },
+  {
+    "description": "Sketched during Astrid's People in the City session at Galle Fort.",
+    "event": "meet-up-06",
+    "filename": "5.webp",
+    "id": "USKG17-5",
+    "title": "People in the city"
+  },
+  {
     "description": "This life-sized replica at Galle’s Black Fort depicts a Kodithuwakku, the administrative commanding officer of the King’s Flag and Light Artillery Corps. ​He wears a fitted red tunic with gold cross- belts, a draped off - white waistcloth(tuppotiya), and a traditional red and gold brimmed headpiece(kasthale).Slung across his chest is a gunpowder horn, an essential tool for managing field artillery(gingals) and signaling logistics on the ramparts.His vigilant posture honors the local military leaders who directed the island’s defense during the transition into the British period.",
     "event": "meet-up-03",
     "filename": "1.webp",
