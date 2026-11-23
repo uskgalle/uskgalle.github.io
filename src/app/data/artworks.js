@@ -166,6 +166,20 @@ export const artworks = [
     "title": "Galle Fish Market"
   },
   {
+    "description": "Drawn during Astrid's sketching session at Sketch Meet-Up #6.",
+    "event": "meet-up-06",
+    "filename": "2.webp",
+    "id": "USKG10-2",
+    "title": "People in the city"
+  },
+  {
+    "description": "",
+    "event": "meet-up-06",
+    "filename": "3.webp",
+    "id": "USKG10-3",
+    "title": "People in the city"
+  },
+  {
     "description": "A little piece of Galle, captured in lines and colours. 🎨🌊",
     "event": "meet-up-05",
     "filename": "1.webp",
