@@ -54,6 +54,20 @@ export const artworks = [
     "title": "Galle Fort Lighthouse with blue sky"
   },
   {
+    "description": "",
+    "event": "meet-up-06",
+    "filename": "2.webp",
+    "id": "USKG2-2",
+    "title": "People in the city, Galle Fort"
+  },
+  {
+    "description": "",
+    "event": "meet-up-06",
+    "filename": "3.webp",
+    "id": "USKG2-3",
+    "title": "People in the city, Galle Fort"
+  },
+  {
     "description": "I captured the lighthouse and the beautiful landscape using watercolors and markers to showcase the beauty of Galle.",
     "event": "meet-up-04",
     "filename": "1.png",
@@ -373,6 +387,13 @@ export const artworks = [
     "event": "meet-up-06",
     "filename": "1.webp",
     "id": "USKG28-1",
+    "title": "People in the city"
+  },
+  {
+    "description": "",
+    "event": "meet-up-06",
+    "filename": "1.webp",
+    "id": "USKG30-1",
     "title": "People in the city"
   }
 ];
