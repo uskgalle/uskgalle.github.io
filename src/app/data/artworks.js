@@ -411,6 +411,13 @@ export const artworks = [
     "title": "People in the city"
   },
   {
+    "description": "Drawn during the outdoor sketching session at Sketch Meet-Up #6, Galle Fort.",
+    "event": "meet-up-06",
+    "filename": "2.webp",
+    "id": "USKG28-2",
+    "title": "Court Complex - Galle"
+  },
+  {
     "description": "",
     "event": "meet-up-06",
     "filename": "1.webp",
