@@ -215,17 +215,10 @@ export const artworks = [
     "title": "People in the city"
   },
   {
-    "description": "Sketched during the People in the City workshop at Galle Fort. I tried to capture people walking, waiting and living their everyday moments in the city.",
+    "description": "Sketched during Astrid's People in the City session at Galle Fort.",
     "event": "meet-up-06",
     "filename": "4.webp",
     "id": "USKG17-4",
-    "title": "People in the city"
-  },
-  {
-    "description": "Sketched during Astrid's People in the City session at Galle Fort.",
-    "event": "meet-up-06",
-    "filename": "5.webp",
-    "id": "USKG17-5",
     "title": "People in the city"
   },
   {
