@@ -91,7 +91,7 @@ export const artists = [
     "slug": "rachel-west"
   },
   {
-    "bio": "Finely imperfect",
+    "bio": "An emerging watercolour artist, exploring the beauty of colours, creativity and self-expression. Learning, experimenting and finding my own artistic voice, one brushstroke at a time.",
     "country": "LK",
     "id": "USKG10",
     "instagram": "https://instagram.com/__hibee___",
