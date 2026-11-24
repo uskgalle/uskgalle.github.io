@@ -395,6 +395,83 @@ export const artworks = [
     "filename": "1.webp",
     "id": "USKG30-1",
     "title": "People in the city"
+  },
+  {
+    "description": "Drawn during Sketch Meet-Up #6.",
+    "event": "meet-up-06",
+    "filename": "1.webp",
+    "id": "USKG27-1",
+    "title": "Courts Square - Galle"
+  },
+  {
+    "description": "Drawn during Astrid's People in the City session at Sketch Meet-Up #6.",
+    "event": "meet-up-06",
+    "filename": "2.webp",
+    "id": "USKG27-2",
+    "title": "People in the city"
+  },
+  {
+    "description": "Drawn during Astrid's People in the City session at Sketch Meet-Up #6.",
+    "event": "meet-up-06",
+    "filename": "3.webp",
+    "id": "USKG27-3",
+    "title": "People in the city"
+  },
+  {
+    "description": "Sketched during Astrid's People in the City session at Sketch Meet-Up #6.",
+    "event": "meet-up-06",
+    "filename": "1.webp",
+    "id": "USKG29-1",
+    "title": "People in the city"
+  },
+  {
+    "description": "Drawn during the outdoor People in the City sketching session at Sketch Meet-Up #6.",
+    "event": "meet-up-06",
+    "filename": "2.webp",
+    "id": "USKG29-2",
+    "title": "People in the city"
+  },
+  {
+    "description": "Watercolor and ink sketch of the Maritime Museum, Galle Fort.",
+    "event": "",
+    "filename": "1.webp",
+    "id": "USKG26-1",
+    "title": "Maritime Museum, Galle Fort"
+  },
+  {
+    "description": "Watercolor and ink sketch of the Maritime Museum, Galle Fort.",
+    "event": "",
+    "filename": "2.webp",
+    "id": "USKG26-2",
+    "title": "Maritime Museum, Galle Fort"
+  },
+  {
+    "description": "Pen sketch spread of tree branches and roots in Galle Fort.",
+    "event": "",
+    "filename": "3.webp",
+    "id": "USKG26-3",
+    "title": "Galle Fort"
+  },
+  {
+    "description": "Watercolor and ink sketch from the Retaining the City series.",
+    "event": "",
+    "filename": "4.webp",
+    "id": "USKG26-4",
+    "title": "Market Square, Galle Fort"
+  },
+  {
+    "description": "Pen sketch from the Retaining the City series.",
+    "event": "",
+    "filename": "5.webp",
+    "id": "USKG26-5",
+    "title": "Dutch Reformed Church, Galle Fort"
+  },
+  {
+    "description": "Drawn during the outdoor People in the City sketching session at Sketch Meet-Up #6.",
+    "event": "meet-up-06",
+    "filename": "6.webp",
+    "id": "USKG26-6",
+    "title": "People in the city"
   }
 ];
 
