@@ -500,6 +500,20 @@ export const artworks = [
     "filename": "6.webp",
     "id": "USKG26-6",
     "title": "People in the city"
+  },
+  {
+    "description": "Watercolor painting of a street in Galle Fort.",
+    "event": "",
+    "filename": "1.webp",
+    "id": "USKG34-1",
+    "title": "Galle Fort street"
+  },
+  {
+    "description": "Watercolor painting of a shop in Galle Fort.",
+    "event": "",
+    "filename": "2.webp",
+    "id": "USKG34-2",
+    "title": "Galle Fort shop"
   }
 ];
 
