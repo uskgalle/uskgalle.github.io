@@ -120,7 +120,7 @@
 .photoGrid {
   position: relative;
   width: 100%;
-  aspect-ratio: 0.94;
+  aspect-ratio: 0.8;
   margin-top: 1.5rem;
 }
 
@@ -136,10 +136,11 @@
 }
 
 .groupPhoto:nth-child(1) { top: 0; left: 2%; transform: rotate(-7deg); z-index: 1; }
-.groupPhoto:nth-child(2) { top: 17%; right: 0; transform: rotate(6deg); z-index: 2; }
-.groupPhoto:nth-child(3) { top: 35%; left: 0; transform: rotate(-4deg); z-index: 3; }
-.groupPhoto:nth-child(4) { top: 53%; right: 1%; transform: rotate(7deg); z-index: 4; }
-.groupPhoto:nth-child(5) { top: 70%; left: 5%; transform: rotate(-5deg); z-index: 5; }
+.groupPhoto:nth-child(2) { top: 14%; right: 0; transform: rotate(6deg); z-index: 2; }
+.groupPhoto:nth-child(3) { top: 29%; left: 0; transform: rotate(-4deg); z-index: 3; }
+.groupPhoto:nth-child(4) { top: 44%; right: 1%; transform: rotate(7deg); z-index: 4; }
+.groupPhoto:nth-child(5) { top: 59%; left: 5%; transform: rotate(-5deg); z-index: 5; }
+.groupPhoto:nth-child(6) { top: 74%; right: 2%; transform: rotate(5deg); z-index: 6; }
 
 .visualImg {
   display: block;

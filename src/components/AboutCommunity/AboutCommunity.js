@@ -70,6 +70,14 @@ export default function AboutCommunity() {
                 />
               </figure>
             ))}
+            <figure className={styles.groupPhoto}>
+              <img
+                src="/gallery-images/meet-up-06/1.webp"
+                alt="Urban Sketchers Galle group at Sketch Meet #6"
+                className={styles.visualImg}
+                loading="lazy"
+              />
+            </figure>
           </div>
         </div>
 
