@@ -223,7 +223,7 @@ export const artists = [
     "slug": "mawli-de-silva"
   },
   {
-    "bio": "Artist in Sri Lanka. To purchase my work please visit Sri Lankan Art Gallery.",
+    "bio": "Artist in Sri Lanka.",
     "id": "USKG26",
     "website": "https://www.srilankanartgallery.com/author/janaki-perera",
     "instagram": "https://instagram.com/Perera.janaki",
