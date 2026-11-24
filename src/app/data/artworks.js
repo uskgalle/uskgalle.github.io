@@ -299,6 +299,27 @@ export const artworks = [
     "title": "Galle Fish Market"
   },
   {
+    "description": "Drawn during Astrid's People in the City session at Sketch Meet-Up #6.",
+    "event": "meet-up-06",
+    "filename": "3.webp",
+    "id": "USKG11-3",
+    "title": "People in the city"
+  },
+  {
+    "description": "Drawn during Astrid's People in the City session at Sketch Meet-Up #6.",
+    "event": "meet-up-06",
+    "filename": "4.webp",
+    "id": "USKG11-4",
+    "title": "People in the city"
+  },
+  {
+    "description": "Drawn during the outdoor sketching session at Sketch Meet-Up #6, Galle Fort.",
+    "event": "meet-up-06",
+    "filename": "5.webp",
+    "id": "USKG11-5",
+    "title": "Court Complex - Galle"
+  },
+  {
     "description": "",
     "event": "meet-up-05",
     "filename": "1.webp",
